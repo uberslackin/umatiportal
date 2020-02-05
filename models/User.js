@@ -26,8 +26,46 @@ const userSchema = new mongoose.Schema({
     gender: String,
     location: String,
     website: String,
-    picture: String
-  }
+    group: String,
+    business: String,
+    vocation: String,
+    role: Array,
+    picture: String,
+    salt: String,
+    active: Boolean
+  },
+  group: {
+    name: String,
+    size: Number,
+    admin: String,
+    location: String,
+    description: String,
+    members: Array,
+    creationdate: Date,
+    salt: String,
+    active: Boolean
+  },
+  blog: {
+    name: String,
+    user: String,
+    posttitle: String,
+    visibility: Boolean,
+    post: String,
+    postcat: String,
+    posttags: String,
+    postdate: Date,
+    sharedwith: Array,
+    active: Boolean
+  },
+  activity: {
+    name: String,
+    amount: Number,
+    admin: String,
+    passwordResetExpires: Date,
+    iphash: String,
+    transhash: String,
+    members: Array
+  },
 }, { timestamps: true });
 
 /**
