@@ -3,8 +3,6 @@ UMATI BANK self help group portal
 
 [![Dependency Status](https://david-dm.org/sahat/hackathon-starter/status.svg?style=flat)](https://david-dm.org/sahat/hackathon-starter) [![devDependencies Status](https://david-dm.org/sahat/hackathon-starter/dev-status.svg)](https://david-dm.org/sahat/hackathon-starter?type=dev) [![Build Status](https://travis-ci.org/sahat/hackathon-starter.svg?branch=master)](https://travis-ci.org/sahat/hackathon-starter) [![Join the chat at https://gitter.im/sahat/hackathon-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sahat/hackathon-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-**Live Demo**: https://hackathon-starter.walcony.com
-
 Jump to [What's new?](https://github.com/sahat/hackathon-starter/blob/master/CHANGELOG.md)
 
 A boilerplate for **Node.js** web applications.
@@ -486,7 +484,7 @@ Recommended Design Resources
 - [Bootsnipp](http://bootsnipp.com/) - Code snippets for Bootstrap.
 - [Bootstrap Zero](https://www.bootstrapzero.com) - Free Bootstrap templates themes.
 - [Google Bootstrap](http://todc.github.io/todc-bootstrap/) - Google-styled theme for Bootstrap.
-- [Font Awesome Icons](http://fortawesome.github.io/Font-Awesome/icons/) - It's already part of the Hackathon Starter, so use this page as a reference.
+- [Font Awesome Icons](http://fortawesome.github.io/Font-Awesome/icons/) - It's already part of the Umatibank, so use this page as a reference.
 - [Colors](http://clrs.cc) - A nicer color palette for the web.
 - [Creative Button Styles](http://tympanus.net/Development/CreativeButtons/) - awesome button styles.
 - [Creative Link Effects](http://tympanus.net/Development/CreativeLinkEffects/) - Beautiful link effects in CSS.
@@ -613,7 +611,7 @@ I hope it provides some guidance to you.
 [HTML5 UP](http://html5up.net/) has many beautiful templates that you can download for free.
 
 When you download the ZIP file, it will come with *index.html*, *images*, *css* and *js* folders. So, how do you
-integrate it with Hackathon Starter? Hackathon Starter uses Bootstrap CSS framework, but these templates do not.
+integrate it with Umatibank? Umatibank uses Bootstrap CSS framework, but these templates do not.
 Trying to use both CSS files at the same time will likely result in undesired effects.
 
 **Note:** Using the custom templates approach, you should understand that you cannot reuse any of the views I have created: layout, home page, api browser, login, signup, account management, contact. Those views were built using Bootstrap grid and styles. You will have to manually update the grid using a different syntax provided in the template. **Having said that, you can mix and match if you want to do so: Use Bootstrap for main app interface, and a custom template for a landing page.**
@@ -652,9 +650,9 @@ I will stop right here, but if you would like to use this template as more than 
 Then, each page that changes, be it `index.pug`, `about.pug`, `contact.pug`
 will be embedded in your new `layout.pug` via `block content`. Use existing templates as a reference.
 
-This is a rather lengthy process, and templates you get from elsewhere might have yet another grid system. That's why I chose *Bootstrap* for the Hackathon Starter.
+This is a rather lengthy process, and templates you get from elsewhere might have yet another grid system. That's why I chose *Bootstrap* for the Umatibank.
  Many people are already familiar with *Bootstrap*, plus it's easy to get started with it if you have never used *Bootstrap*.
- You can also buy many beautifully designed *Bootstrap* themes at [Themeforest](http://themeforest.net/), and use them as a drop-in replacement for Hackathon Starter. However, if you would like to go with a completely custom HTML/CSS design, this should help you to get started!
+ You can also buy many beautifully designed *Bootstrap* themes at [Themeforest](http://themeforest.net/), and use them as a drop-in replacement for Umatibank. However, if you would like to go with a completely custom HTML/CSS design, this should help you to get started!
 
 <hr>
 
@@ -871,10 +869,10 @@ parsing websites using [Cheerio](https://github.com/cheeriojs/cheerio), etc.
 
 <hr>
 
-### How do I use Socket.io with Hackathon Starter?
+### How do I use Socket.io with Umatibank?
 [Dan Stroot](https://github.com/dstroot) submitted an excellent [pull request](https://github.com/dstroot/hackathon-starter/commit/0a632def1ce8da446709d92812423d337c977d75) that adds a real-time dashboard with socket.io.
 And as  much as I'd like to add it to the project, I think it violates one of the main
-principles of the Hackathon Starter:
+principles of the Umatibank:
 > When I started this project, my primary focus was on simplicity and ease of use.
 > I also tried to make it as generic and reusable as possible to cover most use cases of
 > hackathon web apps, **without being too specific**.
@@ -898,7 +896,7 @@ I wouldn't even know I had to use port 8000.
 
 I am really glad that Heroku and OpenShift at least
 have a websockets support, because many other PaaS providers still do not support it.
-Due to the aforementioned issues with websockets, I cannot include socket.io as part of the Hackathon Starter. *For now...*
+Due to the aforementioned issues with websockets, I cannot include socket.io as part of the Umatibank. *For now...*
 If you need to use socket.io in your app, please continue reading.
 
 First, you need to install socket.io:
@@ -1360,7 +1358,7 @@ Add this to `package.json`, after *name* and *version*. This is necessary becaus
 ```
 
 - Finally, you can now push your code to OpenShift by running `git push -f openshift master`
- - **Note:** The first time you run this command, you have to pass `-f` (force) flag because OpenShift creates a dummy server with the welcome page when you create a new Node.js app. Passing `-f` flag will override everything with your *Hackathon Starter* project repository. **Do not** run `git pull` as it will create unnecessary merge conflicts.
+ - **Note:** The first time you run this command, you have to pass `-f` (force) flag because OpenShift creates a dummy server with the welcome page when you create a new Node.js app. Passing `-f` flag will override everything with your *Umatibank* project repository. **Do not** run `git pull` as it will create unnecessary merge conflicts.
 - And you are done!
 
 ---
@@ -1380,7 +1378,7 @@ Add this to `package.json`, after *name* and *version*. This is necessary becaus
 - Select **Local Git repository** from the list, and then click the arrow
 - To enable Git publishing, Azure will ask you to create a user name and password
 - Once the Git repository is ready, you will be presented with a **GIT URL**
-- Inside your *Hackathon Starter* directory, run `git remote add azure [Azure Git URL]`
+- Inside your *Umatibank* directory, run `git remote add azure [Azure Git URL]`
 - To push your changes run `git push azure master`
  - **Note:** *You will be prompted for the password you created earlier*
 - On **Deployments** tab of your Windows Azure Web App, you will see the deployment history

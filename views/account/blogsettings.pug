@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Blog Settings
+
+  include ../partials/profilehead.pug
+
+  form(action='/account/blogsettings', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Blog Title
+      .col-md-7
+        input.form-control(type='text', name='blogtitle', id='blogtitle', value=user.blogsettings.blogtitle, autocomplete='blogtitle')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='shortdesc') Short Description
+      .col-md-7
+        input.form-control(type='text', name='shortdesc', id='shortdesc', value=user.blogsettings.shortdesc, autocomplete)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='blogdesc') Description
+      .col-md-7
+        input.form-control(type='text', name='blogdesc', id='blogdesc', value=user.blogsettings.blogdesc, autocomplete)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='blogtags') Tags
+      .col-md-7
+        input.form-control(type='text', name='blogtags', id='blogtags', value=user.blogsettings.blogtags, autocomplete='blogtags')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='blogtags') Active
+        input.form-control(type='checkbox', name='visibility', checked=user.blogsettings.active)
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update Settings

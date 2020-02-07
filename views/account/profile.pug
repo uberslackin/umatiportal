@@ -2,12 +2,23 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
+
     h3 Profile Information
+
+  include ../partials/profilehead.pug
 
   form(action='/account/profile', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Name
+      .col-md-7
+        input.form-control(type='text', name='name', id='name', value=user.profile.name, autocomplete='name')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left Gravatar
+      .col-sm-4
+        img(src=user.gravatar(), class='profile', width='100', height='100')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='email') Email
       .col-md-7
         input.form-control(type='email', name='email', id='email', value=user.email, autocomplete='email', required)
       .offset-sm-3.col-md-7.pl-3
@@ -19,11 +30,7 @@ block content
             | Unverified: &nbsp;
             a(href='/account/verify') Send verification email
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Name
-      .col-md-7
-        input.form-control(type='text', name='name', id='name', value=user.profile.name, autocomplete='name')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right Gender
+      label.col-md-3.col-form-label.font-weight-bold.text-left Gender
       .col-sm-6
         .form-check.form-check-inline
           input(type='radio', class='form-check-input' checked=user.profile.gender == 'male', name='gender', value='male', data-toggle='radio')
@@ -37,17 +44,21 @@ block content
           input(type='radio', class='form-check-input' checked=user.profile.gender == 'other', name='gender', value='other', data-toggle='radio')
           label.form-check-label Other
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='location') Location
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
       .col-md-7
         input.form-control(type='text', name='location', id='location', value=user.profile.location, autocomplete)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='website') Website
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='business') Business
+      .col-md-7
+        input.form-control(type='text', name='business', id='business', value=user.profile.business, autocomplete)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='group') Group
+      .col-md-7
+        input.form-control(type='text', name='group', id='group', value=user.profile.group, autocomplete)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='website') Website
       .col-md-7
         input.form-control(type='text', name='website', id='website', value=user.profile.website, autocomplete='url')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right Gravatar
-      .col-sm-4
-        img(src=user.gravatar(), class='profile', width='100', height='100')
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')
@@ -60,11 +71,11 @@ block content
   form(action='/account/password', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='password') New Password
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='password') New Password
       .col-md-7
         input.form-control(type='password', name='password', id='password', autocomplete='new-password', minlength='8', required)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='confirmPassword') Confirm Password
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='confirmPassword') Confirm Password
       .col-md-7
         input.form-control(type='password', name='confirmPassword', id='confirmPassword', autocomplete='new-password', minlength='8', required)
     .form-group

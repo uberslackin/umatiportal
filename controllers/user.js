@@ -64,6 +64,7 @@ exports.logout = (req, res) => {
   });
 };
 
+
 /**
  * GET /signup
  * Signup page.
@@ -120,6 +121,193 @@ exports.postSignup = (req, res, next) => {
  * GET /account
  * Profile page.
  */
+exports.getActivity = (req, res) => {
+  res.render('account/activity', {
+    title: 'Personal accounting'
+  });
+};
+
+/**
+ * GET /account/business
+ * Profile page.
+ */
+exports.getBusiness = (req, res) => {
+  res.render('account/business', {
+    title: 'Business description'
+  });
+};
+
+/**
+ * POST /account/business
+ * Update blog information.
+ */
+exports.postUpdateBusiness = (req, res, next) => {
+  const validationErrors = [];
+/**  if (!validator.isEmail(req.body.amount)) validationErrors.push({ msg: 'Please enter a valid payment amount.' });
+ */
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/business');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.business.name = req.body.name || '';
+    user.business.description = req.body.description || '';
+    user.business.contactemail = req.body.contactemail || '';
+    user.business.contactphone = req.body.contactphone || '';
+    user.business.social1 = req.body.social1 || '';
+    user.business.social2 = req.body.social2 || '';
+    user.business.social3 = req.body.social3 || '';
+    user.business.businesstags = req.body.businesstags || '';
+    user.business.postdate = req.body.postdate || '';
+    user.business.members = req.body.members || '';
+    user.business.weburl = req.body.weburl || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your update.' });
+          return res.redirect('/account/business');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Business description has been registered.' });
+      res.redirect('/account/business');
+    });
+  });
+};
+
+
+/**
+ * POST /account/activity
+ * Update activity information.
+ */
+exports.postUpdateActivity = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/activity');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.activity.name = req.body.name || '';
+    user.activity.amount = req.body.amount || '';
+    user.activity.source = req.body.source || '';
+    user.activity.postdate = req.body.postdate || '';
+    user.activity.iphash = req.body.iphash || '';
+    user.activity.transhash = req.body.transhash || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your update.' });
+          return res.redirect('/account/activity');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Account transaction has been registered.' });
+      res.redirect('/account/activity');
+    });
+  });
+};
+
+/**
+ * GET /account/blogsettings
+ * Profile page.
+ */
+exports.getBlogsettings = (req, res) => {
+  res.render('account/blogsettings', {
+    title: 'Blog Settings'
+  });
+};
+
+/**
+ * POST /account/blogsettings
+ * Update blog settings.
+ */
+exports.postUpdateBlogsettings = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/blogsettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.blogsettings.user = req.body.user || '';
+    user.blogsettings.blogtitle = req.body.blogtitle || '';
+    user.blogsettings.blogdesc = req.body.blogdesc || '';
+    user.blogsettings.shortdesc = req.body.shortdesc || '';
+    user.blogsettings.blogtags = req.body.blogtags || '';
+    user.blogsettings.active = req.body.active || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your blog settings update.' });
+          return res.redirect('/account/blogsettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Blog setings has been updated.' });
+      res.redirect('/account/blogsettings');
+    });
+  });
+};
+
+
+/**
+ * GET /account/group
+ * Group page.
+ */
+exports.getGroup = (req, res) => {
+  res.render('account/group', {
+    title: 'Group Details'
+  });
+};
+
+/**
+ * POST /account/group
+ * Update blog settings.
+ */
+exports.postUpdateGroup = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/group');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.group.groupname = req.body.groupname || '';
+    user.group.adminperson = req.body.adminperson || '';
+    user.group.location = req.body.location || '';
+    user.group.description = req.body.description || '';
+    user.group.shortdesc = req.body.shortdesc || '';
+    user.group.memberlist = req.body.memberlist || '';
+    user.group.active = req.body.active || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your group details update.' });
+          return res.redirect('/account/group');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Group details have been updated.' });
+      res.redirect('/account/group');
+    });
+  });
+};
+
+
+/**
+ * GET /account
+ * savings page.
+ */
 exports.getAccount = (req, res) => {
   res.render('account/profile', {
     title: 'Account Management'
@@ -147,6 +335,10 @@ exports.postUpdateProfile = (req, res, next) => {
     user.profile.name = req.body.name || '';
     user.profile.gender = req.body.gender || '';
     user.profile.location = req.body.location || '';
+    user.profile.group = req.body.group || '';
+    user.profile.business = req.body.business || '';
+    user.profile.vocation = req.body.vocation || '';
+    user.profile.role = req.body.role || '';
     user.profile.website = req.body.website || '';
     user.save((err) => {
       if (err) {
@@ -341,7 +533,7 @@ exports.getVerifyEmail = (req, res, next) => {
     const mailOptions = {
       to: req.user.email,
       from: 'hackathon@starter.com',
-      subject: 'Please verify your email address on Hackathon Starter',
+      subject: 'Please verify your email address on Umati Bank self help group netork',
       text: `Thank you for registering with hackathon-starter.\n\n
         This verify your email address please click on the following link, or paste this into your browser:\n\n
         http://${req.headers.host}/account/verify/${token}\n\n
@@ -430,7 +622,7 @@ exports.postReset = (req, res, next) => {
     const mailOptions = {
       to: user.email,
       from: 'hackathon@starter.com',
-      subject: 'Your Hackathon Starter password has been changed',
+      subject: 'Your Umati Bank password has been changed',
       text: `Hello,\n\nThis is a confirmation that the password for your account ${user.email} has just been changed.\n`
     };
     return transporter.sendMail(mailOptions)
@@ -524,7 +716,7 @@ exports.postForgot = (req, res, next) => {
     const mailOptions = {
       to: user.email,
       from: 'hackathon@starter.com',
-      subject: 'Reset your password on Hackathon Starter',
+      subject: 'Reset your password on Umati Bank',
       text: `You are receiving this email because you (or someone else) have requested the reset of the password for your account.\n\n
         Please click on the following link, or paste this into your browser to complete the process:\n\n
         http://${req.headers.host}/reset/${token}\n\n

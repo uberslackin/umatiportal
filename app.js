@@ -31,6 +31,7 @@ dotenv.config({ path: '.env.example' });
  */
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
+const blogController = require('./controllers/blog');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
@@ -142,9 +143,22 @@ app.get('/account/verify', passportConfig.isAuthenticated, userController.getVer
 app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+app.get('/account/activity', passportConfig.isAuthenticated, userController.getActivity);
+app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
+app.get('/account/business', passportConfig.isAuthenticated, userController.getBusiness);
+app.post('/account/business', passportConfig.isAuthenticated, userController.postUpdateBusiness);
+app.get('/account/blogsettings', passportConfig.isAuthenticated, userController.getBlogsettings);
+app.post('/account/blogsettings', passportConfig.isAuthenticated, userController.postUpdateBlogsettings);
+app.get('/account/group', passportConfig.isAuthenticated, userController.getGroup);
+app.post('/account/group', passportConfig.isAuthenticated, userController.postUpdateGroup);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
+
+app.get('/account/createpost', passportConfig.isAuthenticated, blogController.getCreatepost);
+app.post('/account/createpost', passportConfig.isAuthenticated, blogController.postCreatepost);
+app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog);
+app.post('/account/blog', passportConfig.isAuthenticated, blogController.postUpdateBlog);
 
 /**
  * API examples routes.

@@ -1,0 +1,39 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Self help group description
+
+  include ../partials/profilehead.pug
+
+  form(action='/account/group', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Group Name
+      .col-md-7
+        input.form-control(type='text', name='groupname', id='groupname', value=user.group.groupname, autocomplete='groupname')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='adminperson') Group admin
+      .col-md-7
+        input.form-control(type='text', name='adminperson', id='adminperson', value=user.group.adminperson, autocomplete)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='') Location
+      .col-md-7
+        input.form-control(type='text', name='location', id='location', value=user.group.location, autocomplete)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='description') Description
+      .col-md-7
+        textarea.form-control( name="description", rows="6", cols="66", autocomplete='description' ) #{user.group.description}
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='shortdesc') Short description
+      .col-md-7
+        input.form-control(type='text', name='shortdesc', id='shortdesc', value=user.group.shortdesc, autocomplete='shortdesc')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='memberlist') List of members
+      .col-md-7
+        input.form-control(type='text', name='memberlist', id='memberlist', value=user.group.memberlist, autocomplete='memberlist')
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update Group

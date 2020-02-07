@@ -1,0 +1,55 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Business Information
+
+  include ../partials/profilehead.pug
+
+  form(action='/account/business', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Name
+      .col-md-7
+        input.form-control(type='text', name='name', id='name', value=user.profile.name, autocomplete='name')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='description') Description
+      .col-md-7
+        input.form-control(type='text', name='description', id='description', value=user.business.description, autocomplete)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='contactemail') Contact Email
+      .col-md-7
+        input.form-control(type='text', name='contactemail', id='contactemail', value=user.business.contactemail, autocomplete='contactemail')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='contactemail') Contact Phone
+      .col-md-7
+        input.form-control(type='text', name='contactphone', id='contactphone', value=user.business.contactphone, autocomplete='contactphone')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social1') Social Media Link
+      .col-md-7
+        input.form-control(type='text', name='social1', id='social1', value=user.business.social1, autocomplete='social1')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social2') Social Media Link
+      .col-md-7
+        input.form-control(type='text', name='social2', id='social2', value=user.business.social2, autocomplete='social2')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social3') Social Media Link
+      .col-md-7
+        input.form-control(type='text', name='social3', id='social3', value=user.business.social3, autocomplete='social3')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='businesstags') Tags
+      .col-md-7
+        input.form-control(type='text', name='businesstags', id='businesstags', value=user.business.businesstags, autocomplete='businesstags')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='members') Members
+      .col-md-7
+        input.form-control(type='text', name='members', id='members', value=user.business.members, autocomplete='members')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='weburl') Website URL
+      .col-md-7
+        input.form-control(type='text', name='weburl', id='weburl', value=user.business.weburl, autocomplete='weburl')
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update Business Info

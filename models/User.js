@@ -35,36 +35,42 @@ const userSchema = new mongoose.Schema({
     active: Boolean
   },
   group: {
-    name: String,
-    size: Number,
-    admin: String,
+    groupname: String,
+    adminperson: String,
     location: String,
     description: String,
-    members: Array,
-    creationdate: Date,
-    salt: String,
-    active: Boolean
+    shortdesc: String,
+    memberlist: String,
+    active: String
   },
-  blog: {
-    name: String,
+  blogsettings: {
     user: String,
-    posttitle: String,
-    visibility: Boolean,
-    post: String,
-    postcat: String,
-    posttags: String,
-    postdate: Date,
-    sharedwith: Array,
-    active: Boolean
+    blogtitle: String,
+    shortdesc: String,
+    blogdesc: String,
+    blogtags: String,
+    active: String
   },
   activity: {
     name: String,
     amount: Number,
-    admin: String,
-    passwordResetExpires: Date,
+    source: String,
+    postdate: Date,
     iphash: String,
-    transhash: String,
-    members: Array
+    transhash: String
+  },
+  business: {
+    name: String,
+    description: String,
+    contactemail: String,
+    contactphone: String,
+    social1: String,
+    social2: String,
+    social3: String,
+    businesstags: String,
+    postdate: Date,
+    members: String,
+    weburl: String
   },
 }, { timestamps: true });
 
