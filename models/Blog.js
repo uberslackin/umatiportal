@@ -4,8 +4,10 @@ const mongoose = require('mongoose');
 const Schema = mongoose.userSchema;
 
 const blogSchema = new mongoose.Schema({
+    id: Number,
     name: String,
     user: String,
+    username: String,
     posttitle: String,
     post: String,
     location: String,
@@ -35,3 +37,5 @@ blogSchema.pre('save', function save(next) {
 const Blog = mongoose.model('Blog', blogSchema);
 
 module.exports = Blog;
+
+

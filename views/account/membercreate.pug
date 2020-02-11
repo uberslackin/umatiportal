@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+    h3 Make a new payment
+
+  include ../partials/profilehead.pug
+
+    .form-group.row
+    a(href='/account/blogsettings') Blog Settings
+
+  form(action='/account/payment', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='name', value=user.name)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='soure') Source
+      .col-md-7
+        input.form-control(type='text', name='source', id='source')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='amount') Amount
+      .col-md-7
+        input.form-control(type='number', name='amount', id='amount')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='group') Group
+      .col-md-7
+        input.form-control(type='text', name='group', id='group')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='witness') Witness
+      .col-md-7
+        input.form-control(type='text', name='witness', id='witness')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='comment') Comment
+      .col-md-7
+        textarea.form-control( name="comment", rows="6", cols="66", autocomplete='comment' ) #{user.group.comment}        
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='date') Date
+      .col-md-7
+        input.form-control(type='date', name='date', id='date')
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Create post

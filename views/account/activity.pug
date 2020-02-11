@@ -2,12 +2,39 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-    h3 Savings Activity
 
   include ../partials/profilehead.pug
 
+  h2 Transaction Record
+
+  hr
+
+  #table-wrapper
+  table#desc
+    tr
+      th Payment Date
+      th Amount
+      th Source
+      th Witness
+      th Comment
+
+    - activity_list.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+    each item in activity_list
+    
+      #{item.date} |
+      #{item.amount} |
+      #{item.source} |
+      #{item.witness} |
+      #{item.comment}
+    else
+      li There are no recorded payments.
+      hr
+
+  h2 Account Details
+
   form(action='/account/activity', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='username', value=username)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Name
       .col-md-7

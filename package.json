@@ -1,14 +1,15 @@
 {
-  "name": "hackathon-starter",
-  "version": "6.0.0",
-  "description": "A boilerplate for Node.js web applications",
+  "name": "umatibank-self-help-group-finance-app",
+  "version": "1.0.0",
+  "description": "Umati Bank  Self Help Group App",
   "repository": {
     "type": "git",
     "url": "https://github.com/sahat/hackathon-starter.git"
   },
   "license": "MIT",
-  "author": "Sahat Yalkabov",
+  "author": "Greg Willson",
   "contributors": [
+    "Greg Willson (https://github.com/biomassives",
     "Yashar Fakhari (https://github.com/YasharF)"
   ],
   "scripts": {
@@ -36,6 +37,7 @@
     "express": "^4.17.1",
     "express-flash": "^0.0.2",
     "express-handlebars": "^3.1.0",
+    "express-promise-router": "^3.0.3",
     "express-session": "^1.17.0",
     "express-status-monitor": "^1.2.8",
     "fbgraph": "^1.4.4",

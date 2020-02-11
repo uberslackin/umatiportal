@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+const { wrap: async } = require('co');
 const { promisify } = require('util');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
@@ -16,13 +18,43 @@ const randomBytesAsync = promisify(crypto.randomBytes);
  * GET /account/blog
  * Blog manager.
  */
+
+exports.getBlog = async(function*(req, res) {
+  const page = (req.query.page > 0 ? req.query.page : 1) - 1;
+  const _id = req.query.item;
+  const limit = 15;
+  const options = {
+    limit: limit,
+    page: page
+  };
+
+  if (_id) options.criteria = { _id };
+
+  const blogs = yield Blog.list;
+  const count = yield Blog.countDocuments();
+
+  console.log(blogs);
+
+  res.render('account/blog', {
+    title: 'Blog posts',
+    username: req.user,
+    blogs: blogs,
+    page: page + 1,
+    pages: Math.ceil(count / limit)
+  });
+});
+
+
+
+/**
 exports.getBlog = (req, res) => {
+
+  const blogs = Blog.list;
   res.render('account/blog', {
     title: 'Blog manager'
   });
 };
 
-/**
  * POST /blog
  * Sign in using email and password.
  */

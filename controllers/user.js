@@ -6,6 +6,7 @@ const _ = require('lodash');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
+const Member = require('../models/Members');
 
 const randomBytesAsync = promisify(crypto.randomBytes);
 
@@ -121,11 +122,28 @@ exports.postSignup = (req, res, next) => {
  * GET /account
  * Profile page.
  */
-exports.getActivity = (req, res) => {
-  res.render('account/activity', {
-    title: 'Personal accounting'
+
+
+
+// Display list of all Authors.
+exports.getActivity = function (req, res, next) {
+
+    Member.find()
+        .sort([['date', 'ascending']])
+        .exec(function (err, list_activity) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/activity', { title: 'Account Ledger', activity_list: list_activity });
+        })
+};
+
+
+exports.getMember = (req, res) => {
+  res.render('account/membercreate', {
+    title: 'Business description'
   });
 };
+
 
 /**
  * GET /account/business
@@ -177,6 +195,38 @@ exports.postUpdateBusiness = (req, res, next) => {
     });
   });
 };
+
+
+
+exports.postMember = (req, res, next) => {
+  const validationErrors = [];
+
+        var db = new Member();
+        var response = {};
+        db.name = req.body.name;
+        db.source = req.body.source;
+        db.amount = req.body.amount;
+        db.date = req.body.date;
+        db.group = req.body.group;
+        db.witness = req.body.witness;
+        db.comment = req.body.comment;
+
+        db.save((err) => {
+          if (err) {
+            if (err.code === 11000) {
+              req.flash('errors', { msg: 'There was an error in your update.' });
+              return res.redirect('/account/activity');
+          }
+          return next(err);
+          }
+          req.flash('success', { msg: 'Account transaction has been registered.' });
+          res.redirect('/account/activity');
+          });
+
+};
+
+
+
 
 
 /**

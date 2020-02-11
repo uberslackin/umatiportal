@@ -28,8 +28,10 @@
               span= user.profile.name || user.email || user.id
               i.caret
             div.dropdown-menu
-              a.dropdown-item(href='/account') Profile
-              a.dropdown-item(href='/account/account') Savings
+              a.dropdown-item(href='/account/activity') Account Ledger
+              a.dropdown-item(href='/account/payment') Add a Payment              
+              div.dropdown-divider
+              a.dropdown-item(href='/account') Profile              
               a.dropdown-item(href='/account/business') Business
               a.dropdown-item(href='/account/group') Group
               a.dropdown-item(href='/account/blog') Blog

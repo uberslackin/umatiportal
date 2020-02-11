@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 const express = require('express');
+const router = require('express-promise-router')();
 const compression = require('compression');
 const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -159,6 +160,11 @@ app.get('/account/createpost', passportConfig.isAuthenticated, blogController.ge
 app.post('/account/createpost', passportConfig.isAuthenticated, blogController.postCreatepost);
 app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog);
 app.post('/account/blog', passportConfig.isAuthenticated, blogController.postUpdateBlog);
+
+app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
+
+app.post('/account/payment', passportConfig.isAuthenticated, userController.postMember);
+
 
 /**
  * API examples routes.
