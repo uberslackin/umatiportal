@@ -119,13 +119,18 @@ exports.postSignup = (req, res, next) => {
 };
 
 /**
- * GET /account
- * Profile page.
+ * GET /account/setup
+ * member payment account settings page.
  */
 
+exports.getSetup = (req, res) => {
+  res.render('account/setup', {
+    title: 'Account settings'
+  });
+};
 
 
-// Display list of all Authors.
+// Display list of Member activity.
 exports.getActivity = function (req, res, next) {
 
     Member.find()
@@ -141,6 +146,42 @@ exports.getActivity = function (req, res, next) {
 exports.getMember = (req, res) => {
   res.render('account/membercreate', {
     title: 'Business description'
+  });
+};
+
+/**
+ * POST /account/setup
+ * Update setup info.
+ */
+exports.postUpdateSetup = (req, res, next) => {
+  const validationErrors = [];
+/**  if (!validator.isEmail(req.body.amount)) validationErrors.push({ msg: 'Please enter a valid payment amount.' });
+ */
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/setup');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.setup.name = req.body.name || '';
+    user.setup.amount = req.body.amount || '';
+    user.setup.sourcetype = req.body.sourcetype || '';
+    user.setup.sourcenum = req.body.sourcenum || '';
+    user.setup.postdate = req.body.postdate || '';
+
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your update.' });
+          return res.redirect('/account/setup');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Settings have been updated.' });
+      res.redirect('/account/setup');
+    });
   });
 };
 
@@ -224,9 +265,6 @@ exports.postMember = (req, res, next) => {
           });
 
 };
-
-
-
 
 
 /**

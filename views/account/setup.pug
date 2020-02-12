@@ -1,0 +1,36 @@
+extends ../layout
+
+block content
+
+  h2 Payment Account
+
+  form(action='/account/setup', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='username', value=username)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Name
+      .col-md-7
+        input.form-control(type='text', name='name', id='name', value=user.setup.name, autocomplete='name')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='sourcetype') Source Type
+      .col-md-7
+        input.form-control(type='text', name='sourcetype', id='sourcetype', value=user.setup.sourcetype, autocomplete)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='sourcenum') Source Number
+      .col-md-7
+        input.form-control(type='text', name='sourcenum', id='sourcenum', value=user.setup.sourcenum, autocomplete='sourcenum')   
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update Account
+
+
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Linked Accounts
+  .form-group
+    .offset-sm-3.col-md-7.pl-2
+      if user.quickbooks
+        p.mb-1: a.text-danger(href='/account/unlink/quickbooks') Unlink your QuickBooks account
+      else
+        p.mb-1: a(href='/auth/quickbooks') Link your QuickBooks account

@@ -46,6 +46,8 @@ const passportConfig = require('./config/passport');
  */
 const app = express();
 
+app.locals.moment = require('moment');
+
 /**
  * Connect to MongoDB.
  */
@@ -146,6 +148,8 @@ app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 app.get('/account/activity', passportConfig.isAuthenticated, userController.getActivity);
 app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
+app.get('/account/setup', passportConfig.isAuthenticated, userController.getSetup);
+app.post('/account/setup', passportConfig.isAuthenticated, userController.postUpdateSetup);
 app.get('/account/business', passportConfig.isAuthenticated, userController.getBusiness);
 app.post('/account/business', passportConfig.isAuthenticated, userController.postUpdateBusiness);
 app.get('/account/blogsettings', passportConfig.isAuthenticated, userController.getBlogsettings);
@@ -162,7 +166,6 @@ app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog)
 app.post('/account/blog', passportConfig.isAuthenticated, blogController.postUpdateBlog);
 
 app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
-
 app.post('/account/payment', passportConfig.isAuthenticated, userController.postMember);
 
 

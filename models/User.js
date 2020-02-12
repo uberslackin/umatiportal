@@ -51,10 +51,12 @@ const userSchema = new mongoose.Schema({
     blogtags: String,
     active: String
   },
-  activity: {
+  setup: {
+    username: String,
     name: String,
     amount: Number,
-    source: String,
+    sourcetype: String,
+    sourcenum: String,
     postdate: Date,
     iphash: String,
     transhash: String

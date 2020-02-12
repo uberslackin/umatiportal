@@ -5,60 +5,52 @@ block content
 
   include ../partials/profilehead.pug
 
-  h2 Transaction Record
+  h2 Your Umati Transaction Records
+ 
+    br
+    br
 
-  hr
-
-  #table-wrapper
-  table#desc
-    tr
-      th Payment Date
-      th Amount
-      th Source
-      th Witness
-      th Comment
+    .container-fluid
+      .row-fluid
+        .span3
 
     - activity_list.sort(function(a, b) {let textA = a.name.toUpperCase(); let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
-    each item in activity_list
-    
-      #{item.date} |
-      #{item.amount} |
-      #{item.source} |
-      #{item.witness} |
-      #{item.comment}
+    each item,index in activity_list
+      if !(index % 2)
+
+        //first section
+        .row.align-items-center.how-it-works
+            .col-2.text-center.bottom
+                .circle #{moment(item.date).format('MMM Do')}
+            .col-6
+                h5 $#{item.amount} #{item.source} payment
+                p #{item.comment}
+        
+        
+        .row.timeline
+            .col-2
+                .corner.top-right
+            .col-8
+                hr
+            .col-2
+                .corner.left-bottom
+
+      else
+        .row.align-items-center.justify-content-end.how-it-works
+            .col-6.text-right
+                h5 $#{item.amount} #{item.source} payment
+                p #{item.comment}
+            .col-2.text-center.full
+                .circle  #{moment(item.date).format('MMM Do')} 
+        
+        .row.timeline
+            .col-2
+                .corner.right-bottom
+            .col-8
+                hr
+            .col-2
+                .corner.top-left
+
     else
       li There are no recorded payments.
       hr
-
-  h2 Account Details
-
-  form(action='/account/activity', method='POST')
-    input(type='hidden', name='_csrf', value=_csrf)
-    input(type='hidden', name='username', value=username)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Name
-      .col-md-7
-        input.form-control(type='text', name='name', id='name', value=user.activity.name, autocomplete='name')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Amount 
-      .col-md-7
-        input.form-control(type='text', name='amount', id='amount', value=user.activity.amount, autocomplete)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='website') Source
-      .col-md-7
-        input.form-control(type='text', name='source', id='source', value=user.activity.source, autocomplete='url')
-    .form-group
-      .offset-sm-3.col-md-7.pl-2
-        button.btn.btn.btn-primary(type='submit')
-          i.fas.fa-pencil-alt.fa-sm
-          | Update Account
-
-
-  .pb-2.mt-2.mb-4.border-bottom
-    h3 Linked Accounts
-  .form-group
-    .offset-sm-3.col-md-7.pl-2
-      if user.quickbooks
-        p.mb-1: a.text-danger(href='/account/unlink/quickbooks') Unlink your QuickBooks account
-      else
-        p.mb-1: a(href='/auth/quickbooks') Link your QuickBooks account
