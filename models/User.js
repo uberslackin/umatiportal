@@ -51,6 +51,14 @@ const userSchema = new mongoose.Schema({
     blogtags: String,
     active: String
   },
+  calsettings: {
+    user: String,
+    caltitle: String,
+    shortdesc: String,
+    caldesc: String,
+    caltags: String,
+    active: String
+  },
   setup: {
     username: String,
     name: String,

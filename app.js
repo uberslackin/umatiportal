@@ -33,6 +33,7 @@ dotenv.config({ path: '.env.example' });
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const blogController = require('./controllers/blog');
+const calController = require('./controllers/cal');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
@@ -154,6 +155,8 @@ app.get('/account/business', passportConfig.isAuthenticated, userController.getB
 app.post('/account/business', passportConfig.isAuthenticated, userController.postUpdateBusiness);
 app.get('/account/blogsettings', passportConfig.isAuthenticated, userController.getBlogsettings);
 app.post('/account/blogsettings', passportConfig.isAuthenticated, userController.postUpdateBlogsettings);
+app.get('/account/calsettings', passportConfig.isAuthenticated, userController.getCalsettings);
+app.post('/account/calsettings', passportConfig.isAuthenticated, userController.postUpdateCalsettings);
 app.get('/account/group', passportConfig.isAuthenticated, userController.getGroup);
 app.post('/account/group', passportConfig.isAuthenticated, userController.postUpdateGroup);
 app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
@@ -164,6 +167,12 @@ app.get('/account/createpost', passportConfig.isAuthenticated, blogController.ge
 app.post('/account/createpost', passportConfig.isAuthenticated, blogController.postCreatepost);
 app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog);
 app.post('/account/blog', passportConfig.isAuthenticated, blogController.postUpdateBlog);
+
+
+app.get('/account/newcalentry', passportConfig.isAuthenticated, calController.getCalEntry);
+app.post('/account/newcalentry', passportConfig.isAuthenticated, calController.postCreateCalEntry);
+app.get('/account/calendar', passportConfig.isAuthenticated, calController.getCalendar);
+app.post('/account/calendar', passportConfig.isAuthenticated, calController.postUpdateCalEntry);
 
 app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
 app.post('/account/payment', passportConfig.isAuthenticated, userController.postMember);

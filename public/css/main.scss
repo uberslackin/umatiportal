@@ -183,15 +183,31 @@ $enable-gradients: true;
 }
 
 .circle {
-  //font-weight: bold;
+  font-weight: bold;
   padding: 15px 20px;
   border-radius: 50%;
   background-color: #9999ff;
   color: #4D4545;
-  max-height: 50px;
   z-index: 2;
+  text: 14pt;
 }
 
+.circleadd {
+  padding: 10px;
+  border-radius: 50px 20px;
+   border-radius: 15px 15px 15px 15px; 
+   text-decoration: none;
+   background-color:#8888dd;
+   color: #4D4545;
+   z-index: 2;
+   text: 14pt #fff;
+   text-align: center;
+}
+
+.circleadd:hover{
+   background-color:#8888dd;
+   text-decoration: none;
+}
 .how-it-works.row {
   display: flex;
 }

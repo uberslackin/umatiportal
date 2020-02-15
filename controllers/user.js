@@ -6,6 +6,7 @@ const _ = require('lodash');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
+const Calendar = require('../models/Calendar');
 const Member = require('../models/Members');
 
 const randomBytesAsync = promisify(crypto.randomBytes);
@@ -137,7 +138,7 @@ exports.getActivity = function (req, res, next) {
         .sort([['date', 'ascending']])
         .exec(function (err, list_activity) {
             if (err) { return next(err); }
-            // Successful, so render.
+            // Successful, so rendecalsr.
             res.render('account/activity', { title: 'Account Ledger', activity_list: list_activity });
         })
 };
@@ -300,6 +301,54 @@ exports.postUpdateActivity = (req, res, next) => {
     });
   });
 };
+
+/**
+ * GET /account/calsettings
+ * Profile page.
+ */
+exports.getCalsettings = (req, res) => {
+  res.render('account/calsettings', {
+    title: 'Calendar Settings'
+  });
+};
+
+
+/**
+ * POST /account/blogsettings
+ * Update blog settings.
+ */
+exports.postUpdateCalsettings = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/calsettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.calsettings.user = req.body.user || '';
+    user.calsettings.caltitle = req.body.caltitle || '';
+    user.calsettings.caldesc = req.body.caldesc || '';
+    user.calsettings.shortdesc = req.body.shortdesc || '';
+    user.calsettings.caltags = req.body.caltags || '';
+    user.calsettings.active = req.body.active || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your calendar settings update.' });
+          return res.redirect('/account/calsettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Calendar setings has been updated.' });
+      res.redirect('/account/calsettings');
+    });
+  });
+};
+
+
+
 
 /**
  * GET /account/blogsettings

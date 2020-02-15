@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+    h3 Calendar
+
+  include ../partials/profilehead.pug
+
+    .form-group.row
+    a(href='/account/calsettings') Calendar Settings - 
+    a(href='/account/newcalentry') New Calendar Entry
+
+    hr
+
+  - if (cals.length)
+    each entries in cals 
+        strong #{entries.calentrytitle} - #{entries.caldate}  - #{entries.calcat}
+        br
+        #{entries.post}
+        hr 
+
