@@ -13,48 +13,31 @@ const User = require('../models/User');
 
 const randomBytesAsync = promisify(crypto.randomBytes);
 
-
 /**
  * GET /account/calendar
  * Calendar manager.
- */
-
-exports.getCalendar = async(function*(req, res) {
-  const page = (req.query.page > 0 ? req.query.page : 1) - 1;
-  const _id = req.query.item;
-  const limit = 15;
-  const options = {
-    limit: limit,
-    page: page
-  };
-
-  if (_id) options.criteria = { _id };
-
-  const cals = yield Cal.list;
-  const count = yield Cal.countDocuments();
-
-  console.log(cals);
-
-  res.render('account/calendar', {
-    title: 'Calendar entries',
-    username: req.user,
-    cals: cals,
-    page: page + 1,
-    pages: Math.ceil(count / limit)
-  });
-});
+ *
+ * Display calendar data.
+*/
 
 
+// Display list of Member activity.
+exports.getCal = function (req, res, next) {
 
-/**
-exports.getCal = (req, res) => {
-
-  const cals = Cal.list;
-  res.render('account/calendar', {
-    title: 'Calendar manager'
-  });
+    Cal.find()
+        .sort([['date', 'ascending']])
+        .exec(function (err, cal_data) {
+            if (err) { return next(err); }
+            // Successful, so rendecalsr.
+            res.render('account/cal', { title: 'Personal Calendar', caldata: cal_data });
+        })
 };
 
+
+
+
+
+ /*
  * POST /cal
  * Sign in using email and password.
  */
@@ -68,14 +51,14 @@ exports.postCal = (req, res, next) => {
  * Signup page.
  */
 exports.getCalEntry = (req, res) => {
-  res.render('account/newcalentry', {
+  res.render('account/calentrycreate', {
     title: 'Create calendar entry'
   });
 };
 
 
 /**
- * POST /newcal
+ * POST /necal
  * Create a new local account.
  */
 exports.postCreateCalEntry = (req, res, next) => {
@@ -85,7 +68,7 @@ exports.postCreateCalEntry = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/account/newcalentry');
+    return res.redirect('/account/calentrycreate');
   }
 
   const cal = new Cal({
@@ -103,7 +86,7 @@ exports.postCreateCalEntry = (req, res, next) => {
     if (err) { return next(err); }
     if (existingCal) {
       req.flash('errors', { msg: 'Calendar entry with that title already exists.' });
-      return res.redirect('/account/newcalentry');
+      return res.redirect('/account/calentrycreate');
     }
     cal.save((err) => {
       if (err) { return next(err); }
@@ -111,7 +94,7 @@ exports.postCreateCalEntry = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/account/calendar');
+        res.redirect('/account/cal');
       });
     });
   });

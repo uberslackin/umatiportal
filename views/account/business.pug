@@ -10,12 +10,12 @@ block content
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Name
-      .col-md-7
+      .pcol-md-7
         input.form-control(type='text', name='name', id='name', value=user.business.name, autocomplete='name')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='description') Description
       .col-md-7
-        input.form-control(type='text', name='description', id='description', value=user.business.description, autocomplete)
+        textarea.form-control( name="description", rows="6", cols="66", autocomplete='description' ) #{user.business.description}
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='contactemail') Contact Email
       .col-md-7

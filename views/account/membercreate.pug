@@ -7,8 +7,10 @@ block content
 
   include ../partials/profilehead.pug
 
-    .form-group.row
-    a(href='/account/blogsettings') Blog Settings
+    a(href='/account/settings') Payment settings -   
+    a(href='/account/activity') Payment history
+
+    hr
 
   form(action='/account/payment', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)

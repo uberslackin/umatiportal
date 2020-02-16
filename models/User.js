@@ -24,6 +24,7 @@ const userSchema = new mongoose.Schema({
   profile: {
     name: String,
     gender: String,
+    story: String,
     location: String,
     website: String,
     group: String,

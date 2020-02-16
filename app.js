@@ -169,9 +169,9 @@ app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog)
 app.post('/account/blog', passportConfig.isAuthenticated, blogController.postUpdateBlog);
 
 
-app.get('/account/newcalentry', passportConfig.isAuthenticated, calController.getCalEntry);
-app.post('/account/newcalentry', passportConfig.isAuthenticated, calController.postCreateCalEntry);
-app.get('/account/calendar', passportConfig.isAuthenticated, calController.getCalendar);
+app.get('/account/calentrycreate', passportConfig.isAuthenticated, calController.getCalEntry);
+app.post('/account/calentrycreate', passportConfig.isAuthenticated, calController.postCreateCalEntry);
+app.get('/account/cal', passportConfig.isAuthenticated, calController.getCal);
 app.post('/account/calendar', passportConfig.isAuthenticated, calController.postUpdateCalEntry);
 
 app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);

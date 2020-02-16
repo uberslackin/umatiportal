@@ -1,0 +1,19 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+  include ../partials/profilehead.pug
+    a(href='/account/calentrycreate') Add an entry - 
+    a(href='/account/calsettings') Calendar Setup
+
+  hr
+
+  h3 Your Calendar
+ 
+    br
+  - if (caldata.length)
+    each items in caldata 
+        strong #{moment(items.caldate).format('MMM Do')} - #{items.calentrytitle}
+        p #{items.calcat}
+        hr

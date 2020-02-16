@@ -10,7 +10,7 @@ block content
     .form-group.row
     a(href='/account/calsettings') Settings
 
-  form(action='/account/newcalentry', method='POST')
+  form(action='/account/calentrycreate', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
     .form-group.row
@@ -18,9 +18,13 @@ block content
       .col-md-7
         input.form-control(type='text', name='calentrytitle', id='calentrytitle')
     .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='caldate') Date
+      .col-md-7
+        input.form-control(type='date', name='caldate', id='caldate')        
+    .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
-        input.form-control(type='text', name='post', id='post')
+        textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' )
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
       .col-md-7
@@ -33,10 +37,6 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='caltags') Tags
       .col-md-7
         input.form-control(type='text', name='caltags', id='caltags')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='caldate') Date
-      .col-md-7
-        input.form-control(type='date', name='caldate', id='caldate')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='time') Time
       .col-md-7

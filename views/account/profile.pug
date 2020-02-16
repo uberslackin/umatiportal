@@ -30,6 +30,10 @@ block content
             | Unverified: &nbsp;
             a(href='/account/verify') Send verification email
     .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='story') Your story
+      .col-md-7
+        textarea.form-control( name="story", rows="6", cols="66", autocomplete="story" ) #{user.profile.story}
+    .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left Gender
       .col-sm-6
         .form-check.form-check-inline
