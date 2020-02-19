@@ -6,7 +6,6 @@ const Schema = mongoose.userSchema;
 const calSchema = new mongoose.Schema({
     id: Number,
     name: String,
-    user: String,
     username: String,
     calentrytitle: String,
     post: String,

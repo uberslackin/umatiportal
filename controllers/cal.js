@@ -25,7 +25,7 @@ const randomBytesAsync = promisify(crypto.randomBytes);
 exports.getCal = function (req, res, next) {
 
     Cal.find()
-        .sort([['date', 'ascending']])
+        .sort([['caldate', 'ascending']])
         .exec(function (err, cal_data) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
@@ -72,6 +72,7 @@ exports.postCreateCalEntry = (req, res, next) => {
   }
 
   const cal = new Cal({
+    username: req.body.user,
     name: req.body.name,
     calentrytitle: req.body.calentrytitle,
     post: req.body.post, 
