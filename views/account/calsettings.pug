@@ -25,8 +25,19 @@ block content
       .col-md-7
         input.form-control(type='text', name='caltags', id='caltags', value=user.calsettings.caltags, autocomplete='caltags')
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='active') Active
-        input.form-control(type='checkbox', name='active', checked=user.calsettings.active)
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='visibility') Visibility
+      .col-md-1.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.calsettings.visibility == 'visible', name='visibility', value='visible', data-toggle='radio')
+        label.form-check-label Visible
+      .col-md-2.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.calsettings.visibility == 'group', name='visibility', value='group', data-toggle='radio')
+        label.form-check-label My Group Only
+      .col-md-2.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.calsettings.visibility == 'subgroup', name='visibility', value='subgroup', data-toggle='radio')
+        label.form-check-label Sub Group Only
+      .col-md-1.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.calsettings.visibility == 'invisible', name='visibility', value='invisible', data-toggle='radio')
+        label.form-check-label Invisible
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')

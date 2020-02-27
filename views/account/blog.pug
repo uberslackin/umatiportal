@@ -6,10 +6,8 @@ block content
     h3 Manage Your Blog Posts
 
   include ../partials/profilehead.pug
-
-    .form-group.row
-    a(href='/account/blogsettings') Blog Settings - 
-    a(href='/account/createpost') New Post
+    a(href='/account/blogsettings') Settings - 
+    a(href='/account/createpost') Create a Post
 
     hr
 
@@ -18,5 +16,7 @@ block content
         strong #{posts.posttitle} - #{posts.postdate}  - #{posts.postcat}
         br
         #{posts.post}
+        a(href='/account/blog/'+posts._id).icon-edit Edit 
+        updated  &nbsp; &nbsp; &nbsp;  updated #{moment(posts.updatedAt).format('MMM Do h:mm:ss a')}        
         hr 
 

@@ -3,17 +3,17 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
 
-    h3 Create a new Blog Post
+    h3 Blog Post Edit
 
   include ../partials/profilehead.pug
-    a(href='/account/blog') Blog - 
-    a(href='/account/blogsettings') Settings
 
-    hr
+    .form-group.row
+    a(href='/account/blogsettings') Blog Settings
 
-  form(action='/account/createpost', method='POST')
+  form(action='/account/blogedit', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
+    input(type='hidden', name='blogpost_id', value=blogpost_id)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttitle') Post Title
       .col-md-7

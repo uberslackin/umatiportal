@@ -35,14 +35,14 @@ const userSchema = new mongoose.Schema({
     salt: String,
     active: Boolean
   },
-  group: {
+  groupsettings: {
     groupname: String,
     adminperson: String,
     location: String,
     description: String,
     shortdesc: String,
     memberlist: String,
-    active: String
+    visibility: String
   },
   blogsettings: {
     user: String,
@@ -50,7 +50,16 @@ const userSchema = new mongoose.Schema({
     shortdesc: String,
     blogdesc: String,
     blogtags: String,
-    active: String
+    template: String,
+    visibility: String
+  },
+  inventorysettings: {
+    user: String,
+    invtitle: String,
+    shortdesc: String,
+    invdesc: String,
+    invtags: String,
+    visibility: String
   },
   calsettings: {
     user: String,
@@ -58,7 +67,15 @@ const userSchema = new mongoose.Schema({
     shortdesc: String,
     caldesc: String,
     caltags: String,
-    active: String
+    visibility: String
+  },
+  possettings: {
+    user: String,
+    postitle: String,
+    shortdesc: String,
+    posdesc: String,
+    postags: String,
+    visibility: String
   },
   setup: {
     username: String,

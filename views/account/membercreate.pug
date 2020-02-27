@@ -16,7 +16,7 @@ block content
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='name', value=user.name)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='soure') Source
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='source') Source
       .col-md-7
         input.form-control(type='text', name='source', id='source')
     .form-group.row
@@ -34,7 +34,7 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='comment') Comment
       .col-md-7
-        textarea.form-control( name="comment", rows="6", cols="66", autocomplete='comment' ) #{user.group.comment}        
+        textarea.form-control( name="comment", rows="6", cols="66", autocomplete='comment' ) #{member.comment}        
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='date') Date
       .col-md-7

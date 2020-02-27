@@ -1,0 +1,40 @@
+/* LAYOUT */
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+main {
+  width: 3200px;
+  height: 1080px;
+  display: grid;
+  grid-template-columns: 1920px 1280px;
+}
+
+#pong {
+  width: 1920px;
+  height: 1080px;
+}
+
+#slides {
+  position: relative;
+}
+
+#slides, .slide {
+  width: 1280px;
+  height: 1080px;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  transition: opacity 0.4s;
+}
+
+.slide.faded {
+  opacity: 0;
+}
+

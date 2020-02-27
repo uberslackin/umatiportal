@@ -19,30 +19,16 @@ const randomBytesAsync = promisify(crypto.randomBytes);
  * Blog manager.
  */
 
-exports.getBlog = async(function*(req, res) {
-  const page = (req.query.page > 0 ? req.query.page : 1) - 1;
-  const _id = req.query.item;
-  const limit = 15;
-  const options = {
-    limit: limit,
-    page: page
-  };
+exports.getBlog = function (req, res, next) {
 
-  if (_id) options.criteria = { _id };
-
-  const blogs = yield Blog.list;
-  const count = yield Blog.countDocuments();
-
-  console.log(blogs);
-
-  res.render('account/blog', {
-    title: 'Blog posts',
-    username: req.user,
-    blogs: blogs,
-    page: page + 1,
-    pages: Math.ceil(count / limit)
-  });
-});
+    Blog.find()
+        .sort([['postdate', 'ascending']])
+        .exec(function (err, blog_data) {
+            if (err) { return next(err); }
+            // Successful, so rendecalsr.
+            res.render('account/blog', { title: 'Personal Blog', blogs: blog_data });
+        })
+};
 
 
 
@@ -73,7 +59,6 @@ exports.getCreatepost = (req, res) => {
   });
 };
 
-
 /**
  * POST /createpost
  * Create a new local account.
@@ -95,7 +80,8 @@ exports.postCreatepost = (req, res, next) => {
     location: req.body.location, 
     postcat: req.body.postcat,
     posttags: req.body.posttags,
-    postdate: req.body.postdate
+    postdate: req.body.postdate,
+    template: req.body.template
   });
 
   Blog.findOne({ posttitle: req.body.posttitle }, (err, existingBlog) => {
@@ -116,6 +102,40 @@ exports.postCreatepost = (req, res, next) => {
   });
 };
 
+
+exports.getUpdateBlogpost = (req, res) => {
+  res.render('account/blogedit', {
+    title: 'Edit point of sale entry',
+    blogpost_id: req.params.blogpost_id
+  });
+};
+
+
+exports.postUpdateBlogpost = (req, res, next) => {
+
+// create employee and send back all employees after creation
+  // create mongose method to update a existing record into collection
+  let id = req.params.blogpost_id;
+  var data = {
+    name : req.body.name,
+    user : req.body.user,
+    username : req.body.username,
+    postitle : req.body.posttitle,
+    post : req.body.post,
+    location : req.body.location,
+    postcat : req.body.postcat,
+    posttags : req.body.posttags,
+    postdate : req.body.postdate,
+    sharedwith : req.body.sharedwith
+  }
+ 
+  // save the user
+  Blog.findByIdAndUpdate(id, data, function(err, blogpost) {
+  if (err) throw err;
+ 
+  res.send('Successfully! Blog updated - '+blogpost.name);
+  });
+};
 
 
 /**

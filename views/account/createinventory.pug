@@ -3,23 +3,27 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
 
-    h3 Create a new Blog Post
+    h3 Create a new Inventory Item
 
   include ../partials/profilehead.pug
-    a(href='/account/blog') Blog - 
-    a(href='/account/blogsettings') Settings
+    a(href='/account/inventory') Inventory - 
+    a(href='/account/inventorysettings') Settings
 
     hr
 
-  form(action='/account/createpost', method='POST')
+  form(action='/account/createinventory', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Name
+      .col-md-7
+        input.form-control(type='text', name='name', id='name')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttitle') Post Title
       .col-md-7
         input.form-control(type='text', name='posttitle', id='posttitle')
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post
       .col-md-7
         input.form-control(type='text', name='post', id='post')
     .form-group.row
@@ -38,8 +42,12 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate') Date
       .col-md-7
         input.form-control(type='date', name='postdate', id='postdate')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='sharedwith') Share with
+      .col-md-7
+        input.form-control(type='text', name='sharedwith', id='sharedwith')
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm
-          | Create post
+          | Create inventory data item

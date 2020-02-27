@@ -7,7 +7,7 @@ const validator = require('validator');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
 const Calendar = require('../models/Calendar');
-const Member = require('../models/Members');
+const Member = require('../models/Member');
 
 const randomBytesAsync = promisify(crypto.randomBytes);
 
@@ -186,7 +186,6 @@ exports.postUpdateSetup = (req, res, next) => {
   });
 };
 
-
 /**
  * GET /account/business
  * Profile page.
@@ -332,7 +331,7 @@ exports.postUpdateCalsettings = (req, res, next) => {
     user.calsettings.caldesc = req.body.caldesc || '';
     user.calsettings.shortdesc = req.body.shortdesc || '';
     user.calsettings.caltags = req.body.caltags || '';
-    user.calsettings.active = req.body.active || '';
+    user.calsettings.visibility = req.body.visibility || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -346,6 +345,61 @@ exports.postUpdateCalsettings = (req, res, next) => {
     });
   });
 };
+
+
+/**
+ * GET /account/calsettings
+ * Profile page.
+ */
+exports.getPossettings = (req, res) => {
+  res.render('account/possettings', {
+    title: 'POS Settings'
+  });
+};
+
+
+/**
+ * POST /account/blogsettings
+ * Update blog settings.
+ */
+exports.postUpdatePossettings = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/possettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.possettings.user = req.body.user || '';
+    user.possettings.postitle = req.body.postitle || '';
+    user.possettings.posdesc = req.body.posdesc || '';
+    user.possettings.shortdesc = req.body.shortdesc || '';
+    user.possettings.postags = req.body.postags || '';
+    user.possettings.visibility = req.body.visibility || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your point of sale settings update.' });
+          return res.redirect('/account/possettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'POS setings has been updated.' });
+      res.redirect('/account/possettings');
+    });
+  });
+};
+
+
+
+
+
+
+
+
+
 
 
 
@@ -379,7 +433,8 @@ exports.postUpdateBlogsettings = (req, res, next) => {
     user.blogsettings.blogdesc = req.body.blogdesc || '';
     user.blogsettings.shortdesc = req.body.shortdesc || '';
     user.blogsettings.blogtags = req.body.blogtags || '';
-    user.blogsettings.active = req.body.active || '';
+    user.blogsettings.template = req.body.template || '';
+    user.blogsettings.visibility = req.body.visibility || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -396,7 +451,56 @@ exports.postUpdateBlogsettings = (req, res, next) => {
 
 
 /**
- * GET /account/group
+*
+* Inventory Settings
+*
+* GET /account/blogsettings
+* Profile page.
+*/
+
+exports.getInventorysettings = (req, res) => {
+  res.render('account/inventorysettings', {
+    title: 'Inventory Settings'
+  });
+};
+
+/**
+ * POST /account/blogsettings
+ * Update blog settings.
+ */
+exports.postUpdateInventorysettings = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/inventorysettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.Inventorysettings.user = req.body.user || '';
+    user.Inventorysettings.blogtitle = req.body.blogtitle || '';
+    user.Inventorysettings.blogdesc = req.body.blogdesc || '';
+    user.Inventorysettings.shortdesc = req.body.shortdesc || '';
+    user.Inventorysettings.blogtags = req.body.blogtags || '';
+    user.Inventorysettings.active = req.body.active || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your Inventory settings update.' });
+          return res.redirect('/account/inventorysettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Inventory setings has been updated.' });
+      res.redirect('/account/inventorysettings');
+    });
+  });
+};
+
+
+/**
+ * GET /account/group getGroupsettings
  * Group page.
  */
 exports.getGroup = (req, res) => {
@@ -406,36 +510,48 @@ exports.getGroup = (req, res) => {
 };
 
 /**
- * POST /account/group
+ * getGroupsettings form
+ *
+*/
+
+exports.getGroupsettings = (req, res) => {
+  res.render('account/groupsettings', {
+    title: 'Group Settings'
+  });
+};
+
+
+/**
+ * POST /account/group 
  * Update blog settings.
  */
-exports.postUpdateGroup = (req, res, next) => {
+exports.postUpdateGroupsettings = (req, res, next) => {
   const validationErrors = [];
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/account/group');
+    return res.redirect('/account/groupsettings');
   }
 
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
-    user.group.groupname = req.body.groupname || '';
-    user.group.adminperson = req.body.adminperson || '';
-    user.group.location = req.body.location || '';
-    user.group.description = req.body.description || '';
-    user.group.shortdesc = req.body.shortdesc || '';
-    user.group.memberlist = req.body.memberlist || '';
-    user.group.active = req.body.active || '';
+    user.groupsettings.groupname = req.body.groupname || '';
+    user.groupsettings.adminperson = req.body.adminperson || '';
+    user.groupsettings.location = req.body.location || '';
+    user.groupsettings.description = req.body.description || '';
+    user.groupsettings.shortdesc = req.body.shortdesc || '';
+    user.groupsettings.memberlist = req.body.memberlist || '';
+    user.groupsettings.visibility = req.body.visibility || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
           req.flash('errors', { msg: 'There was an error in your group details update.' });
-          return res.redirect('/account/group');
+          return res.redirect('/account/groupsettings');
         }
         return next(err);
       }
       req.flash('success', { msg: 'Group details have been updated.' });
-      res.redirect('/account/group');
+      res.redirect('/account/groupsettings');
     });
   });
 };

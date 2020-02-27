@@ -1,0 +1,48 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+    h3 Edit Point of Sale Item
+
+  include ../partials/profilehead.pug
+
+    .form-group.row
+    a(href='/account/possettings') Settings
+
+  form(action='/account/posentryedit', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='user', value=user.id)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postitle') Name of item
+      .col-md-7
+        input.form-control(type='text', name='postitle', id='postitle')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='posdate') Date
+      .col-md-7
+        input.form-control(type='date', name='posdate', id='posdate')        
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Description
+      .col-md-7
+        textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' )
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location of Item
+      .col-md-7
+        input.form-control(type='text', name='location', id='location')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='poscat') Category
+      .col-md-7
+        input.form-control(type='text', name='poscat', id='poscat')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postags') Tags
+      .col-md-7
+        input.form-control(type='text', name='postags', id='postags')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='time') Time
+      .col-md-7
+        input.form-control(type='time', name='time', id='time')
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update Item

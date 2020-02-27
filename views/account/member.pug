@@ -1,17 +1,17 @@
 extends ../layout
 
 block content
-  h3 Your Calendar
-
   .pb-2.mt-2.mb-4.border-bottom
 
   include ../partials/profilehead.pug
-    a(href='/account/calsettings') Settings - 
-    a(href='/account/calentrycreate') Add an entry
+    a(href='/account/calentrycreate') Add an entry - 
+    a(href='/account/calsettings') Calendar Setup
 
   hr
+
+  h3 Your Calendar
  
-  br
+    br
   - if (caldata.length)
     each items in caldata 
         strong #{moment(items.caldate).format('MMM Do')} - #{items.calentrytitle}

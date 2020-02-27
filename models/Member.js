@@ -12,7 +12,7 @@ const membersSchema = new mongoose.Schema({
   comment: String
  }, { timestamps: true });
 
-const Members = mongoose.model('Members', membersSchema);
+const Member = mongoose.model('Member', membersSchema);
 
-module.exports = Members;
+module.exports = Member;
 

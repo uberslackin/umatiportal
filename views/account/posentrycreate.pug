@@ -1,0 +1,69 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+    h3 New Point of Sale Item
+
+  include ../partials/profilehead.pug
+    a(href='/account/pos') Pos - 
+    a(href='/account/possettings') Settings
+
+  form(action='/account/posentrycreate', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='user', value=user.id)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='posentrytitle') Point of Sale Item Title
+      .col-md-7
+        input.form-control(type='text', name='postitle', id='postitle')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='posdate') Date
+      .col-md-7
+        input.form-control(type='date', name='posdate', id='posdate')        
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
+      .col-md-7
+        textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' )
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
+      .col-md-7
+        input.form-control(type='text', name='location', id='location')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='poscat') Category
+      .col-md-7
+        input.form-control(type='text', name='poscat', id='poscat')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postags') Tags
+      .col-md-7
+        input.form-control(type='text', name='postags', id='postags')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='time') Time
+      .col-md-7
+        input.form-control(type='time', name='time', id='time')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postags') Visibility
+       .col-md-7
+      .form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.possettings.visibility == 'visible', name='visibility', value='visible', data-toggle='radio')
+        label.form-check-label Visible
+
+      .form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.possettings.visibility == 'my group', name='visibility', value='group', data-toggle='radio')
+        label.form-check-label My Group Only
+
+      .div.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.possettings.visibility == 'sub group', name='visibility', value='subgroup', data-toggle='radio')
+        label.form-check-label Sub Group Only
+
+      .div.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.possettings.visibility == 'invisible', name='visibility', value='invisible', data-toggle='radio')
+        label.form-check-label Invisible
+
+
+
+
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Create Point of Sale Entry

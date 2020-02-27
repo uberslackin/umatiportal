@@ -4,8 +4,8 @@ block content
   .pb-2.mt-2.mb-4.border-bottom
 
   include ../partials/profilehead.pug
-    a(href='/account/setup') Setup - 
-    a(href='/account/payment') Make a payment
+    a(href='/account/payment') Make a payment - 
+    a(href='/account/setup') Payments Setup
 
   hr
 
@@ -18,18 +18,18 @@ block content
       .row-fluid
         .span3
 
-    - n=1; activity_list.sort(function(a, b) {let textA = a.name.toUpperCase(); len=activity_list.length;  let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
-    each item,index in activity_list
+    - n=1; group_list.sort(function(a, b) {let textA = a.name.toUpperCase(); len=group_list.length;  let textB = b.name.toUpperCase(); return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;});
+    each item,index in group_list
       - var num = n++
       if !(index % 2)
 
         //first section
         .row.align-items-center.how-it-works
             .col-2.text-center.bottom
-                .circle #{moment(item.date).format('MMM Do')}
+                .circle #{moment(item.updatedAt).format('MMM Do')}
             .col-6
-                h5 $#{item.amount} #{item.source} payment
-                p #{item.comment}
+                h5 $#{item.amount} #{item.profile.group} group
+                p #{item.profile.role[0]}
         
         
         .row.timeline
@@ -42,16 +42,16 @@ block content
 
         if (num === len)  
                    br
-                   a(href='/account/payment')
-                     .circleadd.h2 Add a new payment  
+                   a(href='/account/group')
+                     .circleadd.h2 Add a new member  
 
       else
         .row.align-items-center.justify-content-end.how-it-works
             .col-6.text-right
-                h5 $#{item.amount} #{item.source} payment
-                p #{item.comment}
+                h5 $#{item.profile.group} group
+                p business: #{item.profile.business}
             .col-2.text-center.full
-                .circle  #{moment(item.date).format('MMM Do')} 
+                .circle  #{moment(item.createdAt).format('MMM Do')} 
         
         .row.timeline
             .col-2
@@ -63,9 +63,9 @@ block content
 
         if (num === len)
                    br
-                   a(href='/account/payment')
+                   a(href='/account/group')
                      .circleadd.h2 Add a new payment   
 
     else
-      li There are no recorded payments.
+      li There are no listed group members.
       hr

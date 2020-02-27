@@ -1,0 +1,20 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+    h3 Manage Your Inventory
+
+  include ../partials/profilehead.pug
+    a(href='/account/inventorysettings') Settings - 
+    a(href='/account/createinventory') New Inventory
+
+    hr
+
+  - if (data.length)
+    each posts in data 
+        strong #{posts.posttitle} - #{posts.postdate}  - #{posts.postcat}
+        br
+        #{posts.post}
+        hr 
+

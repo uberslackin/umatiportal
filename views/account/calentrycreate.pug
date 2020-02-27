@@ -2,13 +2,13 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-
-    h3 New Calendar Entry
-
   include ../partials/profilehead.pug
+    a(href='/account/cal') Calendar -  
+    a(href='/account/calsettings') Setup
 
-    .form-group.row
-    a(href='/account/calsettings') Settings
+  hr
+
+  h3 New Calendar Entry
 
   form(action='/account/calentrycreate', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)

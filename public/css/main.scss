@@ -61,11 +61,6 @@ h3+p {
   color: #fff;
 }
 
-.photos {
-  background-image: url(https://picsum.photos/536/354); 
-  color: #fff;
-}
-
 .news {
   background-image: url(/leaders.png); 
   color: #fff;
@@ -155,7 +150,7 @@ a.spam-button:link {
   }
   .cta {
     grid-column: 3;
-    grid-row: 3 / 6;
+    grid-row: 2 / 6;
   }
 }
 
@@ -309,6 +304,23 @@ $enable-gradients: true;
     background-color: #f1ef00;
   }
 }
+
+// unsplash
+
+.creditbadge { 
+    background-color:black;
+    color:white;
+    text-decoration:none;
+    padding:4px 6px;
+    font-family:-apple-system, BlinkMacSystemFont, San Francisco, Helvetica Neue, Helvetica, Ubuntu, Roboto, Noto, Segoe UI, Arial, sans-serif;
+    font-size:12px;
+    font-weight:bold;
+    line-height:1.2;
+    display:inline-block;
+    border-radius:3px; 
+  }
+
+
 
 // timeline
  
