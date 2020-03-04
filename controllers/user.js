@@ -6,14 +6,23 @@ const _ = require('lodash');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
-const Calendar = require('../models/Calendar');
+// const Calendar = require('../models/Calendar');
 const Member = require('../models/Member');
 
 const randomBytesAsync = promisify(crypto.randomBytes);
 
 /**
- * GET /login
- * Login page.
+* GET /login
+* Login page.
+* 
+* ref:
+* app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
+* app.post('/account/payment', passportConfig.isAuthenticated, userController.postMember);
+* app.get('/account/activity', passportConfig.isAuthenticated, userController.getActivity);
+* app.get('/account/activity-print', passportConfig.isAuthenticated, userController.getActivityprint);
+* app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
+
+
  */
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -134,8 +143,9 @@ exports.getSetup = (req, res) => {
 // Display list of Member activity.
 exports.getActivity = function (req, res, next) {
 
+    var mysort = { createdAt: -1,  };
     Member.find()
-        .sort([['date', 'ascending']])
+        .sort(mysort)
         .exec(function (err, list_activity) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
@@ -144,9 +154,66 @@ exports.getActivity = function (req, res, next) {
 };
 
 
+// Display list of Member activity.
+exports.getActivityprint = function (req, res, next) {
+
+    Member.find()
+        .sort([['date', 'ascending']])
+        .exec(function (err, list_activity) {
+            if (err) { return next(err); }
+            // Successful, so rendecalsr.
+            res.render('account/activity-print', { title: 'Account Ledger', activity_list: list_activity });
+        })
+};
+
+
 exports.getMember = (req, res) => {
   res.render('account/membercreate', {
-    title: 'Business description'
+    title: 'Business transaction'
+  });
+};
+
+
+
+exports.postMember = (req, res, next) => {
+  const validationErrors = [];
+
+        var db = new Member();
+        var response = {};
+        db.username = req.body.username;
+        db.name = req.body.name;
+        db.source = req.body.source;
+        db.amount = req.body.amount;
+        db.date = req.body.date;
+        db.group = req.body.group;
+        db.witness = req.body.witness;
+        db.comment = req.body.comment;
+
+        db.save((err) => {
+          if (err) {
+            if (err.code === 11000) {
+              req.flash('errors', { msg: 'There was an error in your update.' });
+              return res.redirect('/account/activity');
+          }
+          return next(err);
+          }
+          req.flash('success', { msg: 'Account transaction has been registered.' });
+          res.redirect('/account/activity');
+          });
+
+};
+
+
+
+exports.getPong = (req, res) => {
+  res.render('games/pong', {
+    title: 'Pong old skool therapeutic game fun ;p '
+  });
+};
+
+exports.getSi = (req, res) => {
+  res.render('games/si', {
+    title: 'Space Invaders old skool therapeutic game fun'
   });
 };
 
@@ -238,33 +305,6 @@ exports.postUpdateBusiness = (req, res, next) => {
 };
 
 
-
-exports.postMember = (req, res, next) => {
-  const validationErrors = [];
-
-        var db = new Member();
-        var response = {};
-        db.name = req.body.name;
-        db.source = req.body.source;
-        db.amount = req.body.amount;
-        db.date = req.body.date;
-        db.group = req.body.group;
-        db.witness = req.body.witness;
-        db.comment = req.body.comment;
-
-        db.save((err) => {
-          if (err) {
-            if (err.code === 11000) {
-              req.flash('errors', { msg: 'There was an error in your update.' });
-              return res.redirect('/account/activity');
-          }
-          return next(err);
-          }
-          req.flash('success', { msg: 'Account transaction has been registered.' });
-          res.redirect('/account/activity');
-          });
-
-};
 
 
 /**
@@ -449,7 +489,6 @@ exports.postUpdateBlogsettings = (req, res, next) => {
   });
 };
 
-
 /**
 *
 * Inventory Settings
@@ -478,12 +517,12 @@ exports.postUpdateInventorysettings = (req, res, next) => {
 
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
-    user.Inventorysettings.user = req.body.user || '';
-    user.Inventorysettings.blogtitle = req.body.blogtitle || '';
-    user.Inventorysettings.blogdesc = req.body.blogdesc || '';
-    user.Inventorysettings.shortdesc = req.body.shortdesc || '';
-    user.Inventorysettings.blogtags = req.body.blogtags || '';
-    user.Inventorysettings.active = req.body.active || '';
+    user.inventorysettings.user = req.body.user || '';
+    user.inventorysettings.invtitle = req.body.invtitle || '';
+    user.inventorysettings.shortdesc = req.body.shortdesc || '';
+    user.inventorysettings.invdesc = req.body.invdesc || '';
+    user.inventorysettings.invtags = req.body.invtags || '';
+    user.inventorysettings.visibility = req.body.visibility || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {

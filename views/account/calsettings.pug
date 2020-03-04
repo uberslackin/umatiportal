@@ -17,9 +17,9 @@ block content
       .col-md-7
         input.form-control(type='text', name='shortdesc', id='shortdesc', value=user.calsettings.shortdesc, autocomplete)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='caldesc') Full Description
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='caldesc') Description
       .col-md-7
-        input.form-control(type='text', name='caldesc', id='caldesc', value=user.calsettings.caldesc, autocomplete)
+        textarea.form-control( name="caldesc", rows="6", cols="66", autocomplete='caldesc' ) #{user.calsettings.caldesc}   
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='caltags') Tags
       .col-md-7

@@ -11,12 +11,13 @@ block content
 
     hr
 
+  - var userr = { id: user._id }
   - if (blogs.length)
-    each posts in blogs 
-        strong #{posts.posttitle} - #{posts.postdate}  - #{posts.postcat}
-        br
-        #{posts.post}
-        a(href='/account/blog/'+posts._id).icon-edit Edit 
-        updated  &nbsp; &nbsp; &nbsp;  updated #{moment(posts.updatedAt).format('MMM Do h:mm:ss a')}        
-        hr 
-
+    each posts in blogs
+        if posts.username == userr.id 
+            strong #{posts.posttitle} - #{posts.postdate}  - #{posts.postcat}
+            br
+            #{posts.post}
+            a(href='/account/blog/'+posts._id).icon-edit Edit 
+            updated  &nbsp; &nbsp; &nbsp;  updated #{moment(posts.updatedAt).format('MMM Do h:mm:ss a')}
+            hr

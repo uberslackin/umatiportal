@@ -8,12 +8,13 @@ block content
     a(href='/account/groupsettings') Settings
   hr
 
-  h3 New Group Entry
+  h3 Group #{user.profile.group}
 
 
   form(action='/account/creategroup', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
+    input(type='hidden', name='group', value=user.profile.group)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Name
       .col-md-7
@@ -21,11 +22,7 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='admin') Admin
       .col-md-7
-        input.form-control(type='text', name='admin', id='admin')        
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='group') Group
-      .col-md-7
-        input.form-control(type='text', name='group', id='group')        
+        input.form-control(type='text', name='admin', id='admin')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='comment') Comment
       .col-md-7

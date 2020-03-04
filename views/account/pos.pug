@@ -9,16 +9,22 @@ block content
 
   hr
 
-  h3 Your Point of Sale
- 
+  h3 #{user.business.name} Point of Sale
+   
     br
+    br
+  - var userr = { id: user._id }  
+
+
   - if (posdata.length)
-    each items in posdata 
-        strong #{items.postitle} #{moment(items.posdate).format('MMM Do')}
-        strong #{items.location}  
-        div  #{items.postags} #{items.poscat}
-        a(href='/account/pos/'+items._id) Edit
-        updated  &nbsp; &nbsp; &nbsp;  updated #{moment(items.updatedAt).format('MMM Do h:mm:ss a')}
-        hr
+    each items in posdata
+       if items.username == userr.id 
+          strong #{items.postitle} #{moment(items.updatedAt).format('MMM Do h:mm:')}
+          strong #{items.location}  
+          div #{items.time}  
+          div tags: #{items.postags} #{items.poscat}
+          a(href='/account/pos/'+items._id) Edit
+          updated  &nbsp; &nbsp; &nbsp;  updated #{moment(items.updatedAt).format('MMM Do h:mm:ss a')}
+          hr
     a(href='/account/posentrycreate') Add an entry -
         hr

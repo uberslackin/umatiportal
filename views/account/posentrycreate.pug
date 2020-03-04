@@ -11,15 +11,11 @@ block content
 
   form(action='/account/posentrycreate', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
-    input(type='hidden', name='user', value=user.id)
+    input(type='hidden', name='user', value=user._id)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='posentrytitle') Point of Sale Item Title
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postitle') Point of Sale Item Title
       .col-md-7
-        input.form-control(type='text', name='postitle', id='postitle')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='posdate') Date
-      .col-md-7
-        input.form-control(type='date', name='posdate', id='posdate')        
+        input.form-control(type='text', name='postitle', id='postitle')        
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
@@ -36,10 +32,6 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='postags') Tags
       .col-md-7
         input.form-control(type='text', name='postags', id='postags')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='time') Time
-      .col-md-7
-        input.form-control(type='time', name='time', id='time')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='postags') Visibility
        .col-md-7
@@ -58,7 +50,6 @@ block content
       .div.form-check.form-check-inline
         input(type='radio', class='form-check-input' checked=user.possettings.visibility == 'invisible', name='visibility', value='invisible', data-toggle='radio')
         label.form-check-label Invisible
-
 
 
 

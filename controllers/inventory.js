@@ -61,7 +61,7 @@ exports.postCreateinventory = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/account/createinventory');
+    return res.redirect('/account/inventory');
   }
 
   const inventory = new Inventory({
@@ -74,15 +74,14 @@ exports.postCreateinventory = (req, res, next) => {
     location: req.body.location,
     postcat: req.body.postcat,
     posttags: req.body.posttags,
-    postdate: req.body.postdate,
-    sharedwith: stringify(req.body.sharedwith)
+    postdate: req.body.postdate
   });
 
   Inventory.findOne({ posttitle: req.body.posttitle }, (err, existingInventory) => {
     if (err) { return next(err); }
     if (existingInventory) {
       req.flash('errors', { msg: 'Inventory post with that title already exists.' });
-      return res.redirect('/account/createinventory');
+      return res.redirect('/account/inventory');
     }
     inventory.save((err) => {
       if (err) { return next(err); }

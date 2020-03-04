@@ -157,6 +157,7 @@ app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userControl
 
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 app.get('/account/activity', passportConfig.isAuthenticated, userController.getActivity);
+app.get('/account/activity-print', passportConfig.isAuthenticated, userController.getActivityprint);
 app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
 app.get('/account/setup', passportConfig.isAuthenticated, userController.getSetup);
 app.post('/account/setup', passportConfig.isAuthenticated, userController.postUpdateSetup);
@@ -191,7 +192,9 @@ app.get('/account/createinventory', passportConfig.isAuthenticated, inventoryCon
 app.post('/account/createinventory', passportConfig.isAuthenticated, inventoryController.postCreateinventory);
 
 app.get('/account/cal', passportConfig.isAuthenticated, calController.getCal);
-app.post('/account/calendar', passportConfig.isAuthenticated, calController.postUpdateCalEntry);
+app.post('/account/cal', passportConfig.isAuthenticated, calController.postCreateCalEntry);
+app.get('/account/cal/:calitem_id', passportConfig.isAuthenticated, calController.getUpdateCalEntry);
+app.get('/account/calentryedit', passportConfig.isAuthenticated, calController.getCalEntry);
 app.get('/account/calentrycreate', passportConfig.isAuthenticated, calController.getCalEntry);
 app.post('/account/calentrycreate', passportConfig.isAuthenticated, calController.postCreateCalEntry);
 
@@ -207,6 +210,8 @@ app.get('/account/createmember', passportConfig.isAuthenticated, memberControlle
 app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
 app.post('/account/payment', passportConfig.isAuthenticated, userController.postMember);
 
+app.get('/games/pong', userController.getPong);
+app.get('/games/si', userController.getSi);
 
 /**
  * API examples routes.

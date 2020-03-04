@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 
 const membersSchema = new mongoose.Schema({
   name: String,
+  username: String,
   source: String,
   amount: String,
   date: Date,

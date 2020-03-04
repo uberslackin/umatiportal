@@ -1,0 +1,161 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='theme-color' content='#4DA5F4')
+    meta(name='csrf-token', content=_csrf)
+    title Umatibank Self help group network - #{title} page
+    link(rel='shortcut icon', href='/favicon.png')
+    link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet', href='/css/bootstrap-table.min.css')
+    link(rel='stylesheet', href='/css/cookie_note.css')
+  body
+
+
+block content
+  col-4 
+    a(href='/account/activity').i.fa.fa-print.masth &nbsp; UMATI BANK TRANSACTION RECORD
+
+  .container.masth
+    .row
+     col-8
+    
+    br
+    strong #{user.profile.name}, #{user.profile.group} group, #{user.profile.role}
+    div #{user.profile.vocation}
+    div #{user.profile.location}
+    div #{user.profile.business}
+    div #{user.profile.website}
+
+
+section#tabs.project-tab
+  .container
+    .row
+      .col-md-12
+        nav
+          #nav-tab.nav.nav-tabs.navtoggler.nav(role='tablist')
+            a#nav-home-tab.nav-item.col-2.nav-link.active(data-toggle='tab' href='#nav-home' role='tab' aria-controls='nav-home' aria-selected='true') Self Help Groups
+            a#nav-profile-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-profile' role='tab' aria-controls='nav-profile' aria-selected='false') Business data
+            a#nav-contact-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-contact' role='tab' aria-controls='nav-contact' aria-selected='false') Trainings
+            a#nav-payment-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-payment' role='tab' aria-controls='nav-payment' aria-selected='false') Payments
+            a#nav-payment-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-payment' role='tab' aria-controls='nav-payment' aria-selected='false') Donations
+        #nav-tabContent.tab-content
+          #nav-home.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='nav-home-tab')
+            table.table(cellspacing='0')
+              thead
+                tr
+                  th Date
+                  th Payment source
+                  th Group
+                  th Witness
+                  th Amount
+              tbody
+              each item,index in activity_list
+                tr
+                  td #{moment(item.createdAt).format('MMM D h:mm a')}
+                  td #{item.source}
+                  td #{item.group}
+                  td #{item.witness}
+                  td $#{item.amount}
+
+          #nav-profile.tab-pane.fade(role='tabpanel' aria-labelledby='nav-profile-tab')
+            table.table(cellspacing='0')
+              thead
+                tr
+                  th Name
+                  th Group
+                  th Comments
+              tbody
+                each item,index in activity_list
+
+                  tr
+                    td #{item.name}
+                    td 
+                      a(href='#') #{item.group}
+                    td #{item.comment}
+
+          #nav-contact.tab-pane.fade(role='tabpanel' aria-labelledby='nav-contact-tab')
+            table.table(cellspacing='0')
+              thead
+                tr
+                  th Contest Name
+                  th Date
+                  th Award Position
+              tbody
+                tr
+                  td
+                    a(href='#') Work 1
+                  td Doe
+                  td john@example.com
+                tr
+                  td
+                    a(href='#') Work 2
+                  td Moe
+                  td mary@example.com
+                tr
+                  td
+                    a(href='#') Work 3
+                  td Dooley
+                  td july@example.com
+
+          #nav-payment.tab-pane.fade(role='tabpanel' aria-labelledby='nav-contact-tab')
+            table.table(cellspacing='0')
+              thead
+                tr
+                  th Contest Name
+                  th Date
+                  th Award Position
+              tbody
+                tr
+                  td
+                    a(href='#') Work 1
+                  td Doe
+                  td john@example.com
+                tr
+                  td
+                    a(href='#') Work 2
+                  td Moe
+                  td mary@example.com
+                tr
+                  td
+                    a(href='#') Work 3
+                  td Dooley
+                  td july@example.com
+
+          #nav-donation.tab-pane.fade(role='tabpanel' aria-labelledby='nav-contact-tab')
+            table.table(cellspacing='0')
+              thead
+                tr
+                  th Contest Name
+                  th Date
+                  th Donation Amount
+                  th Commitments
+              tbody
+                tr
+                  td
+                    a(href='#') Work 1
+                  td Doe
+                  td Doe
+                  td john@example.com
+                tr
+                  td
+                    a(href='#') Work 2
+                  td Moe
+                  td Moe
+                  td mary@example.com
+                tr
+                  td
+                    a(href='#') Work 3
+                  td Dooley
+                  td Dooley
+                  td july@example.com
+
+
+      script(src='/js/lib/jquery.min.js')
+      script(src='/js/lib/popper.min.js')
+      script(src='/js/lib/bootstrap-table.min.js')
+      script(src='/js/lib/bootstrap.min.js')
+      script(src='/js/main.js')
+      script(src='/js/cookie_note.js')

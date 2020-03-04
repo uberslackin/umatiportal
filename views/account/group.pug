@@ -13,10 +13,12 @@ block content
  
   hr
 
-  - if (groupdata.length)
-    each items in groupdata 
-        strong #{items.name} #{items.group} #{items.date}
-        div admin: #{items.admin} witness: #{items.witness}
-        div #{items.comment}
-        hr
 
+  - var userr = { id: user.profile.group }
+  - if (groupdata.length)
+    each items in groupdata
+         if items.group === userr.id 
+           strong #{items.name} #{items.group} #{items.date}
+           div admin: #{items.admin} witness: #{items.witness}
+           div #{items.comment}
+           hr

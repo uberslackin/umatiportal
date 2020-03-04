@@ -13,8 +13,7 @@ const posSchema = new mongoose.Schema({
     poscat: String,
     postags: String,
     posdate: Date,
-    time: String,
-    sharedwith: Array,
+    time: String
 }, { timestamps: true });
 
 /**

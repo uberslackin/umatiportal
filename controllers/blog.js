@@ -9,8 +9,7 @@ const validator = require('validator');
 const mailChecker = require('mailchecker');
 const Blog = require('../models/Blog');
 const User = require('../models/User');
-
-
+    
 const randomBytesAsync = promisify(crypto.randomBytes);
 
 
@@ -19,12 +18,11 @@ const randomBytesAsync = promisify(crypto.randomBytes);
  * Blog manager.
  */
 
-exports.getBlog = function (req, res, next) {
 
+exports.getBlog = function (req, res, user) {
+    
     Blog.find()
-        .sort([['postdate', 'ascending']])
-        .exec(function (err, blog_data) {
-            if (err) { return next(err); }
+        .exec(function (err, blog_data) {          
             // Successful, so rendecalsr.
             res.render('account/blog', { title: 'Personal Blog', blogs: blog_data });
         })
@@ -32,7 +30,7 @@ exports.getBlog = function (req, res, next) {
 
 
 
-/**
+/** 
 exports.getBlog = (req, res) => {
 
   const blogs = Blog.list;
@@ -70,13 +68,14 @@ exports.postCreatepost = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/account/createpost');
+    return res.redirect('/account/blog');
   }
 
   const blog = new Blog({
     name: req.body.name,
     posttitle: req.body.posttitle,
     post: req.body.post, 
+    username: req.body.user, 
     location: req.body.location, 
     postcat: req.body.postcat,
     posttags: req.body.posttags,
@@ -88,27 +87,32 @@ exports.postCreatepost = (req, res, next) => {
     if (err) { return next(err); }
     if (existingBlog) {
       req.flash('errors', { msg: 'Blog post with that title already exists.' });
-      return res.redirect('/account/createpost');
+      return res.redirect('/account/blog');
     }
     blog.save((err) => {
       if (err) { return next(err); }
-      req.logIn(res.user, (err) => {
-        if (err) {
-          return next(err);
-        }
-        res.redirect('/account/blog');
-      });
+      res.redirect('/account/blog');
     });
   });
 };
 
 
+
+
+// get a employee with ID of 1
 exports.getUpdateBlogpost = (req, res) => {
-  res.render('account/blogedit', {
-    title: 'Edit point of sale entry',
-    blogpost_id: req.params.blogpost_id
+  let id = req.params.blogpost_id;
+  Blog.findById(id, function(err, blogdata) {
+    if (err)
+      res.send(err)
+    res.render('account/blogedit', {
+      title: 'Edit point of sale entry',
+      blogpost_id: req.params.blogdata
   });
-};
+
+  });
+  };
+ 
 
 
 exports.postUpdateBlogpost = (req, res, next) => {

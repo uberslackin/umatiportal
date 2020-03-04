@@ -13,15 +13,15 @@ block content
   form(action='/account/blogedit', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
-    input(type='hidden', name='blogpost_id', value=blogpost_id)
+    input(type='hidden', name='blogpost_id', value=_id)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttitle') Post Title
       .col-md-7
-        input.form-control(type='text', name='posttitle', id='posttitle')
+        input.form-control(type='text', name='blog.posttitle', id='posttitle')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
-        input.form-control(type='text', name='post', id='post')
+        input.form-control(type='text', name='blog.post', id='post')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
       .col-md-7

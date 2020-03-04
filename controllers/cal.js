@@ -34,6 +34,13 @@ exports.getCal = function (req, res, next) {
 };
 
 
+exports.getUpdateCalEntry = (req, res) => {
+    Cal.findOne({ id: req.params.url }, (err, cal_data) => {
+        res.render('account/calentryedit', {
+        title: 'Edit calendar entry', caldata: cal_data
+  });
+  });
+};
 
 
 
@@ -61,19 +68,18 @@ exports.getCalEntry = (req, res) => {
  * POST /necal
  * Create a new local account.
  */
-exports.postCreateCalEntry = (req, res) => {
+exports.postCreateCalEntry = (req, res, next) => {
   const validationErrors = [];
   if (!validator.isAscii(req.body.calentrytitle)) validationErrors.push({ msg: 'Please enter a title for your new calendar entry.' });
   if (!validator.isAscii(req.body.post)) validationErrors.push({ msg: 'Please add some content to your calendar entry.' });
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/account/calentrycreate');
+    return res.redirect('/account/calentryedit');
   }
 
   const cal = new Cal({
     username: req.body.user,
-    name: req.body.name,
     calentrytitle: req.body.calentrytitle,
     post: req.body.post, 
     location: req.body.location, 
@@ -87,19 +93,23 @@ exports.postCreateCalEntry = (req, res) => {
     if (err) { return next(err); }
     if (existingCal) {
       req.flash('errors', { msg: 'Calendar entry with that title already exists.' });
-      return res.redirect('/account/calentrycreate');
+      return res.redirect('/account/calentryedit');
     }
     cal.save((err) => {
-      if (err) { return next(err); }
-      req.logIn(res.user, (err) => {
-        if (err) {
-          return next(err);
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your update.' });
+          return res.redirect('/account/cal');
         }
-        res.redirect('/account/cal');
-      });
+        return next(err);
+      }
+      req.flash('success', { msg: 'Calendar update saved.' });
+      res.redirect('/account/cal');
     });
   });
 };
+
+
 
 
 
@@ -115,28 +125,28 @@ exports.postUpdateCalEntry = (req, res, next) => {
     return res.redirect('/account/calendar');
   }
 
-  User.findById(req.user.id, (err, user) => {
+  Cal.findById(req.user.id, (err, user, next) => {
     if (err) { return next(err); }
-    user.cal.name = req.body.name || '';
-    user.cal.user = req.body.user || '';
-    user.cal.visibility = req.body.visibility || '';
-    user.cal.post = req.body.post || '';
-    user.cal.postcat = req.body.postcat || '';
-    user.cal.postttag = req.body.postttag || '';
-    user.cal.postdate = req.body.posgtdate || '';
-    user.cal.time = req.body.time || '';
-    user.cal.iphash = req.body.iphash || '';
-    user.cal.transhash = req.body.transhash || '';
-    user.save((err) => {
+    username = req.body.name || '';
+    user = req.body.user || '';
+    visibility = req.body.visibility || '';
+    post = req.body.post || '';
+    postcat = req.body.postcat || '';
+    postttag = req.body.postttag || '';
+    postdate = req.body.posgtdate || '';
+    time = req.body.time || '';
+    iphash = req.body.iphash || '';
+    transhash = req.body.transhash || '';
+    Cal.save((err) => {
       if (err) {
         if (err.code === 11000) {
           req.flash('errors', { msg: 'There was an error in your calendar update.' });
-          return res.redirect('/account/calendar');
+          return res.redirect('/account/calentrycreate');
         }
         return next(err);
       }
       req.flash('success', { msg: 'Calendar entry has been registered.' });
-      res.redirect('/account/calendar');
+      res.redirect('/account/cal');
     });
   });
 };

@@ -33,7 +33,7 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='description') Description
       .col-md-7
-        input.form-control(type='text', name='description', id='description', value=user.groupsettings.description, autocomplete='description')        
+        textarea.form-control( name="description", rows="6", cols="66", autocomplete='description' ) #{user.groupsettings.description}        
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='visibility') Visibility
       .col-md-1.form-check.form-check-inline

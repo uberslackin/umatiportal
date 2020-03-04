@@ -11,10 +11,12 @@ block content
 
     hr
 
+  - var userr = { id: user._id }
   - if (data.length)
-    each posts in data 
-        strong #{posts.posttitle} - #{posts.postdate}  - #{posts.postcat}
-        br
-        #{posts.post}
-        hr 
+    each posts in data
+        if posts.user == userr.id 
+            strong #{posts.posttitle} - #{moment(posts.updatedAt).format('MMM Do h:mm:ss a')}  - #{posts.postcat}
+            br
+            div #{posts.post}  - #{posts.posttags}
+            hr 
 

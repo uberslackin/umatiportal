@@ -8,13 +8,19 @@ footer
         a(href='/status') Status
       li.list-inline-item
         a(href='/api') APIs
+      li.list-inline-item
+        a(href='/games/pong') Pong
+      li.list-inline-item
+        a(href='/games/si') SI
 
-  .navbar-inner.navbar-content-center#cookie_accept
-    a.btn.btn-default.pull-right(href='#') Close
-    p.text-muted.credit
-    | 
-    By using our website you are consenting to our use of cookies in accordance with our 
-    a(href='/cookies') cookie policy
-    | .
-
-    br
+#cookie_directive_container
+  ul
+    li#cookie_note
+      | To provide the best user experience, this website stores 
+      a(href='http://www.allaboutcookies.org/cookies/' target='_blank') cookies
+      |  on your browser.
+    li#cookie_accept
+      a.btn.btn-default.pull-right(href='#') Close
+      a(href='javascript:void(0);') &nbsp;I understand and accept&nbsp;
+    li#cookies_used
+      a(href='/?page_id=476')  Review cookies used on this website.

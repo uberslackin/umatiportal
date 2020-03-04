@@ -21,7 +21,7 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
-        input.form-control(type='text', name='post', id='post')
+        textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' ) #{user.business.post}
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
       .col-md-7

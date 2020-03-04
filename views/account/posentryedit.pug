@@ -12,11 +12,11 @@ block content
 
   form(action='/account/posentryedit', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
-    input(type='hidden', name='user', value=user.id)
+    input(type='hidden', name='user', value=user._id)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postitle') Name of item
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postitle') Name
       .col-md-7
-        input.form-control(type='text', name='postitle', id='postitle')
+        input.form-control(type='text', name='postitle', id='postitle' ,value='postitle', autocomplete='postitle')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posdate') Date
       .col-md-7

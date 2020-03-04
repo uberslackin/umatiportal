@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
     group: String,
     business: String,
     vocation: String,
-    role: Array,
+    role: String,
     picture: String,
     salt: String,
     active: Boolean
@@ -106,7 +106,7 @@ const userSchema = new mongoose.Schema({
  * Password hash middleware.
  */
 userSchema.pre('save', function save(next) {
-  const user = this;
+    const user = this;
   if (!user.isModified('password')) { return next(); }
   bcrypt.genSalt(10, (err, salt) => {
     if (err) { return next(err); }

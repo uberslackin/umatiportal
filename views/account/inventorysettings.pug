@@ -8,35 +8,36 @@ block content
 
   form(action='/account/inventorysettings', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='user', value=user.username)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Inventory Title
       .col-md-7
-        input.form-control(type='text', name='invtitle', id='invtitle', value=user.invsettings.invtitle, autocomplete='invtitle')
+        input.form-control(type='text', name='invtitle', id='invtitle', value=user.inventorysettings.invtitle, autocomplete='invtitle')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='shortdesc') Short Description
       .col-md-7
-        input.form-control(type='text', name='shortdesc', id='shortdesc', value=user.invsettings.shortdesc, autocomplete)
+        input.form-control(type='text', name='shortdesc', id='shortdesc', value=user.inventorysettings.shortdesc, autocomplete)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='invdesc') Description
       .col-md-7
-        input.form-control(type='text', name='invdesc', id='invdesc', value=user.invsettings.invdesc, autocomplete)
+        input.form-control(type='text', name='invdesc', id='invdesc', value=user.inventorysettings.invdesc, autocomplete)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='blogtags') Tags
       .col-md-7
-        input.form-control(type='text', name='invtags', id='invtags', value=user.invsettings.invtags, autocomplete='blogtags')
+        input.form-control(type='text', name='invtags', id='invtags', value=user.inventorysettings.invtags, autocomplete='blogtags')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='visibility') Visibility
       .col-md-1.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.invsettings.visibility == 'visible', name='visibility', value='visible', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.inventorysettings.visibility == 'visible', name='visibility', value='visible', data-toggle='radio')
         label.form-check-label Visible
       .col-md-2.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.invsettings.visibility == 'my group', name='visibility', value='group', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.inventorysettings.visibility == 'my group', name='visibility', value='group', data-toggle='radio')
         label.form-check-label My Group Only
       .col-md-2.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.invsettings.visibility == 'sub group', name='visibility', value='subgroup', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.inventorysettings.visibility == 'sub group', name='visibility', value='subgroup', data-toggle='radio')
         label.form-check-label Sub Group Only
       .col-md-1.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.invsettings.visibility == 'invisible', name='visibility', value='invisible', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.inventorysettings.visibility == 'invisible', name='visibility', value='invisible', data-toggle='radio')
         label.form-check-label Invisible
 
     .form-group

@@ -25,7 +25,7 @@ const randomBytesAsync = promisify(crypto.randomBytes);
 exports.getPos = function (req, res, next) {
 
     Pos.find()
-        .sort([['posdate', 'ascending']])
+        .sort([['createdAt', 'descending']])
         .exec(function (err, pos_data) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
@@ -59,10 +59,11 @@ exports.getPosEntry = (req, res) => {
  * Signup page.
  */
 exports.getUpdatePosEntry = (req, res, next) => {
-    Pos.findOne({ id: req.params.url }, (err, existingPos) => {
+    Pos.findOne({ _id: req.params.url }, (err, existingPos) => {
 
   res.render('account/posentryedit', {
-    title: 'Edit point of sale entry'
+    title: 'Edit point of sale entry',
+    pos: existingPos
   });
 });
 }
@@ -96,28 +97,28 @@ exports.postCreatePosEntry = (req, res, next) => {
     time: req.body.posdate
   });
 
+
   Pos.findOne({ postitle: req.body.postitle }, (err, existingPos) => {
     if (err) { return next(err); }
     if (existingPos) {
-      req.flash('errors', { msg: 'POS entry with that title already exists.' });
-      return res.redirect('/account/posentrycreate');
+      req.flash('errors', { msg: 'Post with that title already exists.' });
+      return res.redirect('/account/pos');
     }
     pos.save((err) => {
       if (err) { return next(err); }
-      req.logIn(res.user, (err) => {
-        if (err) {
-          return next(err);
-        }
-        res.redirect('/account/possettings');
-      });
+      res.redirect('/account/pos');
     });
   });
 };
 
 
 
+
+
+
+
 /**
- * POST /account/  
+ * POST /pos/createpost  
  * Update cal information.
  */
 exports.postUpdatePosEntry = (req, res, next) => {
@@ -153,4 +154,3 @@ exports.postUpdatePosEntry = (req, res, next) => {
     });
   });
 };
-
