@@ -38,19 +38,19 @@ body {
 	color: rgba(255, 255, 255, 0.6);
 	text-shadow: 0 0px 4px rgba(0, 0, 0, 0.1);
 	&--feb {
-		grid-column: span 3;
+		grid-column: span 6;
 	}
 	&--mar {
 		grid-column: span 4;
 	}
 	&--apr {
-		grid-column: span 2;
+		grid-column: span 3;
 	}
 	&--may {
-		grid-column: span 3;
+		grid-column: span 5;
 	}
 	&--jun {
-		grid-column: span 3;
+		grid-column: span 2;
 	}
 	&--title {
 		grid-column: span 6;
@@ -79,7 +79,7 @@ body {
 		font-size: 14px;
 	}
 	&--1 {
-		grid-column: 3 / span 2;
+		grid-column: 6 / span 2;
 		grid-row: 3;
 	}
 	&--2 {
@@ -114,7 +114,7 @@ body {
 //events
 
 div.date {
-	&:nth-child(15) {
+	&:nth-child(17) {
 		grid-column: 3;
 		grid-row: 3;
 	}
@@ -167,7 +167,7 @@ div.date {
 
 .date {
 	&:nth-child(-7n + 30):after {
-		content: "Fri";
+		content: "Frii";
 	}
 	&:nth-child(-7n + 24):after {
 		content: "Sat";

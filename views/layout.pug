@@ -9,7 +9,12 @@ html
     title Umatibank Self help group network - #{title} page
     link(rel='shortcut icon', href='/favicon.png')
     link(rel='stylesheet', href='/css/main.css')
-    link(rel='stylesheet', href='/css/pong.css')
+    if (title === 'Pong') 
+        link(rel='stylesheet', href='/css/pong.css')
+    if (title === 'Personal Calendar')
+        link(rel='stylesheet', href='/css/fullcalendarcore4.3.1.main.min.css')
+        link(rel='stylesheet', href='/css/fullcalendar.daygrid.4.3.0.main.min.css')
+        link(rel='stylesheet', href='/css/fullcalendar.timegrid.4.3.0.main.min.css')
     link(rel='stylesheet', href='https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css')
     link(rel='stylesheet', href='/css/cookie_note.css')
     block head
@@ -23,10 +28,16 @@ html
 
     include partials/footer
 
-    script(src='/js/lib/jquery.min.js')
     script(src='/js/lib/popper.min.js')
+    script(src='/js/lib/jquery.min.js')
     script(src='https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js')
     script(src='/js/lib/bootstrap.min.js')
     script(src='/js/main.js')
-    script(src='/js/pong.js')
+    if (title === 'Personal Calendar') 
+         script(src='/js/fullcalendar/core.js')
+         script(src='/js/fullcalendar/daygrid.js')
+         script(src='/js/fullcalendar/timegrid.js')
+         script(src='/js/cal.js')
+    if (title === 'Pong') 
+         script(src='/js/pong.js')
     script(src='/js/cookie_note.js')

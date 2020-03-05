@@ -207,7 +207,7 @@ exports.postMember = (req, res, next) => {
 
 exports.getPong = (req, res) => {
   res.render('games/pong', {
-    title: 'Pong old skool therapeutic game fun ;p '
+    title: 'Pong'
   });
 };
 
@@ -304,9 +304,6 @@ exports.postUpdateBusiness = (req, res, next) => {
   });
 };
 
-
-
-
 /**
  * POST /account/activity
  * Update activity information.
@@ -358,6 +355,8 @@ exports.getCalsettings = (req, res) => {
  */
 exports.postUpdateCalsettings = (req, res, next) => {
   const validationErrors = [];
+   if (!validator.isText(req.body.caltitle)) validationErrors.push({ msg: 'Please enter a valid payment amount.' });
+
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
@@ -431,18 +430,6 @@ exports.postUpdatePossettings = (req, res, next) => {
     });
   });
 };
-
-
-
-
-
-
-
-
-
-
-
-
 
 /**
  * GET /account/blogsettings
@@ -827,7 +814,7 @@ exports.getVerifyEmail = (req, res, next) => {
       to: req.user.email,
       from: 'hackathon@starter.com',
       subject: 'Please verify your email address on Umati Bank self help group netork',
-      text: `Thank you for registering with hackathon-starter.\n\n
+      text: `Thank you for registering with umati bank website.\n\n
         This verify your email address please click on the following link, or paste this into your browser:\n\n
         http://${req.headers.host}/account/verify/${token}\n\n
         \n\n
