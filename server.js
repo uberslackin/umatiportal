@@ -191,6 +191,7 @@ app.post('/account/inventory', passportConfig.isAuthenticated, inventoryControll
 app.get('/account/createinventory', passportConfig.isAuthenticated, inventoryController.getCreateinventory);
 app.post('/account/createinventory', passportConfig.isAuthenticated, inventoryController.postCreateinventory);
 
+app.get('/account/api/cal', passportConfig.isAuthenticated, calController.getCaljson);
 app.get('/account/cal', passportConfig.isAuthenticated, calController.getCal);
 app.post('/account/cal', passportConfig.isAuthenticated, calController.postCreateCalEntry);
 app.get('/account/cal/:calitem_id', passportConfig.isAuthenticated, calController.getUpdateCalEntry);

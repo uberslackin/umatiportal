@@ -20,6 +20,48 @@ const randomBytesAsync = promisify(crypto.randomBytes);
  * Display calendar data.
 */
 
+/* [{"title":"Buding Leave",
+     "start":"2019-11-28",
+     "end":"2019-11-28",
+     "backgroundColor":"#f56954",
+     "borderColor":"#f56954"}
+
+existing output
+
+ {"sharedwith":[],
+ "_id":"5e598531ccf07b52195179a7",
+ "username":"5e4869a6dc11621cba9be1af",
+ "calentrytitle":"as",
+ "post":"kkl",
+ "location":"jkj",
+ "calcat":"kj",
+ "caltags":"kj",
+ "caldate":"2018-01-26T00:00:00.000Z",
+ "time":"2018-01-26",
+ "createdAt":"2020-02-28T21:25:05.755Z",
+ "updatedAt":"2020-02-28T21:25:05.755Z",
+ "__v":0},
+
+
+* Display list of Member activity.
+*/
+
+db.books.aggregate( [
+                      { $group : { _id : "$author", books: { $push: "$title" } } },
+                      { $out : "authors" }
+                  ] )
+
+exports.getCaljson = function (req, res, next) {
+
+    Cal.find()
+        .sort([['caldate', 'ascending']])
+        .exec(function (err, cal_data) {
+            if (err) { return next(err); }
+            // Successful, so rendecalsr.
+
+            res.json(cal_data);
+        })
+};
 
 // Display list of Member activity.
 exports.getCal = function (req, res, next) {
