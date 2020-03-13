@@ -168,7 +168,20 @@ a.spam-button:link {
     grid-row: 2 / 6;
   }
 }
+.dropdown-menu.multi-column {
+        width: 400px;
+        background-image: "/umati_creativefire_3birds.png";
+}
 
+.dropdown-menu.multi-column .dropdown-menu {
+        background-image: "/umati_creativefire_3birds.png";
+        display: block !important;
+        position: static !important;
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        min-width:100px;
+}
 
 footer {
   position: absolute;

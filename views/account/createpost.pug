@@ -11,7 +11,22 @@ block content
 
     hr
 
-  form(action='/account/createpost', method='POST')
+    h2  Add images
+
+  form(action="/account/upload", method="POST", enctype="multipart/form-data")
+    input(type='hidden', name='user', value=user.id)
+    p Name of item:
+    input.thedata(type="text", name="item")
+    br
+    br
+    | 
+    Photo of item:
+      input.thefile(type="file", name="uploaded_file")  
+    button(type="submit") Add item
+
+  hr
+
+  form(action="/account/createpost", method="POST")
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
     .form-group.row

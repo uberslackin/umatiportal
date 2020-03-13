@@ -34,16 +34,16 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='visibility') Visibility
       .col-md-1.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'visible', name='visibility', value='visible', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'visible', name='visibility', id='visibility', value='visible', data-toggle='radio')
         label.form-check-label Visible
       .col-md-2.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'group', name='visibility', value='group', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'group', name='visibility', id='visibility', value='group', data-toggle='radio')
         label.form-check-label My Group Only
       .col-md-2.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'subgroup', name='visibility', value='subgroup', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'subgroup', name='visibility', id='visibility', value='subgroup', data-toggle='radio')
         label.form-check-label Sub Group Only
       .col-md-1.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'invisible', name='visibility', value='invisible', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'invisible', name='visibility', id='visibility', value='invisible', data-toggle='radio')
         label.form-check-label Invisible
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='template') Template

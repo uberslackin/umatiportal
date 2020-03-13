@@ -55,10 +55,10 @@ exports.getPosEntry = (req, res) => {
 };
 
 /**
- * GET /createpost
+ * GET /account/post/$id
  * Signup page.
- */
-exports.getUpdatePosEntry = (req, res, next) => {
+ *
+  exports.getUpdatePosEntry = (req, res, next) => {
     Pos.findOne({ _id: req.params.url }, (err, existingPos) => {
 
   res.render('account/posentryedit', {
@@ -68,6 +68,48 @@ exports.getUpdatePosEntry = (req, res, next) => {
 });
 }
 
+/**
+ * GET /account/post/$id
+ * Signup page.
+ *
+
+exports.getUpdatePosEntry = function(req, res, next) {
+    // Get book, authors and genres for form.
+    async({
+        posdata: function(callback) {
+            Pos.findById(req.params.id).populate('poss').exec(callback);
+        },
+        poss: function(callback) {
+            Pos.find(callback);
+        },
+        }, function(err, results) {
+            if (err) { return next(err); }
+            if (results.pos==null) { // No results.
+                var err = new Error('POS entry not found');
+                err.status = 404;
+                return next(err);
+            }
+            // Success.
+            // Mark our selected genres as checked.
+            res.render('account/posentryedit', { title: 'Update POS', posdata: results.pos });
+        });
+};
+*/
+
+// Load Edit Form
+// Display list of Member activity.
+exports.getUpdatePosEntry = function (req, res, next) {
+  Pos.findById(req.params.posid, function(err, pos){
+    if(pos.username != req.user._id){
+      req.flash('danger', 'Not Authorized');
+      return res.redirect('/');
+    }
+    return res.render('account/posentryedit', {
+      title:'Edit Article',
+      pos:pos
+    });
+  });
+};
 
 /**
  * app.post('/account/posentryedit', 
@@ -92,9 +134,10 @@ exports.postCreatePosEntry = (req, res, next) => {
     post: req.body.post, 
     location: req.body.location, 
     poscat: req.body.poscat,
-    postags: req.body.postags,
+    postag: req.body.postag,
     posdate: req.body.posdate,
-    time: req.body.posdate
+    time: req.body.posdate,
+    visibility: req.body.visibility
   });
 
 
@@ -113,44 +156,27 @@ exports.postCreatePosEntry = (req, res, next) => {
 
 
 
+exports.postUpdatePosEntry = (req, res) => {
 
-
-
-
-/**
- * POST /pos/createpost  
- * Update cal information.
- */
-exports.postUpdatePosEntry = (req, res, next) => {
-  const validationErrors = [];
-
-  if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    return res.redirect('/account/pos');
+// create employee and send back all employees after creation
+  // create mongose method to update a existing record into collection
+  var posid = req.body.positemid;
+  var data = {
+    user : req.body.user,
+    postitle : req.body.postitle,
+    post : req.body.post,
+    location : req.body.location,
+    poscat : req.body.poscat,
+    postags : req.body.postags,
+    posdate : req.body.posdate,
+    visibility: req.body.visibility
   }
-
-  User.findById(req.user.id, (err, user) => {
-    if (err) { return next(err); }
-    user.pos.name = req.body.name || '';
-    user.pos.user = req.body.user || '';
-    user.pos.visibility = req.body.visibility || '';
-    user.pos.post = req.body.post || '';
-    user.pos.postcat = req.body.postcat || '';
-    user.pos.postttag = req.body.postttag || '';
-    user.pos.postdate = req.body.posgtdate || '';
-    user.pos.time = req.body.time || '';
-    user.pos.iphash = req.body.iphash || '';
-    user.pos.transhash = req.body.transhash || '';
-    user.save((err) => {
-      if (err) {
-        if (err.code === 11000) {
-          req.flash('errors', { msg: 'There was an error in your POS update.' });
-          return res.redirect('/account/pos');
-        }
-        return next(err);
-      }
-      req.flash('success', { msg: 'Point of Sale entry has been registered.' });
-      res.redirect('/account/pos');
-    });
+ 
+  // save the user
+  Pos.findByIdAndUpdate(posid, data, function(err, pos) {
+  if (err) throw err;
+ 
+  req.flash('success', { msg: 'Nice job. Your Point of Sale entry has been updated.' });
+  res.redirect('/account/pos');
   });
 };

@@ -27,13 +27,37 @@
                 img(src=user.gravatar(60))
               span= user.profile.name || user.email || user.id
               i.caret
-            div.dropdown-menu     
-              a.dropdown-item(href='/account') Profile
+            .dropdown-menu.multi-column
+              .row
+                .col-md-4
+                  ul.dropdown-menu
+                    li    
+                      a(href="/")
+                          img(src="/umati_creativefire_3birds.png", border="0", width="130")
+
+                .col-md-4
+                  ul.dropdown-menu                  
+                    li
+                      a(href='/account/payment') Payments
+                    li
+                      a(href='/account/business') Business
+                    li
+                      a(href='/account/inventory') Inventory
+                    li
+                      a(href='/account/pos') POS
+                .col-md-4
+                  ul.dropdown-menu
+                    li
+                      a(href='/account/') Profile
+                    li
+                      a(href='/account/group') Group
+                    li
+                      a(href='/account/cal') Calendar
+                    li
+                      a(href='/account/blog') Blog
+                    li
+                      a(href='/logout') Logout
               div.dropdown-divider
-              a.dropdown-item(href='/account/payment') Payments  
-              a.dropdown-item(href='/account/business') Business
-              a.dropdown-item(href='/account/group') Group
-              a.dropdown-item(href='/account/blog') Blog
-              a.dropdown-item(href='/account/cal') Calendar
-              div.dropdown-divider
-              a.dropdown-item(href='/logout') Logout
+                  ul.dropdown-menu
+                    li
+                      a.dropdown-item(href='/logout') Logout

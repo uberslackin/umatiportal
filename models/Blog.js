@@ -10,6 +10,7 @@ const blogSchema = new mongoose.Schema({
     username: String,
     posttitle: String,
     post: String,
+    postfiles: Object,
     location: String,
     postcat: String,
     posttags: String,

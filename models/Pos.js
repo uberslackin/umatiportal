@@ -8,12 +8,17 @@ const posSchema = new mongoose.Schema({
     name: String,
     username: String,
     postitle: String,
-    pospost: String,
+    post: String,
     location: String,
     poscat: String,
-    postags: String,
+    postag: String,
     posdate: Date,
-    time: String
+    posHash1: String,
+    posHash2: String,
+    posHash3: String,
+    posHash4: String,
+    posHash5: String,
+    visibility: String
 }, { timestamps: true });
 
 /**
@@ -33,8 +38,4 @@ blogSchema.pre('save', function save(next) {
 });
  */
  
-const Pos = mongoose.model('Pos', posSchema);
-
-module.exports = Pos;
-
-
+module.exports = mongoose.model('Pos', posSchema);

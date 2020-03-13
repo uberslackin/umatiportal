@@ -19,6 +19,14 @@ const randomBytesAsync = promisify(crypto.randomBytes);
  */
 
 
+
+exports.getBlogupdated = function (req, res, user) {
+    
+            // Successful, so rendecalsr.
+            res.render('account/blogupdated', { title: 'Blog updated'});
+};
+
+
 exports.getBlog = function (req, res, user) {
     
     Blog.find()
@@ -46,6 +54,19 @@ exports.postBlog = (req, res, next) => {
   const validationErrors = [];
   if (validator.isEmpty(req.body.blogpost)) validationErrors.push({ msg: 'Blog post cannot be blank.' });
 };
+
+
+/*
+ * POST /account/upload
+ * Sign in using email and password.
+ */
+exports.postUpload = (req, res, next) => {
+  const validationErrors = [];
+  if (validator.isEmpty(req.body.blogpost)) validationErrors.push({ msg: 'Blog post cannot be blank.' });
+};
+
+
+
 
 /**
  * GET /createpost
@@ -105,7 +126,7 @@ exports.getUpdateBlogpost = (req, res) => {
   Blog.findById(id, function(err, blogdata) {
     if (err)
       res.send(err)
-    res.render('account/blogedit', {
+      res.render('account/blogedit', {
       title: 'Edit point of sale entry',
       blogpost_id: req.params.blogdata
   });

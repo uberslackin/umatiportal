@@ -15,7 +15,7 @@ html
         link(rel='stylesheet', href='/css/fullcalendarcore4.3.1.main.min.css')
         link(rel='stylesheet', href='/css/fullcalendar.daygrid.4.3.0.main.min.css')
         link(rel='stylesheet', href='/css/fullcalendar.timegrid.4.3.0.main.min.css')
-    link(rel='stylesheet', href='https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css')
+    link(rel='stylesheet', href='/css/bootstrap-table.min.css')
     link(rel='stylesheet', href='/css/cookie_note.css')
     block head
 
@@ -30,7 +30,8 @@ html
 
     script(src='/js/lib/popper.min.js')
     script(src='/js/lib/jquery.min.js')
-    script(src='https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js')
+    if (title === 'Account Ledger')
+         script(src='/js/lib/bootstrap-table.min.js')
     script(src='/js/lib/bootstrap.min.js')
     script(src='/js/main.js')
     if (title === 'Personal Calendar') 

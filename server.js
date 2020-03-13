@@ -180,7 +180,9 @@ app.get('/account/creategroup', passportConfig.isAuthenticated, groupdataControl
 app.post('/account/creategroup', passportConfig.isAuthenticated, groupdataController.postCreategroupdata);
 
 app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog);
-app.post('/account/blog', passportConfig.isAuthenticated, blogController.postUpdateBlog);
+app.get('/account/blogupdated', passportConfig.isAuthenticated, blogController.getBlogupdated);
+app.post('/account/blog', blogController.postUpdateBlog);
+
 app.post('/account/blogedit', passportConfig.isAuthenticated, blogController.postUpdateBlogpost);
 app.get('/account/blog/:blogpost_id', passportConfig.isAuthenticated, blogController.getUpdateBlogpost);
 app.get('/account/createpost', passportConfig.isAuthenticated, blogController.getCreatepost);
@@ -201,15 +203,19 @@ app.post('/account/calentrycreate', passportConfig.isAuthenticated, calControlle
 
 app.post('/account/pos', passportConfig.isAuthenticated, posController.postUpdatePosEntry);
 app.get('/account/pos', passportConfig.isAuthenticated, posController.getPos);
-app.get('/account/pos/:positem_id', passportConfig.isAuthenticated, posController.getUpdatePosEntry);
+app.get('/account/pos/:posid', passportConfig.isAuthenticated, posController.getUpdatePosEntry);
 app.get('/account/posentrycreate', passportConfig.isAuthenticated, posController.getPosEntry);
 app.post('/account/posentrycreate', passportConfig.isAuthenticated, posController.postCreatePosEntry);
-app.post('/account/posentryedit', passportConfig.isAuthenticated, posController.postCreatePosEntry);
+app.post('/account/posentryedit', passportConfig.isAuthenticated, posController.postUpdatePosEntry);
 
 // add bigchaindb api connections here for verification relay
 app.get('/account/createmember', passportConfig.isAuthenticated, memberController.getCreatemember);
 app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
 app.post('/account/payment', passportConfig.isAuthenticated, userController.postMember);
+
+app.post('/account/upload', passportConfig.isAuthenticated, blogController.postUpload);
+
+// app.get('/account/ajax', userController.getAjax);
 
 app.get('/games/pong', userController.getPong);
 app.get('/games/si', userController.getSi);

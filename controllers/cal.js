@@ -44,13 +44,13 @@ existing output
 
 
 * Display list of Member activity.
-*/
+
 
 db.books.aggregate( [
                       { $group : { _id : "$author", books: { $push: "$title" } } },
                       { $out : "authors" }
                   ] )
-
+*/
 exports.getCaljson = function (req, res, next) {
 
     Cal.find()
