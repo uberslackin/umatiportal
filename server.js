@@ -19,6 +19,7 @@ const passport = require('passport');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
+const avatarsMiddleware = require('adorable-avatars');
 
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
@@ -131,6 +132,8 @@ app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/popper.js/d
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/jquery/dist'), { maxAge: 31557600000 }));
 app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free/webfonts'), { maxAge: 31557600000 }));
+app.use('/myAvatars', avatarsMiddleware);
+
 
 /**
  * Primary app routes.
@@ -163,6 +166,10 @@ app.get('/account/setup', passportConfig.isAuthenticated, userController.getSetu
 app.post('/account/setup', passportConfig.isAuthenticated, userController.postUpdateSetup);
 app.get('/account/business', passportConfig.isAuthenticated, userController.getBusiness);
 app.post('/account/business', passportConfig.isAuthenticated, userController.postUpdateBusiness);
+app.get('/account/bizsettings', passportConfig.isAuthenticated, userController.getBizsettings);
+app.post('/account/bizsettings', passportConfig.isAuthenticated, userController.postUpdateBizsettings);
+
+
 app.get('/account/blogsettings', passportConfig.isAuthenticated, userController.getBlogsettings);
 app.post('/account/blogsettings', passportConfig.isAuthenticated, userController.postUpdateBlogsettings);
 app.get('/account/groupsettings', passportConfig.isAuthenticated, userController.getGroupsettings);

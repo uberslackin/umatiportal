@@ -431,6 +431,55 @@ exports.postUpdatePossettings = (req, res, next) => {
   });
 };
 
+
+
+/**
+ * GET /account/blogsettings
+ * Profile page.
+ */
+exports.getBizsettings = (req, res) => {
+  res.render('account/bizsettings', {
+    title: 'Business configuration'
+  });
+};
+
+/**
+ * POST /account/blogsettings
+ * Update blog settings.
+ */
+exports.postUpdateBizsettings = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/bizsettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.bizsettings.user = req.body.user || '';
+    user.bizsettings.biztitle = req.body.biztitle || '';
+    user.bizsettings.bizdesc = req.body.bizdesc || '';
+    user.bizsettings.shortdesc = req.body.shortdesc || '';
+    user.bizsettings.biztags = req.body.biztags || '';
+    user.bizsettings.template = req.body.template || '';
+    user.bizsettings.visibility = req.body.visibility || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your business configuration update.' });
+          return res.redirect('/account/bizsettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Business configuration has been updated.' });
+      res.redirect('/account/bizsettings');
+    });
+  });
+};
+
+
+
 /**
  * GET /account/blogsettings
  * Profile page.

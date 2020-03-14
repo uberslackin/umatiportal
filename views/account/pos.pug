@@ -4,12 +4,16 @@ block content
   .pb-2.mt-2.mb-4.border-bottom
 
   include ../partials/profilehead.pug
-    a(href='/account/possettings') Settings - 
-    a(href='/account/posentrycreate') Add an entry
-
+  
+ 
+  span POINT OF SALE - 
+  a(href='/account/possettings') Settings - 
+  a(href='/account/posentrycreate') Add an item
+ 
   hr
 
-  h3 #{user.business.name} Point of Sale
+
+  h3 #{user.business.name}
    
     br
     br

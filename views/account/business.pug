@@ -2,9 +2,11 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-    h3 Business Information
-
   include ../partials/profilehead.pug
+  span.caps #{user.business.name} PROFILE - 
+  a(href='/account/bizsettings') Settings
+ 
+  hr
 
   form(action='/account/business', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)

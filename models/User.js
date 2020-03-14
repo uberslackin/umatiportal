@@ -100,6 +100,15 @@ const userSchema = new mongoose.Schema({
     members: String,
     weburl: String
   },
+  bizsettings: {
+    user: String,
+    biztitle: String,
+    shortdesc: String,
+    bizdesc: String,
+    biztags: String,
+    template: String,
+    visibility: String
+  },
 }, { timestamps: true });
 
 /**

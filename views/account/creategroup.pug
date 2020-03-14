@@ -4,12 +4,12 @@ block content
   .pb-2.mt-2.mb-4.border-bottom
 
   include ../partials/profilehead.pug
-    a(href='/account/group') Group - 
-    a(href='/account/groupsettings') Settings
+  a(href='/account/group') SELF HELP GROUP -
+  a(href='/account/groupsettings') Settings
+
   hr
 
-  h3 Group #{user.profile.group}
-
+  h3.caps #{user.profile.group} GROUP NOTES
 
   form(action='/account/creategroup', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)

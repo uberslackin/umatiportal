@@ -2,15 +2,17 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-
-    h3 Make a new payment
-
   include ../partials/profilehead.pug
+  
+  span TRANSACTIONS - 
+  a(href='/account/activity') History - 
+  a(href='/account/print-activity') Data sheet - 
+  a(href='/account/setup') Settings
 
-    a(href='/account/setup') Payment settings -   
-    a(href='/account/activity') Payment history
 
     hr
+
+  h3 New transaction record
 
   form(action='/account/payment', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)

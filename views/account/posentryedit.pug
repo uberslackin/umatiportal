@@ -8,7 +8,9 @@ block content
   include ../partials/profilehead.pug
 
     .form-group.row
+    a(href='/account/pos') Pos - 
     a(href='/account/possettings') Settings
+
 
   form(action='/account/posentryedit', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)

@@ -4,12 +4,16 @@ block content
   .pb-2.mt-2.mb-4.border-bottom
 
   include ../partials/profilehead.pug
-    a(href='/account/groupsettings') Settings - 
-    a(href='/account/creategroup') Add an entry
+  
+  span.caps #{ user.profile.group } SELF HELP GROUP - 
+  a(href='/account/groupsettings') Settings - 
+  a(href='/account/creategroup') Add a note
 
-  hr
+    hr
 
-  h3 Your Group
+    br
+
+  h3 Group Notes
  
   hr
 

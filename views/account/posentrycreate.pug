@@ -3,10 +3,12 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
 
-    h3 New Point of Sale Item
+    h3 New Item
 
   include ../partials/profilehead.pug
-    a(href='/account/pos') Pos - 
+
+    hr
+    a(href='/account/pos') POINT OF SALE - 
     a(href='/account/possettings') Settings
 
   form(action='/account/posentrycreate', method='POST')

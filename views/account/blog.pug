@@ -2,14 +2,15 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-
-    h3 Manage Your Blog Posts
-
   include ../partials/profilehead.pug
-    a(href='/account/blogsettings') Settings - 
-    a(href='/account/createpost') Create a Post
+  
+  span BLOG - 
+  a(href='/account/blogsettings') Settings - 
+  a(href='/account/createpost') Add a post
 
     hr
+
+    br
 
   - var userr = { id: user._id }
   - if (blogs.length)

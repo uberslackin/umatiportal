@@ -29,7 +29,7 @@ exports.getGroupdata = function (req, res, next) {
         .exec(function (err, group_data) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
-            res.render('account/group', { title: 'Group members', groupdata: group_data });
+            res.render('account/group', { title: 'Group', groupdata: group_data });
         })
 };
 
