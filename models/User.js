@@ -30,19 +30,19 @@ const userSchema = new mongoose.Schema({
     group: String,
     business: String,
     vocation: String,
-    role: Array,
+    role: String,
     picture: String,
     salt: String,
     active: Boolean
   },
-  group: {
+  groupsettings: {
     groupname: String,
     adminperson: String,
     location: String,
     description: String,
     shortdesc: String,
     memberlist: String,
-    active: String
+    visibility: String
   },
   blogsettings: {
     user: String,
@@ -50,7 +50,16 @@ const userSchema = new mongoose.Schema({
     shortdesc: String,
     blogdesc: String,
     blogtags: String,
-    active: String
+    template: String,
+    visibility: String
+  },
+  inventorysettings: {
+    user: String,
+    invtitle: String,
+    shortdesc: String,
+    invdesc: String,
+    invtags: String,
+    visibility: String
   },
   calsettings: {
     user: String,
@@ -58,7 +67,15 @@ const userSchema = new mongoose.Schema({
     shortdesc: String,
     caldesc: String,
     caltags: String,
-    active: String
+    visibility: String
+  },
+  possettings: {
+    user: String,
+    postitle: String,
+    shortdesc: String,
+    posdesc: String,
+    postags: String,
+    visibility: String
   },
   setup: {
     username: String,
@@ -83,13 +100,22 @@ const userSchema = new mongoose.Schema({
     members: String,
     weburl: String
   },
+  bizsettings: {
+    user: String,
+    biztitle: String,
+    shortdesc: String,
+    bizdesc: String,
+    biztags: String,
+    template: String,
+    visibility: String
+  },
 }, { timestamps: true });
 
 /**
  * Password hash middleware.
  */
 userSchema.pre('save', function save(next) {
-  const user = this;
+    const user = this;
   if (!user.isModified('password')) { return next(); }
   bcrypt.genSalt(10, (err, salt) => {
     if (err) { return next(err); }

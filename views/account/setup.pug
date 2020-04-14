@@ -1,11 +1,14 @@
 extends ../layout
 
 block content
+  .pb-2.mt-2.mb-4.border-bottom
 
-  hr
 
-  a(href='/account/activity') Make a payment -   
-  a(href='/account/activity') Payment history 
+  include ../partials/profilehead.pug
+  span SAVINGS - 
+  a(href='/account/activity') History - 
+  a(href='/account/activity-print') Data sheet - 
+  a(href='/account/payment') New Transaction
 
   hr
 

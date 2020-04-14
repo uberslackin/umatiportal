@@ -32,7 +32,10 @@ h3+p {
   margin-top: 0;
 }
 
-
+#calendar {
+  max-width: 900px;
+  margin: 40px auto;
+}
 
 .wrapper {
   width: 90%;
@@ -61,9 +64,16 @@ h3+p {
   color: #fff;
 }
 
-.photos {
-  background-image: url(https://picsum.photos/536/354); 
-  color: #fff;
+.navtoggler {
+  background-color: rgba(0, 123, 255, 100);
+}
+
+.navtoggler:hover {
+  background-color: rgba(27, 254, 145, 0.2);
+  // transition-delay: 1s; /* delays for 1 second */
+  // -webkit-transition-delay: 1s; /* for Safari & Chrome */
+  transition: all .4s ease;
+  -webkit-transition: all .4s ease;
 }
 
 .news {
@@ -155,10 +165,23 @@ a.spam-button:link {
   }
   .cta {
     grid-column: 3;
-    grid-row: 3 / 6;
+    grid-row: 2 / 6;
   }
 }
+.dropdown-menu.multi-column {
+        width: 400px;
+        background-image: "/umati_creativefire_3birds.png";
+}
 
+.dropdown-menu.multi-column .dropdown-menu {
+        background-image: "/umati_creativefire_3birds.png";
+        display: block !important;
+        position: static !important;
+        margin: 0 !important;
+        border: none !important;
+        box-shadow: none !important;
+        min-width:100px;
+}
 
 footer {
   position: absolute;
@@ -181,6 +204,10 @@ textarea {
 
 // Navbar
 // -------------------------
+
+.caps { 
+  text-transform: uppercase; 
+}
 
 .navbar-nav img {
   width: 30px;
@@ -310,6 +337,28 @@ $enable-gradients: true;
   }
 }
 
+// unsplash
+
+.creditbadge { 
+    background-color:black;
+    color:white;
+    text-decoration:none;
+    padding:4px 6px;
+    font-family:-apple-system, BlinkMacSystemFont, San Francisco, Helvetica Neue, Helvetica, Ubuntu, Roboto, Noto, Segoe UI, Arial, sans-serif;
+    font-size:12px;
+    font-weight:bold;
+    line-height:1.2;
+    display:inline-block;
+    border-radius:3px; 
+  }
+
+.masth {
+  position: relative;
+  top: -65px;
+  left: 8px;
+}
+
+
 // timeline
  
 
@@ -334,11 +383,15 @@ $enable-gradients: true;
   border-radius: 50px 20px;
    border-radius: 15px 15px 15px 15px; 
    text-decoration: none;
-   background-color:#8888dd;
+   background-color:#7768dd;
    color: #4D4545;
    z-index: 2;
    text: 14pt #fff;
    text-align: center;
+}
+
+.buttontext {
+   color: #fff;
 }
 
 .circleadd:hover{

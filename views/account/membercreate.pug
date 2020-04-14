@@ -2,21 +2,24 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-
-    h3 Make a new payment
-
   include ../partials/profilehead.pug
+  
+  span TRANSACTIONS - 
+  a(href='/account/activity') History - 
+  a(href='/account/print-activity') Data sheet - 
+  a(href='/account/setup') Settings
 
-    a(href='/account/settings') Payment settings -   
-    a(href='/account/activity') Payment history
 
     hr
 
+  h3 New transaction record
+
   form(action='/account/payment', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='username', value=user._id)
     input(type='hidden', name='name', value=user.name)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='soure') Source
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='source') Source
       .col-md-7
         input.form-control(type='text', name='source', id='source')
     .form-group.row
@@ -34,7 +37,7 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='comment') Comment
       .col-md-7
-        textarea.form-control( name="comment", rows="6", cols="66", autocomplete='comment' ) #{user.group.comment}        
+        textarea.form-control( name="comment", rows="6", cols="66", autocomplete='comment' ) #{comment}
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='date') Date
       .col-md-7

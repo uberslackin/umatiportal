@@ -2,9 +2,14 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-    h3 Blog Settings
-
+ 
   include ../partials/profilehead.pug
+    hr
+    a(href='/account/blog') Blog -  
+    a(href='/account/createpost') Create a post
+
+  h3 Blog Settings
+
 
   form(action='/account/blogsettings', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
@@ -25,9 +30,33 @@ block content
       .col-md-7
         input.form-control(type='text', name='blogtags', id='blogtags', value=user.blogsettings.blogtags, autocomplete='blogtags')
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='blogtags') Active
-        input.form-control(type='checkbox', name='visibility', checked=user.blogsettings.active)
-    .form-group
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='visibility') Visibility
+      .col-md-1.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'visible', name='visibility', id='visibility', value='visible', data-toggle='radio')
+        label.form-check-label Visible
+      .col-md-2.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'group', name='visibility', id='visibility', value='group', data-toggle='radio')
+        label.form-check-label My Group Only
+      .col-md-2.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'subgroup', name='visibility', id='visibility', value='subgroup', data-toggle='radio')
+        label.form-check-label Sub Group Only
+      .col-md-1.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'invisible', name='visibility', id='visibility', value='invisible', data-toggle='radio')
+        label.form-check-label Invisible
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='template') Template
+      .col-md-7
+        select#template.select.form-control.input-lg(for='template', name='template')
+          option(value='0') -- Select --
+          option(value='8' selected=(user.blogsettings.visibility == visibility) ) Light
+          option(value='9' selected=(user.blogsettings.visibility == visibility) ) Dark
+          option(value='10' selected=(user.blogsettings.visibility == visibility) ) Business
+          option(value='11' selected=(user.blogsettings.visibility == visibility) ) Business2
+          option(value='12' selected=(user.blogsettings.visibility == visibility) ) Art1
+          option(value='13' selected=(user.blogsettings.visibility == visibility) ) Art2
+          option(value='14' selected=(user.blogsettings.visibility == visibility) ) Music1
+          option(value='15' selected=(user.blogsettings.visibility == visibility) ) Music2
+    .form-group 
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm

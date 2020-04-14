@@ -1,0 +1,34 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+  include ../partials/profilehead.pug
+  
+ 
+  span POINT OF SALE - 
+  a(href='/account/possettings') Settings - 
+  a(href='/account/posentrycreate') Add an item
+ 
+  hr
+
+
+  h3 #{user.business.name}
+   
+    br
+    br
+  - var userr = { id: user._id }  
+
+
+  - if (posdata.length)
+    each items in posdata
+       if items.username == userr.id 
+          strong #{items.postitle} #{moment(items.updatedAt).format('MMM Do h:mm:')}
+          strong #{items.location}  
+          div #{items.time}  
+          div tags: #{items.postags} #{items.poscat}
+          a(href='/account/pos/'+items._id) Edit
+          updated  &nbsp; &nbsp; &nbsp;  updated #{moment(items.updatedAt).format('MMM Do h:mm:ss a')}
+          hr
+    a(href='/account/posentrycreate') Add an entry -
+        hr

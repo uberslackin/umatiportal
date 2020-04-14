@@ -1,0 +1,62 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+    h3 Edit Inventory Item
+
+  include ../partials/profilehead.pug
+
+    .form-group.row
+    a(href='/account/inventory') inventory - 
+    a(href='/account/inventorysettings') Settings
+
+
+  form(action='/account/inventoryedit', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='user', value=user._id)
+    input(type='hidden', name='inventoryitemid', value=inventory._id)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='inventorytitle') Name
+      .col-md-7
+        input.form-control(type='text', name='inventorytitle', id='inventorytitle' , value=inventory.inventorytitle, autocomplete=inventory.inventorytitle)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='inventorydate') Date
+      .col-md-7
+        input.form-control(type='date', name='inventorydate', id='inventorydate', value=moment(inventory.inventorydate).format('YYYY-MM-DD') autocomplete=inventory.inventorydate)        
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Description
+      .col-md-7
+        textarea.form-control( name="post", id="post", rows="6", cols="66", autocomplete='inventory.post' ) #{inventory.post}
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location of Item
+      .col-md-7
+        input.form-control(type='text', name='location', id='location', value=inventory.location, autocomplete=inventory.location)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='inventorycat') Category
+      .col-md-7
+        input.form-control(type='text', name='inventorycat', id='inventorycat', autocomplete=inventory.inventorycat, value=inventory.inventorycat)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postag') Tags
+      .col-md-7
+        input.form-control(type='text', name='inventorytags', id='inventorytags', autocomplete=inventory.inventorytags, value=inventory.inventorytags)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='inventorytags') Visibility
+       .col-md-7
+      .form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=inventory.visibility == 'visible', name='visibility', value='visible', data-toggle='radio')
+        label.form-check-label Visible
+      .form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=inventory.visibility == 'group', name='visibility', value='group', data-toggle='radio')
+        label.form-check-label My Group Only
+      .div.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=inventory.visibility == 'subgroup', name='visibility', value='subgroup', data-toggle='radio')
+        label.form-check-label Sub Group Only
+      .div.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=inventory.visibility == 'invisible', name='visibility', value='invisible', data-toggle='radio')
+        label.form-check-label Invisible
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update Item

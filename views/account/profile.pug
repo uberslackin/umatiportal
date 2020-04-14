@@ -60,6 +60,10 @@ block content
       .col-md-7
         input.form-control(type='text', name='group', id='group', value=user.profile.group, autocomplete)
     .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='role') Role
+      .col-md-7
+        input.form-control(type='text', name='role', id='role', value=user.profile.role, autocomplete)        
+    .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='website') Website
       .col-md-7
         input.form-control(type='text', name='website', id='website', value=user.profile.website, autocomplete='url')

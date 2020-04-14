@@ -5,7 +5,6 @@ const Schema = mongoose.userSchema;
 
 const calSchema = new mongoose.Schema({
     id: Number,
-    name: String,
     username: String,
     calentrytitle: String,
     post: String,
@@ -14,12 +13,26 @@ const calSchema = new mongoose.Schema({
     caltags: String,
     caldate: Date,
     time: String,
-    sharedwith: Array,
+    group: String,
+    visibility: String,
 }, { timestamps: true });
 
 /**
  * Password hash middleware.
 *
+
+
+  var data = {
+    user : req.body.user,
+    calentrytitle : req.body.caltitle,
+    post : req.body.post,
+    location : req.body.location,
+    calcat : req.body.calcat,
+    caltags : req.body.caltags,
+    caldate : req.body.caldate,
+    time : req.body.time,
+    visibility: req.body.visibility
+
 blogSchema.pre('save', function save(next) {
   const cal = this;
   if (!blog.isModified('posttitle')) { return next(); }

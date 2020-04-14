@@ -2,9 +2,13 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-    h3 Calendar Settings
-
   include ../partials/profilehead.pug
+    hr
+    a(href='/account/cal') Calendar -  
+    a(href='/account/calentrycreate') Add an entry
+
+
+  h3 Calendar Settings
 
   form(action='/account/calsettings', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
@@ -17,16 +21,27 @@ block content
       .col-md-7
         input.form-control(type='text', name='shortdesc', id='shortdesc', value=user.calsettings.shortdesc, autocomplete)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='caldesc') Full Description
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='caldesc') Description
       .col-md-7
-        input.form-control(type='text', name='caldesc', id='caldesc', value=user.calsettings.caldesc, autocomplete)
+        textarea.form-control( name="caldesc", rows="6", cols="66", autocomplete='caldesc' ) #{user.calsettings.caldesc}   
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='caltags') Tags
       .col-md-7
         input.form-control(type='text', name='caltags', id='caltags', value=user.calsettings.caltags, autocomplete='caltags')
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='active') Active
-        input.form-control(type='checkbox', name='active', checked=user.calsettings.active)
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='visibility') Visibility
+      .col-md-1.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.calsettings.visibility == 'visible', name='visibility', value='visible', data-toggle='radio')
+        label.form-check-label Visible
+      .col-md-2.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.calsettings.visibility == 'group', name='visibility', value='group', data-toggle='radio')
+        label.form-check-label My Group Only
+      .col-md-2.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.calsettings.visibility == 'subgroup', name='visibility', value='subgroup', data-toggle='radio')
+        label.form-check-label Sub Group Only
+      .col-md-1.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.calsettings.visibility == 'invisible', name='visibility', value='invisible', data-toggle='radio')
+        label.form-check-label Invisible
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')

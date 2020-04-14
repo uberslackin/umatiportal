@@ -9,8 +9,7 @@ const validator = require('validator');
 const mailChecker = require('mailchecker');
 const Blog = require('../models/Blog');
 const User = require('../models/User');
-
-
+    
 const randomBytesAsync = promisify(crypto.randomBytes);
 
 
@@ -19,34 +18,27 @@ const randomBytesAsync = promisify(crypto.randomBytes);
  * Blog manager.
  */
 
-exports.getBlog = async(function*(req, res) {
-  const page = (req.query.page > 0 ? req.query.page : 1) - 1;
-  const _id = req.query.item;
-  const limit = 15;
-  const options = {
-    limit: limit,
-    page: page
-  };
 
-  if (_id) options.criteria = { _id };
 
-  const blogs = yield Blog.list;
-  const count = yield Blog.countDocuments();
+exports.getBlogupdated = function (req, res, user) {
+    
+            // Successful, so rendecalsr.
+            res.render('account/blogupdated', { title: 'Blog updated'});
+};
 
-  console.log(blogs);
 
-  res.render('account/blog', {
-    title: 'Blog posts',
-    username: req.user,
-    blogs: blogs,
-    page: page + 1,
-    pages: Math.ceil(count / limit)
-  });
-});
+exports.getBlog = function (req, res, user) {
+    
+    Blog.find()
+        .exec(function (err, blog_data) {          
+            // Successful, so rendecalsr.
+            res.render('account/blog', { title: 'Personal Blog', blogs: blog_data });
+        })
+};
 
 
 
-/**
+/** 
 exports.getBlog = (req, res) => {
 
   const blogs = Blog.list;
@@ -63,6 +55,19 @@ exports.postBlog = (req, res, next) => {
   if (validator.isEmpty(req.body.blogpost)) validationErrors.push({ msg: 'Blog post cannot be blank.' });
 };
 
+
+/*
+ * POST /account/upload
+ * Sign in using email and password.
+ */
+exports.postUpload = (req, res, next) => {
+  const validationErrors = [];
+  if (validator.isEmpty(req.body.blogpost)) validationErrors.push({ msg: 'Blog post cannot be blank.' });
+};
+
+
+
+
 /**
  * GET /createpost
  * Signup page.
@@ -72,7 +77,6 @@ exports.getCreatepost = (req, res) => {
     title: 'Create post'
   });
 };
-
 
 /**
  * POST /createpost
@@ -85,37 +89,78 @@ exports.postCreatepost = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/account/createpost');
+    return res.redirect('/account/blog');
   }
 
   const blog = new Blog({
     name: req.body.name,
     posttitle: req.body.posttitle,
     post: req.body.post, 
+    username: req.body.user, 
     location: req.body.location, 
     postcat: req.body.postcat,
     posttags: req.body.posttags,
-    postdate: req.body.postdate
+    postdate: req.body.postdate,
+    template: req.body.template
   });
 
   Blog.findOne({ posttitle: req.body.posttitle }, (err, existingBlog) => {
     if (err) { return next(err); }
     if (existingBlog) {
       req.flash('errors', { msg: 'Blog post with that title already exists.' });
-      return res.redirect('/account/createpost');
+      return res.redirect('/account/blog');
     }
     blog.save((err) => {
       if (err) { return next(err); }
-      req.logIn(res.user, (err) => {
-        if (err) {
-          return next(err);
-        }
-        res.redirect('/account/blog');
-      });
+      res.redirect('/account/blog');
     });
   });
 };
 
+
+
+
+// get a employee with ID of 1
+exports.getUpdateBlogpost = (req, res) => {
+  let id = req.params.blogpost_id;
+  Blog.findById(id, function(err, blogdata) {
+    if (err)
+      res.send(err)
+      res.render('account/blogedit', {
+      title: 'Edit point of sale entry',
+      blogpost_id: req.params.blogdata
+  });
+
+  });
+  };
+ 
+
+
+exports.postUpdateBlogpost = (req, res, next) => {
+
+// create employee and send back all employees after creation
+  // create mongose method to update a existing record into collection
+  let id = req.params.blogpost_id;
+  var data = {
+    name : req.body.name,
+    user : req.body.user,
+    username : req.body.username,
+    postitle : req.body.posttitle,
+    post : req.body.post,
+    location : req.body.location,
+    postcat : req.body.postcat,
+    posttags : req.body.posttags,
+    postdate : req.body.postdate,
+    sharedwith : req.body.sharedwith
+  }
+ 
+  // save the user
+  Blog.findByIdAndUpdate(id, data, function(err, blogpost) {
+  if (err) throw err;
+ 
+  res.send('Successfully! Blog updated - '+blogpost.name);
+  });
+};
 
 
 /**

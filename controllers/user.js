@@ -6,14 +6,23 @@ const _ = require('lodash');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
-const Calendar = require('../models/Calendar');
-const Member = require('../models/Members');
+// const Calendar = require('../models/Calendar');
+const Member = require('../models/Member');
 
 const randomBytesAsync = promisify(crypto.randomBytes);
 
 /**
- * GET /login
- * Login page.
+* GET /login
+* Login page.
+* 
+* ref:
+* app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
+* app.post('/account/payment', passportConfig.isAuthenticated, userController.postMember);
+* app.get('/account/activity', passportConfig.isAuthenticated, userController.getActivity);
+* app.get('/account/activity-print', passportConfig.isAuthenticated, userController.getActivityprint);
+* app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
+
+
  */
 exports.getLogin = (req, res) => {
   if (req.user) {
@@ -134,8 +143,9 @@ exports.getSetup = (req, res) => {
 // Display list of Member activity.
 exports.getActivity = function (req, res, next) {
 
+    var mysort = { createdAt: -1,  };
     Member.find()
-        .sort([['date', 'ascending']])
+        .sort(mysort)
         .exec(function (err, list_activity) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
@@ -144,9 +154,66 @@ exports.getActivity = function (req, res, next) {
 };
 
 
+// Display list of Member activity.
+exports.getActivityprint = function (req, res, next) {
+
+    Member.find()
+        .sort([['date', 'ascending']])
+        .exec(function (err, list_activity) {
+            if (err) { return next(err); }
+            // Successful, so rendecalsr.
+            res.render('account/activity-print', { title: 'Account Ledger', activity_list: list_activity });
+        })
+};
+
+
 exports.getMember = (req, res) => {
   res.render('account/membercreate', {
-    title: 'Business description'
+    title: 'Business transaction'
+  });
+};
+
+
+
+exports.postMember = (req, res, next) => {
+  const validationErrors = [];
+
+        var db = new Member();
+        var response = {};
+        db.username = req.body.username;
+        db.name = req.body.name;
+        db.source = req.body.source;
+        db.amount = req.body.amount;
+        db.date = req.body.date;
+        db.group = req.body.group;
+        db.witness = req.body.witness;
+        db.comment = req.body.comment;
+
+        db.save((err) => {
+          if (err) {
+            if (err.code === 11000) {
+              req.flash('errors', { msg: 'There was an error in your update.' });
+              return res.redirect('/account/activity');
+          }
+          return next(err);
+          }
+          req.flash('success', { msg: 'Account transaction has been registered.' });
+          res.redirect('/account/activity');
+          });
+
+};
+
+
+
+exports.getPong = (req, res) => {
+  res.render('games/pong', {
+    title: 'Pong'
+  });
+};
+
+exports.getSi = (req, res) => {
+  res.render('games/si', {
+    title: 'Space Invaders old skool therapeutic game fun'
   });
 };
 
@@ -185,7 +252,6 @@ exports.postUpdateSetup = (req, res, next) => {
     });
   });
 };
-
 
 /**
  * GET /account/business
@@ -238,36 +304,6 @@ exports.postUpdateBusiness = (req, res, next) => {
   });
 };
 
-
-
-exports.postMember = (req, res, next) => {
-  const validationErrors = [];
-
-        var db = new Member();
-        var response = {};
-        db.name = req.body.name;
-        db.source = req.body.source;
-        db.amount = req.body.amount;
-        db.date = req.body.date;
-        db.group = req.body.group;
-        db.witness = req.body.witness;
-        db.comment = req.body.comment;
-
-        db.save((err) => {
-          if (err) {
-            if (err.code === 11000) {
-              req.flash('errors', { msg: 'There was an error in your update.' });
-              return res.redirect('/account/activity');
-          }
-          return next(err);
-          }
-          req.flash('success', { msg: 'Account transaction has been registered.' });
-          res.redirect('/account/activity');
-          });
-
-};
-
-
 /**
  * POST /account/activity
  * Update activity information.
@@ -319,6 +355,8 @@ exports.getCalsettings = (req, res) => {
  */
 exports.postUpdateCalsettings = (req, res, next) => {
   const validationErrors = [];
+   if (!validator.isText(req.body.caltitle)) validationErrors.push({ msg: 'Please enter a valid payment amount.' });
+
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
@@ -332,7 +370,7 @@ exports.postUpdateCalsettings = (req, res, next) => {
     user.calsettings.caldesc = req.body.caldesc || '';
     user.calsettings.shortdesc = req.body.shortdesc || '';
     user.calsettings.caltags = req.body.caltags || '';
-    user.calsettings.active = req.body.active || '';
+    user.calsettings.visibility = req.body.visibility || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -347,6 +385,98 @@ exports.postUpdateCalsettings = (req, res, next) => {
   });
 };
 
+
+/**
+ * GET /account/calsettings
+ * Profile page.
+ */
+exports.getPossettings = (req, res) => {
+  res.render('account/possettings', {
+    title: 'POS Settings'
+  });
+};
+
+
+/**
+ * POST /account/blogsettings
+ * Update blog settings.
+ */
+exports.postUpdatePossettings = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/possettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.possettings.user = req.body.user || '';
+    user.possettings.postitle = req.body.postitle || '';
+    user.possettings.posdesc = req.body.posdesc || '';
+    user.possettings.shortdesc = req.body.shortdesc || '';
+    user.possettings.postags = req.body.postags || '';
+    user.possettings.visibility = req.body.visibility || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your point of sale settings update.' });
+          return res.redirect('/account/possettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'POS setings has been updated.' });
+      res.redirect('/account/possettings');
+    });
+  });
+};
+
+
+
+/**
+ * GET /account/blogsettings
+ * Profile page.
+ */
+exports.getBizsettings = (req, res) => {
+  res.render('account/bizsettings', {
+    title: 'Business configuration'
+  });
+};
+
+/**
+ * POST /account/blogsettings
+ * Update blog settings.
+ */
+exports.postUpdateBizsettings = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/bizsettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.bizsettings.user = req.body.user || '';
+    user.bizsettings.biztitle = req.body.biztitle || '';
+    user.bizsettings.bizdesc = req.body.bizdesc || '';
+    user.bizsettings.shortdesc = req.body.shortdesc || '';
+    user.bizsettings.biztags = req.body.biztags || '';
+    user.bizsettings.template = req.body.template || '';
+    user.bizsettings.visibility = req.body.visibility || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your business configuration update.' });
+          return res.redirect('/account/bizsettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Business configuration has been updated.' });
+      res.redirect('/account/bizsettings');
+    });
+  });
+};
 
 
 
@@ -379,7 +509,8 @@ exports.postUpdateBlogsettings = (req, res, next) => {
     user.blogsettings.blogdesc = req.body.blogdesc || '';
     user.blogsettings.shortdesc = req.body.shortdesc || '';
     user.blogsettings.blogtags = req.body.blogtags || '';
-    user.blogsettings.active = req.body.active || '';
+    user.blogsettings.template = req.body.template || '';
+    user.blogsettings.visibility = req.body.visibility || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -394,9 +525,57 @@ exports.postUpdateBlogsettings = (req, res, next) => {
   });
 };
 
+/**
+*
+* Inventory Settings
+*
+* GET /account/blogsettings
+* Profile page.
+*/
+
+exports.getInventorysettings = (req, res) => {
+  res.render('account/inventorysettings', {
+    title: 'Inventory Settings'
+  });
+};
 
 /**
- * GET /account/group
+ * POST /account/blogsettings
+ * Update blog settings.
+ */
+exports.postUpdateInventorysettings = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/inventorysettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.inventorysettings.user = req.body.user || '';
+    user.inventorysettings.invtitle = req.body.invtitle || '';
+    user.inventorysettings.shortdesc = req.body.shortdesc || '';
+    user.inventorysettings.invdesc = req.body.invdesc || '';
+    user.inventorysettings.invtags = req.body.invtags || '';
+    user.inventorysettings.visibility = req.body.visibility || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your Inventory settings update.' });
+          return res.redirect('/account/inventorysettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Inventory setings has been updated.' });
+      res.redirect('/account/inventorysettings');
+    });
+  });
+};
+
+
+/**
+ * GET /account/group getGroupsettings
  * Group page.
  */
 exports.getGroup = (req, res) => {
@@ -406,36 +585,48 @@ exports.getGroup = (req, res) => {
 };
 
 /**
- * POST /account/group
+ * getGroupsettings form
+ *
+*/
+
+exports.getGroupsettings = (req, res) => {
+  res.render('account/groupsettings', {
+    title: 'Group Settings'
+  });
+};
+
+
+/**
+ * POST /account/group 
  * Update blog settings.
  */
-exports.postUpdateGroup = (req, res, next) => {
+exports.postUpdateGroupsettings = (req, res, next) => {
   const validationErrors = [];
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/account/group');
+    return res.redirect('/account/groupsettings');
   }
 
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
-    user.group.groupname = req.body.groupname || '';
-    user.group.adminperson = req.body.adminperson || '';
-    user.group.location = req.body.location || '';
-    user.group.description = req.body.description || '';
-    user.group.shortdesc = req.body.shortdesc || '';
-    user.group.memberlist = req.body.memberlist || '';
-    user.group.active = req.body.active || '';
+    user.groupsettings.groupname = req.body.groupname || '';
+    user.groupsettings.adminperson = req.body.adminperson || '';
+    user.groupsettings.location = req.body.location || '';
+    user.groupsettings.description = req.body.description || '';
+    user.groupsettings.shortdesc = req.body.shortdesc || '';
+    user.groupsettings.memberlist = req.body.memberlist || '';
+    user.groupsettings.visibility = req.body.visibility || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
           req.flash('errors', { msg: 'There was an error in your group details update.' });
-          return res.redirect('/account/group');
+          return res.redirect('/account/groupsettings');
         }
         return next(err);
       }
       req.flash('success', { msg: 'Group details have been updated.' });
-      res.redirect('/account/group');
+      res.redirect('/account/groupsettings');
     });
   });
 };
@@ -672,7 +863,7 @@ exports.getVerifyEmail = (req, res, next) => {
       to: req.user.email,
       from: 'hackathon@starter.com',
       subject: 'Please verify your email address on Umati Bank self help group netork',
-      text: `Thank you for registering with hackathon-starter.\n\n
+      text: `Thank you for registering with umati bank website.\n\n
         This verify your email address please click on the following link, or paste this into your browser:\n\n
         http://${req.headers.host}/account/verify/${token}\n\n
         \n\n

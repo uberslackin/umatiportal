@@ -6,11 +6,27 @@ block content
     h3 Create a new Blog Post
 
   include ../partials/profilehead.pug
+    a(href='/account/blog') Blog - 
+    a(href='/account/blogsettings') Settings
 
-    .form-group.row
-    a(href='/account/blogsettings') Blog Settings
+    hr
 
-  form(action='/account/createpost', method='POST')
+    h2  Add images
+
+  form(action="/account/upload", method="POST", enctype="multipart/form-data")
+    input(type='hidden', name='user', value=user.id)
+    p Name of item:
+    input.thedata(type="text", name="item")
+    br
+    br
+    | 
+    Photo of item:
+      input.thefile(type="file", name="uploaded_file")  
+    button(type="submit") Add item
+
+  hr
+
+  form(action="/account/createpost", method="POST")
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
     .form-group.row
@@ -20,7 +36,7 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
-        input.form-control(type='text', name='post', id='post')
+        textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' ) #{user.business.post}
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
       .col-md-7
