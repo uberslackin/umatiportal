@@ -8,18 +8,22 @@ const inventorySchema = new mongoose.Schema({
     name: String,
     user: String,
     username: String,
-    posttitle: String,
+    inventorytitle: String,
     post: String,
+    visibility: String,
     location: String,
-    postcat: String,
-    posttags: String,
-    postdate: Date,
+    inventorycat: String,
+    inventorytags: String,
+    inventorydate: Date,
     sharedwith: Array,
 }, { timestamps: true });
 
 /**
  * Password hash middleware.
 *
+
+
+
 blogSchema.pre('save', function save(next) {
   const blog = this;
   if (!blog.isModified('posttitle')) { return next(); }

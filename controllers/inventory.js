@@ -65,16 +65,15 @@ exports.postCreateinventory = (req, res, next) => {
   }
 
   const inventory = new Inventory({
-    id: req.body.id,
     name: req.body.name,
     user: req.body.user,
     username: req.body.username, 
-    posttitle: req.body.posttitle, 
+    inventorytitle: req.body.inventorytitle, 
     post: req.body.post,
     location: req.body.location,
-    postcat: req.body.postcat,
-    posttags: req.body.posttags,
-    postdate: req.body.postdate
+    inventorycat: req.body.inventorycat,
+    inventorytags: req.body.inventorytags,
+    inventorydate: req.body.inventorydate
   });
 
   Inventory.findOne({ posttitle: req.body.posttitle }, (err, existingInventory) => {
@@ -84,51 +83,53 @@ exports.postCreateinventory = (req, res, next) => {
       return res.redirect('/account/inventory');
     }
     inventory.save((err) => {
-      if (err) { return next(err); }
-      req.logIn(res.user, (err) => {
-        if (err) {
-          return next(err);
-        }
+      if (err) { return next(err); } 
         res.redirect('/account/inventory');
       });
     });
+  };
+
+
+
+
+/**
+ * POST /account/inventory
+ */
+exports.postUpdateInventory = (req, res) => {
+
+// create employee and send back all employees after creation
+  // create mongose method to update a existing record into collection
+  var invid = req.body.inventoryitemid;
+  var data = {
+    inventorytitle : req.body.inventorytitle,
+    post : req.body.post,
+    location : req.body.location,
+    inventorycat : req.body.inventorycat,
+    inventorytags : req.body.inventorytags,
+    inventorydate : req.body.inventorydate,
+    visibility: req.body.visibility
+  }
+ 
+  // save the user
+  Inventory.findByIdAndUpdate(invid, data, function(err, pos) {
+  if (err) throw err;
+ 
+  req.flash('success', { msg: 'Nice job. Your Inventory entry has been updated.' });
+  res.redirect('/account/inventory');
   });
 };
 
-/**
- * POST /account/blog
- * Update blog information.
- */
-exports.postUpdateInventory = (req, res, next) => {
-  const validationErrors = [];
 
-  if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    return res.redirect('/account/inventory');
-  }
 
-  User.findById(req.user.id, (err, user) => {
-    if (err) { return next(err); }
-    user.inventory.name = req.body.name || '';
-    user.inventory.user = req.body.user || '';
-    user.inventory.visibility = req.body.visibility || '';
-    user.inventory.post = req.body.post || '';
-    user.inventory.postcat = req.body.postcat || '';
-    user.inventory.postttag = req.body.postttag || '';
-    user.inventory.postdate = req.body.postdate || '';
-    user.inventory.iphash = req.body.iphash || '';
-    user.inventory.transhash = req.body.transhash || '';
-    user.save((err) => {
-      if (err) {
-        if (err.code === 11000) {
-          req.flash('errors', { msg: 'There was an error in your inventory update.' });
-          return res.redirect('/account/inventory');
-        }
-        return next(err);
-      }
-      req.flash('success', { msg: 'inventory has been registered.' });
-      res.redirect('/account/inventory');
+exports.getUpdateInventory = function (req, res, next) {
+  Inventory.findById(req.params.inventory_id, function(err, inventory){
+    if(inventory.user != req.user._id){
+      req.flash('danger', 'Not Authorized');
+      return res.redirect('/');
+    }
+    return res.render('account/inventoryedit', {
+      title:'Edit Inventory Item',
+      inventory:inventory
     });
   });
 };
-

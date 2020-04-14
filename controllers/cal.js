@@ -58,6 +58,7 @@ exports.getCaljson = function (req, res, next) {
         .exec(function (err, cal_data) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
+            var caljson =           
 
             res.json(cal_data);
         })
@@ -75,15 +76,34 @@ exports.getCal = function (req, res, next) {
         })
 };
 
+// Display list of Member activity.
+exports.getCal3 = function (req, res, next) {
 
-exports.getUpdateCalEntry = (req, res) => {
-    Cal.findOne({ id: req.params.url }, (err, cal_data) => {
-        res.render('account/calentryedit', {
-        title: 'Edit calendar entry', caldata: cal_data
-  });
-  });
+    Cal.find()
+        .sort([['caldate', 'ascending']])
+        .exec(function (err, cal_data) {
+            if (err) { return next(err); }
+            // Successful, so rendecalsr.
+            res.render('account/cal3', { title: 'Test Calendar', caldata: cal_data });
+        })
 };
 
+
+
+// Load Edit Form
+// Display list of Member activity.
+exports.getUpdateCalEntry = function (req, res, next) {
+  Cal.findById(req.params.calitem_id, function(err, cal){
+    if(cal.username != req.user._id){
+      req.flash('danger', 'Not Authorized');
+      return res.redirect('/');
+    }
+    return res.render('account/calentryedit', {
+      title:'Edit Calendar Item',
+      caldata:cal
+    });
+  });
+};
 
 
  /*
@@ -92,7 +112,7 @@ exports.getUpdateCalEntry = (req, res) => {
  */
 exports.postCal = (req, res, next) => {
   const validationErrors = [];
-  if (validator.isEmpty(req.body.calpost)) validationErrors.push({ msg: 'Cal post cannot be blank.' });
+  if (validator.isEmpty(req.body.post)) validationErrors.push({ msg: 'Calendar content cannot be blank.' });
 };
 
 /**
@@ -152,44 +172,34 @@ exports.postCreateCalEntry = (req, res, next) => {
 };
 
 
-
-
-
 /**
- * POST /account/calendar
- * Update cal information.
+ * POST /necal
+ * Create a new local account.
  */
-exports.postUpdateCalEntry = (req, res, next) => {
-  const validationErrors = [];
 
-  if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    return res.redirect('/account/calendar');
+exports.postUpdateCalEntry = (req, res) => {
+
+  // create employee and send back all employees after creation
+  // create mongose method to update a existing record into collection
+  var calid = req.body.calitemid;
+  var data = {
+    username : req.body.username,
+    calentrytitle : req.body.calentrytitle,
+    post : req.body.post,
+    location : req.body.location,
+    calcat : req.body.calcat,
+    caltags : req.body.caltags,
+    caldate : req.body.caldate,
+    time : req.body.time,
+    group : req.body.group,
+    visibility: req.body.visibility
   }
-
-  Cal.findById(req.user.id, (err, user, next) => {
-    if (err) { return next(err); }
-    username = req.body.name || '';
-    user = req.body.user || '';
-    visibility = req.body.visibility || '';
-    post = req.body.post || '';
-    postcat = req.body.postcat || '';
-    postttag = req.body.postttag || '';
-    postdate = req.body.posgtdate || '';
-    time = req.body.time || '';
-    iphash = req.body.iphash || '';
-    transhash = req.body.transhash || '';
-    Cal.save((err) => {
-      if (err) {
-        if (err.code === 11000) {
-          req.flash('errors', { msg: 'There was an error in your calendar update.' });
-          return res.redirect('/account/calentrycreate');
-        }
-        return next(err);
-      }
-      req.flash('success', { msg: 'Calendar entry has been registered.' });
-      res.redirect('/account/cal');
-    });
+ 
+  // save the user
+  Cal.findByIdAndUpdate(calid, data, function(err, pos) {
+  if (err) throw err;
+ 
+  req.flash('success', { msg: 'Nice job. Your calendar entry has been updated.' });
+  res.redirect('/account/cal');
   });
 };
-

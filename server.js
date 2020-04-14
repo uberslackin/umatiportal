@@ -187,10 +187,8 @@ app.get('/account/creategroup', passportConfig.isAuthenticated, groupdataControl
 app.post('/account/creategroup', passportConfig.isAuthenticated, groupdataController.postCreategroupdata);
 
 app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog);
-app.get('/account/blogupdated', passportConfig.isAuthenticated, blogController.getBlogupdated);
 app.post('/account/blog', blogController.postUpdateBlog);
-
-app.post('/account/blogedit', passportConfig.isAuthenticated, blogController.postUpdateBlogpost);
+app.post('/account/blogupdate', passportConfig.isAuthenticated, blogController.postUpdateBlogpost);
 app.get('/account/blog/:blogpost_id', passportConfig.isAuthenticated, blogController.getUpdateBlogpost);
 app.get('/account/createpost', passportConfig.isAuthenticated, blogController.getCreatepost);
 app.post('/account/createpost', passportConfig.isAuthenticated, blogController.postCreatepost);
@@ -199,9 +197,12 @@ app.get('/account/inventory', passportConfig.isAuthenticated, inventoryControlle
 app.post('/account/inventory', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
 app.get('/account/createinventory', passportConfig.isAuthenticated, inventoryController.getCreateinventory);
 app.post('/account/createinventory', passportConfig.isAuthenticated, inventoryController.postCreateinventory);
+app.get('/account/inventory/:inventory_id', passportConfig.isAuthenticated, inventoryController.getUpdateInventory);
+app.post('/account/inventoryedit', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
 
 app.get('/account/api/cal', passportConfig.isAuthenticated, calController.getCaljson);
 app.get('/account/cal', passportConfig.isAuthenticated, calController.getCal);
+app.get('/account/cal3', passportConfig.isAuthenticated, calController.getCal3);
 app.post('/account/cal', passportConfig.isAuthenticated, calController.postCreateCalEntry);
 app.get('/account/cal/:calitem_id', passportConfig.isAuthenticated, calController.getUpdateCalEntry);
 app.get('/account/calentryedit', passportConfig.isAuthenticated, calController.getCalEntry);

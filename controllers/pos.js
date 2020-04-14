@@ -54,47 +54,6 @@ exports.getPosEntry = (req, res) => {
   });
 };
 
-/**
- * GET /account/post/$id
- * Signup page.
- *
-  exports.getUpdatePosEntry = (req, res, next) => {
-    Pos.findOne({ _id: req.params.url }, (err, existingPos) => {
-
-  res.render('account/posentryedit', {
-    title: 'Edit point of sale entry',
-    pos: existingPos
-  });
-});
-}
-
-/**
- * GET /account/post/$id
- * Signup page.
- *
-
-exports.getUpdatePosEntry = function(req, res, next) {
-    // Get book, authors and genres for form.
-    async({
-        posdata: function(callback) {
-            Pos.findById(req.params.id).populate('poss').exec(callback);
-        },
-        poss: function(callback) {
-            Pos.find(callback);
-        },
-        }, function(err, results) {
-            if (err) { return next(err); }
-            if (results.pos==null) { // No results.
-                var err = new Error('POS entry not found');
-                err.status = 404;
-                return next(err);
-            }
-            // Success.
-            // Mark our selected genres as checked.
-            res.render('account/posentryedit', { title: 'Update POS', posdata: results.pos });
-        });
-};
-*/
 
 // Load Edit Form
 // Display list of Member activity.

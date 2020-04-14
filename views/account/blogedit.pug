@@ -10,7 +10,7 @@ block content
     .form-group.row
     a(href='/account/blogsettings') Blog Settings
 
-  form(action='/account/blogedit', method='POST')
+  form(action='/account/blogupdate', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
     input(type='hidden', name='blogpost_id', value=_id)

@@ -3,6 +3,7 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
   include ../partials/profilehead.pug
+    hr
     a(href='/account/cal') Calendar -  
     a(href='/account/calsettings') Setup
 
@@ -13,34 +14,35 @@ block content
   form(action='/account/cal', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
+    input(type='hidden', name='group', value=user.group)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='calentrytitle') Calendar Entry Title
       .col-md-7
-        input.form-control(type='text', value="caldata.name" name='calentrytitle', id='calentrytitle')
+        input.form-control(type='text', value=caldata.calentrytitle, name='calentrytitle', id='calentrytitle', autocomplete=caldata.calentrytitle)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='caldate') Date
       .col-md-7
-        input.form-control(type='date', name='caldate' value='caldata.caldate', id='caldate')        
+        input.form-control(type='date', name='caldate', value='caldata.caldate', id='caldate', autocomplete=caldata.caldate)        
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
-        textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' )
+        textarea.form-control( name="post", rows="6", cols="66", autocomplete=caldata.post) #{caldata.post} 
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
       .col-md-7
-        input.form-control(type='text', name='location', id='location')
+        input.form-control(type='text', name='location', id='location',  value=caldata.location, autocomplete=caldata.location)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='calcat') Category
       .col-md-7
-        input.form-control(type='text', name='calcat', id='calcat')
+        input.form-control(type='text', name='calcat', id='calcat', autocomplete=caldata.calcat, value=caldata.calcat)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='caltags') Tags
       .col-md-7
-        input.form-control(type='text', name='caltags', id='caltags')
+        input.form-control(type='text', name='caltags', id='caltags', value=caldata.caltags, autocomplete=caldata.caltags)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='time') Time
       .col-md-7
-        input.form-control(type='time', name='time', id='time')
+        input.form-control(type='time', name='time', id='time', value=caldata.time, autocomplete=caldata.time)
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')

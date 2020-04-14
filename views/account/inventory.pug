@@ -15,8 +15,10 @@ block content
   - if (data.length)
     each posts in data
         if posts.user == userr.id 
-            strong #{posts.posttitle} - #{moment(posts.updatedAt).format('MMM Do h:mm:ss a')}  - #{posts.postcat}
+            strong #{posts.inventorytitle} - #{moment(posts.updatedAt).format('MMM Do h:mm:ss a')}  - #{posts.inventorycat}
             br
-            div #{posts.post}  - #{posts.posttags}
+            div #{posts.post}  - #{posts.inventorytags}
+            a(href='/account/inventory/'+posts._id) Edit
+
             hr 
 
