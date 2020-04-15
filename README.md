@@ -5,7 +5,10 @@ UMATI BANK self help group portal
 
 Jump to [What's new?](https://github.com/sahat/hackathon-starter/blob/master/CHANGELOG.md)
 
-A boilerplate for **Node.js** web applications.
+Umati Self Help Group Codebase is made from a boilerplate for **Node.js** web applications.
+
+[![pipeline status](https://gitlab.com/umati1/umati/badges/master/pipeline.svg)](https://gitlab.com/umati1/umati/-/commits/master)
+
 
 If you have attended any hackathons in the past, then you know how much time it takes to
 get a project started: decide on what to build, pick a programming language, pick a web framework,

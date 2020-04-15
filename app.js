@@ -19,7 +19,6 @@ const passport = require('passport');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const multer = require('multer');
-//const avatarsMiddleware = require('adorable-avatars');
 
 const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
@@ -34,11 +33,7 @@ dotenv.config({ path: '.env.example' });
 const homeController = require('./controllers/home');
 const userController = require('./controllers/user');
 const blogController = require('./controllers/blog');
-const groupdataController = require('./controllers/groupdata');
-const inventoryController = require('./controllers/inventory');
 const calController = require('./controllers/cal');
-const memberController = require('./controllers/member');
-const posController = require('./controllers/pos');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
@@ -132,8 +127,6 @@ app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/popper.js/d
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/jquery/dist'), { maxAge: 31557600000 }));
 app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free/webfonts'), { maxAge: 31557600000 }));
-//app.use('/myAvatars', avatarsMiddleware);
-
 
 /**
  * Primary app routes.
@@ -150,83 +143,40 @@ app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
-
 app.get('/account/verify', passportConfig.isAuthenticated, userController.getVerifyEmail);
 app.get('/account/verify/:token', passportConfig.isAuthenticated, userController.getVerifyEmailToken);
 app.get('/account', passportConfig.isAuthenticated, userController.getAccount);
-app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
-app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
-app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
-
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 app.get('/account/activity', passportConfig.isAuthenticated, userController.getActivity);
-app.get('/account/activity-print', passportConfig.isAuthenticated, userController.getActivityprint);
 app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
 app.get('/account/setup', passportConfig.isAuthenticated, userController.getSetup);
 app.post('/account/setup', passportConfig.isAuthenticated, userController.postUpdateSetup);
 app.get('/account/business', passportConfig.isAuthenticated, userController.getBusiness);
 app.post('/account/business', passportConfig.isAuthenticated, userController.postUpdateBusiness);
-app.get('/account/bizsettings', passportConfig.isAuthenticated, userController.getBizsettings);
-app.post('/account/bizsettings', passportConfig.isAuthenticated, userController.postUpdateBizsettings);
-
-
 app.get('/account/blogsettings', passportConfig.isAuthenticated, userController.getBlogsettings);
 app.post('/account/blogsettings', passportConfig.isAuthenticated, userController.postUpdateBlogsettings);
-app.get('/account/groupsettings', passportConfig.isAuthenticated, userController.getGroupsettings);
-app.post('/account/groupsettings', passportConfig.isAuthenticated, userController.postUpdateGroupsettings);
-app.get('/account/inventorysettings', passportConfig.isAuthenticated, userController.getInventorysettings);
-app.post('/account/inventorysettings', passportConfig.isAuthenticated, userController.postUpdateInventorysettings);
 app.get('/account/calsettings', passportConfig.isAuthenticated, userController.getCalsettings);
 app.post('/account/calsettings', passportConfig.isAuthenticated, userController.postUpdateCalsettings);
-app.get('/account/possettings', passportConfig.isAuthenticated, userController.getPossettings);
-app.post('/account/possettings', passportConfig.isAuthenticated, userController.postUpdatePossettings);
+app.get('/account/group', passportConfig.isAuthenticated, userController.getGroup);
+app.post('/account/group', passportConfig.isAuthenticated, userController.postUpdateGroup);
+app.post('/account/password', passportConfig.isAuthenticated, userController.postUpdatePassword);
+app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
+app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
-app.get('/account/group', passportConfig.isAuthenticated, groupdataController.getGroupdata);
-app.post('/account/group', passportConfig.isAuthenticated, groupdataController.postGroupdata);
-app.get('/account/creategroup', passportConfig.isAuthenticated, groupdataController.getCreategroupdata);
-app.post('/account/creategroup', passportConfig.isAuthenticated, groupdataController.postCreategroupdata);
-
-app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog);
-app.post('/account/blog', blogController.postUpdateBlog);
-app.post('/account/blogupdate', passportConfig.isAuthenticated, blogController.postUpdateBlogpost);
-app.get('/account/blog/:blogpost_id', passportConfig.isAuthenticated, blogController.getUpdateBlogpost);
 app.get('/account/createpost', passportConfig.isAuthenticated, blogController.getCreatepost);
 app.post('/account/createpost', passportConfig.isAuthenticated, blogController.postCreatepost);
+app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog);
+app.post('/account/blog', passportConfig.isAuthenticated, blogController.postUpdateBlog);
 
-app.get('/account/inventory', passportConfig.isAuthenticated, inventoryController.getInventory);
-app.post('/account/inventory', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
-app.get('/account/createinventory', passportConfig.isAuthenticated, inventoryController.getCreateinventory);
-app.post('/account/createinventory', passportConfig.isAuthenticated, inventoryController.postCreateinventory);
-app.get('/account/inventory/:inventory_id', passportConfig.isAuthenticated, inventoryController.getUpdateInventory);
-app.post('/account/inventoryedit', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
 
-app.get('/account/api/cal', passportConfig.isAuthenticated, calController.getCaljson);
-app.get('/account/cal', passportConfig.isAuthenticated, calController.getCal);
-app.get('/account/cal3', passportConfig.isAuthenticated, calController.getCal3);
-app.post('/account/cal', passportConfig.isAuthenticated, calController.postCreateCalEntry);
-app.get('/account/cal/:calitem_id', passportConfig.isAuthenticated, calController.getUpdateCalEntry);
-app.get('/account/calentryedit', passportConfig.isAuthenticated, calController.getCalEntry);
 app.get('/account/calentrycreate', passportConfig.isAuthenticated, calController.getCalEntry);
 app.post('/account/calentrycreate', passportConfig.isAuthenticated, calController.postCreateCalEntry);
+app.get('/account/cal', passportConfig.isAuthenticated, calController.getCal);
+app.post('/account/calendar', passportConfig.isAuthenticated, calController.postUpdateCalEntry);
 
-app.post('/account/pos', passportConfig.isAuthenticated, posController.postUpdatePosEntry);
-app.get('/account/pos', passportConfig.isAuthenticated, posController.getPos);
-app.get('/account/pos/:posid', passportConfig.isAuthenticated, posController.getUpdatePosEntry);
-app.get('/account/posentrycreate', passportConfig.isAuthenticated, posController.getPosEntry);
-app.post('/account/posentrycreate', passportConfig.isAuthenticated, posController.postCreatePosEntry);
-app.post('/account/posentryedit', passportConfig.isAuthenticated, posController.postUpdatePosEntry);
-
-// add bigchaindb api connections here for verification relay
-app.get('/account/createmember', passportConfig.isAuthenticated, memberController.getCreatemember);
 app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
 app.post('/account/payment', passportConfig.isAuthenticated, userController.postMember);
 
-app.post('/account/upload', passportConfig.isAuthenticated, blogController.postUpload);
-
-// app.get('/account/ajax', userController.getAjax);
-
-app.get('/games/pong', userController.getPong);
-app.get('/games/si', userController.getSi);
 
 /**
  * API examples routes.
