@@ -148,6 +148,7 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
+app.get('/privacy', contactController.getPrivacy);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);
 
@@ -202,10 +203,12 @@ app.post('/account/inventoryedit', passportConfig.isAuthenticated, inventoryCont
 
 app.get('/account/api/cal', passportConfig.isAuthenticated, calController.getCaljson);
 app.get('/account/cal', passportConfig.isAuthenticated, calController.getCal);
+
+app.get('/account/cal4', passportConfig.isAuthenticated, calController.getCal4);
 app.get('/account/cal3', passportConfig.isAuthenticated, calController.getCal3);
 app.post('/account/cal', passportConfig.isAuthenticated, calController.postCreateCalEntry);
 app.get('/account/cal/:calitem_id', passportConfig.isAuthenticated, calController.getUpdateCalEntry);
-app.get('/account/calentryedit', passportConfig.isAuthenticated, calController.getCalEntry);
+app.post('/account/calentryupdate', passportConfig.isAuthenticated, calController.postUpdateCalEntry);
 app.get('/account/calentrycreate', passportConfig.isAuthenticated, calController.getCalEntry);
 app.post('/account/calentrycreate', passportConfig.isAuthenticated, calController.postCreateCalEntry);
 
@@ -227,6 +230,7 @@ app.post('/account/upload', passportConfig.isAuthenticated, blogController.postU
 
 app.get('/games/pong', userController.getPong);
 app.get('/games/si', userController.getSi);
+app.get('/projects', userController.getProjects);
 
 /**
  * API examples routes.

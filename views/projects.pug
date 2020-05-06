@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+  include partials/profilehead.pug
+
+  span POINT OF SALE -
+  a(href='/account/possettings') Settings -
+  a(href='/account/posentrycreate') Add an item
+
+  hr
+
+
+  .container
+   - var id = ['carousel-craft']
+   - var urlname = [{n:114},{n:745},{n:315},{n:622},{n:401}]
+      .page-header
+      #carousel-craft.carousel.slide(data-ride="carousel")
+        ol.carousel-indicators
+          - var i = 0
+            while (i++<5)
+              if i == 1
+                li(data-target="#"+id data-slide-to=""+i class="active")
+              else
+                li(data-targe="#"+id data-slide-to=""+i)
+
+        .carousel-inner(role="listbox")
+            each val in urlname
+              if val.n == 114
+                .item(class="active")
+                  img(src="https://unsplash.it/1400/600?image="+val.n)
+              else
+                .item
+                  img(src='https://unsplash.it/1400/600?image='+val.n)
+        
+        a.left.carousel-control(href="#"+id role="button" data-slide="prev")
+          span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
+          span.sr-only Previous
+
+        a.right.carousel-control(href="#"+id role="button" data-slide="next")
+          span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
+          span.sr-only Next

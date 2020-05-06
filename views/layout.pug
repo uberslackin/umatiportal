@@ -11,6 +11,10 @@ html
     link(rel='stylesheet', href='/css/main.css')
     if (title === 'Pong') 
         link(rel='stylesheet', href='/css/pong.css')
+    if (title === 'Cal4') 
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
+        link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css')
+        link(rel='stylesheet', href='/css/cal4.css')
     if (title === 'Personal Calendar')
         link(rel='stylesheet', href='/css/fullcalendarcore4.3.1.main.min.css')
         link(rel='stylesheet', href='/css/fullcalendar.daygrid.4.3.0.main.min.css')
@@ -20,7 +24,7 @@ html
         link(rel="stylesheet", type="text/css", href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css")
         link(rel="stylesheet", type="text/css", href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css")
     link(rel='stylesheet', href='/css/bootstrap-table.min.css')
-    link(rel='stylesheet', href='/css/cookie_note.css')
+    link(rel='stylesheet', href='/css/bootstrap4-fs-modal.min.css')
     block head
 
   body
@@ -34,9 +38,13 @@ html
 
     script(src='/js/lib/popper.min.js')
     script(src='/js/lib/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js')
+    script(src='/js/ihavecookies.options.js')
+    script(src='/js/jquery.ihavecookies.min.js')
     if (title === 'Account Ledger')
          script(src='/js/lib/bootstrap-table.min.js')
     script(src='/js/lib/bootstrap.min.js')
+    //script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
     script(src='/js/main.js')
     if (title === 'Personal Calendar') 
          script(src='/js/fullcalendar/core.js')
@@ -51,4 +59,3 @@ html
         script(src="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.js")
     if (title === 'Pong') 
          script(src='/js/pong.js')
-    script(src='/js/cookie_note.js')

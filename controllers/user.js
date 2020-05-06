@@ -204,6 +204,12 @@ exports.postMember = (req, res, next) => {
 };
 
 
+exports.getProjects = (req, res) => {
+  res.render('projects', {
+    title: 'Projects'
+  });
+};
+
 
 exports.getPong = (req, res) => {
   res.render('games/pong', {

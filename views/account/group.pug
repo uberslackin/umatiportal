@@ -4,8 +4,12 @@ block content
   .pb-2.mt-2.mb-4.border-bottom
 
   include ../partials/profilehead.pug
-  
-  span.caps #{ user.profile.group } SELF HELP GROUP - 
+ 
+  - var userr = { id: user.profile.group }
+  if userr.id  === ""
+         span.caps UNSPECIFIED SELF HELP GROUP - 
+  else
+         span.caps #{ user.profile.group } SELF HELP GROUP -
   a(href='/account/groupsettings') Settings - 
   a(href='/account/creategroup') Add a note
 
@@ -18,7 +22,6 @@ block content
   hr
 
 
-  - var userr = { id: user.profile.group }
   - if (groupdata.length)
     each items in groupdata
          if items.group === userr.id 

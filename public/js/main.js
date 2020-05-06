@@ -1,8 +1,18 @@
 /* eslint-env jquery, browser */
 $(document).ready(() => {
 
-  // Place JavaScript code here...
-  // new WOW().init();
+    // Place JavaScript code here...
+    // new WOW().init();
+    $('body').ihavecookies(options);
+
+        if ($.fn.ihavecookies.preference('marketing') === true) {
+            console.log('This should run because marketing is accepted.');
+        }
+
+        $('#ihavecookiesBtn').on('click', function(){
+            $('body').ihavecookies(options, 'reinit');
+        });
+
 
     $("form#changeQuote").on('submit', function(e){
         e.preventDefault();

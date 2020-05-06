@@ -15,6 +15,19 @@ exports.getContact = (req, res) => {
 };
 
 /**
+ * GET /privacy
+ * Privacy page.
+ */
+exports.getPrivacy = (req, res) => {
+  const unknownUser = !(req.user);
+
+  res.render('privacy', {
+    title: 'Privacy Policy',
+    unknownUser,
+  });
+};
+
+/**
  * POST /contact
  * Send a contact form via Nodemailer.
  */

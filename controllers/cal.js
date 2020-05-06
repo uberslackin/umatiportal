@@ -52,21 +52,17 @@ db.books.aggregate( [
                   ] )
 */
 exports.getCaljson = function (req, res, next) {
-
     Cal.find()
         .sort([['caldate', 'ascending']])
         .exec(function (err, cal_data) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
-            var caljson =           
-
             res.json(cal_data);
         })
 };
 
-// Display list of Member activity.
+// Display calendar data
 exports.getCal = function (req, res, next) {
-
     Cal.find()
         .sort([['caldate', 'ascending']])
         .exec(function (err, cal_data) {
@@ -76,15 +72,25 @@ exports.getCal = function (req, res, next) {
         })
 };
 
-// Display list of Member activity.
+// Display calendar data
 exports.getCal3 = function (req, res, next) {
-
     Cal.find()
         .sort([['caldate', 'ascending']])
         .exec(function (err, cal_data) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
             res.render('account/cal3', { title: 'Test Calendar', caldata: cal_data });
+        })
+};
+
+// css grid calendar - display calendar data
+exports.getCal4 = function (req, res, next) {
+    Cal.find()
+        .sort([['caldate', 'ascending']])
+        .exec(function (err, cal_data) {
+            if (err) { return next(err); }
+            // Successful, so rendecalsr.
+            res.render('account/cal4', { title: 'Cal4', caldata: cal_data });
         })
 };
 
@@ -127,8 +133,8 @@ exports.getCalEntry = (req, res) => {
 
 
 /**
- * POST /necal
- * Create a new local account.
+ * POST /cal
+ * Create a new calendar entry.
  */
 exports.postCreateCalEntry = (req, res, next) => {
   const validationErrors = [];
@@ -173,13 +179,12 @@ exports.postCreateCalEntry = (req, res, next) => {
 
 
 /**
- * POST /necal
- * Create a new local account.
+ * POST /calentryupdate
  */
 
 exports.postUpdateCalEntry = (req, res) => {
 
-  // create employee and send back all employees after creation
+  // update calendar and send back all calendar entries after update
   // create mongose method to update a existing record into collection
   var calid = req.body.calitemid;
   var data = {
@@ -195,7 +200,7 @@ exports.postUpdateCalEntry = (req, res) => {
     visibility: req.body.visibility
   }
  
-  // save the user
+  // save the update
   Cal.findByIdAndUpdate(calid, data, function(err, pos) {
   if (err) throw err;
  

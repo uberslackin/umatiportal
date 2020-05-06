@@ -11,7 +11,7 @@ block content
 
   h3 Edit Calendar Entry
 
-  form(action='/account/cal', method='POST')
+  form(action='/account/calentryupdate', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
     input(type='hidden', name='group', value=user.group)
