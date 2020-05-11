@@ -190,7 +190,7 @@ app.post('/account/creategroup', passportConfig.isAuthenticated, groupdataContro
 
 app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog);
 app.post('/account/blog', blogController.postUpdateBlog);
-app.post('/account/blogupdate', passportConfig.isAuthenticated, blogController.postUpdateBlogpost);
+app.post('/account/blogupdate', passportConfig.isAuthenticated, blogController.postUpdateBlog);
 app.get('/account/blog/:blogpost_id', passportConfig.isAuthenticated, blogController.getUpdateBlogpost);
 app.get('/account/createpost', passportConfig.isAuthenticated, blogController.getCreatepost);
 app.post('/account/createpost', passportConfig.isAuthenticated, blogController.postCreatepost);

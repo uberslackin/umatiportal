@@ -11,7 +11,7 @@ const posSchema = new mongoose.Schema({
     post: String,
     location: String,
     poscat: String,
-    postag: String,
+    postags: String,
     posdate: Date,
     posHash1: String,
     posHash2: String,

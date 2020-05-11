@@ -120,19 +120,20 @@ exports.postCreatepost = (req, res, next) => {
 
 
 
-// get a employee with ID of 1
-exports.getUpdateBlogpost = (req, res) => {
-  let id = req.params.blogpost_id;
-  Blog.findById(id, function(err, blogdata) {
-    if (err)
-      res.send(err)
-      res.render('account/blogedit', {
-      title: 'Edit point of sale entry',
-      blogpost_id: req.params.blogdata
-  });
+// get a blog post
+exports.getUpdateBlogpost = (req, res, next) => {
+  Blog.findById(req.params.blogpost_id, function(err, blog) {
+    if (blog.username != req.user._id){
+      req.flash('danger', 'Not Authorized');
+      return res.redirect('/');
+    }
 
+    return res.render('account/blogedit', {
+      title: 'Edit point of sale entry',
+      blogdata: blog
+    });
   });
-  };
+};
  
 
 

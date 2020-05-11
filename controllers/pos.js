@@ -93,7 +93,7 @@ exports.postCreatePosEntry = (req, res, next) => {
     post: req.body.post, 
     location: req.body.location, 
     poscat: req.body.poscat,
-    postag: req.body.postag,
+    postags: req.body.postags,
     posdate: req.body.posdate,
     time: req.body.posdate,
     visibility: req.body.visibility

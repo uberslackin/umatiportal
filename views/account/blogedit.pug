@@ -17,29 +17,29 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttitle') Post Title
       .col-md-7
-        input.form-control(type='text', name='blog.posttitle', id='posttitle')
+        input.form-control(type='text', name='posttitle', value=blogdata.posttitle, id='posttitle')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
-        input.form-control(type='text', name='blog.post', id='post')
+        input.form-control(type='text', name="post", value=blogdata.post, id='post')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
       .col-md-7
-        input.form-control(type='text', name='location', id='location')
+        input.form-control(type='text', name='location', value=blogdata.location, id='location')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='postcat') Category
       .col-md-7
-        input.form-control(type='text', name='postcat', id='postcat')
+        input.form-control(type='text', name='postcat', id='postcat', value=blogdata.postcat)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttags') Tags
       .col-md-7
-        input.form-control(type='text', name='posttags', id='posttags')
+        input.form-control(type='text', name='posttags', value=blogdata.posttags, id='posttags')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate') Date
       .col-md-7
-        input.form-control(type='date', name='postdate', id='postdate')
+        input.form-control(type='date', name='postdate', id='postdate', value=moment(blogdata.postdate).format("YYYY-MM-DD"))
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm
-          | Create post
+          | update post

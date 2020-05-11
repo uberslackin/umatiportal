@@ -39,9 +39,9 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='postag') Tags
       .col-md-7
-        input.form-control(type='text', name='postag', id='postag', autocomplete=pos.postag, value=pos.postag)
+        input.form-control(type='text', name='postags', id='postags', autocomplete=pos.postags, value=pos.postags)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postags') Visibility
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='visibility') Visibility
        .col-md-7
       .form-check.form-check-inline
         input(type='radio', class='form-check-input' checked=pos.visibility == 'visible', name='visibility', value='visible', data-toggle='radio')

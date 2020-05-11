@@ -16,6 +16,20 @@ $(document).ready(() => {
 
     $('#MyCarousel').carousel();
 
+
+    $('#duration').slider({
+    formatter: function(value) {
+        return 'Current value: ' + value;
+        }
+    });
+
+    var slider = new Slider('#duration', {
+        formatter: function(value) {
+        return 'Current value: ' + value;
+        }
+    });
+
+
     $("form#changeQuote").on('submit', function(e){
         e.preventDefault();
         var data = $('input[name=quote]').val();

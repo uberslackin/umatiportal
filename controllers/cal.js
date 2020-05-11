@@ -20,10 +20,10 @@ const randomBytesAsync = promisify(crypto.randomBytes);
  * Display calendar data.
 */
 
-/* [{"title":"Buding Leave",
-     "start":"2019-11-28",
-     "end":"2019-11-28",
-     "backgroundColor":"#f56954",
+/* [{"title":"Budding Leaf",
+     "start":"2018-11-11",
+     "end":"2018-11-11",
+     "backgroundColor":"#f76973",
      "borderColor":"#f56954"}
 
 existing output
@@ -188,7 +188,7 @@ exports.postUpdateCalEntry = (req, res) => {
   // create mongose method to update a existing record into collection
   var calid = req.body.calitemid;
   var data = {
-    username : req.body.username,
+    username : req.body.user,
     calentrytitle : req.body.calentrytitle,
     post : req.body.post,
     location : req.body.location,
