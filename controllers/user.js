@@ -204,6 +204,12 @@ exports.postMember = (req, res, next) => {
 };
 
 
+exports.getPrivacy = (req, res) => {
+  res.render('privacy', {
+    title: 'Privacy'
+  });
+};
+
 exports.getProjects = (req, res) => {
   res.render('projects', {
     title: 'Projects'

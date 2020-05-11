@@ -13,31 +13,33 @@ block content
 
 
   .container
-   - var id = ['carousel-craft']
-   - var urlname = [{n:114},{n:745},{n:315},{n:622},{n:401}]
-      .page-header
-      #carousel-craft.carousel.slide(data-ride="carousel")
-        ol.carousel-indicators
-          - var i = 0
-            while (i++<5)
-              if i == 1
-                li(data-target="#"+id data-slide-to=""+i class="active")
-              else
-                li(data-targe="#"+id data-slide-to=""+i)
 
-        .carousel-inner(role="listbox")
-            each val in urlname
-              if val.n == 114
-                .item(class="active")
-                  img(src="https://unsplash.it/1400/600?image="+val.n)
-              else
-                .item
-                  img(src='https://unsplash.it/1400/600?image='+val.n)
-        
-        a.left.carousel-control(href="#"+id role="button" data-slide="prev")
-          span.glyphicon.glyphicon-chevron-left(aria-hidden="true")
-          span.sr-only Previous
+  #myCarousel.carousel.slide(data-ride='carousel')
+  ol.carousel-indicators
+    li.active(data-target='#myCarousel' data-slide-to='0')
+    li(data-target='#myCarousel' data-slide-to='1')
+    li(data-target='#myCarousel' data-slide-to='2')
+  .carousel-inner
+    .item.active
+      img(src='https://unsplash.it/1400/600?image=354' alt='Ginko Biloba')
+      .carousel-caption
+        h3 Los Angeles
+        p LA is always so much fun
+    .item
+      img(src='https://unsplash.it/1400/600?image=401' alt='Bridges')
+      .carousel-caption
+        h3 Chicago
+        p Thank you, Chicago
+    .item
+      img(src='https://unsplash.it/1400/600?image=745' alt='New York')
+      .carousel-caption
+        h3 New York
+        p We love the Big Apple
+    a.left.carousel-control(href='#myCarousel' data-slide='prev')
+      span.glyphicon.glyphicon-chevron-left
+      span.sr-only Previous
+    a.right.carousel-control(href='#myCarousel' data-slide='next')
+      span.glyphicon.glyphicon-chevron-right
+      span.sr-only Next
 
-        a.right.carousel-control(href="#"+id role="button" data-slide="next")
-          span.glyphicon.glyphicon-chevron-right(aria-hidden="true")
-          span.sr-only Next
+

@@ -13,8 +13,9 @@ block content
 
   form(action='/account/calentryupdate', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
-    input(type='hidden', name='user', value=user.id)
+    input(type='hidden', name='user', value=user._id)
     input(type='hidden', name='group', value=user.group)
+    input(type='hidden', name='calitemid', value=caldata._id)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='calentrytitle') Calendar Entry Title
       .col-md-7
@@ -47,4 +48,4 @@ block content
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm
-          | Create Entry
+          | Update Entry

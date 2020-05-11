@@ -148,6 +148,7 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
+app.get('/privacypolicy', userController.getPrivacy);
 app.get('/privacy', contactController.getPrivacy);
 app.get('/contact', contactController.getContact);
 app.post('/contact', contactController.postContact);

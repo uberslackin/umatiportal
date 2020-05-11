@@ -14,6 +14,8 @@ $(document).ready(() => {
         });
 
 
+    $('#MyCarousel').carousel();
+
     $("form#changeQuote").on('submit', function(e){
         e.preventDefault();
         var data = $('input[name=quote]').val();
