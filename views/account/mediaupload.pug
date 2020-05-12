@@ -13,19 +13,19 @@ block content
 
     hr
 
-    button.btn.btn-primary(type="button", data-toggle="modal", data-target="#myModal") Open modal
+    button.btn.btn-primary(type="button", data-toggle="modal", data-target="#myModal")
+    Open modal
+
+    button.btn.btn-primary(type="button", data-toggle="modal", data-target="#myModal").
+    Open modal
   
     .modal#myModal
       .modal-dialog
         .modal-content
           .modal-header
-            .row
-            .col-md-7
             h4.modal-title Modal Heading
             button.close(type="button", data-dismiss="modal") ×
-          .modal-body
-            .row
-            .col-md-7
+          .modal-body.
         
           h2  Add images
           form(action="/account/upload", method="POST", enctype="multipart/form-data")
