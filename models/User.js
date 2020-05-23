@@ -69,6 +69,14 @@ const userSchema = new mongoose.Schema({
     caltags: String,
     visibility: String
   },
+  elevsettings: {
+    user: String,
+    elevtitle: String,
+    shortdesc: String,
+    elevdesc: String,
+    elevtags: String,
+    visibility: String
+  },
   possettings: {
     user: String,
     postitle: String,

@@ -37,6 +37,7 @@ const blogController = require('./controllers/blog');
 const groupdataController = require('./controllers/groupdata');
 const inventoryController = require('./controllers/inventory');
 const calController = require('./controllers/cal');
+const elevatorController = require('./controllers/elevator');
 const memberController = require('./controllers/member');
 const posController = require('./controllers/pos');
 const apiController = require('./controllers/api');
@@ -180,11 +181,15 @@ app.get('/account/inventorysettings', passportConfig.isAuthenticated, userContro
 app.post('/account/inventorysettings', passportConfig.isAuthenticated, userController.postUpdateInventorysettings);
 app.get('/account/calsettings', passportConfig.isAuthenticated, userController.getCalsettings);
 app.post('/account/calsettings', passportConfig.isAuthenticated, userController.postUpdateCalsettings);
+app.get('/account/elevsettings', passportConfig.isAuthenticated, userController.getElevsettings);
+app.post('/account/elevsettings', passportConfig.isAuthenticated, userController.postUpdateElevsettings);
 app.get('/account/possettings', passportConfig.isAuthenticated, userController.getPossettings);
 app.post('/account/possettings', passportConfig.isAuthenticated, userController.postUpdatePossettings);
 
+app.get('/account/groupdatasheet1', passportConfig.isAuthenticated, groupdataController.getGroupdatasheet1);
 app.get('/account/group', passportConfig.isAuthenticated, groupdataController.getGroupdata);
 app.post('/account/group', passportConfig.isAuthenticated, groupdataController.postGroupdata);
+app.get('/account/creategroupnote', passportConfig.isAuthenticated, groupdataController.getCreategroupnote);
 app.get('/account/creategroup', passportConfig.isAuthenticated, groupdataController.getCreategroupdata);
 app.post('/account/creategroup', passportConfig.isAuthenticated, groupdataController.postCreategroupdata);
 
@@ -202,6 +207,15 @@ app.post('/account/createinventory', passportConfig.isAuthenticated, inventoryCo
 app.get('/account/inventory/:inventory_id', passportConfig.isAuthenticated, inventoryController.getUpdateInventory);
 app.post('/account/inventoryedit', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
 
+app.get('/account/elevator', passportConfig.isAuthenticated, elevatorController.getElevator);
+app.post('/account/elevator', passportConfig.isAuthenticated, elevatorController.postCreateElevatorEntry);
+app.get('/account/elevator3', passportConfig.isAuthenticated, elevatorController.getElevator3);
+app.get('/account/elevator4', passportConfig.isAuthenticated, elevatorController.getElevator4);
+app.get('/account/elevator5', passportConfig.isAuthenticated, elevatorController.getElevator5);
+app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
+app.post('/account/elevatorentryupdate', passportConfig.isAuthenticated, elevatorController.postUpdateElevatorEntry);
+app.get('/account/elevatorentrycreate', passportConfig.isAuthenticated, elevatorController.getElevatorEntry);
+app.post('/account/elevatorentrycreate', passportConfig.isAuthenticated, elevatorController.postCreateElevatorEntry);
 app.get('/account/api/cal', passportConfig.isAuthenticated, calController.getCaljson);
 app.get('/account/cal', passportConfig.isAuthenticated, calController.getCal);
 

@@ -16,6 +16,9 @@ html
 
 block content
   col-4 
+  if user.profile.group == "Taxes with mom"
+    a(href='/account/activity').i.fa.fa-print.masth &nbsp; G. WILLSON TAX DOCUMENTS
+  else
     a(href='/account/activity').i.fa.fa-print.masth &nbsp; UMATI BANK TRANSACTION RECORD
 
   .container.masth
@@ -36,11 +39,11 @@ section#tabs.project-tab
       .col-md-12
         nav
           #nav-tab.nav.nav-tabs.navtoggler.nav(role='tablist')
-            a#nav-home-tab.nav-item.col-2.nav-link.active(data-toggle='tab' href='#nav-home' role='tab' aria-controls='nav-home' aria-selected='true') Self Help Groups
-            a#nav-profile-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-profile' role='tab' aria-controls='nav-profile' aria-selected='false') Business data
-            a#nav-contact-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-contact' role='tab' aria-controls='nav-contact' aria-selected='false') Trainings
-            a#nav-payment-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-payment' role='tab' aria-controls='nav-payment' aria-selected='false') Payments
-            a#nav-payment-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-payment' role='tab' aria-controls='nav-payment' aria-selected='false') Donations
+            a#nav-home-tab.nav-item.col-2.nav-link.active(data-toggle='tab' href='#nav-home' role='tab' aria-controls='nav-home' aria-selected='true') Property taxes
+            a#nav-profile-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-profile' role='tab' aria-controls='nav-profile' aria-selected='false') house insurance
+            a#nav-contact-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-contact' role='tab' aria-controls='nav-contact' aria-selected='false') utilties inc. wifi
+            a#nav-payment-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-payment' role='tab' aria-controls='nav-payment' aria-selected='false') Write off purchases
+            a#nav-payment-tab.nav-item.col-2.nav-link(data-toggle='tab' href='#nav-payment' role='tab' aria-controls='nav-payment' aria-selected='false') Etc.
         #nav-tabContent.tab-content
           #nav-home.tab-pane.fade.show.active(role='tabpanel' aria-labelledby='nav-home-tab')
             table.table(cellspacing='0')

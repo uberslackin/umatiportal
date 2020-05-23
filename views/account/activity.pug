@@ -4,10 +4,18 @@ block content
   .pb-2.mt-2.mb-4.border-bottom
 
   include ../partials/profilehead.pug
+
+
+  - var userr = { id: user.profile.group }
+
   
   span SAVINGS - 
   a(href='/account/setup') Settings - 
-  a(href='/account/activity-print') Data sheet- 
+  if user.profile.group == "Taxes with mom"
+    a(href='/account/activity-print') Tax Data -  
+    hi hi mom!  
+  else 
+    a(href='/account/activity-print') Data Tables-  
   a(href='/account/payment') New transaction
 
     hr

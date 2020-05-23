@@ -1,0 +1,22 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+  include ../partials/profilehead.pug
+
+  - var userr = { id: user.profile.group }
+  if userr.id  === ""
+         span.caps UNSPECIFIED SELF HELP GROUP -
+  else
+         span.caps #{ user.profile.group } SELF HELP GROUP -
+  a(href='/account/groupsettings') Settings -
+  a(href='/account/creategroupnote') Add a note
+
+    hr
+
+    br
+
+  h3 Group Notes
+
+  #spreadsheet

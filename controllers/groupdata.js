@@ -33,6 +33,17 @@ exports.getGroupdata = function (req, res, next) {
         })
 };
 
+// Display list of Member activity.
+exports.getGroupdatasheet1 = function (req, res, next) {
+
+    Groupdata.find()
+        .sort([['name', 'ascending']])
+        .exec(function (err, group_data) {
+            if (err) { return next(err); }
+            // Successful, so rendecalsr.
+            res.render('account/groupdatasheet1', { title: 'Dataview1', groupdata: group_data });
+        })
+};
 
 
  /*
@@ -63,6 +74,17 @@ exports.getCreategroupdata = (req, res) => {
     title: 'Create new group entry'
   });
 };
+
+/**
+ * GET /createpost
+ * Signup page.
+ */
+exports.getCreategroupnote = (req, res) => {
+  res.render('account/creategroupnote', {
+    title: 'Create new note to be seen internally by members of your groups.'
+  });
+};
+
 
 
 /**
@@ -101,17 +123,18 @@ exports.postCreategroupdata = (req, res, next) => {
       return res.redirect('/account/creategroup');
     }
     groupdata.save((err) => {
-      if (err) { return next(err); }
-      req.logIn(res.user, (err) => {
-        if (err) {
-          return next(err);
+      if (err) { 
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your update.' });
+          return res.redirect('/account/cal');
         }
-        res.redirect('/account/creategroup');
-      });
+        return next(err);
+      }
+      req.flash('success', { msg: 'Calendar update saved.' });
+      res.redirect('/account/creategroupnote');
     });
   });
 };
-
 
 
 /**

@@ -1,0 +1,56 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+  include ../partials/profilehead.pug
+  a(href='/account/elevator') ELEVATOR -
+  a(href='/account/elevsettings') Settings
+
+  hr
+
+  h3 New Podcast Entry
+
+  form(action='/account/elevator', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='user', value=user.id)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventrytitle') Podcast Entry Title
+      .col-md-7
+        input.form-control(type='text', name='eleventrytitle', id='eleventrytitle')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventryurl') public web URL
+      .col-md-7
+        input.form-control(type='text', name='eleventryurl', id='eleventryurl')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevdate') Date
+      .col-md-7
+        input.form-control(type='date', name='elevdate', id='elevdate')        
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='time') Time
+      .col-md-7
+        input.form-control(type='time', name='time', id='time')        
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='duration') Duration
+      .col-md-7
+        input.form-control(type='range',min='1',max='180',name='duration',id='duration')        
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
+      .col-md-7
+        textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' )
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
+      .col-md-7
+        input.form-control(type='text', name='location', id='location')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevcat') Category
+      .col-md-7
+        input.form-control(type='text', name='elevcat', id='elevcat')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevtags') Tags
+      .col-md-7
+        input.form-control(type='text', name='elevtags', id='elevtags')
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Create Entry

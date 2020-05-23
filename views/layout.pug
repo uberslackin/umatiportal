@@ -23,6 +23,9 @@ html
         link(rel="stylesheet", type="text/css", href="https://uicdn.toast.com/tui-calendar/latest/tui-calendar.css")
         link(rel="stylesheet", type="text/css", href="https://uicdn.toast.com/tui.date-picker/latest/tui-date-picker.css")
         link(rel="stylesheet", type="text/css", href="https://uicdn.toast.com/tui.time-picker/latest/tui-time-picker.css")
+    if (title === 'Dataview1')
+        link(rel="stylesheet", type="text/css", href="https://bossanova.uk/jexcel/v4/jexcel.css")
+        link(rel="stylesheet", type="text/css", href="https://bossanova.uk/jexcel/v4/jsuites.css")
     link(rel='stylesheet', href='/css/bootstrap-table.min.css')
     link(rel='stylesheet', href='/css/bootstrap4-fs-modal.min.css')
     block head
@@ -53,6 +56,16 @@ html
          script(src='/js/fullcalendar/daygrid.js')
          script(src='/js/fullcalendar/timegrid.js')
          script(src='/js/cal.js')
+    if (title === 'Dataview1') 
+       script(src="https://bossanova.uk/jexcel/v4/jexcel.js")
+       script.
+  
+         var options = {
+            minDimensions:[10,10],
+            tableOverflow:true,
+         }
+         $('#spreadsheet').jexcel(options);)
+  
     if (title === 'Test Calendar') 
         script(src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js")
         script(src="https://uicdn.toast.com/tui.dom/v3.0.0/tui-dom.js")

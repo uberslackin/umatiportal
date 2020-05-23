@@ -2,8 +2,8 @@ extends layout
 
 block content
   h1 Software testing release.
-  h2 Welcome. Testing... Data will be preserved, yet, please back it up for now. -g May 11 2020
-  p Umati Bank supports in-person groups pursuing sustainable social enterprise business models
+  p Welcome. current repairs underway blog manager, blog templates, use off umaticore by ... Data s being be preserved, yet, please back up your writing just in case, as we are just in a testing phase right now. -g May 19 2020
+  h2 Umati Bank supports in-person groups pursuing sustainable social enterprise business models
   hr
 
   .home-hero
@@ -38,18 +38,29 @@ block content
       p
         a.btn.btn-raised(href='#', role='button') Sponsor a loan »
     .col-md-6
-      h2 Group Leaders
-      p Umati Bank provides an accounting system for group leaders to use in tracking contributions to their group account. We do not hold money for groups, rather, we allow group leaders to report the weekly contributions, notify their members of their savings progress, and provide methods of tracking individual member savings, loan disbursements, and loan repayments.
+      h2 Tax preparation
+      p Test system: manage your US income tax filing for 2020
       p
-        a.btn.btn-raised(href='#', role='button') View details »
+        button.btn.btn-primary(type="button", data-toggle="modal", data-target="#basicExampleModal") Get started
     .col-md-6
-      h2 Self help group members
-      p As a member of an Umati self help group, you are able to maintain your own blog here, request support for your small business from the internet community visiting umatibank.com loan request portal, and learn more about opportunites that help grow your business. 
+      h2 Self help groups
+      p Umati Bank provides an accounting system for group leaders to use in tracking contributions to their group account. We do not hold money for groups, rather, we allow group leaders to report the weekly contributions, notify their members of their savings progress, and provide methods of tracking individual member savings, loan disbursements, and loan repayments. As a member of an Umati self help group, you are able to maintain your own blog here, request support for your small business from the internet community visiting umatibank.com loan request portal, and learn more about opportunites that help grow your business. 
       p
         a.btn.btn-raised(href='#', role='button') View details »
 
   .row
     .col-md-12
-    hr   
-    p 
     hr
+  
+    .modal.fade#basicExampleModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+      .modal-dialog(role="document")
+        .modal-content
+          .modal-header
+            h5.modal-title#exampleModalLabel 2020 Tax preparation group
+            button.close(type="button", data-dismiss="modal", aria-label="Close")
+              span(aria-hidden="true") ×
+          .modal-body
+            p Please log in and check your group section.
+          .modal-footer
+            button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+            button.btn.btn-primary(type="button") ok

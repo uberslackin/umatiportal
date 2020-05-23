@@ -42,6 +42,16 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='date') Date
       .col-md-7
         input.form-control(type='date', name='date', id='date')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='itemtype') Type
+      .col-md-7
+        select.form-control(form='addProperty', type='select', name='itemtype', id='itemtype')
+          option(value='0', selected= true) -- Select --
+          option(value='8') Property Taxes
+          option(value='9') House Insurance
+          option(value='10') Utilities inc. Wifi
+          option(value='11') Write off Purchases
+          option(value='12') etc.
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')

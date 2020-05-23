@@ -176,18 +176,18 @@ exports.postUpdateBlog = (req, res, next) => {
     return res.redirect('/account/blog');
   }
 
-  User.findById(req.user.id, (err, user) => {
+  Blog.findById(req.user.id, (err, blog) => {
     if (err) { return next(err); }
-    user.blog.name = req.body.name || '';
-    user.blog.user = req.body.user || '';
-    user.blog.visibility = req.body.visibility || '';
-    user.blog.post = req.body.post || '';
-    user.blog.postcat = req.body.postcat || '';
-    user.blog.postttag = req.body.postttag || '';
-    user.blog.postdate = req.body.postdate || '';
-    user.blog.iphash = req.body.iphash || '';
-    user.blog.transhash = req.body.transhash || '';
-    user.save((err) => {
+    blog.name = req.body.name || '';
+    blog.user = req.body.user || '';
+    blog.visibility = req.body.visibility || '';
+    blog.post = req.body.post || '';
+    blog.postcat = req.body.postcat || '';
+    blog.postttag = req.body.postttag || '';
+    blog.postdate = req.body.postdate || '';
+    blog.iphash = req.body.iphash || '';
+    blog.transhash = req.body.transhash || '';
+    blog.save((err) => {
       if (err) {
         if (err.code === 11000) {
           req.flash('errors', { msg: 'There was an error in your update.' });

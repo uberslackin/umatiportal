@@ -360,9 +360,19 @@ exports.getCalsettings = (req, res) => {
   });
 };
 
+/**
+ * GET /account/elevsettings
+ * Profile page.
+ */
+exports.getElevsettings = (req, res) => {
+  res.render('account/elevsettings', {
+    title: 'Elevator Settings'
+  });
+};
+
 
 /**
- * POST /account/blogsettings
+ * POST /account/calsettings
  * Update blog settings.
  */
 exports.postUpdateCalsettings = (req, res, next) => {
@@ -393,6 +403,38 @@ exports.postUpdateCalsettings = (req, res, next) => {
       }
       req.flash('success', { msg: 'Calendar setings has been updated.' });
       res.redirect('/account/calsettings');
+    });
+  });
+};
+
+
+
+exports.postUpdateElevsettings = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/elevsettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.elevsettings.user = req.body.user || '';
+    user.elevsettings.elevtitle = req.body.elevtitle || '';
+    user.elevsettings.elevdesc = req.body.elevdesc || '';
+    user.elevsettings.shortdesc = req.body.shortdesc || '';
+    user.elevsettings.elevtags = req.body.elevtags || '';
+    user.elevsettings.visibility = req.body.visibility || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your elevator settings update.' });
+          return res.redirect('/account/elevsettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Elevator setings has been updated.' });
+      res.redirect('/account/elevsettings');
     });
   });
 };
