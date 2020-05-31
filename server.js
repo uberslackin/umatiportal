@@ -246,6 +246,7 @@ app.post('/account/upload', passportConfig.isAuthenticated, blogController.postU
 app.get('/games/pong', userController.getPong);
 app.get('/games/si', userController.getSi);
 app.get('/projects', userController.getProjects);
+app.get('/accounts/jexcel', userController.getJexcel);
 
 /**
  * API examples routes.

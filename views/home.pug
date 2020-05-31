@@ -8,7 +8,8 @@ block content
 
   .home-hero
     .feature
-      h3 Software to Assist Self Help Groups
+      h3 Software to assist
+      h3 self help groups
       p community centered. Social enterprises, brand and trade skilldevelopment, trade skill development
     .special
       h3 Community equity
@@ -60,7 +61,21 @@ block content
             button.close(type="button", data-dismiss="modal", aria-label="Close")
               span(aria-hidden="true") ×
           .modal-body
-            p Please log in and check your group section.
+
+            if !user
+               a.nav-link(href='/login') Login
+               a.nav-link(href='/signup') Create Account
+               p Please log in and check your group section.
+            else
+               p Please follow this link for data
+               a(href='https://portal.etiny.xyz/account/activity-print') Spreadsheet
+               if user.profile.picture
+                 img(src=user.profile.picture) 
+                 p Spreadsheet data
+               else
+                 img(src=user.gravatar(60))
+                 button.btn.btn-primary(type="button") ok profile
+
           .modal-footer
             button.btn.btn-secondary(type="button", data-dismiss="modal") Close
             button.btn.btn-primary(type="button") ok

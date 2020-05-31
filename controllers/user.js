@@ -173,6 +173,12 @@ exports.getMember = (req, res) => {
   });
 };
 
+exports.getJexcel = (req, res) => {
+  res.render('account/jexcel', {
+    title: 'Jxcel'
+  });
+};
+
 
 
 exports.postMember = (req, res, next) => {
