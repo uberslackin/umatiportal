@@ -28,6 +28,40 @@ exports.getApi = (req, res) => {
   });
 };
 
+
+exports.getUmaticast = (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  res.json([{
+        "firstname": "firstname1",
+        "lastname": "lastname1",
+        "itemid": "12",
+        "colid": "col1",
+        "seqid": "1",
+        "title":"title",
+        "embedcode":"embedcode"
+    }, {
+        "firstname": "firstname2",
+        "lastname": "lastname2",
+        "itemid": "13",
+        "colid": "col2",
+        "seqid": "1",
+        "title":"title2",
+        "embedcode":"embedcode2"
+    }, {
+        "firstname": "firstname3",
+        "lastname": "lastname3",
+        "itemid": "14",
+        "colid": "col3",
+        "seqid": "1",
+        "title":"title3",
+        "embedcode":"embedcode3"
+    }]);
+};
+
+
+
+
+
 /**
  * GET /api/foursquare
  * Foursquare API example.

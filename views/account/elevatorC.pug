@@ -13,14 +13,28 @@ block content
     hr
 
     br
+  - var userr = { id: user._id }
 
-  link(rel="stylesheet", href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css")
-  style.
-    table {
-      font-size: 1em;
+  - if (elevdata.length)
+  
+  each items in elevdata 
+    if items.group == user.profile.group 
+
+            strong #{moment(items.elevdate).format('MMM Do')} - #{items.eleventrytitle} #{items.username}
+            p #{items.elevcat} #{userr.id}
+            a(href='/account/elevator/'+items._id) Edit
+            hr
+
+  #calendar
+
+link(rel="stylesheet", href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css")
+style.
+  
+  table {
+   	 font-size: 1em;
     }
     .ui-draggable, .ui-droppable {
-      background-position: top;
+  	 background-position: top;
     }
     body {
       min-width: 520px;
@@ -54,25 +68,25 @@ block content
       margin: 0 1em 1em 0;
       height: 50px;
     }
- 
- 
-   script(src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js")
-   script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.js")
-   script.
   
-     $( function() {
+script(src="https://code.jquery.com/jquery-1.12.4.js")
+script(src="https://code.jquery.com/ui/1.12.1/jquery-ui.js")
+script.
+  
+  $( function() {
+  	  	  	 	
   
      let xhr = new XMLHttpRequest();
      xhr.open('GET', 'https://portal.etiny.xyz/account/api/elevator');
      xhr.responseType = 'json';
      xhr.send();
   
-     xhr.onload = function() {
-       let responseObj = xhr.response;
+  xhr.onload = function() {
+    let responseObj = xhr.response;
   	  
-     //functionality goes here;
-     $.each(responseObj, function (index, value) {
-       if (value.dayid != "") {
+    //functionality goes here;
+   $.each(responseObj, function (index, value) {
+      if (value.dayid != "") {
       //    var title=value.title;
           var title=value.eleventrytitle;
           var itemid=value._id;
@@ -81,20 +95,21 @@ block content
           var embedcode=value.embedcode;
           console.log(title + " " + itemid + " " + colid + " " + embedcode);
           $( "."+colid ).append( "<div class=\"portlet  ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\" id=\"" + itemid +  "\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\"><span class='ui-icon ui-icon-minusthick portlet-toggle'></span>" + title + "</div><div class=\"portlet-content\">" + post + "<br>" + embedcode + "</div></div>");	  	            }
-       });
-      };
+   });
+  };
+
   	  
       $( ".column" ).sortable({
-         connectWith: ".column",
-         handle: ".portlet-header",
-         cancel: ".portlet-toggle",
-         placeholder: "portlet-placeholder ui-corner-all"
+        connectWith: ".column",
+        handle: ".portlet-header",
+        cancel: ".portlet-toggle",
+        placeholder: "portlet-placeholder ui-corner-all"
       });
   	  
       $( ".column" ).sortable({
       start: function(event, ui) {
           ui.item.startRow = ui.item.index();
-          ui.item.startCol = ui.item.closest('span').index();
+  	ui.item.startCol = ui.item.closest('span').index();
       },
       stop: function(event, ui) {
           console.log("Item ID: " +   ui.item.attr("id"));
@@ -105,7 +120,10 @@ block content
           console.log("$post: itemID:" + ui.item.attr("id") + ", dayID: " + ui.item.closest('span').attr("id") + " , seq: " + ui.item.index() );
           $.post( "/account/elevatorentryedit", { itemID: ui.item.attr("id") , dayID: ui.item.closest('span').attr("id") , seq:  ui.item.index()  } );
       }
-      });  
+  });  
+  	  
+  // load a new array of what is to be displaye
+  // jquery will add them to othe 
   	  
       $( ".portlet" )
         .addClass( "ui-widget ui-widget-content ui-helper-clearfix ui-corner-all" )
@@ -118,47 +136,47 @@ block content
         icon.toggleClass( "ui-icon-minusthick ui-icon-plusthick" );
         icon.closest( ".portlet" ).find( ".portlet-content" ).toggle();
       });
-   });
+    });
   
-  .content(style="width:96%")
-    span.column.col1#0
-      h2 Monday
-      .portlet#1
-        .portlet-header Feeds
-        .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-      .portlet#2
-        .portlet-header News
-        .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-    span.column.col2#1
-      h2 Tuesday
-      .portlet#3
-        .portlet-header Shopping
-        .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-    span.column.col3#2
-      h2 Wednesday
-      .portlet#4
-        .portlet-header Links
-        .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-      .portlet#5
-        .portlet-header Images
-        .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-    span.column.col4#3
-      h2 Thursday
-      .portlet#6
-        .portlet-header Shopping
-        .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-    span.column#4
-      h2 Friday
-      .portlet#7
-        .portlet-header Shopping
-        .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-    span.column#5
-      h2 Saturday
-      .portlet#8
-        .portlet-header Shopping
-        .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-    span.column#6
-      h2 Sunday
-      .portlet#9
-        .portlet-header Shopping
-        .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+.content(style="width:96%")
+  span.column.col1#0
+    h2 Monday
+    .portlet#1
+      .portlet-header Feeds
+      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+    .portlet#2
+      .portlet-header News
+      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+  span.column.col2#1
+    h2 Tuesday
+    .portlet#3
+      .portlet-header Shopping
+      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+  span.column.col3#2
+    h2 Wednesday
+    .portlet#4
+      .portlet-header Links
+      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+    .portlet#5
+      .portlet-header Images
+      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+  span.column.col4#3
+    h2 Thursday
+    .portlet#6
+      .portlet-header Shopping
+      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+  span.column#4
+    h2 Friday
+    .portlet#7
+      .portlet-header Shopping
+      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+  span.column#5
+    h2 Saturday
+    .portlet#8
+      .portlet-header Shopping
+      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
+  span.column#6
+    h2 Sunday
+    .portlet#9
+      .portlet-header Shopping
+      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit

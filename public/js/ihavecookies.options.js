@@ -1,6 +1,6 @@
     var options = {
         title: '&#x1F36A; Accept Cookies & Privacy Policy?',
-        message: 'Cookies are used on this site, to help improve your user experience. Click the <strong>accept</strong> if you are ok with cookies being used. We dont trade or sell your data. ',
+        message: 'Cookies are used to customize and improve your user experience. Click the <strong>accept</strong> if you are ok with cookies being used. We dont trade or sell your data. ',
         delay: 600,
         expires: 1,
         link: '/privacy',

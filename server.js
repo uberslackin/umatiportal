@@ -208,12 +208,15 @@ app.get('/account/inventory/:inventory_id', passportConfig.isAuthenticated, inve
 app.post('/account/inventoryedit', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
 
 app.get('/account/elevator', passportConfig.isAuthenticated, elevatorController.getElevator);
+app.get('/account/api/elevator', passportConfig.isAuthenticated, elevatorController.getElevatorapi);
+app.get('/account/elevatormanage', passportConfig.isAuthenticated, elevatorController.getElevatormanage);
 app.post('/account/elevator', passportConfig.isAuthenticated, elevatorController.postCreateElevatorEntry);
 app.get('/account/elevator3', passportConfig.isAuthenticated, elevatorController.getElevator3);
 app.get('/account/elevator4', passportConfig.isAuthenticated, elevatorController.getElevator4);
 app.get('/account/elevator5', passportConfig.isAuthenticated, elevatorController.getElevator5);
 app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
 app.post('/account/elevatorentryupdate', passportConfig.isAuthenticated, elevatorController.postUpdateElevatorEntry);
+app.get('/account/elevatorentryupdate', passportConfig.isAuthenticated, elevatorController.getElevatorentryupdate);
 app.get('/account/elevatorentrycreate', passportConfig.isAuthenticated, elevatorController.getElevatorEntry);
 app.post('/account/elevatorentrycreate', passportConfig.isAuthenticated, elevatorController.postCreateElevatorEntry);
 app.get('/account/api/cal', passportConfig.isAuthenticated, calController.getCaljson);
@@ -251,6 +254,7 @@ app.get('/accounts/jexcel', userController.getJexcel);
 /**
  * API examples routes.
  */
+app.get('/api/umaticast', apiController.getUmaticast);
 app.get('/api', apiController.getApi);
 app.get('/api/lastfm', apiController.getLastfm);
 app.get('/api/nyt', apiController.getNewYorkTimes);

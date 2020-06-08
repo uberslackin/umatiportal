@@ -5,9 +5,10 @@ block content
   .pb-2.mt-2.mb-4.border-bottom
   include ../partials/profilehead.pug
   
-  span ELEVATOR - 
+  span #{user.profile.group} group podcast - 
   a(href='/account/elevsettings') Settings - 
   a(href='/account/elevatorentrycreate') Add an entry
+  p This podcast system appreciates AdamP, Andycapp, Virginia
 
     hr
 
@@ -17,11 +18,11 @@ block content
   - if (elevdata.length)
   
   each items in elevdata 
-    if items.username == userr.id 
+    if items.group == user.profile.group 
 
             strong #{moment(items.elevdate).format('MMM Do')} - #{items.eleventrytitle} #{items.username}
             p #{items.elevcat} #{userr.id}
             a(href='/account/elevator/'+items._id) Edit
             hr
 
-  #elevator
+  #calendar

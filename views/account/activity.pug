@@ -37,14 +37,6 @@ block content
               .col-2.text-center.bottom
                   if item.type == "fart"
                   .circle.circleattr.h6 #{moment(item.date).format('MMMD')}
-                  if item.type == "eek"
-                  .circle.circlearrt1.h6 #{moment(item.date).format('h')}
-                  if item.type == "pook"
-                  .circle.circleattr2.h6 #{moment(item.date).format('ma')}
-                  if item.type == "yaya"
-                  .circle.circleattr3.h6 #{moment(item.date).format('a')}
-                  if item.type == "foreign affairs subcommitte"
-                  .circle.circleattr4.h6 #{moment(item.date).format('e')}
               .col-6
                   h5 $#{item.amount} #{item.source} payment 
                   div.small witnessed by
@@ -59,7 +51,7 @@ block content
                   .corner.left-bottom
  
     br
-    a(href='/account/payment').btn.buttontext.tn-outline-primary.circleadd.h2 Make payment
+    a(href='/account/payment').btn.buttontext.tn-outline-primary.circleadd.h2 Record a payment
      -  
 
     a(href='/account/requestpayment').btn.buttontext.tn-outline-primary.circleadd.h2 Request payment

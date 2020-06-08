@@ -8,7 +8,10 @@ const elevSchema = new mongoose.Schema({
     username: String,
     eleventrytitle: String,
     eleventryurl: String,
-    time: String,
+    seqid: String,
+    dayid: String,
+    embedcode: String,
+    duration: String,
     elevdate: Date,
     post: String,
     elevtags: String,
@@ -21,7 +24,6 @@ const elevSchema = new mongoose.Schema({
 /**
  * Password hash middleware.
 *
-
 
   var data = {
     user : req.body.user,

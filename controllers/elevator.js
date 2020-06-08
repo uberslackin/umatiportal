@@ -13,15 +13,28 @@ const User = require('../models/User');
 
 const randomBytesAsync = promisify(crypto.randomBytes);
 
-exports.getElevjson = function (req, res, next) {
+
+/* exports.getElevatorapi = function(req, res){
+        for (var i=0; i<elev_data.length; i++){
+            myChannel.push( elev_data[i].eleventrytitle );
+        }
+        res.send( myChannel.join("\n") );
+};*/
+
+
+
+exports.getElevatorapi = function (req, res, next) {
+  //  var mySort = ['group', 'Taxes with mom'];
     Elevator.find()
         .sort([['elevdate', 'ascending']])
+        //.sort([['group', 'taxes with mom']])
+	//.sort(mySort)
         .exec(function (err, elev_data) {
             if (err) { return next(err); }
-            // Successful, so rendeelevsr.
             res.json(elev_data);
         })
 };
+
 
 // Display calendar data
 exports.getElevator = function (req, res, next) {
@@ -41,7 +54,7 @@ exports.getElevator3 = function (req, res, next) {
         .exec(function (err, elev_data) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
-            res.render('account/elevator3', { title: 'Test Podcast Manager', elevdata: elev_data });
+            res.render('account/elevator3', { title: 'Podcast Manager', elevdata: elev_data });
         })
 };
 
@@ -68,7 +81,6 @@ exports.getElevator5 = function (req, res, next) {
 };
 
 
-
 // Load Edit Form
 exports.getUpdateElevatorEntry = function (req, res, next) {
   Elevator.findById(req.params.elevitem_id, function(err, elev){
@@ -80,6 +92,31 @@ exports.getUpdateElevatorEntry = function (req, res, next) {
       title:'Edit Elevator Item',
       elevdata:elev
     });
+  });
+};
+
+
+// Post via ajax
+exports.getElevatorentryupdate = function (req, res) {
+    var itemid = req.param.itemid;
+    var dayid = req.param.dayid;
+    var seqid = req.param.seqid;
+	
+    var data = {
+      seqid: seqid,
+      dayid: dayid
+    };
+ 
+    // save the update
+    Elevator.findByIdAndUpdate(itemid, data, function(err, result) {
+    if (err){ 
+         res.send(err);
+    }
+    else{
+         res.send(result);
+	 console.log("RESULT: " + result);
+    };
+
   });
 };
 
@@ -103,6 +140,16 @@ exports.getElevatorEntry = (req, res) => {
   });
 };
 
+/**
+ * GET account/elevatormanage
+ * a
+ */
+exports.getElevatormanage = (req, res) => {
+  res.render('account/elevatormanage', {
+    title: 'Manage podcast entries'
+  });
+};
+
 
 /**
  * POST /account/elevator
@@ -122,12 +169,17 @@ exports.postCreateElevatorEntry = (req, res, next) => {
     username: req.body.user,
     eleventrytitle: req.body.eleventrytitle,
     eleventryurl: req.body.eleventryurl,
+    seqid: req.body.seqid,
+    dayid: req.body.dayid,
+    embedcode: req.body.embedcode,
+    elevdate: req.body.elevdate,
+    duration: req.body.duration,
     post: req.body.post, 
     location: req.body.location, 
     elevcat: req.body.elevcat,
     elevtags: req.body.elevtags,
-    elevdate: req.body.elevdate,
-    time: req.body.elevdate
+    group: req.body.group,
+    visibility: req.body.visibility
   });
 
   Elevator.findOne({ eleventrytitle: req.body.eleventrytitle }, (err, existingElev) => {
@@ -164,12 +216,15 @@ exports.postUpdateElevatorEntry = (req, res) => {
     username : req.body.user,
     eleventrytitle : req.body.eleventrytitle,
     eleventryurl : req.body.eleventryurl,
+    seqid: req.body.seqid,
+    dayid: req.body.dayid,
+    embedcode: req.body.embedcode,
+    duration: req.body.duration,
     post : req.body.post,
     location : req.body.location,
     elevcat : req.body.elevcat,
     elevtags : req.body.elevtags,
     elevdate : req.body.elevdate,
-    time : req.body.time,
     group : req.body.group,
     visibility: req.body.visibility
   }

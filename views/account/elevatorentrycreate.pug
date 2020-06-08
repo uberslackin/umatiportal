@@ -3,7 +3,7 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
   include ../partials/profilehead.pug
-  a(href='/account/elevator') ELEVATOR -
+  a(href='/account/elevator') PODCAST -
   a(href='/account/elevsettings') Settings
 
   hr
@@ -13,6 +13,7 @@ block content
   form(action='/account/elevator', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
+    input(type='hidden', name='group', value=user.profile.group)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventrytitle') Podcast Entry Title
       .col-md-7
@@ -26,17 +27,17 @@ block content
       .col-md-7
         input.form-control(type='date', name='elevdate', id='elevdate')        
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='time') Time
-      .col-md-7
-        input.form-control(type='time', name='time', id='time')        
-    .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='duration') Duration
       .col-md-7
         input.form-control(type='range',min='1',max='180',name='duration',id='duration')        
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
-        textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' )
+        textarea.form-control( name="embedcode", rows="6", cols="66", autocomplete='post' )
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='embedcode') Embed Code
+      .col-md-7
+        textarea.form-control( name="embedcode", rows="6", cols="66", autocomplete='embedcode' )
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
       .col-md-7
