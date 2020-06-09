@@ -128,7 +128,7 @@ exports.getUpdateBlogpost = (req, res, next) => {
     }
 
     return res.render('account/blogedit', {
-      title: 'Edit point of sale entry',
+      title: 'Edit blog entry',
       blogdata: blog
     });
   });
@@ -144,7 +144,8 @@ exports.postUpdateBlogpost = (req, res, next) => {
   var data = {
     user : req.body.user,
     username : req.body.user,
-    postitle : req.body.posttitle,
+    posttitle : req.body.posttitle,
+    authorname : req.body.authorname,
     post : req.body.post,
     location : req.body.location,
     postcat : req.body.postcat,
@@ -172,6 +173,7 @@ exports.postUpdateBlog = (req, res) => {
     user : req.body.user,
     username : req.body.username,
     posttitle : req.body.posttitle,
+    authorname : req.body.authorname,
     post : req.body.post,
     location : req.body.location,
     postcat : req.body.postcat,

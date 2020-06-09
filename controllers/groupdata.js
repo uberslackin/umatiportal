@@ -126,12 +126,12 @@ exports.postCreategroupdata = (req, res, next) => {
       if (err) { 
         if (err.code === 11000) {
           req.flash('errors', { msg: 'There was an error in your update.' });
-          return res.redirect('/account/cal');
+          return res.redirect('/account/creategroupnote');
         }
         return next(err);
       }
       req.flash('success', { msg: 'Calendar update saved.' });
-      res.redirect('/account/creategroupnote');
+      res.redirect('/account/group');
     });
   });
 };

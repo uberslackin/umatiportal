@@ -8,6 +8,7 @@ const blogSchema = new mongoose.Schema({
     user: String,
     username: String,
     posttitle: String,
+    authorname: String,
     post: String,
     postfiles: Object,
     location: String,
