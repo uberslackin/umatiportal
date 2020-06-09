@@ -98,17 +98,19 @@ exports.getUpdateElevatorEntry = function (req, res, next) {
 
 // Post via ajax
 exports.getElevatorentryupdate = function (req, res) {
-    var itemid = req.param.itemid;
-    var dayid = req.param.dayid;
-    var seqid = req.param.seqid;
+    var itemid = req.params.itemid;
+    var dayid = req.params.dayid;
+    var seqid = req.params.seqid;
 	
     var data = {
       seqid: seqid,
       dayid: dayid
     };
- 
-    // save the update
+     console.log("Itemid: " + itemid + " dayid: " + dayid + " seqid: " + seqid);
+    // save the update 
+	// findOneAndUpdate() -g june 8 2020
     Elevator.findByIdAndUpdate(itemid, data, function(err, result) {
+    //Elevator.findOneAndUpdate(itemid, data, function(err, result) {
     if (err){ 
          res.send(err);
     }

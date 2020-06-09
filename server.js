@@ -18,10 +18,10 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
-const multer = require('multer');
+//const multer = require('multer');
 //const avatarsMiddleware = require('adorable-avatars');
 
-const upload = multer({ dest: path.join(__dirname, 'uploads') });
+//const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
 /**
  * Load environment variables from .env file, where API keys and passwords are configured.
@@ -99,12 +99,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 app.use((req, res, next) => {
-  if (req.path === '/api/upload') {
-    // Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
-    next();
-  } else {
+//  if (req.path === '/api/upload') {
+//    // Multer multipart/form-data handling needs to occur before the Lusca CSRF check.
+//    next();
+//  } else {
     lusca.csrf()(req, res, next);
-  }
+ // }
 });
 app.use(lusca.xframe('SAMEORIGIN'));
 app.use(lusca.xssProtection(true));
@@ -216,7 +216,7 @@ app.get('/account/elevator4', passportConfig.isAuthenticated, elevatorController
 app.get('/account/elevator5', passportConfig.isAuthenticated, elevatorController.getElevator5);
 app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
 app.post('/account/elevatorentryupdate', passportConfig.isAuthenticated, elevatorController.postUpdateElevatorEntry);
-app.get('/account/elevatorentryupdate', passportConfig.isAuthenticated, elevatorController.getElevatorentryupdate);
+app.get('/account/elevatorentryupdate/:itemid/:seqid/:dayid/', passportConfig.isAuthenticated, elevatorController.getElevatorentryupdate);
 app.get('/account/elevatorentrycreate', passportConfig.isAuthenticated, elevatorController.getElevatorEntry);
 app.post('/account/elevatorentrycreate', passportConfig.isAuthenticated, elevatorController.postCreateElevatorEntry);
 app.get('/account/api/cal', passportConfig.isAuthenticated, calController.getCaljson);
@@ -277,8 +277,8 @@ app.get('/api/paypal', apiController.getPayPal);
 app.get('/api/paypal/success', apiController.getPayPalSuccess);
 app.get('/api/paypal/cancel', apiController.getPayPalCancel);
 app.get('/api/lob', apiController.getLob);
-app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
-app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
+//app.get('/api/upload', lusca({ csrf: true }), apiController.getFileUpload);
+//app.post('/api/upload', upload.single('myFile'), lusca({ csrf: true }), apiController.postFileUpload);
 app.get('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.getPinterest);
 app.post('/api/pinterest', passportConfig.isAuthenticated, passportConfig.isAuthorized, apiController.postPinterest);
 app.get('/api/here-maps', apiController.getHereMaps);

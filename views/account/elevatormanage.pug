@@ -93,7 +93,7 @@ script.
           console.log("New col: " +  ui.item.closest('span').attr("id"));
           console.log("Start row: " + ui.item.startRow);
           console.log("New row: " + ui.item.index());
-          $.get( "/account/elevatorentryupdate", { itemid: ui.item.attr("id") , dayid: ui.item.closest('span').attr("id") , seqid:  ui.item.index()  });
+          $.get( "/account/elevatorentryupdate/" + ui.item.attr("id") + "/" + ui.item.closest('span').attr("id") + "/col" + ui.item.index() );
 
       }
   });  

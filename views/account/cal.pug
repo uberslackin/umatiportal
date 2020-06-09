@@ -25,3 +25,7 @@ block content
             hr
 
   #calendar
+
+  script.
+    var event={id:1 , title: 'New event', start:  new Date('2020-06-08')};
+    $('#calendar').fullCalendar( 'renderEvent', event, true);
