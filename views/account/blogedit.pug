@@ -12,12 +12,20 @@ block content
 
   form(action='/account/blog', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
-    input(type='hidden', name='user', value=user.id)
-    input(type='hidden', name='blogpost_id', value=_id)
+    input(type='hidden', name='username', value=user.id)
+    input(type='hidden', name='blogpost_id', value=blogdata._id)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttitle') Post Title
       .col-md-7
         input.form-control(type='text', name='posttitle', value=blogdata.posttitle, id='posttitle')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='authorname') Author name
+      .col-md-7
+        input.form-control(type='text', name='authorname', value=blogdata.authorname, id='authorname')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='user') User nicname
+      .col-md-7
+        input.form-control(type='text', name='user', value=blogdata.user, id='user')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7

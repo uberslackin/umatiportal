@@ -14,27 +14,32 @@ block content
   
     .modal#myModal
       .modal-dialog
-        .modal-content
+        .modal-content.content
           .modal-header
             .row
             .col-md-7
-            h4.modal-title Modal Heading
+            h4.modal-title UMATI BANK
+               img(src="/lion.png",border="0")
+               a.navbar-brand(href='/')
+               | &nbsp;UMATI BANK
             button.close(type="button", data-dismiss="modal") ×
-          .modal-body
+          .modal-body.content
             .row
-            .col-md-7
-        
-          h2  Add images
-          form(action="/account/upload", method="POST", enctype="multipart/form-data")
-          input(type='hidden', name='user', value=user.id)
-          p Name of item:
-          input.thedata(type="text", name="item")
-          br
-          br
-          | 
-          Photo of item:
-            input.thefile(type="file", name="uploaded_file")  
-          button(type="submit") Add item
+            .col-md-5
+            span Note, this is set up to use 3rd party APIs. go to your 
+            a(href='/account/profile') account profile 
+            to add one.
+            h2  Add images
+            form(action="/account/upload", method="POST", enctype="multipart/form-data")
+            input(type='hidden', name='user', value=user.id)
+            p Name of item:
+            input.thedata(type="text", name="item")
+            br
+            br
+            | 
+            Photo
+              input.thefile(type="file", name="uploaded_file")  
+              button(type="submit") Add item
 
         
           .modal-footer
@@ -48,6 +53,10 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttitle') Post Title
       .col-md-7
         input.form-control(type='text', name='posttitle', id='posttitle')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='authorname') Author name
+      .col-md-7
+        input.form-control(type='text', name='authorname', id='authorname')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
