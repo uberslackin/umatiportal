@@ -93,7 +93,6 @@ exports.postCreatepost = (req, res, next) => {
   }
 
   const blog = new Blog({
-    name: req.body.name,
     posttitle: req.body.posttitle,
     post: req.body.post, 
     username: req.body.user, 
@@ -143,9 +142,8 @@ exports.postUpdateBlogpost = (req, res, next) => {
   // create mongose method to update a existing record into collection
   let id = req.params.blogpost_id;
   var data = {
-    name : req.body.name,
     user : req.body.user,
-    username : req.body.username,
+    username : req.body.user,
     postitle : req.body.posttitle,
     post : req.body.post,
     location : req.body.location,
@@ -164,40 +162,32 @@ exports.postUpdateBlogpost = (req, res, next) => {
 };
 
 
-/**
- * POST /account/blog
- * Update blog information.
- */
-exports.postUpdateBlog = (req, res, next) => {
-  const validationErrors = [];
+exports.postUpdateBlog = (req, res) => {
+  // update podcast ( Elevator ) and send back all calendar entries after update
+  // create mongoose method to update a existing record into collection
 
-  if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    return res.redirect('/account/blog');
+
+  var blogid = req.body.blogpost_id;
+  var data = {
+    user : req.body.user,
+    username : req.body.username,
+    posttitle : req.body.posttitle,
+    post : req.body.post,
+    location : req.body.location,
+    postcat : req.body.postcat,
+    posttags : req.body.posttags,
+    postdate : req.body.postdate,
+    iphash : req.body.iphash,
+    transhash : req.body.transhash,
+    group : req.body.group,
+    visibility: req.body.visibility
   }
 
-  Blog.findById(req.user.id, (err, blog) => {
-    if (err) { return next(err); }
-    blog.name = req.body.name || '';
-    blog.user = req.body.user || '';
-    blog.visibility = req.body.visibility || '';
-    blog.post = req.body.post || '';
-    blog.postcat = req.body.postcat || '';
-    blog.postttag = req.body.postttag || '';
-    blog.postdate = req.body.postdate || '';
-    blog.iphash = req.body.iphash || '';
-    blog.transhash = req.body.transhash || '';
-    blog.save((err) => {
-      if (err) {
-        if (err.code === 11000) {
-          req.flash('errors', { msg: 'There was an error in your update.' });
-          return res.redirect('/account/blog');
-        }
-        return next(err);
-      }
-      req.flash('success', { msg: 'Blog has been registered.' });
-      res.redirect('/account/blog');
-    });
+  // save the update
+  Blog.findByIdAndUpdate(blogid, data, function(err, pos) {
+  if (err) throw err;
+
+  req.flash('success', { msg: 'Your blog post has been updated.' });
+  res.redirect('/account/blog');
   });
 };
-

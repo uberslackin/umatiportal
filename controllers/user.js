@@ -383,8 +383,6 @@ exports.getElevsettings = (req, res) => {
  */
 exports.postUpdateCalsettings = (req, res, next) => {
   const validationErrors = [];
-   if (!validator.isText(req.body.caltitle)) validationErrors.push({ msg: 'Please enter a valid payment amount.' });
-
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);

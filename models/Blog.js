@@ -5,7 +5,6 @@ const Schema = mongoose.userSchema;
 
 const blogSchema = new mongoose.Schema({
     id: Number,
-    name: String,
     user: String,
     username: String,
     posttitle: String,
@@ -14,7 +13,11 @@ const blogSchema = new mongoose.Schema({
     location: String,
     postcat: String,
     posttags: String,
-    postdate: Date
+    postdate: Date,
+    iphash: String,
+    group: String,
+    transhash: String,
+    visibility: String
 }, { timestamps: true });
 
  
