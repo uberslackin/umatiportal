@@ -2,7 +2,7 @@ extends layout
 
 block content
   h1 Software testing release.
-  p Welcome. current repairs underway blog manager, blog templates, use off umaticore by ... Data s being be preserved, yet, please back up your writing just in case, as we are just in a testing phase right now. -g May 19 2020
+  p Welcome.  Lots of bugs fixed we are now testing with self help groups. Welcome Edgar and your "Global Affordable Housing Project", welcome Dan and your food logistics project, welcome Podcast channel management group. -g June 10 2020
   h2 Umati Bank supports in-person groups pursuing sustainable social enterprise business models
   hr
 
@@ -57,7 +57,8 @@ block content
       .modal-dialog(role="document")
         .modal-content
           .modal-header
-            h5.modal-title#exampleModalLabel Group maanged podcast channel stream interface 
+            img(src="/lion.png",border="0") 
+            h5.modal-title#exampleModalLabel &nbsp; Umati Group podcast channel 
             button.close(type="button", data-dismiss="modal", aria-label="Close")
               span(aria-hidden="true") ×
           .modal-body
@@ -67,15 +68,9 @@ block content
                a.nav-link(href='/signup') Create Account
                p Please log in and check your group section.
             else
-               p Please follow this link for data
-               a(href='https://portal.etiny.xyz/account/activity-print') Please follow this link
-               if user.profile.picture
-                 img(src=user.profile.picture) 
-                 p Spreadsheet data
-               else
-                 img(src=user.gravatar(60))
-                 p
-                 button.btn.btn-primary(type="button") Hi #{user.profile.name}
+               p Hi #{user.profile.name}
+               span Join us 
+               a(href='https://portal.etiny.xyz/account/podcast') here
 
           .modal-footer
             button.btn.btn-secondary(type="button", data-dismiss="modal") Close

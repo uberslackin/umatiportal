@@ -95,6 +95,35 @@ exports.getUpdateElevatorEntry = function (req, res, next) {
   });
 };
 
+var getCats = function(elevcat, elev) {
+    Elevator.aggregate([
+        { $match: {
+            elevcat: elevcat
+        }},
+        { $unwind: "$records" },
+        { $group: {
+            elevcat: "$elevcat",
+            balance: { $sum: "$records.amount"  }
+        }}
+    ], function (err, result) {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log(result);
+    });
+}
+
+
+// Load Categories
+exports.getElevatorCat = function (req, res, next) {
+    getCats(req.params.elevcat);
+    return res.render('account/elevatorcat', {
+      title:'Podcast categories',
+      elevdata:elev
+    });
+};
+
 
 // Post via ajax
 exports.getElevatorentryupdate = function (req, res) {

@@ -93,7 +93,7 @@ script.
           console.log("New col: " +  ui.item.closest('span').attr("id"));
           console.log("Start row: " + ui.item.startRow);
           console.log("New row: " + ui.item.index());
-          $.get( "/account/elevatorentryupdate/" + ui.item.attr("id") + "/" + ui.item.closest('span').attr("id") + "/col" + ui.item.index() );
+          $.get( "/account/elevatorentryupdate/" + ui.item.attr("id") + "/" + ui.item.index() + "/col" + ui.item.closest('span').attr("id") );
 
       }
   });  
@@ -115,7 +115,7 @@ script.
     });
   
 .content(style="width:96%")
-  span.column.col1#0
+  span.column.col0#0
     h2 Monday
     .portlet#1
       .portlet-header Feeds
@@ -123,12 +123,12 @@ script.
     .portlet#2
       .portlet-header News
       .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-  span.column.col2#1
+  span.column.col1#1
     h2 Tuesday
     .portlet#3
       .portlet-header Shopping
       .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-  span.column.col3#2
+  span.column.col2#2
     h2 Wednesday
     .portlet#4
       .portlet-header Links
@@ -136,22 +136,22 @@ script.
     .portlet#5
       .portlet-header Images
       .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-  span.column.col4#3
+  span.column.col3#3
     h2 Thursday
     .portlet#6
       .portlet-header Shopping
       .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-  span.column.col5#4
+  span.column.col4#4
     h2 Friday
     .portlet#7
       .portlet-header Shopping
       .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-  span.column.col6#5
+  span.column.col5#5
     h2 Saturday
     .portlet#8
       .portlet-header Shopping
       .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-  span.column.col7#6
+  span.column.col6#6
     h2 Sunday
     .portlet#9
       .portlet-header Shopping

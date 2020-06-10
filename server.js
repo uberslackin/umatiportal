@@ -214,6 +214,7 @@ app.post('/account/elevator', passportConfig.isAuthenticated, elevatorController
 app.get('/account/elevator3', passportConfig.isAuthenticated, elevatorController.getElevator3);
 app.get('/account/elevator4', passportConfig.isAuthenticated, elevatorController.getElevator4);
 app.get('/account/elevator5', passportConfig.isAuthenticated, elevatorController.getElevator5);
+app.get('/account/elevator/cat/:elevcat', passportConfig.isAuthenticated, elevatorController.getElevatorCat);
 app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
 app.post('/account/elevatorentryupdate', passportConfig.isAuthenticated, elevatorController.postUpdateElevatorEntry);
 app.get('/account/elevatorentryupdate/:itemid/:seqid/:dayid/', passportConfig.isAuthenticated, elevatorController.getElevatorentryupdate);
