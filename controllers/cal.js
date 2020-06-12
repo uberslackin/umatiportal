@@ -57,9 +57,15 @@ exports.getCaljson = function (req, res, next) {
         .exec(function (err, cal_data) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
+		//   
+		//
+            console.log("user group:" + User.profile.group[0]);
+	    cal_data.filter();
             res.json(cal_data);
         })
 };
+
+
 
 // Display calendar data
 exports.getCal = function (req, res, next) {

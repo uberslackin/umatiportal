@@ -56,7 +56,7 @@ block content
     .modal.fade#basicExampleModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
       .modal-dialog(role="document")
         .modal-content
-          .modal-header
+          .modal-header(style="background-color:ltgrey")
             img(src="/lion.png",border="0") 
             h5.modal-title#exampleModalLabel &nbsp; Umati Group podcast channel 
             button.close(type="button", data-dismiss="modal", aria-label="Close")
@@ -70,7 +70,7 @@ block content
             else
                p Hi #{user.profile.name}
                span Join us 
-               a(href='https://portal.etiny.xyz/account/podcast') here
+               a(href='https://portal.etiny.xyz/account/elevator') here
 
           .modal-footer
             button.btn.btn-secondary(type="button", data-dismiss="modal") Close

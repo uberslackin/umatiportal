@@ -5,6 +5,7 @@ meta(charset="utf-8")
 meta(name="viewport", content="width=device-width,initial-scale=1")
 title Umaticast - show sequence manager week view
 link(rel="stylesheet", href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css")
+link(rel="stylesheet", href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
 style.
   
   table {
@@ -70,7 +71,7 @@ script.
           var embedcode=value.embedcode;
           var post=value.post;
           console.log(title+" "+itemid+" "+colid+" "+embedcode);
-          $( "."+colid ).append( "<div class=\"portlet  ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\" id=\"" + itemid +  "\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\"><span class='ui-icon ui-icon-minusthick portlet-toggle'></span>" + title + "</div><div class=\"portlet-content\">"+ post +"<br>" + embedcode + "</div></div>");	  	    
+          $( "."+colid ).append( "<div class=\"portlet  ui-widget ui-widget-content ui-helper-clearfix ui-corner-all\" id=\"" + itemid +  "\"><div class=\"portlet-header ui-sortable-handle ui-widget-header ui-corner-all\"><span class='ui-icon ui-icon-minusthick portlet-toggle'></span><a href=\"/account/elevator/" + itemid + "\"><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i></a> " + title + "</div><div class=\"portlet-content\">"+ post +"<br>" + embedcode + "</div></div>");	  	    
    });
   };
 
@@ -113,46 +114,37 @@ script.
         icon.closest( ".portlet" ).find( ".portlet-content" ).toggle();
       });
     });
-  
+
 .content(style="width:96%")
+
+
+  p
+    img(src="/lion.png",border="0")
+    a.navbar-brand(href='/')
+    | &nbsp;UMATICAST
+
+  
+  strong #{user.profile.group} group podcast
+    br 
+  a(href='/account/elevatorentrycreate') Create new entry
+    br 
+  a(href='/account/elevsettings') Settings
+  //p This podcast system appreciates you!
+  p This system is growing
+
+    hr
+
   span.column.col0#0
     h2 Monday
-    .portlet#1
-      .portlet-header Feeds
-      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-    .portlet#2
-      .portlet-header News
-      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
   span.column.col1#1
     h2 Tuesday
-    .portlet#3
-      .portlet-header Shopping
-      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
   span.column.col2#2
     h2 Wednesday
-    .portlet#4
-      .portlet-header Links
-      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-    .portlet#5
-      .portlet-header Images
-      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
   span.column.col3#3
     h2 Thursday
-    .portlet#6
-      .portlet-header Shopping
-      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
   span.column.col4#4
     h2 Friday
-    .portlet#7
-      .portlet-header Shopping
-      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
   span.column.col5#5
     h2 Saturday
-    .portlet#8
-      .portlet-header Shopping
-      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit
   span.column.col6#6
     h2 Sunday
-    .portlet#9
-      .portlet-header Shopping
-      .portlet-content Lorem ipsum dolor sit amet, consectetuer adipiscing elit

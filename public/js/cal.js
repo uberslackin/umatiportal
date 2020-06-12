@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     defaultView: 'timeGridDay',
     events: function(info, successCallback, failureCallback) {
         var arrevents = [];
-        jQuery.get( "https://api.myjson.com/bins/16ubhe", function( data ) {
+        jQuery.get( "https://www.umatibank.com/media/website/groupdemo1.json", function( data ) {
           
           // var response = JSON.parse(data);
           // $.each(response, function(k, v) {
