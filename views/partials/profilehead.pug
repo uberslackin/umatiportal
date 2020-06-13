@@ -1,10 +1,13 @@
 a(href='/account/business') Business - 
 a(href='/account/blog') Blog - 
-a(href='/account/elevator') Podcast - 
+if (user.profile.group == "Ward Food Logistics") 
+   a(href='/account/elevator') Food Panel - 
+else
+   a(href='/account/elevator') Podcast - 
 a(href='/account/cal') Calendar - 
 a(href='/account/group') Groups - 
 a(href='/account/activity') Savings -  
 a(href='/account/inventory') Inventory - 
 a(href='/account/pos') POS
-
+#{user.group}
 hr

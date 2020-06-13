@@ -9,6 +9,7 @@ const inventorySchema = new mongoose.Schema({
     user: String,
     username: String,
     inventorytitle: String,
+    price: String,
     post: String,
     visibility: String,
     location: String,

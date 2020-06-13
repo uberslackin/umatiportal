@@ -69,6 +69,7 @@ exports.postCreateinventory = (req, res, next) => {
     user: req.body.user,
     username: req.body.username, 
     inventorytitle: req.body.inventorytitle, 
+    price: req.body.price, 
     post: req.body.post,
     location: req.body.location,
     inventorycat: req.body.inventorycat,
@@ -101,8 +102,11 @@ exports.postUpdateInventory = (req, res) => {
   // create mongose method to update a existing record into collection
   var invid = req.body.inventoryitemid;
   var data = {
+    user : req.body.user,
+    username : req.body.username,
     inventorytitle : req.body.inventorytitle,
     post : req.body.post,
+    price : req.body.price,
     location : req.body.location,
     inventorycat : req.body.inventorycat,
     inventorytags : req.body.inventorytags,

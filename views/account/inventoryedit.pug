@@ -15,11 +15,16 @@ block content
   form(action='/account/inventoryedit', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user._id)
+    input(type='hidden', name='username', value=user._id)
     input(type='hidden', name='inventoryitemid', value=inventory._id)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='inventorytitle') Name
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='inventorytitle') Item name
       .col-md-7
         input.form-control(type='text', name='inventorytitle', id='inventorytitle' , value=inventory.inventorytitle, autocomplete=inventory.inventorytitle)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='price') Price
+      .col-md-7
+        input.form-control(type='text', name='price', id='price' , value=inventory.price, autocomplete=inventory.price)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='inventorydate') Date
       .col-md-7

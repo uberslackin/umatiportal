@@ -4,7 +4,10 @@ block content
   .pb-2.mt-2.mb-4.border-bottom
   include ../partials/profilehead.pug
     hr
-    a(href='/account/elevator') Podcast -  
+    if (user.profile.group == "Ward Food Logistics")
+      a(href='/account/elevator') Food panel -  
+    else
+      a(href='/account/elevator') Podcast -  
     a(href='/account/elevsettings') Settings -
     a(href='/account/elevatormanage') Week view -
     a(href='/account/elevatorentrycreate') Add an entry
@@ -12,7 +15,11 @@ block content
 
   hr
 
-  h3 Edit Podcast Entry
+  if (user.profile.group == "Ward Food Logistics")
+    h3 Edit your food order
+  else
+    h3 Edit Podcast Entry
+
 
   form(action='/account/elevatorentryupdate', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
@@ -20,7 +27,7 @@ block content
     input(type='hidden', name='group', value=user.profile.group)
     input(type='hidden', name='elevitemid', value=elevdata._id)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventrytitle') Podcast Entry Title
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventrytitle') Entry Title
       .col-md-7
         input.form-control(type='text', value=elevdata.eleventrytitle, name='eleventrytitle', id='eleventrytitle', autocomplete=elevdata.eleventrytitle)
     .form-group.row
@@ -39,24 +46,33 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
         textarea.form-control( name="post", rows="6", cols="66", autocomplete=elevdata.post) #{elevdata.post} 
+    if (user.profile.group != "Ward Food Logistics")
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='embedcode') EmbedCode 
+        .col-md-7
+          textarea.form-control( name="embedcode", rows="6", cols="66", autocomplete=elevdata.embedcode) #{elevdata.embedcode} 
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='seqid') Time slot
+        .col-md-7
+          input.form-control(type='text', name='seqid', id='seqid', value=elevdata.seqid, autocomplete=elevdata.seqid)
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='dayid') Day ID
+        .col-md-7
+          input.form-control(type='text', name='dayid', id='dayid', value=elevdata.dayid, autocomplete=elevdata.dayid)
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevtags') Tags
+        .col-md-7
+          input.form-control(type='text', name='elevtags', id='elevtags', value=elevdata.elevtags, autocomplete=elevdata.elevtags)
+    else
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevtags') Desired dropoff location
+        .col-md-7
+          input.form-control(type='text', name='elevtags', id='elevtags', value=elevdata.elevtags, autocomplete=elevdata.elevtags)
+      input(type='hidden', name='embedcode', value=elevdata.embedcode)
+      input(type='hidden', name='seqid', value=elevdata.seqid)
+      input(type='hidden', name='dayid', value=elevdata.dayid)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='embedcode') EmbedCode 
-      .col-md-7
-        textarea.form-control( name="embedcode", rows="6", cols="66", autocomplete=elevdata.embedcode) #{elevdata.embedcode} 
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='seqid') Time slot
-      .col-md-7
-        input.form-control(type='text', name='seqid', id='seqid', value=elevdata.seqid, autocomplete=elevdata.seqid)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='dayid') Day ID
-      .col-md-7
-        input.form-control(type='text', name='dayid', id='dayid', value=elevdata.dayid, autocomplete=elevdata.dayid)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevtags') Tags
-      .col-md-7
-        input.form-control(type='text', name='elevtags', id='elevtags', value=elevdata.elevtags, autocomplete=elevdata.elevtags)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Pickup Location(s)
       .col-md-7
         input.form-control(type='text', name='location', id='location',  value=elevdata.location, autocomplete=elevdata.location)
     .form-group.row

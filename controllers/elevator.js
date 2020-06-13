@@ -188,8 +188,8 @@ exports.getElevatormanage = (req, res) => {
  */
 exports.postCreateElevatorEntry = (req, res, next) => {
   const validationErrors = [];
-  if (!validator.isAscii(req.body.eleventrytitle)) validationErrors.push({ msg: 'Please enter a title for your new podast entry.' });
-  if (!validator.isAscii(req.body.post)) validationErrors.push({ msg: 'Please add some content to your podcast entry.' });
+//  if (!validator.isAscii(req.body.eleventrytitle)) validationErrors.push({ msg: 'Please enter a title for your new podast entry.' });
+//  if (!validator.isAscii(req.body.post)) validationErrors.push({ msg: 'Please add some content to your podcast entry.' });
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);

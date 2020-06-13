@@ -45,6 +45,12 @@
                       a(href='/account/inventory') Inventory
                     li
                       a(href='/account/pos') POS
+                    li
+                    if (user.profile.group == "Ward Food Logistics")  
+                      a(href='/account/elevator') Food Panel
+                    else 
+                      a(href='/account/elevator') Podcast
+                      
                 .col-md-4
                   ul.dropdown-menu
                     li
@@ -56,8 +62,4 @@
                     li
                       a(href='/account/blog') Blog
                     li
-                      a(href='/account/elevator') Podcast
-              div.dropdown-divider
-                  ul.dropdown-menu
-                    li
-                      a.dropdown-item(href='/logout') Logout
+                      a(href='/logout') >>Logout

@@ -3,19 +3,27 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
   include ../partials/profilehead.pug
-  a(href='/account/elevator') PODCAST -
+  if (user.profile.group != "Ward Food Logistics")
+    a(href='/account/elevator') PODCAST -
+  else
+    a(href='/account/elevator') Food Logistics -
   a(href='/account/elevsettings') Settings
 
   hr
-
-  h3 New Podcast Entry
+  if (user.profile.group != "Ward Food Logistics")
+    h3 New Podcast Entry
+  else
+    h3 New food request
 
   form(action='/account/elevator', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
     input(type='hidden', name='group', value=user.profile.group)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventrytitle') Podcast Entry Title
+      if (user.profile.group != "Ward Food Logistics")
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventrytitle') Podcast Entry Title
+      else
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventrytitle') Food request title
       .col-md-7
         input.form-control(type='text', name='eleventrytitle', id='eleventrytitle')
     .form-group.row

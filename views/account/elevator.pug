@@ -5,10 +5,16 @@ block content
   .pb-2.mt-2.mb-4.border-bottom
   include ../partials/profilehead.pug
   
-  span #{user.profile.group} group podcast - 
+  span #{user.profile.group} group 
+  if (user.profile.group != "Ward Food Logistics")
+    span podcast
+  span -
   a(href='/account/elevsettings') Settings - 
   a(href='/account/elevatormanage') Week view - 
-  a(href='/account/elevatorentrycreate') Add an entry
+  if (user.profile.group != "Ward Food Logistics")
+    a(href='/account/elevatorentrycreate') Add an entry
+  else
+    a(href='/account/elevatorentrycreate') New food request
   p This podcast system appreciates you!
 
     hr
