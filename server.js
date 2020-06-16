@@ -149,6 +149,8 @@ app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
 app.post('/signup', userController.postSignup);
+app.get('/wardsignup', userController.getWardsignup);
+app.post('/wardsignup', userController.postWardsignup);
 app.get('/privacypolicy', userController.getPrivacy);
 app.get('/privacy', contactController.getPrivacy);
 app.get('/contact', contactController.getContact);
@@ -214,10 +216,11 @@ app.post('/account/elevator', passportConfig.isAuthenticated, elevatorController
 app.get('/account/elevator3', passportConfig.isAuthenticated, elevatorController.getElevator3);
 app.get('/account/elevator4', passportConfig.isAuthenticated, elevatorController.getElevator4);
 app.get('/account/elevator5', passportConfig.isAuthenticated, elevatorController.getElevator5);
-app.get('/account/elevator/cat/:elevcat', passportConfig.isAuthenticated, elevatorController.getElevatorCat);
-app.post('/account/elevatorentryupdate', passportConfig.isAuthenticated, elevatorController.postUpdateElevatorEntry);
-app.get('/account/elevatorentryupdate/:itemid/:seqid/:dayid/', passportConfig.isAuthenticated, elevatorController.getElevatorentryupdate);
 app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
+app.get('/account/elevator/cat/:elevcat', passportConfig.isAuthenticated, elevatorController.getElevatorCat);
+app.get('/account/elevator/remove/:itemid', passportConfig.isAuthenticated, elevatorController.getElevatorRemove);
+app.get('/account/elevatorentryupdate/:itemid/:seqid/:dayid/', passportConfig.isAuthenticated, elevatorController.getElevatorentryupdate);
+app.post('/account/elevatorentryupdate', passportConfig.isAuthenticated, elevatorController.postUpdateElevatorEntry);
 app.get('/account/elevatorentrycreate', passportConfig.isAuthenticated, elevatorController.getElevatorEntry);
 app.post('/account/elevatorentrycreate', passportConfig.isAuthenticated, elevatorController.postCreateElevatorEntry);
 app.get('/account/api/cal', passportConfig.isAuthenticated, calController.getCaljson);
@@ -250,7 +253,7 @@ app.post('/account/upload', passportConfig.isAuthenticated, blogController.postU
 app.get('/games/pong', userController.getPong);
 app.get('/games/si', userController.getSi);
 app.get('/projects', userController.getProjects);
-app.get('/accounts/jexcel', userController.getJexcel);
+app.get('/account/jexcel', userController.getJexcel);
 
 /**
  * API examples routes.

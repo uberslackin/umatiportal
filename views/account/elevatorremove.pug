@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+  include ../partials/profilehead.pug
+    hr
+    if (user.profile.group == "Ward Food Logistics")
+      a(href='/account/elevator') Food panel -  
+    else
+      a(href='/account/elevator') Podcast -  
+    a(href='/account/elevsettings') Settings -
+    a(href='/account/elevatormanage') Week view -
+    a(href='/account/elevatorentrycreate') New food request
+
+
+  hr
+
+  if (user.profile.group == "Ward Food Logistics")
+    h3 Remove food order
+  else
+    h3 Remove podcast entry
+
+    span user:
+    span #{user._id}
+    br
+    span group:
+    span #{user.profile.group}
+    br

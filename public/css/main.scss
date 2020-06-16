@@ -144,6 +144,23 @@ a.spam-button:link {
   }
 }
 
+@media (max-width: 420px) {
+    div.col-md-4:nth-child(1) > ul:nth-child(1) > li:nth-child(1) {
+	    display:none;
+    }
+    div.col-md-4:nth-child(1) > ul:nth-child(1) > li:nth-child(1) > a:nth-child(1) > img:nth-child(1) {
+	    display:none;
+    }
+    li.nav-item:nth-child(2) {
+	    display:none;
+    }
+    div.col-md-4:nth-child(2) > ul {
+	    width:120px;
+    }
+
+
+}
+
 @media (min-width: 800px) {
    .home-hero {
     grid-template-columns: 1fr 1fr 1fr;
@@ -180,7 +197,7 @@ a.spam-button:link {
         margin: 0 !important;
         border: none !important;
         box-shadow: none !important;
-        min-width:100px;
+        min-width:350px;
 }
 
 footer {
@@ -362,6 +379,7 @@ $enable-gradients: true;
 /* Cookie Dialog */
 #gdpr-cookie-message {
     position: fixed;
+    z-index: 1000000;
     right: 30px;
     bottom: 30px;
     max-width: 375px;

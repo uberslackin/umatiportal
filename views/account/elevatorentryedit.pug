@@ -10,7 +10,7 @@ block content
       a(href='/account/elevator') Podcast -  
     a(href='/account/elevsettings') Settings -
     a(href='/account/elevatormanage') Week view -
-    a(href='/account/elevatorentrycreate') Add an entry
+    a(href='/account/elevatorentrycreate') New food request
 
 
   hr
@@ -30,10 +30,11 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventrytitle') Entry Title
       .col-md-7
         input.form-control(type='text', value=elevdata.eleventrytitle, name='eleventrytitle', id='eleventrytitle', autocomplete=elevdata.eleventrytitle)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventryurl') Media URL
-      .col-md-7
-        input.form-control(type='text', value=elevdata.eleventryurl, name='eleventryurl', id='eleventryurl', autocomplete=elevdata.eleventryurl)
+    if (user.profile.group != "Ward Food Logistics")
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventryurl') Media URL
+        .col-md-7
+          input.form-control(type='text', value=elevdata.eleventryurl, name='eleventryurl', id='eleventryurl', autocomplete=elevdata.eleventryurl)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevdate') Date
       .col-md-7
@@ -75,10 +76,11 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Pickup Location(s)
       .col-md-7
         input.form-control(type='text', name='location', id='location',  value=elevdata.location, autocomplete=elevdata.location)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevcat') Category
-      .col-md-7
-        input.form-control(type='text', name='elevcat', id='elevcat', autocomplete=elevdata.elevcat, value=elevdata.elevcat)
+    if (user.profile.group != "Ward Food Logistics")
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevcat') Category
+        .col-md-7
+          input.form-control(type='text', name='elevcat', id='elevcat', autocomplete=elevdata.elevcat, value=elevdata.elevcat)
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')

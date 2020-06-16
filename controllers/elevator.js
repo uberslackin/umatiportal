@@ -114,13 +114,21 @@ var getCats = function(elevcat, elev) {
     });
 }
 
+// Remove entry
+exports.getElevatorRemove = function (req, res, next) {
+    var itemid = req.params.itemid;
+    return res.render('account/elevatorremove', {
+      title:'Remove elev entry',
+      elevdata:itemid
+    });
+};
 
 // Load Categories
 exports.getElevatorCat = function (req, res, next) {
-    getCats(req.params.elevcat);
+    var itemid = req.params.itemid;
     return res.render('account/elevatorcat', {
       title:'Podcast categories',
-      elevdata:elev
+      elevdata:itemid
     });
 };
 

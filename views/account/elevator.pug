@@ -15,24 +15,42 @@ block content
     a(href='/account/elevatorentrycreate') Add an entry
   else
     a(href='/account/elevatorentrycreate') New food request
-  p This podcast system appreciates you!
+  p We appreciate you!
 
+  if (user.profile.group == "Ward Food Logistics")
+    strong Boulder food stores' specials:
+    br
+    a(href='https://www.alfalfas.com/whats-on-sale/sales-flyer/') Alfalfas Circular
+    span - 
+    a(href='https://www.naturalgrocers.com/hot-deals') Natural Grocer hot deals
+    span - 
+    a(href='https://www.naturalgrocers.com/screaming-values') Natural Grocer screaming values
+    span - 
+    a(href='https://www.traderjoes.com/fearless-flyer') TJ screaming values
     hr
 
     br
-  - var userr = { id: user._id }
 
   - if (elevdata.length)
   
   each items in elevdata 
-    if items.group == user.profile.group 
-
+         if items.group == user.profile.group 
             a(href='/account/elevator/'+items._id) 
               i.fa.fa-pencil-square-o.fa-2x(aria-hidden='true') 
+            a(href='/account/elevator/remove/'+items._id) 
+              i.fa.fa-trash-o.fa-2x(aria-hidden='true') 
             strong #{items.eleventrytitle} - #{moment(items.elevdate).format('MMM Do')}
             br
-            a(href='https://'+items.eleventryurl) #{items.eleventryurl} 
+            span Post by:
+            strong #{user.profile.name}
             br
-            strong Category:
-            a(href='/account/elevator/cat/'+items.elevcat) #{items.elevcat} 
+            if (user.profile.group != "Ward Food Logistics")
+              a(href='https://'+items.eleventryurl) #{items.eleventryurl} 
+              strong Category:
+              a(href='/account/elevator/cat/'+items.elevcat) #{items.elevcat} 
+            else
+              strong pickup: 
+              span #{items.location} 
+              strong dropoff: 
+              span #{items.elevtags} 
             hr

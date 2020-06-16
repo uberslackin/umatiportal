@@ -26,38 +26,53 @@ block content
         label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventrytitle') Food request title
       .col-md-7
         input.form-control(type='text', name='eleventrytitle', id='eleventrytitle')
+    if (user.profile.group != "Ward Food Logistics")
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventryurl') public web URL
+        .col-md-7
+          input.form-control(type='text', name='eleventryurl', id='eleventryurl')
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventryurl') public web URL
-      .col-md-7
-        input.form-control(type='text', name='eleventryurl', id='eleventryurl')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevdate') Date
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevdate') Ideal pickup date
       .col-md-7
         input.form-control(type='date', name='elevdate', id='elevdate')        
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='duration') Duration
-      .col-md-7
-        input.form-control(type='range',min='1',max='180',name='duration',id='duration')        
+      if (user.profile.group != "Ward Food Logistics")
+        .form-group.row
+          label.col-md-3.col-form-label.font-weight-bold.text-left(for='duration') Duration
+          .col-md-7
+            input.form-control(type='range',min='1',max='180',name='duration',id='duration')        
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
-        textarea.form-control( name="embedcode", rows="6", cols="66", autocomplete='post' )
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='embedcode') Embed Code
-      .col-md-7
-        textarea.form-control( name="embedcode", rows="6", cols="66", autocomplete='embedcode' )
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
-      .col-md-7
-        input.form-control(type='text', name='location', id='location')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevcat') Category
-      .col-md-7
-        input.form-control(type='text', name='elevcat', id='elevcat')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevtags') Tags
-      .col-md-7
-        input.form-control(type='text', name='elevtags', id='elevtags')
+        textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' )
+    if (user.profile.group != "Ward Food Logistics")
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='embedcode') Embed Code
+        .col-md-7
+          textarea.form-control( name="embedcode", rows="6", cols="66", autocomplete='embedcode' )
+    if (user.profile.group != "Ward Food Logistics")
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
+        .col-md-7
+          input.form-control(type='text', name='location', id='location')
+    else
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Pickup location
+        .col-md-7
+          input.form-control(type='text', name='location', id='location')
+    if (user.profile.group != "Ward Food Logistics")
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevcat') Category
+        .col-md-7
+          input.form-control(type='text', name='elevcat', id='elevcat')
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevtags') Tags
+        .col-md-7
+          input.form-control(type='text', name='elevtags', id='elevtags')
+    else
+      .form-group.row
+        label.col-md-3.col-form-label.font-weight-bold.text-left(for='elevtags') Desired dropoff location
+        .col-md-7
+          input.form-control(type='text', name='elevtags', id='elevtags')
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')
