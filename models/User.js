@@ -117,6 +117,16 @@ const userSchema = new mongoose.Schema({
     template: String,
     visibility: String
   },
+  message: {
+    user: String,
+    fromname: String,
+    toname: String,
+    subject: String,
+    sourcetype: String,
+    postdate: String,
+    status: String,
+    visibility: String
+  },
 }, { timestamps: true });
 
 /**

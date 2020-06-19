@@ -169,6 +169,9 @@ app.get('/account/activity-print', passportConfig.isAuthenticated, userControlle
 app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
 app.get('/account/setup', passportConfig.isAuthenticated, userController.getSetup);
 app.post('/account/setup', passportConfig.isAuthenticated, userController.postUpdateSetup);
+app.get('/account/messages', passportConfig.isAuthenticated, userController.getMessages);
+app.get('/account/messagecompose', passportConfig.isAuthenticated, userController.getMessagecompose);
+app.post('/account/messages', passportConfig.isAuthenticated, userController.postUpdateMessages);
 app.get('/account/business', passportConfig.isAuthenticated, userController.getBusiness);
 app.post('/account/business', passportConfig.isAuthenticated, userController.postUpdateBusiness);
 app.get('/account/bizsettings', passportConfig.isAuthenticated, userController.getBizsettings);

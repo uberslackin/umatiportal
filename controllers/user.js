@@ -128,6 +128,64 @@ exports.postSignup = (req, res, next) => {
   });
 };
 
+/**
+ * GET /account/messages
+ * Internal Messages
+ */
+exports.getMessages = (req, res) => {
+  if (!req.user) {
+    return res.redirect('/');
+  }
+  res.render('account/messages', {
+    title: 'Get Account Messages'
+  });
+};
+
+/**
+ * GET /account/messagecompose
+ * Internal Messages
+ */
+exports.getMessagecompose = (req, res) => {
+  if (!req.user) {
+    return res.redirect('/');
+  }
+  res.render('account/messagecompose', {
+    title: 'Compose Message'
+  });
+};
+
+exports.postUpdateMessages = (req, res, next) => {
+  const validationErrors = [];
+/**  if (!validator.isEmail(req.body.amount)) validationErrors.push({ msg: 'Please enter a valid payment amount.' });
+ */
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/messages');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.message.toname = req.body.toname || '';
+    user.message.subject = req.body.subject || '';
+    user.message.sourcetype = req.body.sourcetype || '';
+    user.message.sourcenum = req.body.sourcenum || '';
+    user.message.postdate = req.body.postdate || '';
+
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was a messaging error in your post.' });
+          return res.redirect('/account/messages');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Message has been sent.' });
+      res.redirect('/account/messages');
+    });
+  });
+};
+
 
 /**
  * GET /wardsignup
@@ -136,7 +194,7 @@ exports.postSignup = (req, res, next) => {
 exports.getWardsignup = (req, res) => {
   if (req.user) {
     return res.redirect('/');
-  }
+  } 
   res.render('account/wardsignup', {
     title: 'Create Food Logistics Account'
   });

@@ -6,6 +6,16 @@ block content
   form(id='signup-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='group', value='Ward Food Logistics')
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='contactmethod') Preferred contact method:
+      .col-md-7
+        select#template.select.form-control.input-lg(for='contactmethod', name='contactmethod')
+          option(value='0') -- Select --
+          option(value='1') Text message
+          option(value='2') Phone message
+          option(value='3') Town Bulletin Board
+
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='phone') Cell #
       .col-md-7
@@ -22,6 +32,17 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='confirmPassword') Confirm Password
       .col-md-7
         input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', autocomplete='new-password', minlength='8', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='template') Interested in:
+      .col-md-7
+        select#template.select.form-control.input-lg(for='interests', name='template')
+          option(value='0') -- Select --
+          option(value='1') Pickups
+          option(value='2') Delivery
+          option(value='3') Cleanup
+          option(value='4') Compost
+          option(value='5') Other
+
     .form-group.offset-sm-3.col-md-7.pl-2
       button.btn.btn-success(type='submit')
         i.fas.fa-user-plus.fa-sm

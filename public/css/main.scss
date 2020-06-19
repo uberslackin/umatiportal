@@ -379,11 +379,10 @@ $enable-gradients: true;
 /* Cookie Dialog */
 #gdpr-cookie-message {
     position: fixed;
-    z-index: 1000000;
     right: 30px;
     bottom: 30px;
     max-width: 375px;
-    background-color: var(--grey);
+    background-color: var(--white);
     padding: 20px;
     border-radius: 5px;
     box-shadow: 0 6px 6px rgba(0,0,0,0.25);
@@ -391,7 +390,6 @@ $enable-gradients: true;
     font-family: system-ui;
 }
 #gdpr-cookie-message h4 {
-    background-color: var(--white);
     color: var(--black);
     font-family: 'Quicksand', sans-serif;
     font-size: 18px;
@@ -407,7 +405,6 @@ $enable-gradients: true;
     margin-bottom: 10px;
 }
 #gdpr-cookie-message p, #gdpr-cookie-message ul {
-    background-color: var(--white);
     color: black;
     font-size: 15px;
     line-height: 1.5em;
@@ -442,6 +439,7 @@ button#ihavecookiesBtn {
     font-size: 15px;
     padding: 7px;
     border-radius: 3px;
+    border-color: var(--white);
     margin-left: 15px;
     cursor: pointer;
     transition: all 0.3s ease-in;
@@ -452,6 +450,7 @@ button#ihavecookiesBtn {
     transition: all 0.3s ease-in;
 }
 button#gdpr-cookie-advanced {
+    z-index: 1000000;
     background: white;
     color: var(--red);
 }
