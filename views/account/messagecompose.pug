@@ -127,11 +127,14 @@ block content
                      .form-group.row
                         label.col-md-3.col-form-label.font-weight-bold.text-right(for='sentto') To:
                         .col-md-7
-                     - var groupp = { id: user.profile.group }
-                     each item,index in user_list
-                       if (groupp.id === item.profile.group)
-                           p #{item.profile.name} 
-                           input.form-control(type='text', name='sentto', id='sentto')
+
+                           select#template.select.form-control.input-lg(for='sendto', name='sendto')
+                             option(value='0') -- Select --
+
+                             - var groupp = { id: user.profile.group }
+                             each item,index in user_list
+                               if (groupp.id === item.profile.group)
+                                 option(value=item.profile.name) #{item.profile.name}
                      .form-group.row
                         label.col-md-3.col-form-label.font-weight-bold.text-right(for='subject') Subject:
                         .col-md-7
