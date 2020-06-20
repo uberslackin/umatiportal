@@ -8,6 +8,7 @@ const mailChecker = require('mailchecker');
 const User = require('../models/User');
 // const Calendar = require('../models/Calendar');
 const Member = require('../models/Member');
+const Messages = require('../models/Messages');
 
 const randomBytesAsync = promisify(crypto.randomBytes);
 
@@ -132,59 +133,65 @@ exports.postSignup = (req, res, next) => {
  * GET /account/messages
  * Internal Messages
  */
-exports.getMessages = (req, res) => {
-  if (!req.user) {
-    return res.redirect('/');
-  }
-  res.render('account/messages', {
-    title: 'Get Account Messages'
-  });
+exports.getMessages = function (req, res, next) {
+    var mysort = { createdAt: -1,  };
+    Messages.find()
+        .sort(mysort)
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messages', { title: 'Messages', message_list: message_list });
+        })
 };
+
 
 /**
  * GET /account/messagecompose
  * Internal Messages
  */
-exports.getMessagecompose = (req, res) => {
+exports.getMessageCompose = (req, res, next) => {
   if (!req.user) {
     return res.redirect('/');
   }
-  res.render('account/messagecompose', {
-    title: 'Compose Message'
-  });
+  var mysort = { createdAt: -1,  };
+  User.find()
+      .sort(mysort)
+      .exec(function (err, user_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagecompose', { title: 'Compose Message', user_list: user_list });
+      });
 };
 
-exports.postUpdateMessages = (req, res, next) => {
+
+exports.postMessageCreate = (req, res, next) => {
   const validationErrors = [];
-/**  if (!validator.isEmail(req.body.amount)) validationErrors.push({ msg: 'Please enter a valid payment amount.' });
- */
 
-  if (validationErrors.length) {
-    req.flash('errors', validationErrors);
-    return res.redirect('/account/messages');
-  }
+        var db = new Messages();
+        var response = {};
+        db.username = req.body.username;
+        db.name = req.body.name;
+        db.subject = req.body.subject;
+        db.sentfrom = req.body.sentfrom;
+        db.sentto = req.body.sentto;
+        db.message = req.body.message;
+        db.date = req.body.date;
+        db.status = req.body.status;
 
-  User.findById(req.user.id, (err, user) => {
-    if (err) { return next(err); }
-    user.message.toname = req.body.toname || '';
-    user.message.subject = req.body.subject || '';
-    user.message.sourcetype = req.body.sourcetype || '';
-    user.message.sourcenum = req.body.sourcenum || '';
-    user.message.postdate = req.body.postdate || '';
+        db.save((err) => {
+          if (err) {
+            if (err.code === 11000) {
+              req.flash('errors', { msg: 'There was an error in your update.' });
+              return res.redirect('/account/messagecompose');
+          }
+          return next(err);
+          }
+          req.flash('success', { msg: 'Your message has been sent.' });
+          res.redirect('/account/messages');
+          });
 
-    user.save((err) => {
-      if (err) {
-        if (err.code === 11000) {
-          req.flash('errors', { msg: 'There was a messaging error in your post.' });
-          return res.redirect('/account/messages');
-        }
-        return next(err);
-      }
-      req.flash('success', { msg: 'Message has been sent.' });
-      res.redirect('/account/messages');
-    });
-  });
 };
+
 
 
 /**

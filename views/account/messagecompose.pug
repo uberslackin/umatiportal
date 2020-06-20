@@ -119,18 +119,28 @@ block content
                   .email-body
 
                   
-                  form(action="/account/createpost", method="POST")
+                  form(action="/account/messagecreate", method="POST")
                      input(type='hidden', name='_csrf', value=_csrf)
                      input(type='hidden', name='user', value=user.id)
+                     input(type='hidden', name='sentfrom', value=user.profile.name)
+                     input(type='hidden', name='group', value=user.profile.group)
                      .form-group.row
-                        label.col-md-3.col-form-label.font-weight-bold.text-right(for='to') To:
+                        label.col-md-3.col-form-label.font-weight-bold.text-right(for='sentto') To:
                         .col-md-7
-                           input.form-control(type='text', name='to', id='to')
+                     - var groupp = { id: user.profile.group }
+                     each item,index in user_list
+                       if (groupp.id === item.profile.group)
+                           p #{item.profile.name} 
+                           input.form-control(type='text', name='sentto', id='sentto')
                      .form-group.row
-                        label.col-md-3.col-form-label.font-weight-bold.text-right(for='location') Subject:
+                        label.col-md-3.col-form-label.font-weight-bold.text-right(for='subject') Subject:
                         .col-md-7
                            input.form-control(type='text', name='subject', id='subject')
                      .form-group.row
-                        label.col-md-3.col-form-label.font-weight-bold.text-right(for='Message') Message:
+                        label.col-md-3.col-form-label.font-weight-bold.text-right(for='message') Message:
                         .col-md-7
-                           textarea.form-control.text-right( name="post", rows="6", cols="66", autocomplete='post' ) #{user.business.post}
+                           textarea.form-control.text-left( name="message", rows="6", cols="66", autocomplete='message' ) 
+                     .form-group.row
+                       .offset-sm-3.col-md-7.pl-2
+                          button.btn.btn.btn-primary(type='submit')
+                            i.fas.fa-pencil-alt.fa-sm  Send Message

@@ -95,7 +95,7 @@ block content
                             span.icon
                               svg.feather.feather-star.text-primary-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                                 polygon(points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2")
-                          span New Project
+                          span #{user.profile.group} Group
                         .icons
                           a.icon(href="#")
                             svg.feather.feather-share.text-muted.hover-primary-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Forward")
@@ -111,61 +111,33 @@ block content
                             svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
                               polyline(points="3 6 5 6 21 6")
                               path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")
-                    .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
-                      .d-flex.align-items-center
-                        .avatar
-                          img.rounded-circle.user-avatar-md(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="Avatar")
-                        .sender.d-flex.align-items-center
-                          a(href="#") John Doe
-                          |  
-                          span to
-                          a(href="#") me
-                          .actions.dropdown
-                            a.icon(href="#", data-toggle="dropdown")
-                              svg.feather.feather-chevron-down(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+
+
+
+                  - var userr = { id: user.profile.group }
+                  each item,index in message_list
+                    if (item.sentto === userr.id)
+                      .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
+                        .d-flex.align-items-center
+                          .avatar
+                            img.rounded-circle.user-avatar-md(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="Avatar")
+                          .sender.d-flex.align-items-center
+                            a(href="#") From: #{item.sentfrom}
+                            br
+                            span Subject: #{item.subject}
+                            |  
+                            .actions.dropdown
+                              a.icon(href="#", data-toggle="dropdown")
+                                svg.feather.feather-chevron-down(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                                 polyline(points="6 9 12 15 18 9")
                             .dropdown-menu(role="menu")
-                              a.dropdown-item(href="#") Mark as read
-                              a.dropdown-item(href="#") Mark as unread
-                              a.dropdown-item(href="#") Spam
-                              .dropdown-divider
-                              a.dropdown-item.text-danger(href="#") Delete
-                      .date Nov 20, 11:20
-                  .email-body
-                    p Hello,
-                    br
-                    p Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
-                    br
-                    p Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna.
-                    br
-                    p
-                      strong Regards
-                      | ,
-                      br
-                      | John Doe
-                  .email-attachments
-                    .title
-                      | Attachments 
-                      span (3 files, 12,44 KB)
-                    ul
-                      li
-                        a(href="#")
-                          svg.feather.feather-file(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
-                            path(d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z")
-                            polyline(points="13 2 13 9 20 9")
-                          |  Reference.zip 
-                          span.text-muted.tx-11 (5.10 MB)
-                      li
-                        a(href="#")
-                          svg.feather.feather-file(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
-                            path(d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z")
-                            polyline(points="13 2 13 9 20 9")
-                          |  Instructions.zip 
-                          span.text-muted.tx-11 (3.15 MB)
-                      li
-                        a(href="#")
-                          svg.feather.feather-file(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
-                            path(d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z")
-                            polyline(points="13 2 13 9 20 9")
-                          |  Team-list.pdf 
-                          span.text-muted.tx-11 (4.5 MB)
+                               a.dropdown-item(href="#") Mark as read
+                               a.dropdown-item(href="#") Mark as unread
+                               a.dropdown-item(href="#") Spam
+                            .dropdown-divider
+                               a.dropdown-item.text-danger(href="#") Delete
+                          .date #{moment(item.createdAt).format('lll')}
+                      
+                    .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
+                      .d-flex.align-items-center
+                        .sender.d-flex.align-items-center #{item.message}
