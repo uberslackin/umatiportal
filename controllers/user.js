@@ -161,18 +161,36 @@ exports.getMessagesSent = function (req, res, next) {
 };
 
 
+
+
 /**
- * GET /account/messagessent
+ * GET /account/messagesdrafts
  * Internal Messages
  */
 exports.getMessagesDrafts = function (req, res, next) {
     var mysort = { createdAt: -1,  };
-    Messages.find()
+Messages.find({_id:{$in: req.params.messageid}})
         .sort(mysort)
         .exec(function (err, message_list) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('account/messagedrafts', { title: 'Message Drafts', message_list: message_list });
+            res.render('account/messagesdrafts', { title: 'Messages Drafts', message_list: message_list });
+        })
+};
+
+
+/**
+ * GET /account/messagestags
+ * Internal Messages
+ */
+exports.getMessagesTags = function (req, res, next) {
+    var mysort = { createdAt: -1,  };
+Messages.find({_id:{$in: req.params.messageid}})
+        .sort(mysort)
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagestags', { title: 'Messages Tags', message_list: message_list });
         })
 };
 
@@ -194,11 +212,26 @@ exports.getMessagesTrash = function (req, res, next) {
 
 
 /**
+ * GET /account/messagesimportant
+ * Internal Messages Important
+ */
+exports.getMessagesImportant = function (req, res, next) {
+    var mysort = { createdAt: -1,  };
+    Messages.find()
+        .sort(mysort)
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagesimportant', { title: 'Messages Important', message_list: message_list });
+        })
+};
+
+
+/**
  * GET /account/messagesTotrash
  * Internal Messages Totrash
  */
 exports.getMessagesTotrash = function (req, res, next) {
-    //req.params.token
     var mysort = { createdAt: -1,  };
     Messages.find()
         .sort(mysort)
@@ -207,6 +240,15 @@ exports.getMessagesTotrash = function (req, res, next) {
             // Successful, so render.
             res.render('account/messagestotrash', { title: 'Messages Totrash', message_list: message_list });
         })
+
+Messages.findOne({_id: req.param.messageid}, {'messageItem.$': 1},
+    function (err, message) {
+        if (message) {
+            console.log(message.messageItem[0]._id);
+        }
+    }
+);
+
 };
 
 

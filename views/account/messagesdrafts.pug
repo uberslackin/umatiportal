@@ -15,12 +15,12 @@ block content
                         span.icon
                           svg.feather.feather-chevron-down(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                             polyline(points="6 9 12 15 18 9")
-                      span.title Umati Messaging
+                      span.title DRAFTS FOLDER
 
 
-                    p.description #{user.profile.name}
+                    p.description #{user.business.name}
                     .aside-compose
-                      a.btn.btn-primary.btn-block(href="messages") Messages
+                      a.btn.btn-primary.btn-block(href="messagecompose") Compose Message
                     .aside-nav.collapse
                       ul.nav
                         li.active
@@ -92,6 +92,10 @@ block content
                       .title.d-flex.align-items-center.justify-content-between
                         .d-flex.align-items-center
                           a.active(href="#")
+                            span.icon
+                              svg.feather.feather-star.text-primary-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                                polygon(points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2")
+                          span #{user.profile.group} Group
                         .icons
                           a.icon(href="#")
                             svg.feather.feather-share.text-muted.hover-primary-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Forward")
@@ -103,46 +107,45 @@ block content
                               polyline(points="6 9 6 2 18 2 18 9")
                               path(d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2")
                               rect(x="6", y="14", width="12", height="8")
-                          a.icon(href="#")
+
+
+
+                  - var userr = { id: user.profile.name }
+                  each item,index in message_list
+                    if (item.status=== "draft")
+                      .email-head-sender.d-flex.justify-content-between.flex-wrap
+                        .d-flex.align-items-center
+                          .avatar
+                            if user.profile.picture
+                              img.rounded-circle.user-avatar-md(src=user.profile.picture)
+                            else
+                              img.rounded-circle.user-avatar-md(src=user.gravatar(60))
+                              i.caret
+                          .sender.d-flex.align-items-left
+                            strong #{item.sentfrom} 
+                          .sender.d-flex.align-items-center
+                            strong  -  #{item.subject}
+                            |  
+                            .actions.dropdown
+                              a.icon(href="#", data-toggle="dropdown")
+                                svg.feather.feather-chevron-down(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                                polyline(points="6 9 12 15 18 9")
+                            .dropdown-menu(role="menu")
+                               a.dropdown-item(href="#") Mark as read
+                               a.dropdown-item(href="#") Mark as unread
+                               a.dropdown-item(href="#") Spam
+                            .dropdown-divider
+                               a.dropdown-item.text-danger(href="#") Delete
+                          .sender.d-flex.align-items-right
+                          .date #{moment(item.createdAt).format('lll')}
+                          a.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrash/' + item._id )
                             svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
                               polyline(points="3 6 5 6 21 6")
                               path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")
-                    .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
-                      .d-flex.align-items-center
-                          .dropdown-menu(role="menu")
-                            a.dropdown-item(href="#") Mark as read
-                            a.dropdown-item(href="#") Mark as unread
-                            a.dropdown-item(href="#") Spam
-                            .dropdown-divider
-                            a.dropdown-item.text-danger(href="#") Delete
-                      .date #{moment(Date.now()).format('MM/DD/YYYY')}
-                  .email-body
-
-                  
-                  form(action="/account/messagecreate", method="POST")
-                     input(type='hidden', name='_csrf', value=_csrf)
-                     input(type='hidden', name='user', value=user.id)
-                     input(type='hidden', name='sentfrom', value=user.profile.name)
-                     input(type='hidden', name='group', value=user.profile.group)
-                     .form-group.row
-                        label.col-md-3.col-form-label.font-weight-bold.text-right(for='sentto') To:
-                        .col-md-7
-
-                           select#sentto.select.form-control.input-lg(for='sentto', name='sentto')
-                             option(value='0') -- Select --
-                             - var groupp = { id: user.profile.group }
-                             each item,index in user_list
-                               if (groupp.id === item.profile.group)
-                                 option(value=item.profile.name) #{item.profile.name}
-                     .form-group.row
-                        label.col-md-3.col-form-label.font-weight-bold.text-right(for='subject') Subject:
-                        .col-md-7
-                           input.form-control(type='text', name='subject', id='subject')
-                     .form-group.row
-                        label.col-md-3.col-form-label.font-weight-bold.text-right(for='message') Message:
-                        .col-md-7
-                           textarea.form-control.text-left( name="message", rows="6", cols="66", autocomplete='message' ) 
-                     .form-group.row
-                       .offset-sm-3.col-md-7.pl-2
-                          button.btn.btn.btn-primary(type='submit')
-                            i.fas.fa-pencil-alt.fa-sm  Send Message
+                      .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
+                        p
+                          a.toggle-trigger read
+                        p.
+                        .toggle-wrap(style='display:none;')
+                          .style-single.
+                            #{item.message}

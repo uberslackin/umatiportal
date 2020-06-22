@@ -4,10 +4,8 @@ block content
 
   include ../partials/messageui.pug
 
-
-                  - var itemtosendtotrash = { id: req.params.messageid }
                   each item,index in message_list
-                    if (item._id === itemtosendtotrash.id)
+                    if (item.status === "important")
                       
                       .email-head-sender.colorrow1.d-flex.align-items-center.justify-content-between.flex-wrap
                         .d-flex.align-items-center

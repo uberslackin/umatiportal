@@ -18,6 +18,8 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
+const avatars = require('@dicebear/avatars');
+const sprites = require('@dicebear/avatars-male-sprites');
 //const multer = require('multer');
 //const avatarsMiddleware = require('adorable-avatars');
 
@@ -171,9 +173,11 @@ app.get('/account/setup', passportConfig.isAuthenticated, userController.getSetu
 app.post('/account/setup', passportConfig.isAuthenticated, userController.postUpdateSetup);
 app.get('/account/messages', passportConfig.isAuthenticated, userController.getMessages);
 app.get('/account/messagessent', passportConfig.isAuthenticated, userController.getMessagesSent);
-app.get('/account/messagedrafts', passportConfig.isAuthenticated, userController.getMessagesDrafts);
-app.get('/account/messagestrash', passportConfig.isAuthenticated, userController.getMessagesTrash);
+app.get('/account/messagesdrafts', passportConfig.isAuthenticated, userController.getMessagesDrafts);
+app.get('/account/messagestags', passportConfig.isAuthenticated, userController.getMessagesTags);
+app.get('/account/messagesimportant', passportConfig.isAuthenticated, userController.getMessagesImportant);
 app.get('/account/messagestrash/:messageid', passportConfig.isAuthenticated, userController.getMessagesTotrash);
+app.get('/account/messagestrash', passportConfig.isAuthenticated, userController.getMessagesTrash);
 app.get('/account/messagecompose', passportConfig.isAuthenticated, userController.getMessageCompose);
 app.post('/account/messagecreate', passportConfig.isAuthenticated, userController.postMessageCreate);
 app.get('/account/business', passportConfig.isAuthenticated, userController.getBusiness);
