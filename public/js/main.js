@@ -23,6 +23,12 @@ $(document).ready(() => {
 });
 */
 
+    $(".toggle-trigger").click(function() {
+    $(this).parent().nextAll('.toggle-wrap').first().toggle('slow');
+
+    });
+
+
   var JSON = [
     {
         "id": "1", // Optional

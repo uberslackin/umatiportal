@@ -146,6 +146,71 @@ exports.getMessages = function (req, res, next) {
 
 
 /**
+ * GET /account/messagessent
+ * Internal Messages
+ */
+exports.getMessagesSent = function (req, res, next) {
+    var mysort = { createdAt: -1,  };
+    Messages.find()
+        .sort(mysort)
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagessent', { title: 'Messages Sent', message_list: message_list });
+        })
+};
+
+
+/**
+ * GET /account/messagessent
+ * Internal Messages
+ */
+exports.getMessagesDrafts = function (req, res, next) {
+    var mysort = { createdAt: -1,  };
+    Messages.find()
+        .sort(mysort)
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagedrafts', { title: 'Message Drafts', message_list: message_list });
+        })
+};
+
+
+/**
+ * GET /account/messagestrash
+ * Internal Messages Trash
+ */
+exports.getMessagesTrash = function (req, res, next) {
+    var mysort = { createdAt: -1,  };
+    Messages.find()
+        .sort(mysort)
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagestrash', { title: 'Messages Trash', message_list: message_list });
+        })
+};
+
+
+/**
+ * GET /account/messagesTotrash
+ * Internal Messages Totrash
+ */
+exports.getMessagesTotrash = function (req, res, next) {
+    //req.params.token
+    var mysort = { createdAt: -1,  };
+    Messages.find()
+        .sort(mysort)
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagestotrash', { title: 'Messages Totrash', message_list: message_list });
+        })
+};
+
+
+/**
  * GET /account/messagecompose
  * Internal Messages
  */
@@ -169,11 +234,13 @@ exports.postMessageCreate = (req, res, next) => {
 
         var db = new Messages();
         var response = {};
-        db.username = req.body.username;
+        db.username = req.body.user;
+        db.user = req.body.user;
         db.name = req.body.name;
         db.subject = req.body.subject;
         db.sentfrom = req.body.sentfrom;
         db.sentto = req.body.sentto;
+        db.group = req.body.group;
         db.message = req.body.message;
         db.date = req.body.date;
         db.status = req.body.status;

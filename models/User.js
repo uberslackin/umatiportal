@@ -117,11 +117,12 @@ const userSchema = new mongoose.Schema({
     template: String,
     visibility: String
   },
-  message: {
+  messagesettings: {
     user: String,
-    fromname: String,
-    toname: String,
-    subject: String,
+    name: String,
+    hash1: String,
+    hash2: String,
+    sentto: String,
     sourcetype: String,
     postdate: String,
     status: String,

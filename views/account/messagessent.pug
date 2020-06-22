@@ -95,7 +95,7 @@ block content
                             span.icon
                               svg.feather.feather-star.text-primary-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                                 polygon(points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2")
-                          span #{user.profile.group} Group
+                          span Your Group: #{user.profile.group}
                         .icons
                           a.icon(href="#")
                             svg.feather.feather-share.text-muted.hover-primary-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Forward")
@@ -107,24 +107,24 @@ block content
                               polyline(points="6 9 6 2 18 2 18 9")
                               path(d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2")
                               rect(x="6", y="14", width="12", height="8")
+                          a.icon(href="#")
+                            svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
+                              polyline(points="3 6 5 6 21 6")
+                              path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")
 
 
 
-                  - var userr = { id: user.profile.name }
+                  - var userr = { id: user.profile.id }
                   each item,index in message_list
-                    if (item.sentto === userr.id)
-                      .email-head-sender.d-flex.justify-content-between.flex-wrap
+                    if (item.from === userr.id)
+                      .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
                         .d-flex.align-items-center
                           .avatar
-                            if user.profile.picture
-                              img.rounded-circle.user-avatar-md(src=user.profile.picture)
-                            else
-                              img.rounded-circle.user-avatar-md(src=user.gravatar(60))
-                              i.caret
-                          .sender.d-flex.align-items-left
-                            strong #{item.sentfrom} 
+                            img.rounded-circle.user-avatar-md(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="Avatar")
                           .sender.d-flex.align-items-center
-                            strong  -  #{item.subject}
+                            a(href="#") To: #{item.sentto}
+                            br
+                            span Subject: #{item.subject}
                             |  
                             .actions.dropdown
                               a.icon(href="#", data-toggle="dropdown")
@@ -136,16 +136,7 @@ block content
                                a.dropdown-item(href="#") Spam
                             .dropdown-divider
                                a.dropdown-item.text-danger(href="#") Delete
-                          .sender.d-flex.align-items-right
                           .date #{moment(item.createdAt).format('lll')}
-                          a.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrash/' + item._id )
-                            svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
-                              polyline(points="3 6 5 6 21 6")
-                              path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")
-                      .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
-                        p
-                          a.toggle-trigger read
-                        p.
-                        .toggle-wrap(style='display:none;')
-                          .style-single.
-                            #{item.message}
+                      
+                    .email-head-sender.colorrow2.d-flex.align-items-center.justify-content-between.flex-wrap
+                        .sender.d-flex.align-items-center #{item.message}

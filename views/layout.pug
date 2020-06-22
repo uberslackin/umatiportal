@@ -15,9 +15,7 @@ html
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css')
         link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css')
         link(rel='stylesheet', href='/css/cal4.css')
-    if (title === 'Messages')
-        link(rel='stylesheet', href='/css/read-email.css')
-    if (title === 'Compose Message')
+    if (title=== "Messages Totrash" || title === "Messages Trash" || title === "Message Drafts" || title === 'Messages' || title === 'Messages Sent' || title === 'Compose Message')
         link(rel='stylesheet', href='/css/read-email.css')
     if (title === 'Personalized Podcast')
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
@@ -71,7 +69,8 @@ html
             tableOverflow:true,
          }
          $('#spreadsheet').jexcel(options);)
-  
+
+
     if (title === 'Test Calendar') 
         script(src="https://uicdn.toast.com/tui.code-snippet/latest/tui-code-snippet.js")
         script(src="https://uicdn.toast.com/tui.dom/v3.0.0/tui-dom.js")

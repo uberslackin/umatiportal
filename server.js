@@ -170,6 +170,10 @@ app.post('/account/activity', passportConfig.isAuthenticated, userController.pos
 app.get('/account/setup', passportConfig.isAuthenticated, userController.getSetup);
 app.post('/account/setup', passportConfig.isAuthenticated, userController.postUpdateSetup);
 app.get('/account/messages', passportConfig.isAuthenticated, userController.getMessages);
+app.get('/account/messagessent', passportConfig.isAuthenticated, userController.getMessagesSent);
+app.get('/account/messagedrafts', passportConfig.isAuthenticated, userController.getMessagesDrafts);
+app.get('/account/messagestrash', passportConfig.isAuthenticated, userController.getMessagesTrash);
+app.get('/account/messagestrash/:messageid', passportConfig.isAuthenticated, userController.getMessagesTotrash);
 app.get('/account/messagecompose', passportConfig.isAuthenticated, userController.getMessageCompose);
 app.post('/account/messagecreate', passportConfig.isAuthenticated, userController.postMessageCreate);
 app.get('/account/business', passportConfig.isAuthenticated, userController.getBusiness);

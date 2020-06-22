@@ -8,6 +8,20 @@ body{
     }
 }
 
+.colorrow1 {
+        background-color: #F5F5F5;
+        border: none;
+        padding: 10px 20px;
+        display: inline-block;
+        text-decoration: none;
+        font: bold 18px sans-serif;
+        -webkit-transition: background 1s; /* For Safari 3.0 to 6.0 */
+        transition: background 1s; /* For modern browsers */
+    }
+.colorrow1:hover {
+        background: #edf7ed;
+    }
+
 .inbox-wrapper .email-aside .aside-content .aside-header {
     padding: 0 0 5px;
     position: relative;

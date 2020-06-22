@@ -24,7 +24,7 @@ block content
                     .aside-nav.collapse
                       ul.nav
                         li.active
-                          a(href="../../../demo_1/pages/email/inbox.html")
+                          a(href="messages")
                             span.icon
                               svg.feather.feather-inbox(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                                 polyline(points="22 12 16 12 14 15 10 15 8 12 2 12")
@@ -32,7 +32,7 @@ block content
                             | Inbox
                             span.badge.badge-danger-muted.text-white.font-weight-bold.float-right 2
                         li
-                          a(href="#")
+                          a(href="messagessent")
                             span.icon
                               svg.feather.feather-mail(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                                 path(d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z")
@@ -47,7 +47,7 @@ block content
                             | Important
                             span.badge.badge-info-muted.text-white.font-weight-bold.float-right 4
                         li
-                          a(href="#")
+                          a(href="messagesdrafts")
                             span.icon
                               svg.feather.feather-file(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                                 path(d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z")
@@ -60,7 +60,7 @@ block content
                                 polygon(points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2")
                             | Tags
                         li
-                          a(href="#")
+                          a(href="messagestrash")
                             span.icon
                               svg.feather.feather-trash(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                                 polyline(points="3 6 5 6 21 6")
@@ -128,9 +128,8 @@ block content
                         label.col-md-3.col-form-label.font-weight-bold.text-right(for='sentto') To:
                         .col-md-7
 
-                           select#template.select.form-control.input-lg(for='sendto', name='sendto')
+                           select#sentto.select.form-control.input-lg(for='sentto', name='sentto')
                              option(value='0') -- Select --
-
                              - var groupp = { id: user.profile.group }
                              each item,index in user_list
                                if (groupp.id === item.profile.group)
