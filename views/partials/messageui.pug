@@ -20,7 +20,7 @@
                   .aside-nav.collapse
                     ul.nav
                       li.active
-                        a(href="messages")
+                        a(href="/account/messages")
                           span.icon
                             svg.feather.feather-inbox(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                               polyline(points="22 12 16 12 14 15 10 15 8 12 2 12")
@@ -28,14 +28,14 @@
                           | Inbox
                           span.badge.badge-danger-muted.text-white.font-weight-bold.float-right 2
                       li
-                        a(href="messagessent")
+                        a(href="/account/messagessent")
                           span.icon
                             svg.feather.feather-mail(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                               path(d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z")
                               polyline(points="22,6 12,13 2,6")
                           | Sent Mail
                       li
-                        a(href="#")
+                        a(href="/account/messagesimportant")
                           span.icon
                             svg.feather.feather-briefcase(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                               rect(x="2", y="7", width="20", height="14", rx="2", ry="2")
@@ -43,7 +43,7 @@
                           | Important
                           span.badge.badge-info-muted.text-white.font-weight-bold.float-right 4
                       li
-                        a(href="messagesdrafts")
+                        a(href="/account/messagesdrafts")
                           span.icon
                             svg.feather.feather-file(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                               path(d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z")
@@ -56,7 +56,7 @@
                               polygon(points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2")
                           | Tags
                       li
-                        a(href="messagetrash")
+                        a(href="messagestrash")
                           span.icon
                             svg.feather.feather-trash(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                               polyline(points="3 6 5 6 21 6")
@@ -82,30 +82,20 @@
                             path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
                             line(x1="7", y1="7", x2="7.01", y2="7")
                           |  Inspiration 
+
               .col-lg-9.email-content
-                .email-head
-                  .email-head-subject
-                    .title.d-flex.align-items-center.justify-content-between
-                      .d-flex.align-items-center
-                        a.active(href="#")
-                          span.icon
-                            svg.feather.feather-star.text-primary-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
-                              polygon(points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2")
-                        span #{user.profile.group} Group
-                      .icons
-                        a.icon(href="#")
-                          svg.feather.feather-share.text-muted.hover-primary-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Forward")
-                            path(d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8")
-                            polyline(points="16 6 12 2 8 6")
-                            line(x1="12", y1="2", x2="12", y2="15")
-                        a.icon(href="#")
-                          svg.feather.feather-printer.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Print")
-                            polyline(points="6 9 6 2 18 2 18 9")
-                            path(d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2")
-                            rect(x="6", y="14", width="12", height="8")
-                        a.icon(href="#")
-                          svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
-                            polyline(points="3 6 5 6 21 6")
-                            path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")
-
-
+                            .email-head
+                              .email-head-subject
+                                .title.d-flex.align-items-center.justify-content-between
+                                  .d-flex.align-items-center
+                                    a.active(href="#")
+                                      span.icon
+                                        svg.feather.feather-star.text-primary-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                                          polygon(points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2")
+                                    span #{user.profile.group} Group
+                                  .icons
+                                    a.icon(href="#")
+                                      svg.feather.feather-share.text-muted.hover-primary-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Forward")
+                                        path(d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8")
+                                        polyline(points="16 6 12 2 8 6")
+                                        line(x1="12", y1="2", x2="12", y2="15")

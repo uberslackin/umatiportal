@@ -15,10 +15,10 @@ block content
                         span.icon
                           svg.feather.feather-chevron-down(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                             polyline(points="6 9 12 15 18 9")
-                      span.title Sent Messages
+                      span.title Umati Messaging
 
 
-                    p.description #{user.profile.group} member
+                    p.description #{user.profile.name}
                     .aside-compose
                       a.btn.btn-primary.btn-block(href="messagecompose") Compose Message
                     .aside-nav.collapse
@@ -30,14 +30,14 @@ block content
                                 polyline(points="22 12 16 12 14 15 10 15 8 12 2 12")
                                 path(d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z")
                             | Inbox
-                            span.badge.badge-danger-muted.text-white.font-weight-bold.float-right #{messages.length}
+                            span.badge.badge-danger-muted.text-white.font-weight-bold.float-right 2
                         li
                           a(href="messagessent")
                             span.icon
                               svg.feather.feather-mail(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                                 path(d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z")
                                 polyline(points="22,6 12,13 2,6")
-                            | Sent Messages
+                            | Sent Mail
                         li
                           a(href="messagesimportant")
                             span.icon
@@ -75,13 +75,13 @@ block content
                               line(x1="7", y1="7", x2="7.01", y2="7")
                             |  Important 
                         li.active
-                          a(href="#")
+                          a(href="messagesbusiness")
                             svg.feather.feather-tag.text-primary(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                               path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
                               line(x1="7", y1="7", x2="7.01", y2="7")
                             |  Business 
                         li
-                          a(href="#")
+                          a(href="messagesinspiration")
                             svg.feather.feather-tag.text-info(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                               path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
                               line(x1="7", y1="7", x2="7.01", y2="7")
@@ -107,24 +107,26 @@ block content
                               polyline(points="6 9 6 2 18 2 18 9")
                               path(d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2")
                               rect(x="6", y="14", width="12", height="8")
+                          a.icon(href="#")
+                            svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
+                              polyline(points="3 6 5 6 21 6")
+                              path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")
 
 
 
-                  - var userr = { id: user.profile.name }
+                  - var userr = { id: user._id }
+                  p.strong #{userr.id}
+                  p.strong #{message_list[0].username}
                   each item,index in message_list
-                    if (item.sentfrom === userr.id)
-                      .email-head-sender.d-flex.justify-content-between.flex-wrap
+                    if (item.username == userr.id && item.status == "trash")
+                      .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
                         .d-flex.align-items-center
                           .avatar
-                            if user.profile.picture
-                              img.rounded-circle.user-avatar-md(src=user.profile.picture)
-                            else
-                              img.rounded-circle.user-avatar-md(src=user.gravatar(60))
-                              i.caret
-                          .sender.d-flex.align-items-left
-                            strong #{item.sentfrom} 
+                            img.rounded-circle.user-avatar-md(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="Avatar")
                           .sender.d-flex.align-items-center
-                            strong  -  #{item.subject}
+                            a(href="#") From: #{item.sentfrom}
+                            br
+                            span Subject: #{item.subject}
                             |  
                             .actions.dropdown
                               a.icon(href="#", data-toggle="dropdown")
@@ -136,16 +138,4 @@ block content
                                a.dropdown-item(href="#") Spam
                             .dropdown-divider
                                a.dropdown-item.text-danger(href="#") Delete
-                          .sender.d-flex.align-items-right
                           .date #{moment(item.createdAt).format('lll')}
-                          a.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrash/' + item._id )
-                            svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
-                              polyline(points="3 6 5 6 21 6")
-                              path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")
-                      .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
-                        p
-                          a.toggle-trigger read
-                        p.
-                        .toggle-wrap(style='display:none;')
-                          .style-single.
-                            #{item.message}

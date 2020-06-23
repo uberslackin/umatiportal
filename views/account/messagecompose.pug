@@ -139,6 +139,14 @@ block content
                         .col-md-7
                            input.form-control(type='text', name='subject', id='subject')
                      .form-group.row
+                        label.col-md-3.col-form-label.font-weight-bold.text-right(for='status') Status:
+                        .col-md-7
+                           select#template.select.form-control.input-lg(for='status', name='status')
+                              option(value='0') -- Select --
+                              option(value='8') Draft
+                              option(value='9') Send Now
+                              option(value='10') Send Late
+                     .form-group.row
                         label.col-md-3.col-form-label.font-weight-bold.text-right(for='message') Message:
                         .col-md-7
                            textarea.form-control.text-left( name="message", rows="6", cols="66", autocomplete='message' ) 

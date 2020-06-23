@@ -169,7 +169,7 @@ exports.getMessagesSent = function (req, res, next) {
  */
 exports.getMessagesDrafts = function (req, res, next) {
     var mysort = { createdAt: -1,  };
-Messages.find({_id:{$in: req.params.messageid}})
+    Messages.find()
         .sort(mysort)
         .exec(function (err, message_list) {
             if (err) { return next(err); }
@@ -185,7 +185,7 @@ Messages.find({_id:{$in: req.params.messageid}})
  */
 exports.getMessagesTags = function (req, res, next) {
     var mysort = { createdAt: -1,  };
-Messages.find({_id:{$in: req.params.messageid}})
+Messages.find()
         .sort(mysort)
         .exec(function (err, message_list) {
             if (err) { return next(err); }
@@ -195,21 +195,61 @@ Messages.find({_id:{$in: req.params.messageid}})
 };
 
 
+
+/**
+ * GET /account/messagestrashlist
+ * Internal Messages Trash
+ */
+exports.getMessagesTrashlist = function (req, res, next) {
+/**    var mysort = { createdAt: -1,  };
+  *      .sort(mysort)
+ */
+    Messages.find()
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagestrashlist', { title: 'Messages Trash List', message_list: message_list });
+        })
+};
+
+
+
 /**
  * GET /account/messagestrash
  * Internal Messages Trash
  */
-exports.getMessagesTrash = function (req, res, next) {
-    var mysort = { createdAt: -1,  };
-    Messages.find()
-        .sort(mysort)
-        .exec(function (err, message_list) {
-            if (err) { return next(err); }
-            // Successful, so render.
-            res.render('account/messagestrash', { title: 'Messages Trash', message_list: message_list });
-        })
+
+function getTrashlist(req, res) {
+  var query =  Messages.where({ _id: req.params.messageid });
+
+  query.findOne(function (err, messages) {
+      if (err)
+          return res.send(err)
+      res.render('account/messagestrashlist', { title: 'Messages Trash', message_list: messages });
+  });
 };
 
+exports.getMessagesTrash = function (req, res) {
+      getTrashlist(req,res);
+};
+
+
+
+
+/**
+ * GET /account/messagestrashremove
+ * Remove entry from the database after action is confirmed
+ */
+exports.getMessagesTrashRemove = function (req, res, next) {
+  Messages.findById(req.params.messageid, function(err, messages) {
+    if (message.username != req.user._id){
+      req.flash('danger', 'Not Authorized');
+      return res.redirect('messages');
+    }
+    else 
+      res.render('account/messagestrashremoved', { title: 'Messages Trash Removed', message_list: messages });
+  });
+};
 
 /**
  * GET /account/messagesimportant
@@ -228,17 +268,17 @@ exports.getMessagesImportant = function (req, res, next) {
 
 
 /**
- * GET /account/messagesTotrash
- * Internal Messages Totrash
+ * GET /account/messagesTrashRemoval
+ * Internal Messages Trash Removal
  */
-exports.getMessagesTotrash = function (req, res, next) {
+exports.getMessagesTrashRemoval = function (req, res, next) {
     var mysort = { createdAt: -1,  };
     Messages.find()
         .sort(mysort)
         .exec(function (err, message_list) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('account/messagestotrash', { title: 'Messages Totrash', message_list: message_list });
+            res.render('account/messagestrash', { title: 'Messages Trash', message_list: message_list });
         })
 
 Messages.findOne({_id: req.param.messageid}, {'messageItem.$': 1},
@@ -313,6 +353,19 @@ exports.getWardsignup = (req, res) => {
   } 
   res.render('account/wardsignup', {
     title: 'Create Food Logistics Account'
+  });
+};
+
+/**
+ * GET /wardsignup
+ * Food Group Signup page.
+ */
+exports.getAvatared = (req, res) => {
+let options = {};
+let avatars = new Avatars(sprites, options);
+let svg = avatars.create('custom-seed');
+  res.render('account/avatared', {
+    title: 'Create Avatars'
   });
 };
 
