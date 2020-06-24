@@ -5,37 +5,3 @@ block content
   include ../partials/messageui.pug
 
 
-                  - var userr = { id: user.profile.group }
-                  each item,index in message_list
-                    if (item.sentto === userr.id)
-                      .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
-                        .d-flex.align-items-center
-                          .avatar
-                            img.rounded-circle.user-avatar-md(src="https://bootdey.com/img/Content/avatar/avatar1.png", alt="Avatar")
-                          .sender.d-flex.align-items-center
-                            a(href="#") From: #{item.sentfrom}
-                            br
-                            span Subject: #{item.subject}
-                            |  
-                            .actions.dropdown
-                              a.icon(href="#", data-toggle="dropdown")
-                                svg.feather.feather-chevron-down(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
-                                polyline(points="6 9 12 15 18 9")
-                            .dropdown-menu(role="menu")
-                               a.dropdown-item(href="#") Mark as read
-                               a.dropdown-item(href="#") Mark as unread
-                               a.dropdown-item(href="#") Spam
-                            .dropdown-divider
-                               a.dropdown-item.text-danger(href="#") Delete
-                          .date #{moment(item.createdAt).format('lll')}
-                      
-                    .email-head-sender.colorrow1.d-flex.align-items-center.justify-content-between.flex-wrap
-                      .d-flex.align-items-center
-                        .sender.d-flex.align-items-center #{item.sentfrom}
-                      .d-flex.align-items-center
-                        .sender.d-flex.align-items-center #{item.subject}
-                        br
-                      .d-flex.align-items-center
-                        .date #{moment(item.createdAt).format('lll')}
-                    .email-head-sender.colorrow2.d-flex.align-items-center.justify-content-between.flex-wrap
-                        .sender.d-flex.align-items-center #{item.message}

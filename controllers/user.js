@@ -251,6 +251,25 @@ exports.getMessagesTrashRemove = function (req, res, next) {
   });
 };
 
+exports.getMessagesTrashEmpty = function (req, res, next) {
+  
+  Messages.findByIdAndRemove(req.params.messageid)
+    .then((result) => {
+      res.json({
+        success: true,
+        msg: `It has been deleted.`,
+        result: {
+          _id: result._id,
+          name: result.subject
+        }
+      });
+    })
+    .catch((err) => {
+      res.status(404).json({ success: false, msg: 'Nothing to delete.' });
+    });
+};
+
+
 /**
  * GET /account/messagesimportant
  * Internal Messages Important
@@ -271,24 +290,13 @@ exports.getMessagesImportant = function (req, res, next) {
  * GET /account/messagesTrashRemoval
  * Internal Messages Trash Removal
  */
-exports.getMessagesTrashRemoval = function (req, res, next) {
-    var mysort = { createdAt: -1,  };
-    Messages.find()
-        .sort(mysort)
+exports.getMessagesTrashRemove = function (req, res, next) {
+    Messages.findByIdAndRemove(req.params.messageid)
         .exec(function (err, message_list) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('account/messagestrash', { title: 'Messages Trash', message_list: message_list });
+            res.render('account/messagestrashremoved', { title: 'Messages Trash', message_list: message_list });
         })
-
-Messages.findOne({_id: req.param.messageid}, {'messageItem.$': 1},
-    function (err, message) {
-        if (message) {
-            console.log(message.messageItem[0]._id);
-        }
-    }
-);
-
 };
 
 
@@ -368,6 +376,10 @@ let svg = avatars.create('custom-seed');
     title: 'Create Avatars'
   });
 };
+
+
+
+
 
 
 /**

@@ -15,7 +15,7 @@ block content
                         span.icon
                           svg.feather.feather-chevron-down(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                             polyline(points="6 9 12 15 18 9")
-                      span.title Umati Messaging
+                      span.title Message Trashbin
 
 
                     p.description #{user.profile.name}
@@ -115,8 +115,6 @@ block content
 
 
                   - var userr = { id: user._id }
-                  p.strong #{userr.id}
-                  p.strong #{message_list[0].username}
                   each item,index in message_list
                     if (item.username == userr.id && item.status == "trash")
                       .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
@@ -126,7 +124,7 @@ block content
                           .sender.d-flex.align-items-center
                             a(href="#") From: #{item.sentfrom}
                             br
-                            span Subject: #{item.subject}
+                            span Subjecto: #{item.subject}
                             |  
                             .actions.dropdown
                               a.icon(href="#", data-toggle="dropdown")
@@ -139,3 +137,9 @@ block content
                             .dropdown-divider
                                a.dropdown-item.text-danger(href="#") Delete
                           .date #{moment(item.createdAt).format('lll')}
+
+                        a.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrashremove/' + item._id )
+                          svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
+                            polyline(points="3 6 5 6 21 6")
+                            path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")
+

@@ -20,6 +20,10 @@ const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const avatars = require('@dicebear/avatars');
 const sprites = require('@dicebear/avatars-male-sprites');
+
+
+
+
 //const multer = require('multer');
 //const avatarsMiddleware = require('adorable-avatars');
 
@@ -135,7 +139,11 @@ app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/popper.js/d
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/bootstrap/dist/js'), { maxAge: 31557600000 }));
 app.use('/js/lib', express.static(path.join(__dirname, 'node_modules/jquery/dist'), { maxAge: 31557600000 }));
 app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawesome/fontawesome-free/webfonts'), { maxAge: 31557600000 }));
-//app.use('/myAvatars', avatarsMiddleware);
+app.use('/account/avatars', express.static(path.join(__dirname, 'node_modules/node_modules/avatars-utils/dist'), { maxAge: 31557600000 }));
+
+
+// Import routes
+
 
 
 /**
@@ -176,9 +184,9 @@ app.get('/account/messagessent', passportConfig.isAuthenticated, userController.
 app.get('/account/messagesdrafts', passportConfig.isAuthenticated, userController.getMessagesDrafts);
 app.get('/account/messagestags', passportConfig.isAuthenticated, userController.getMessagesTags);
 app.get('/account/messagesimportant', passportConfig.isAuthenticated, userController.getMessagesImportant);
-app.get('/account/messagestrash', passportConfig.isAuthenticated, userController.getMessagesTrashlist);
+app.get('/account/messagestrashremove/:messageid', passportConfig.isAuthenticated, userController.getMessagesTrashRemove);
 app.get('/account/messagestrash/:messageid', passportConfig.isAuthenticated, userController.getMessagesTrash);
-app.get('/account/messagestrashremove', passportConfig.isAuthenticated, userController.getMessagesTrashRemove);
+app.get('/account/messagestrash', passportConfig.isAuthenticated, userController.getMessagesTrashlist);
 app.get('/account/messagecompose', passportConfig.isAuthenticated, userController.getMessageCompose);
 app.post('/account/messagecreate', passportConfig.isAuthenticated, userController.postMessageCreate);
 app.get('/account/business', passportConfig.isAuthenticated, userController.getBusiness);
@@ -267,7 +275,6 @@ app.get('/games/si', userController.getSi);
 app.get('/projects', userController.getProjects);
 app.get('/account/jexcel', userController.getJexcel);
 app.get('/account/avatared', userController.getAvatared);
-
 /**
  * API examples routes.
  */

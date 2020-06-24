@@ -119,7 +119,9 @@ block content
                             if user.profile.picture
                               img.rounded-circle.user-avatar-md(src=user.profile.picture)
                             else
-                              img.rounded-circle.user-avatar-md(src=user.gravatar(60))
+                              - var avatarurl ='https://avatars.dicebear.com/api/human/' + item.sentfrom + '.svg';
+                              img.rounded-circle.user-avatar-md(src=avatarurl)
+
                               i.caret
                           .sender.d-flex.align-items-left
                             strong #{item.sentfrom} 
@@ -138,13 +140,19 @@ block content
                                a.dropdown-item.text-danger(href="#") Delete
                           .sender.d-flex.align-items-right
                           .date #{moment(item.createdAt).format('lll')}
-                          a.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrash/' + item._id )
+                          a.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrashremove/' + item._id )
                             svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
                               polyline(points="3 6 5 6 21 6")
                               path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")
                       .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
                         p
                           a.toggle-trigger read
+                        p.
+                        .toggle-wrap(style='display:none;')
+                          .style-single.
+                            #{item.message}
+                        p
+                          a.toggle-trigger roo
                         p.
                         .toggle-wrap(style='display:none;')
                           .style-single.
