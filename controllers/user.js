@@ -144,6 +144,30 @@ exports.getMessages = function (req, res, next) {
         })
 };
 
+/**
+ * GET /account/messagesbusiness
+ * Internal Messages Business Descriptor
+ */
+exports.getMessagesBusiness = function (req, res, next) {
+    var mysort = { createdAt: -1,  };
+    Messages.find()
+        .sort(mysort)
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagesbusiness', { title: 'Messages Business', message_list: message_list });
+        })
+};
+exports.getMessagesGroupBusiness = function (req, res, next) {
+    var mysort = { createdAt: -1,  };
+    Messages.find()
+        .sort(mysort)
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagesgroupbusiness', { title: 'Messages Business', message_list: message_list });
+        })
+};
 
 /**
  * GET /account/messagessent
@@ -159,8 +183,6 @@ exports.getMessagesSent = function (req, res, next) {
             res.render('account/messagessent', { title: 'Messages Sent', message_list: message_list });
         })
 };
-
-
 
 
 /**
@@ -180,6 +202,35 @@ exports.getMessagesDrafts = function (req, res, next) {
 
 
 /**
+ * GET /account/messagesdrafts
+ * Internal Messages
+ */
+exports.getMessagesInspiration = function (req, res, next) {
+    var mysort = { createdAt: -1,  };
+    Messages.find()
+        .sort(mysort)
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagesinspiration', { title: 'Messages of Inspiration', message_list: message_list });
+        })
+};
+
+exports.getMessagesGroupInspiration = function (req, res, next) {
+    var mysort = { createdAt: -1,  };
+    Messages.find()
+        .sort(mysort)
+        .exec(function (err, message_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/messagesgroupinspiration', { title: 'Messages of Inspiration', message_list: message_list });
+        })
+};
+
+
+
+
+/**
  * GET /account/messagestags
  * Internal Messages
  */
@@ -195,7 +246,6 @@ Messages.find()
 };
 
 
-
 /**
  * GET /account/messagestrashlist
  * Internal Messages Trash
@@ -208,10 +258,9 @@ exports.getMessagesTrashlist = function (req, res, next) {
         .exec(function (err, message_list) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('account/messagestrashlist', { title: 'Messages Trash List', message_list: message_list });
+            res.render('account/messagestrash', { title: 'Messages Trash List', message_list: message_list });
         })
 };
-
 
 
 /**
@@ -225,7 +274,7 @@ function getTrashlist(req, res) {
   query.findOne(function (err, messages) {
       if (err)
           return res.send(err)
-      res.render('account/messagestrashlist', { title: 'Messages Trash', message_list: messages });
+      res.render('account/messagestrash', { title: 'Messages Trash', message_list: messages });
   });
 };
 
@@ -235,39 +284,37 @@ exports.getMessagesTrash = function (req, res) {
 
 
 
-
 /**
- * GET /account/messagestrashremove
- * Remove entry from the database after action is confirmed
+ * GET /account/messagestrashmoveajax
+ * Update status of entry to 'trash' or whatever needed
  */
-exports.getMessagesTrashRemove = function (req, res, next) {
-  Messages.findById(req.params.messageid, function(err, messages) {
-    if (message.username != req.user._id){
-      req.flash('danger', 'Not Authorized');
-      return res.redirect('messages');
+exports.getMessagesTrashMoveAjax = function (req, res) {
+
+    var itemid = req.params.itemid;
+    var status = req.params.status;
+
+    var data = {
+      status: status
+    };
+     console.log("Itemid: " + itemid + " status: " + status );
+    Messages.findByIdAndUpdate(itemid, data, function(err, result) {
+    if (err){
+         res.send(err);
     }
-    else 
-      res.render('account/messagestrashremoved', { title: 'Messages Trash Removed', message_list: messages });
+    else{
+         res.status(200);
+         console.log("RESULT: " + result);
+    };
+
   });
 };
 
-exports.getMessagesTrashEmpty = function (req, res, next) {
-  
-  Messages.findByIdAndRemove(req.params.messageid)
-    .then((result) => {
-      res.json({
-        success: true,
-        msg: `It has been deleted.`,
-        result: {
-          _id: result._id,
-          name: result.subject
-        }
-      });
-    })
-    .catch((err) => {
-      res.status(404).json({ success: false, msg: 'Nothing to delete.' });
-    });
-};
+
+exports.getLink = function (req, res, next) {
+  usernameparam = req.params.username;
+  res.render('link')
+
+  };
 
 
 /**
@@ -285,20 +332,33 @@ exports.getMessagesImportant = function (req, res, next) {
         })
 };
 
-
-/**
- * GET /account/messagesTrashRemoval
- * Internal Messages Trash Removal
- */
-exports.getMessagesTrashRemove = function (req, res, next) {
-    Messages.findByIdAndRemove(req.params.messageid)
+exports.getMessagesGroupImportant = function (req, res, next) {
+    var mysort = { createdAt: -1,  };
+    Messages.find()
+        .sort(mysort)
         .exec(function (err, message_list) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('account/messagestrashremoved', { title: 'Messages Trash', message_list: message_list });
+            res.render('account/messagesgroupimportant', { title: 'Messages Important', message_list: message_list });
         })
 };
 
+
+
+/**
+ * GET /account/messagesTrashRemove
+ * Internal Messages Trash Remove
+ */
+exports.getMessagesTrashRemove = function (req, res, next) {
+    Messages.findByIdAndRemove(req.params.itemid, function(err, result) {
+    if (err){
+         res.send(err);
+     }
+     else {
+         res.status(200);
+     };
+     })
+};
 
 /**
  * GET /account/messagecompose
@@ -376,8 +436,6 @@ let svg = avatars.create('custom-seed');
     title: 'Create Avatars'
   });
 };
-
-
 
 
 

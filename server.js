@@ -174,6 +174,7 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+app.get('/link/:username', userController.getLink);
 app.get('/account/activity', passportConfig.isAuthenticated, userController.getActivity);
 app.get('/account/activity-print', passportConfig.isAuthenticated, userController.getActivityprint);
 app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
@@ -182,9 +183,17 @@ app.post('/account/setup', passportConfig.isAuthenticated, userController.postUp
 app.get('/account/messages', passportConfig.isAuthenticated, userController.getMessages);
 app.get('/account/messagessent', passportConfig.isAuthenticated, userController.getMessagesSent);
 app.get('/account/messagesdrafts', passportConfig.isAuthenticated, userController.getMessagesDrafts);
+app.get('/account/messagesinspiration', passportConfig.isAuthenticated, userController.getMessagesInspiration);
+app.get('/account/messagesbusiness', passportConfig.isAuthenticated, userController.getMessagesBusiness);
 app.get('/account/messagestags', passportConfig.isAuthenticated, userController.getMessagesTags);
 app.get('/account/messagesimportant', passportConfig.isAuthenticated, userController.getMessagesImportant);
-app.get('/account/messagestrashremove/:messageid', passportConfig.isAuthenticated, userController.getMessagesTrashRemove);
+app.get('/account/messagesgroupinspiration', passportConfig.isAuthenticated, userController.getMessagesGroupInspiration);
+app.get('/account/messagesgroupbusiness', passportConfig.isAuthenticated, userController.getMessagesGroupBusiness);
+app.get('/account/messagesgroupimportant', passportConfig.isAuthenticated, userController.getMessagesGroupImportant);
+
+app.get('/account/messagestrashremove/:itemid', passportConfig.isAuthenticated, userController.getMessagesTrashRemove);
+app.get('/account/messagestrashmoveajax/:itemid/:status/', passportConfig.isAuthenticated, userController.getMessagesTrashMoveAjax);
+//app.get('/account/messagestrashmove/:messageid', passportConfig.isAuthenticated, userController.getMessagesTrashMove);
 app.get('/account/messagestrash/:messageid', passportConfig.isAuthenticated, userController.getMessagesTrash);
 app.get('/account/messagestrash', passportConfig.isAuthenticated, userController.getMessagesTrashlist);
 app.get('/account/messagecompose', passportConfig.isAuthenticated, userController.getMessageCompose);
@@ -268,7 +277,6 @@ app.post('/account/payment', passportConfig.isAuthenticated, userController.post
 
 app.post('/account/upload', passportConfig.isAuthenticated, blogController.postUpload);
 
-// app.get('/account/ajax', userController.getAjax);
 
 app.get('/games/pong', userController.getPong);
 app.get('/games/si', userController.getSi);

@@ -23,7 +23,7 @@ block content
                       a.btn.btn-primary.btn-block(href="messagecompose") Compose Message
                     .aside-nav.collapse
                       ul.nav
-                        li.active
+                        li
                           a(href="messages")
                             span.icon
                               svg.feather.feather-inbox(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
@@ -46,7 +46,7 @@ block content
                                 path(d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16")
                             | Important
                             span.badge.badge-info-muted.text-white.font-weight-bold.float-right 4
-                        li
+                        li.active
                           a(href="messagesdrafts")
                             span.icon
                               svg.feather.feather-file(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
@@ -112,14 +112,15 @@ block content
 
                   - var userr = { id: user.profile.name }
                   each item,index in message_list
-                    if (item.status=== "draft")
+                    if (item.status=== "Draft")
                       .email-head-sender.d-flex.justify-content-between.flex-wrap
                         .d-flex.align-items-center
                           .avatar
                             if user.profile.picture
                               img.rounded-circle.user-avatar-md(src=user.profile.picture)
                             else
-                              img.rounded-circle.user-avatar-md(src=user.gravatar(60))
+                              - var avatarurl ='https://avatars.dicebear.com/api/human/' + item.username + '.svg';
+                              img.rounded-circle.user-avatar-md(src=avatarurl)
                               i.caret
                           .sender.d-flex.align-items-left
                             strong #{item.sentfrom} 
@@ -138,7 +139,7 @@ block content
                                a.dropdown-item.text-danger(href="#") Delete
                           .sender.d-flex.align-items-right
                           .date #{moment(item.createdAt).format('lll')}
-                          a.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrash/' + item._id )
+                          a.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrashmoveajax/' + item._id + '/trash' )
                             svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
                               polyline(points="3 6 5 6 21 6")
                               path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")

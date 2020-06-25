@@ -23,6 +23,10 @@ $(document).ready(() => {
 });
 */
 
+    $('.trash-ajax').click(function(e) {
+        e.preventDefault();
+    });
+
     $(".toggle-trigger").click(function() {
     $(this).parent().nextAll('.toggle-wrap').first().toggle('slow');
 

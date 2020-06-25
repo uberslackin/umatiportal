@@ -143,7 +143,6 @@ exports.getElevatorentryupdate = function (req, res) {
       seqid: seqid,
       dayid: dayid
     };
-     console.log("Itemid: " + itemid + " dayid: " + dayid + " seqid: " + seqid);
     // save the update 
 	// findOneAndUpdate() -g june 8 2020
     Elevator.findByIdAndUpdate(itemid, data, function(err, result) {
@@ -153,7 +152,6 @@ exports.getElevatorentryupdate = function (req, res) {
     }
     else{
          res.send(result);
-	 console.log("RESULT: " + result);
     };
 
   });

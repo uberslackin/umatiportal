@@ -23,7 +23,7 @@ block content
                       a.btn.btn-primary.btn-block(href="messagecompose") Compose Message
                     .aside-nav.collapse
                       ul.nav
-                        li.active
+                        li
                           a(href="messages")
                             span.icon
                               svg.feather.feather-inbox(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
@@ -39,7 +39,7 @@ block content
                                 polyline(points="22,6 12,13 2,6")
                             | Sent Mail
                         li
-                          a(href="#")
+                          a(href="messagesimportant")
                             span.icon
                               svg.feather.feather-briefcase(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                                 rect(x="2", y="7", width="20", height="14", rx="2", ry="2")
@@ -53,7 +53,7 @@ block content
                                 path(d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z")
                                 polyline(points="13 2 13 9 20 9")
                             | Drafts
-                        li
+                        li.active
                           a(href="messagestags")
                             span.icon
                               svg.feather.feather-star(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
@@ -86,6 +86,27 @@ block content
                               path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
                               line(x1="7", y1="7", x2="7.01", y2="7")
                             |  Inspiration 
+                      span.title Group Share
+                      ul.nav.nav-pills.nav-stacked
+                        li
+                          a(href="messagesgroupimportant")
+                            svg.feather.feather-tag.text-warning(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                              path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
+                              line(x1="7", y1="7", x2="7.01", y2="7")
+                            |  Important
+                        li
+                          a(href="messagesgroupbusiness")
+                            svg.feather.feather-tag.text-primary(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                              path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
+                              line(x1="7", y1="7", x2="7.01", y2="7")
+                            |  Business
+                        li.active
+                          a(href="messagesgroupinspiration")
+                            svg.feather.feather-tag.text-info(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                              path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
+                              line(x1="7", y1="7", x2="7.01", y2="7")
+                            |  Inspiration
+
                 .col-lg-9.email-content
                   .email-head
                     .email-head-subject
@@ -119,7 +140,8 @@ block content
                             if user.profile.picture
                               img.rounded-circle.user-avatar-md(src=user.profile.picture)
                             else
-                              img.rounded-circle.user-avatar-md(src=user.gravatar(60))
+                              - var avatarurl ='https://avatars.dicebear.com/api/human/' + item.sentfrom + '.svg';
+                              img.rounded-circle.user-avatar-md(src=avatarurl)
                               i.caret
                           .sender.d-flex.align-items-left
                             strong #{item.sentfrom} 
@@ -138,7 +160,7 @@ block content
                                a.dropdown-item.text-danger(href="#") Delete
                           .sender.d-flex.align-items-right
                           .date #{moment(item.createdAt).format('lll')}
-                          a.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrash/' + item._id )
+                          a.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrashmoveajax/' + item._id + '/trash' )
                             svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
                               polyline(points="3 6 5 6 21 6")
                               path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")

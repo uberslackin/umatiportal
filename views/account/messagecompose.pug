@@ -23,7 +23,7 @@ block content
                       a.btn.btn-primary.btn-block(href="messages") Messages
                     .aside-nav.collapse
                       ul.nav
-                        li.active
+                        li
                           a(href="messages")
                             span.icon
                               svg.feather.feather-inbox(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
@@ -143,9 +143,8 @@ block content
                         .col-md-7
                            select#template.select.form-control.input-lg(for='status', name='status')
                               option(value='0') -- Select --
-                              option(value='8') Draft
-                              option(value='9') Send Now
-                              option(value='10') Send Late
+                              option(value='Draft') Draft
+                              option(value='Sent') Send Now
                      .form-group.row
                         label.col-md-3.col-form-label.font-weight-bold.text-right(for='message') Message:
                         .col-md-7
