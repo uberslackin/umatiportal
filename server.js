@@ -18,8 +18,6 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
-const avatars = require('@dicebear/avatars');
-const sprites = require('@dicebear/avatars-male-sprites');
 
 
 
