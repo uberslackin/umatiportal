@@ -20,13 +20,11 @@ const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
 const avatars = require('@dicebear/avatars');
 const sprites = require('@dicebear/avatars-male-sprites');
-
+const avatarsInitialsSprites = require("@dicebear/avatars-initials-sprites")
 
 
 
 //const multer = require('multer');
-//const avatarsMiddleware = require('adorable-avatars');
-
 //const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
 /**

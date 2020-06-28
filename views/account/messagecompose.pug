@@ -131,8 +131,9 @@ block content
                            select#sentto.select.form-control.input-lg(for='sentto', name='sentto')
                              option(value='0') -- Select --
                              - var groupp = { id: user.profile.group }
+                             - var grouppp = { id: user.profile.name }
                              each item,index in user_list
-                               if (groupp.id === item.profile.group)
+                               if (groupp.id === item.profile.group  && grouppp.id !== item.profile.name)
                                  option(value=item.profile.name) #{item.profile.name}
                      .form-group.row
                         label.col-md-3.col-form-label.font-weight-bold.text-right(for='subject') Subject:

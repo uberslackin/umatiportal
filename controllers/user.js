@@ -296,14 +296,14 @@ exports.getMessagesTrashMoveAjax = function (req, res) {
     var data = {
       status: status
     };
-     console.log("Itemid: " + itemid + " status: " + status );
+ /*  console.log("Itemid: " + itemid + " status: " + status );*/
     Messages.findByIdAndUpdate(itemid, data, function(err, result) {
     if (err){
          res.send(err);
     }
     else{
          res.status(200);
-         console.log("RESULT: " + result);
+ /*        console.log("RESULT: " + result);*/
     };
 
   });
