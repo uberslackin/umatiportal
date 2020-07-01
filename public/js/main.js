@@ -23,7 +23,8 @@ $(document).ready(() => {
 });
 */
 
-    $('.trash-ajax').click(function(e) {
+    $('.movetrash').click(function(e) {
+	(this).parent.remove();
         e.preventDefault();
     });
 
