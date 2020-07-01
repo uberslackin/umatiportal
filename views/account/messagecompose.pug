@@ -130,6 +130,7 @@ block content
 
                            select#sentto.select.form-control.input-lg(for='sentto', name='sentto')
                              option(value='0') -- Select --
+                             option(value='group') All members
                              - var groupp = { id: user.profile.group }
                              - var grouppp = { id: user.profile.name }
                              each item,index in user_list

@@ -76,7 +76,7 @@ block content
                             |  Important 
                         li
                           a(href="messagesbusiness")
-                            svg.feather.feather-tag.text-primary(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                            svg.feather.feather-briefcase.text-primary(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                               path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
                               line(x1="7", y1="7", x2="7.01", y2="7")
                             |  Business 
@@ -90,21 +90,21 @@ block content
                       ul.nav.nav-pills.nav-stacked
                         li
                           a(href="messagesgroupimportant")
-                            svg.feather.feather-tag.text-warning(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
-                              path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
-                              line(x1="7", y1="7", x2="7.01", y2="7")
+                            svg.feather.feather-briefcase.text-success(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                                path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
+                                line(x1="7", y1="7", x2="7.01", y2="7")
                             |  Important
                         li
                           a(href="messagesgroupbusiness")
-                            svg.feather.feather-tag.text-primary(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
-                              path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
-                              line(x1="7", y1="7", x2="7.01", y2="7")
+                            svg.feather.feather-briefcase.text-primary(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                                rect(x="2", y="7", width="20", height="14", rx="2", ry="2")
+                                path(d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16")
                             |  Business
                         li
                           a(href="messagesgroupinspiration")
-                            svg.feather.feather-tag.text-info(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
-                              path(d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z")
-                              line(x1="7", y1="7", x2="7.01", y2="7")
+                            svg.feather.feather-chevrons-up.text-info(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                              path(d="17 11 12 6 7 11")
+                              path(d="17 18 12 13 7 18")
                             |  Inspiration
                 .col-lg-9.email-content
                   .email-head
@@ -138,14 +138,14 @@ block content
                   each item,index in message_list
                     if (item.sentto === userr.id && item.status === "Sent")
                       - var avatarurl = "https://avatars.dicebear.com/api/human/" + item.sentfrom + ".svg";
-                      .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
-                        .d-flex.align-items-center
-                          .avatar
+                      .email-head-sender.d-flex.align-items-center.justify-content-between
+                        .d-flex.align-items-right
+                          .avatar.col
                             img.rounded-circle.user-avatar-md(src=avatarurl, alt="Avatar")
-                          .sender.d-flex.align-items-center
-                            a(href="#") From: #{item.sentfrom}
-                            br
-                            span Subject: #{item.subject}
+                          .sender.d-flex.align-items-center.col
+                            a(href="#") #{item.sentfrom}
+                          .sender.d-flex.align-items-center.col
+                            a(href="#") #{item.subject}
                             |  
                             .actions.dropdown
                               a.icon(href="#", data-toggle="dropdown")
@@ -157,12 +157,20 @@ block content
                                a.dropdown-item(href="#") Spam
                             .dropdown-divider
                                a.dropdown-item.text-danger(href="#") Delete
-                          .date #{moment(item.createdAt).format('lll')}
-                            a.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrashmoveajax/' + item._id + '/trash/' )
+                          .date.col-sm-3 #{moment(item.createdAt).format('MMM Do h:mm a')}
+                          br
+                          a.col.justify-content-end.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrashmoveajax/' + item._id + '/trash/' )
                               svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
                                 polyline(points="3 6 5 6 21 6")
                                 path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")
-                 
+
+                          a.col.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrashmoveajax/' + item._id + '/draft/' )
+                              svg.feather.feather-file(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
+                                path(d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z")
+                                polyline(points="13 2 13 9 20 9")
+
+
+
                       .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
                         p
                           a.toggle-trigger read
