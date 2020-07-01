@@ -37,7 +37,7 @@ block content
                               svg.feather.feather-mail(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round")
                                 path(d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z")
                                 polyline(points="22,6 12,13 2,6")
-                            | Sent Mail
+                            | Sent Messages
                         li
                           a(href="messagesimportant")
                             span.icon
@@ -157,16 +157,13 @@ block content
                                a.dropdown-item(href="#") Spam
                             .dropdown-divider
                                a.dropdown-item.text-danger(href="#") Delete
-<<<<<<< HEAD
                           .date #{moment(item.createdAt).format('lll')}
                             a.movetrash.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrashmoveajax/' + item._id + '/trash' )
                               svg.feather.feather-trash.trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
-=======
                           .date.col-sm-3 #{moment(item.createdAt).format('MMM Do h:mm a')}
                           br
                           a.col.justify-content-end.icon.d-flex.align-items-right.justify-content-between.flex-wrap(href='messagestrashmoveajax/' + item._id + '/trash/' )
                               svg.feather.feather-trash.text-muted(xmlns="http://www.w3.org/2000/svg", width="24", height="24", viewBox="0 0 24 24", fill="none", stroke="currentColor", stroke-width="2", stroke-linecap="round", stroke-linejoin="round", data-toggle="tooltip", data-original-title="Delete")
->>>>>>> b8d7b5acdbc4edd933999395fca075886b0280cf
                                 polyline(points="3 6 5 6 21 6")
                                 path(d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2")
 

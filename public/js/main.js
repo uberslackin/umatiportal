@@ -23,13 +23,10 @@ $(document).ready(() => {
 });
 */
 
-<<<<<<< HEAD
     $('.movetrash').click(function(e) {
 	(this).parent.remove();
         e.preventDefault();
     });
-=======
->>>>>>> b8d7b5acdbc4edd933999395fca075886b0280cf
 
     $(".toggle-trigger").click(function() {
     $(this).parent().nextAll('.toggle-wrap').first().toggle('slow');
