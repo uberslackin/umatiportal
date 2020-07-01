@@ -18,13 +18,17 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
+<<<<<<< HEAD
 
+=======
+const avatars = require('@dicebear/avatars');
+const sprites = require('@dicebear/avatars-male-sprites');
+const avatarsInitialsSprites = require("@dicebear/avatars-initials-sprites")
+>>>>>>> b8d7b5acdbc4edd933999395fca075886b0280cf
 
 
 
 //const multer = require('multer');
-//const avatarsMiddleware = require('adorable-avatars');
-
 //const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
 /**

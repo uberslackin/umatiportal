@@ -348,9 +348,10 @@ $enable-gradients: true;
 .btn-snapchat {
   background-color: #fffc00;
   color: #000 !important;
-
+read
   &:hover, &:active {
-    background-color: #f1ef00;
+    /*background-color: #f1ef00;*/
+    background-color: #f0f3cf;
   }
 }
 
@@ -466,6 +467,9 @@ button#gdpr-cookie-advanced {
 
 // timeline
  
+.blue {
+  size: 120%;
+}
 
 .blue-bg {
   background-color: #4D4545;

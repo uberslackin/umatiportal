@@ -23,16 +23,40 @@ $(document).ready(() => {
 });
 */
 
+<<<<<<< HEAD
     $('.movetrash').click(function(e) {
 	(this).parent.remove();
         e.preventDefault();
     });
+=======
+>>>>>>> b8d7b5acdbc4edd933999395fca075886b0280cf
 
     $(".toggle-trigger").click(function() {
     $(this).parent().nextAll('.toggle-wrap').first().toggle('slow');
 
     });
 
+   $("umatidb").hover(function() {
+     $(this).addClass("blue");
+     }, function() {
+       $(this).removeClass("blue");
+   });
+
+   $( ".umatidb" ).on( "click", function() {
+        $(this).parent().remove();
+        $(".email-head-sender").next().eq(0).remove();
+     //   $(this).nextAll('.email-head-sender').first().remove();
+        $(this).load("/account/messagestrashmoveajax/" + $(this).attr('href') + "/" + $(this).attr('newstatus') );
+         return false;
+      });
+
+   $( ".umatidbr" ).on( "click", function() {
+        $(this).parent().remove();
+        $(".email-head-sender").next().eq(0).remove();
+     //   $(this).nextAll('.email-head-sender').first().remove();
+        $(this).load("/account/messagestrashremove/" + $(this).attr('href') + "/" + $(this).attr('newstatus') );
+         return false;
+      });
 
   var JSON = [
     {

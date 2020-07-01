@@ -18,7 +18,7 @@ block content
                       span.title Sent Messages
 
 
-                    p.description #{user.profile.group} member
+                    p.description #{user.profile.name}
                     .aside-compose
                       a.btn.btn-primary.btn-block(href="messagecompose") Compose Message
                     .aside-nav.collapse
@@ -140,11 +140,11 @@ block content
                             if user.profile.picture
                               img.rounded-circle.user-avatar-md(src=user.profile.picture)
                             else
-                              - var avatarurl ='https://avatars.dicebear.com/api/human/' + item.sentfrom + '.svg';
+                              - var avatarurl ='https://avatars.dicebear.com/api/human/' + item.sentto + '.svg';
                               img.rounded-circle.user-avatar-md(src=avatarurl)
                               i.caret
                           .sender.d-flex.align-items-left
-                            strong #{item.sentfrom} 
+                            strong #{item.sentyo} 
                           .sender.d-flex.align-items-center
                             strong  -  #{item.subject}
                             |  
