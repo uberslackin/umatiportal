@@ -23,19 +23,11 @@ const randomBytesAsync = promisify(crypto.randomBytes);
 
 
 
-/*
-   $match: {
-      name: { $in: [ "USA", "China" ] }
-   }
-*/
-
-
-
 exports.getElevatorapi = function (req, res, next) {
   //  var mySort = ['group', 'Taxes with mom'];
     Elevator.find()
         .sort([['elevdate', 'ascending']])
-        .sort([['group', 'Ward Food Logistics']])
+        .sort([['group', "Ward Food Logistics"]])
 	//.sort(mySort)
         .exec(function (err, elev_data) {
             if (err) { return next(err); }

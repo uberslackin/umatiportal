@@ -133,7 +133,7 @@ block content
                   - var userr = { id: user.profile.name }
                   each item,index in message_list
                     if (item.sentfrom == userr.id)
-                    if (item.status == "sent")
+                    if (item.status == "Sent")
                       .email-head-sender.d-flex.justify-content-between.flex-wrap
                         .d-flex.align-items-center
                           .avatar
@@ -167,12 +167,6 @@ block content
                       .email-head-sender.d-flex.align-items-center.justify-content-between.flex-wrap
                         p
                           a.toggle-trigger read
-                        p.
-                        .toggle-wrap(style='display:none;')
-                          .style-single.
-                            #{item.message}
-                        p
-                          a.toggle-trigger roo
                         p.
                         .toggle-wrap(style='display:none;')
                           .style-single.

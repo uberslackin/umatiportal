@@ -15,6 +15,8 @@
         if user
           li.nav-item(class=(title === 'Messages') ? 'active' : undefined)
             a.nav-link(href='/account/messages') Messages
+        if (user.profile.group == "Ward Food Logistics")  
+            a.nav-link(href='/account/elevatormanage') Action board
       ul.nav.navbar-nav.ml-auto
         if !user
           li.nav-item(class=(title === 'Login') ? 'active' : undefined)

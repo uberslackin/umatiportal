@@ -229,7 +229,7 @@ app.get('/account/createinventory', passportConfig.isAuthenticated, inventoryCon
 app.post('/account/createinventory', passportConfig.isAuthenticated, inventoryController.postCreateinventory);
 app.get('/account/inventory/:inventory_id', passportConfig.isAuthenticated, inventoryController.getUpdateInventory);
 app.post('/account/inventoryedit', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
-
+app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
 app.get('/account/elevator', passportConfig.isAuthenticated, elevatorController.getElevator);
 app.get('/account/api/elevator', passportConfig.isAuthenticated, elevatorController.getElevatorapi);
 app.get('/account/elevatormanage', passportConfig.isAuthenticated, elevatorController.getElevatormanage);
@@ -237,7 +237,6 @@ app.post('/account/elevator', passportConfig.isAuthenticated, elevatorController
 app.get('/account/elevator3', passportConfig.isAuthenticated, elevatorController.getElevator3);
 app.get('/account/elevator4', passportConfig.isAuthenticated, elevatorController.getElevator4);
 app.get('/account/elevator5', passportConfig.isAuthenticated, elevatorController.getElevator5);
-app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
 app.get('/account/elevator/cat/:elevcat', passportConfig.isAuthenticated, elevatorController.getElevatorCat);
 app.get('/account/elevator/remove/:itemid', passportConfig.isAuthenticated, elevatorController.getElevatorRemove);
 app.get('/account/elevatorentryupdate/:itemid/:seqid/:dayid/', passportConfig.isAuthenticated, elevatorController.getElevatorentryupdate);
