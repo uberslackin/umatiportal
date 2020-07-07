@@ -9,7 +9,7 @@ block content
 
   hr
 
-  h3 Edit Podcast Entry
+  h3 Edit Logistics entry
 
   form(action='/account/elevatorentryupdate', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
@@ -29,7 +29,7 @@ block content
       .col-md-7
         input.form-control(type='date', name='elevdate', value=moment(elevdata.elevdate).format("YYYY-MM-DD"), id='elevdate', format="dd/mm/yyyy", autocomplete=elevdata.elevdate)        
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='duration') Duration
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='duration') Best Pickup/Dropoff Time
       .col-md-7
         input.form-control(name='duration', id='duration', value=elevdata.duration, autocomplete=elevdata.duration, type='text', data-slider-min="0", data-slider-max="180", data-slider-step="5", data-slider-value="30", data-slider-enabled="false")
     .form-group.row

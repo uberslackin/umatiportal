@@ -9,11 +9,12 @@ block content
     a(href='/account/elevator') Food Logistics -
   a(href='/account/elevsettings') Settings
 
+  h3 rogue #{reque}
   hr
   if (user.profile.group != "Ward Food Logistics")
     h3 New Podcast Entry
   else
-    h3 New food request
+    h3 New Logistics Entry
 
   form(action='/account/elevator', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)

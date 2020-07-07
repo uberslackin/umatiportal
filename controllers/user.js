@@ -394,6 +394,7 @@ exports.postMessageCreate = (req, res, next) => {
         db.message = req.body.message;
         db.date = req.body.date;
         db.status = req.body.status;
+        db.tag = req.body.tag;
 
         db.save((err) => {
           if (err) {
@@ -417,7 +418,7 @@ exports.postMessageCreate = (req, res, next) => {
  */
 exports.getWardsignup = (req, res) => {
   if (req.user) {
-    return res.redirect('/');
+    return res.redirect('/acccount/elevatormanager');
   } 
   res.render('account/wardsignup', {
     title: 'Create Food Logistics Account'
@@ -425,7 +426,51 @@ exports.getWardsignup = (req, res) => {
 };
 
 /**
- * GET /wardsignup
+ * POST /wardsignup
+ * Create a new resource logistics account.
+ */
+exports.postWardsignup = (req, res, next) => {
+  const validationErrors = [];
+  if (!validator.isEmail(req.body.email)) validationErrors.push({ msg: 'Please enter a valid email address.' });
+  if (!validator.isLength(req.body.password, { min: 8 })) validationErrors.push({ msg: 'Password must be at least 8 characters long' });
+  if (req.body.password !== req.body.confirmPassword) validationErrors.push({ msg: 'Passwords do not match' });
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/signup');
+  }
+  req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
+
+  const user = new User({
+    email: req.body.email,
+    group: req.body.group,
+    contactmethod: req.body.contactmethod,
+    phone: req.body.phone,
+    interests: req.body.interests,
+    pickupneed: req.body.pickupneed,
+    password: req.body.password
+  });
+
+  User.findOne({ email: req.body.email }, (err, existingUser) => {
+    if (err) { return next(err); }
+    if (existingUser) {
+      req.flash('errors', { msg: 'Account with that email address already exists.' });
+      return res.redirect('/wardignup');
+    }
+    user.save((err) => {
+      if (err) { return next(err); }
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect('account/elevatormanager');
+      });
+    });
+  });
+};
+
+/**
+ * GET /avatared
  * Food Group Signup page.
  */
 exports.getAvatared = (req, res) => {
@@ -441,7 +486,7 @@ let svg = avatars.create('custom-seed');
 
 
 /**
- * POST /signup
+ * POST /wardsignup
  * Create a new local account.
  */
 exports.postWardsignup = (req, res, next) => {
@@ -523,6 +568,12 @@ exports.getActivityprint = function (req, res, next) {
 exports.getMember = (req, res) => {
   res.render('account/membercreate', {
     title: 'Business transaction'
+  });
+};
+
+exports.getRequestMember = (req, res) => {
+  res.render('account/memberrequest', {
+    title: 'Member Request'
   });
 };
 

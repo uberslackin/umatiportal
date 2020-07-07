@@ -8,8 +8,12 @@ const messagesSchema = new mongoose.Schema({
   subject: String,
   sentfrom: String,
   sentto: String,
+  tag: String,
   group: String,
   message: String,
+  rmbysender: String,
+  rmbyrecip: String,
+  hash: String,
   date: Date,
   status: String,
  }, { timestamps: true });

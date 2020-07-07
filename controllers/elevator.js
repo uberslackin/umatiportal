@@ -33,9 +33,12 @@ const randomBytesAsync = promisify(crypto.randomBytes);
 
 exports.getElevatorapi = function (req, res, next) {
   //  var mySort = ['group', 'Taxes with mom'];
+  //  var sortVar = User.profile.group
     Elevator.find()
         .sort([['elevdate', 'ascending']])
-        .sort([['group', 'Ward Food Logistics']])
+	//.find({}, null, {sort: {group: "Ward Food Logistics"}})
+	.where('group').equals('Ward Food Logistics') // find each Person with a last name matching 'Ghost'
+        //.sort([['group', 'Ward Logistics Group']])
 	//.sort(mySort)
         .exec(function (err, elev_data) {
             if (err) { return next(err); }
@@ -88,15 +91,30 @@ exports.getElevator5 = function (req, res, next) {
         })
 };
 
+// Load Edit Form
+exports.getUpdateResourceElevatorEntry = function (req, res, next) {
+  Elevator.findById(req.params.elevitem_id, function(err, elev){
+    /*if(elev.group != user.profile.group){
+      req.flash('danger', 'Not Authorized');
+      return res.redirect('/');
+    }*/
+    if (err) { return next(err); }
+    return res.render('account/elevatorresourceentryupdate', {
+      title:'Edit Elevator Item',
+      elevdata:elev
+    });
+  });
+};
 
 // Load Edit Form
 exports.getUpdateElevatorEntry = function (req, res, next) {
   Elevator.findById(req.params.elevitem_id, function(err, elev){
-    if(elev.user != req.user._id){
+    /*if(elev.group != user.profile.group){
       req.flash('danger', 'Not Authorized');
       return res.redirect('/');
-    }
-    return res.render('account/elevatorentryedit', {
+    }*/
+    if (err) { return next(err); }
+    return res.render('account/elevatorentryupdate', {
       title:'Edit Elevator Item',
       elevdata:elev
     });
@@ -179,9 +197,11 @@ exports.postElevator = (req, res, next) => {
  * GET account/elevatorentrycreate
  * a
  */
-exports.getElevatorEntry = (req, res) => {
+exports.getElevatorEntry = (req, res, next) => {
+  let parsedQ = req.query.day;
   res.render('account/elevatorentrycreate', {
-    title: 'Create elevator entry'
+    title: 'Create elevator entry',
+    reque:parsedQ
   });
 };
 
@@ -277,7 +297,21 @@ exports.postUpdateElevatorEntry = (req, res) => {
   // save the update
   Elevator.findByIdAndUpdate(elevid, data, function(err, pos) {
   if (err) throw err;
- 
+
+  
+  // using Twilio SendGrid's v3 Node.js Library
+  // https://github.com/sendgrid/sendgrid-nodejs
+  const sgMail = require('@sendgrid/mail');
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const msg = {
+    to: 'greg@ecocity.com',
+    from: 'greg@ecocity.com',
+    subject: 'Sending with Twilio SendGrid is Fun',
+    text: 'and easy to do anywhere, even with Node.js',
+    html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+  };
+  sgMail.send(msg);
+
   req.flash('success', { msg: 'Nice job. Your podcast entry has been updated.' });
   res.redirect('/account/elevator');
   });

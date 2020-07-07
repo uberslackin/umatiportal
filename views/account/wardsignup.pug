@@ -2,8 +2,8 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-    h3 Ward Food and Resource Logistics Group Sign up
-  form(id='signup-form', method='POST')
+    h3 Ward Food Pantry Sign up
+  form(id='ward-signup-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='group', value='Ward Food Logistics')
 
@@ -21,7 +21,7 @@ block content
       .col-md-7
         input.form-control(type='number', name='phone', id='phone', placeholder='Phone', autofocus, autocomplete='phone', required)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='phone') Phone
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
       .col-md-7
         input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, autocomplete='email', required)
     .form-group.row
@@ -33,17 +33,25 @@ block content
       .col-md-7
         input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', autocomplete='new-password', minlength='8', required)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='template') Interested in:
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='pickupneed') Interested in:
       .col-md-7
-        select#template.select.form-control.input-lg(for='interests', name='template')
+        select#template.select.form-control.input-lg(for='pickupneed', name='pickupneed')
           option(value='0') -- Select --
-          option(value='1') Pickups
-          option(value='2') Delivery
-          option(value='3') Cleanup
-          option(value='4') Compost
-          option(value='5') Other
+          option(value='1') Regularly Scheduled
+          option(value='2') As needed
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='interests') Interested in:
+      .col-md-7
+        select#template.select.form-control.input-lg(for='interests', name='interests')
+          option(value='0') -- Select --
+          option(value='1') Food
+          option(value='2') Construction Materials
+          option(value='3') Compost
+          option(value='4') Household Items
+          option(value='5') Tools
 
     .form-group.offset-sm-3.col-md-7.pl-2
       button.btn.btn-success(type='submit')
         i.fas.fa-user-plus.fa-sm
-        | Signup
+        | Got it!

@@ -2,7 +2,9 @@ extends layout
 
 block content
   h1 Software testing release.
-  p Welcome.  Lots of bugs fixed we are now testing with self help groups. Welcome Mamawatoto Eco School, Global Affordable Housing Project, Feed The Children PRoject.  Welcome community members testing 'Ward Food Logistics' group. -g June 19 2020
+  p Welcome, July5 2020 update.  Currently testing resource logistics panel. Welcome Mamawatoto Eco School, Global Affordable Housing Project, Feed The Children PRoject.  Welcome community members of 
+    a(href='https://portal.etiny.xyz/wardsignup') Ward Food Pantry
+ 
   h2 Supporting in-person groups pursuing sustainable social enterprises
   hr
 
@@ -25,8 +27,6 @@ block content
   .row
     .col-md-6 
       hr  
-
-
   .row
     .col-md-6
       h2 Self Help Groups
@@ -44,33 +44,53 @@ block content
       p
         button.btn.btn-primary(type="button", data-toggle="modal", data-target="#basicExampleModal") Get started
     .col-md-6
-      h2 Self help groups
+      #carousel-pager.carousel.slide(data-ride="carousel", data-interval="1000")
+        .carousel-inner.vertical
+          .active.item
+            img.img-responsive(src="https://i.picsum.photos/id/860/536/354.jpg?hmac=9B6GW2nlzqoBily_DX6J7YkFyPHiYEizv_yVvejWvng", data-target="#bootstrap-vertical-carousel-slider", data-slide-to="0")
+            .item
+            img.img-responsive(src="https://i.picsum.photos/id/866/536/354.jpg?hmac=tGofDTV7tl2rprappPzKFiZ9vDh5MKj39oa2D--gqhA", data-target="#bootstrap-vertical-carousel-slider", data-slide-to="1")
+            .item
+            img.img-responsive(src="https://i.picsum.photos/id/1084/536/354.jpg?grayscale&hmac=Ux7nzg19e1q35mlUVZjhCLxqkR30cC-CarVg-nlIf60", data-target="#bootstrap-vertical-carousel-slider", data-slide-to="2")
+            .item
+            img.img-responsive(src="https://i.picsum.photos/id/780/200/300.jpg?blur=2&hmac=LfuKUlSpg5iRXOtmRAIXoan4YU009tv42YIA746rKWw forth", data-target="#bootstrap-vertical-carousel-slider", data-slide-to="2")
+            .item
+            img.img-responsive(src="https://verticalcarouselslider.com/140x140/8DD1C8/fff.jpg&text=image fifth", data-target="#bootstrap-vertical-carousel-slider", data-slide-to="2")
+            .item
+            img.img-responsive(src="https://verticalcarouselslider.com/140x140/8DD1C8/fff.jpg&text=image six", data-target="#bootstrap-vertical-carousel-slider", data-slide-to="2")
+            a.left.carousel-control(href="#carousel-pager", role="button", data-slide="prev")
+              span.glyphicon.glyphicon-chevron-up(aria-hidden="true")
+              span.sr-only Previous
+            a.right.carousel-control(href="#carousel-pager", role="button", data-slide="next")
+              span.glyphicon.glyphicon-chevron-down(aria-hidden="true")
+              span.sr-only Next
+          h2 Self help groups
       p Umati Bank provides an accounting system for group leaders to use in tracking contributions to their group account. We do not hold money for groups, rather, we allow group leaders to report the weekly contributions, notify their members of their savings progress, and provide methods of tracking individual member savings, loan disbursements, and loan repayments. As a member of an Umati self help group, you are able to maintain your own blog here, request support for your small business from the internet community visiting umatibank.com loan request portal, and learn more about opportunites that help grow your business. 
       p
-        a.btn.btn-raised(href='#', role='button') View details »
+           a.btn.btn-raised(href='#', role='button') View details »
 
-  .row
-    .col-md-12
-    hr
+      .row
+        .col-md-12
+      hr
   
-    .modal.fade#basicExampleModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
-      .modal-dialog(role="document")
-        .modal-content
-          .modal-header(style="background-color:ltgrey")
-            img(src="/lion.png",border="0") 
-            h5.modal-title#exampleModalLabel &nbsp; Umati Group podcast channel 
-            button.close(type="button", data-dismiss="modal", aria-label="Close")
-              span(aria-hidden="true") ×
-          .modal-body
+      .modal.fade#basicExampleModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+        .modal-dialog(role="document")
+          .modal-content
+            .modal-header(style="background-color:ltgrey")
+              img(src="/lion.png",border="0") 
+              h5.modal-title#exampleModalLabel &nbsp; Umati Group podcast channel 
+              button.close(type="button", data-dismiss="modal", aria-label="Close")
+                span(aria-hidden="true") ×
+            .modal-body
 
-            if !user
-               a.nav-link(href='/login') Login
-               a.nav-link(href='/signup') Create Account
-               p Please log in and check your group section.
-            else
-               p Hi #{user.profile.name}
-               span Join us 
-               a(href='https://portal.etiny.xyz/account/elevator') here
+              if !user
+                 a.nav-link(href='/login') Login
+                 a.nav-link(href='/signup') Create Account
+                 p Please log in and check your group section.
+              else
+                 p Hi #{user.profile.name}
+                 span Join us 
+                 a(href='https://portal.etiny.xyz/account/elevator') here
 
           .modal-footer
             button.btn.btn-secondary(type="button", data-dismiss="modal") Close

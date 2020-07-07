@@ -230,6 +230,7 @@ app.post('/account/createinventory', passportConfig.isAuthenticated, inventoryCo
 app.get('/account/inventory/:inventory_id', passportConfig.isAuthenticated, inventoryController.getUpdateInventory);
 app.post('/account/inventoryedit', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
 app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
+app.get('/account/resourceelevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateResourceElevatorEntry);
 app.get('/account/elevator', passportConfig.isAuthenticated, elevatorController.getElevator);
 app.get('/account/api/elevator', passportConfig.isAuthenticated, elevatorController.getElevatorapi);
 app.get('/account/elevatormanage', passportConfig.isAuthenticated, elevatorController.getElevatormanage);
@@ -265,6 +266,7 @@ app.post('/account/posentryedit', passportConfig.isAuthenticated, posController.
 app.get('/account/createmember', passportConfig.isAuthenticated, memberController.getCreatemember);
 app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
 app.post('/account/payment', passportConfig.isAuthenticated, userController.postMember);
+app.get('/account/requestpayment', passportConfig.isAuthenticated, userController.getRequestMember);
 
 app.post('/account/upload', passportConfig.isAuthenticated, blogController.postUpload);
 
