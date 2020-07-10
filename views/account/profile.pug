@@ -28,7 +28,7 @@ block content
         else
           .text-danger.font-italic
             | Unverified: &nbsp;
-            a(href='/account/verify') Send verification email
+            a(href='/account/verify') (won't) Send verification email (yet)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='story') Your story
       .col-md-7
@@ -58,7 +58,7 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='group') Group
       .col-md-7
-        input.form-control(type='text', name='group', id='group', value=user.profile.group, autocomplete)
+        input.form-control(type='text', name='group', id='group', value=user.group, autocomplete)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='role') Role
       .col-md-7

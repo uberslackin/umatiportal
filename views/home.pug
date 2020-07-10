@@ -3,7 +3,7 @@ extends layout
 block content
   h1 Software testing release.
   p Welcome, July5 2020 update.  Currently testing resource logistics panel. Welcome Mamawatoto Eco School, Global Affordable Housing Project, Feed The Children PRoject.  Welcome community members of 
-    a(href='https://portal.etiny.xyz/wardsignup') Ward Food Pantry
+    a(href='https://portal.etiny.xyz/wardsignup') forWard Project
  
   h2 Supporting in-person groups pursuing sustainable social enterprises
   hr
@@ -23,7 +23,10 @@ block content
       h3 Work together
     .cta
       p Get started today! Our server is secure, and we protect your data. 
-      a.button.btn.btn-success.spam-button(href='/signup') Create a free account now!
+      if (!user) 
+        a.button.btn.btn-success.spam-button(href='/signup') Start a private group Now!
+      else
+        a.button.btn.btn-success.spam-button(href='/account/elevatormanage') Umati's new 'elevator' tool
   .row
     .col-md-6 
       hr  
