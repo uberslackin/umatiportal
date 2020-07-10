@@ -14,16 +14,26 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='contactmethod') Preferred contact method:
       .col-md-7
-        select#template.select.form-control.input-lg(for='contactmethod', name='contactmethod')
-          option(value='0') -- Select --
-          option(value='1') Text message
-          option(value='2') Phone message
-          option(value='3') Town Bulletin Board
-
+        .btn-group(data-toggle="buttons")
+          label.btn.btn-outline-success
+            input(type="radio", value="phone", id="contactmethod", name="contactmethod", autocomplete="off")
+            | Phone Call
+          label.btn.btn-outline-success
+            input(type="radio", value="sms", id="contactmethod", name="contactmethod", autocomplete="off")
+            | SMS Text
+          label.btn.btn-outline-success
+            input(type="radio", value="email", id="contactmethod", name="contactmethod", autocomplete="off")
+            | Email
+          label.btn.btn-outline-success
+            input(type="radio", value="town bulletin board", id="contactmethod", name="contactmethod", autocomplete="off")
+            | Town Bulletin Board
+          label.btn.btn-outline-success
+            input(type="radio", value="yodeling", id="contactmethod", name="contactmethod", autocomplete="off")
+            | Yodeling
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='phone') Cell #
       .col-md-7
-        input.form-control(type='number', name='phone', id='phone', placeholder='Phone', autofocus, autocomplete='phone', required)
+        input.form-control(type='phone', name='phone', id='phone', placeholder='Phone', autofocus, autocomplete='off', required)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
       .col-md-7
@@ -40,18 +50,15 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed') 1. Will you have surplus/donations that need to be picked up?
       .col-md-7
         .btn-group(data-toggle="buttons")
-          label.btn.btn-outline-success
-            input(type="checkbox", autocomplete="off")
-            | Cat Food
-
-          label.btn.btn-outline-success
-            input(type="checkbox", autocomplete="off")
-            | Dog Food
-        select#template.select.form-control.input-lg(for='pickupneed', name='pickupneed')
-          option(value='0') -- Select --
-          option(value='scheduled') Regularly Scheduled
-          option(value='as needed') As needed
-          option(value='both') Both
+          label.btn.btn-outline-secondary
+            input(type="radio", autocomplete="off")
+            | Regularly scheduled
+          label.btn.btn-outline-secondary
+            input(type="radio", autocomplete="off")
+            | As needed
+          label.btn.btn-outline-secondary
+            input(type="radio", id="donations", name="donations", autocomplete="off")
+            | Both
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') Specific item request
       .col-md-7
@@ -130,11 +137,23 @@ block content
             input(type="checkbox", autocomplete="off")
             | Dog Food
 
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') User agreement: 
+      .col-md-7
+        span Please review our 
+        a(href="communityguidelines") Community Guidelines 
+        span and 
+        a(href="terms") Terms of Service
+        br
+        .btn-group(data-toggle="buttons")
+          label.btn.btn-outline-success
+            input(type="checkbox", autocomplete="off")
+            | I agree
 
     .form-group.offset-sm-3.col-md-7.pl-2
       button.btn.btn-primary(type='submit')
         i.fas.fa-user-plus.fa-sm
-        | Got it!
+        | Register
 
 
     style.

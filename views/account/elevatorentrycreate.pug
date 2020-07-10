@@ -19,7 +19,7 @@ block content
   form(action='/account/elevator', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
-    input(type='hidden', name='group', value=user.profile.group)
+    input(type='hidden', name='group', value=user.group)
     .form-group.row
       if (user.profile.group != "Ward Food Logistics")
         label.col-md-3.col-form-label.font-weight-bold.text-left(for='eleventrytitle') Podcast Entry Title

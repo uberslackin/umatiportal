@@ -65,6 +65,7 @@ script.
   	  
     //functionality goes here;
    $.each(responseObj, function (index, value) {
+   if (value.group === user.group)
           var title=value.eleventrytitle;
           var itemid=value._id;
           var colid=value.dayid;
@@ -127,7 +128,7 @@ script.
     | &nbsp;UMATICAST
 
   
-  strong #{user.profile.group} group logistics:
+  strong #{user.group} group logistics:
   a(href='/account/elevatorentrycreate') (new) 
   span ॐ
   a(href='/account/elevator') (list) 

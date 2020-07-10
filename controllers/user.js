@@ -158,6 +158,7 @@ exports.getMessagesBusiness = function (req, res, next) {
             res.render('account/messagesbusiness', { title: 'Messages Business', message_list: message_list });
         })
 };
+
 exports.getMessagesGroupBusiness = function (req, res, next) {
     var mysort = { createdAt: -1,  };
     Messages.find()
@@ -223,7 +224,7 @@ exports.getMessagesGroupInspiration = function (req, res, next) {
         .exec(function (err, message_list) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('account/messagesgroupinspiration', { title: 'Messages of Inspiration', message_list: message_list });
+            res.render('account/messagesgroupinspiration', { title: 'Messages shared for group Inspiration', message_list: message_list });
         })
 };
 

@@ -38,7 +38,7 @@ block content
   - if (elevdata.length)
   
   each items in elevdata 
-         if items.group == user.profile.group 
+         if items.group == user.group 
             a(href='/account/elevator/'+items._id) 
               i.fa.fa-pencil-square-o.fa-2x(aria-hidden='true') 
             a(href='/account/elevator/remove/'+items._id) 
