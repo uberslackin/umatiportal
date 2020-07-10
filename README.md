@@ -18,6 +18,9 @@ pick a CSS framework. A while later, you might have an initial project up on Git
 can other team members start contributing. Or how about doing something as simple as *Sign in with Facebook*
 authentication? You can spend hours on it if you are not familiar with how OAuth 2.0 works.
 
+
+In Sahat's visionary words...
+
 When I started this project, my primary focus was on **simplicity** and **ease of use**.
 I also tried to make it as **generic** and **reusable** as possible to cover most use cases of hackathon web apps,
 without being too specific. In the worst case, you can use this as a learning guide for your projects,
@@ -123,10 +126,10 @@ The easiest way to get started is to clone the repository:
 
 ```bash
 # Get the latest snapshot
-git clone https://github.com/sahat/hackathon-starter.git myproject
+git clone https://github.com/biomassives/umati_hs.git whatever-your-group-or-projcet-name
 
 # Change directory
-cd myproject
+cd whatever-your-group-or-project-name
 
 # Install NPM dependencies
 npm install
@@ -144,7 +147,7 @@ You must start ngrok after starting the project.
 ./ngrok http 8080
 ```
 
-Next, you must use the https URL defined by ngrok, for example, `https://hackaton.ngrok.io`
+Next, you must use the https URL defined by ngrok, for example, `https://whatever-group-or-project-name.ngrok.io`
 
 **Note:** I highly recommend installing [Nodemon](https://github.com/remy/nodemon).
 It watches for any changes in your  node.js app and automatically restarts the
@@ -183,8 +186,8 @@ credentials.
 
 **Note:** When you ready to deploy to production don't forget to
 add your new URL to *Authorized Javascript origins* and *Authorized redirect URI*,
-e.g. `http://my-awesome-app.herokuapp.com` and
-`http://my-awesome-app.herokuapp.com/auth/google/callback` respectively.
+e.g. `http://whatever-your-group-or-community-project-name.herokuapp.com` and
+`http://whatever-your-group-or-community-project.herokuapp.com/auth/google/callback` respectively.
 The same goes for other providers.
 
 <hr>
