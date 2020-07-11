@@ -23,6 +23,19 @@ $(document).ready(() => {
 });
 */
 
+      function focusFunction(do) {
+        console.log("hi there");
+      }
+      function blurFunction(do,containerId) {
+        container = document.getElementById(containerid);
+        container.innerHTML=page_request.responseText;
+        container.innerHTML=page_request.responseText;
+        if (do.value == 'good vibes') {
+          container.style.visibility = 'visible';
+        }
+      }
+
+
 $('.carousel .vertical .item').each(function(){
   var next = $(this).next();
   if (!next.length) {
