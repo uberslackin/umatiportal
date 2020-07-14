@@ -1,6 +1,7 @@
 /* eslint-env jquery, browser */
 $(document).ready(() => {
 	
+$('#depth').append( "h2 boot" );
 //	$( "div.fc-slats:nth-child(2) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(15) > td:nth-child(2)" ).append( "<p>Test</p>" );
 
 /* $('#calendar').fullCalendar({
@@ -23,17 +24,28 @@ $(document).ready(() => {
 });
 */
 
-      function focusFunction(do) {
-        console.log("hi there");
-      }
-      function blurFunction(do,containerId) {
-        container = document.getElementById(containerid);
+    $('#invite').on('click', function () {
+        var Status = $(this).val();
+        $.ajax({
+            url: '/account/door1',
+            data: {
+                text: $("input[name=invite]").val(),
+                Status: Status
+            },
+            dataType : 'json'
+        });
+    });
+
+
+
+$('#invite').change(function(){
+        container = document.getElementById(this);
         container.innerHTML=page_request.responseText;
         container.innerHTML=page_request.responseText;
-        if (do.value == 'good vibes') {
+      if (container.value == 'good vibes') {
           container.style.visibility = 'visible';
-        }
       }
+});
 
 
 $('.carousel .vertical .item').each(function(){

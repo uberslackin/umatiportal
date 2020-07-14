@@ -11,6 +11,14 @@ block content
         form#gui
         | Scale
         input#scale(type="range", name="Scale", min="50", max="400", value="60")
+        | Lat
+        input#long(type="range", name="long", min="-90", max="90", value="0")
+        | Long
+        input#lat(type="range", name="lat", min="-180", max="180", value="0")
+        | Color
+        input#color(type="range", name="color", min="380", max="740", value="0")
+        | Depth
+        input#depth(type="range", name="depth", min="-1", max="99", value="0")
         br
         #WebGL-output(style="height:100px;")
         script(src='/js/three.js')
@@ -19,7 +27,7 @@ block content
           var renderer, scene, camera;
           function init() {
             scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(29.15, window.innerWidth / window.innerHeight, 0.11, 1000);
+            camera = new THREE.PerspectiveCamera(22.15, window.innerWidth / window.innerHeight, 0.1, 1000);
             renderer = new THREE.WebGLRenderer();
             renderer.setClearColor(new THREE.Color(0xEEEEEE));
             renderer.setSize(window.innerWidth/2, window.innerHeight/2);
@@ -29,7 +37,7 @@ block content
             scene.add(sphere);
             camera.position.x = -30;
             camera.position.y = 40;
-            camera.position.z = 20;
+            camera.position.z = 30;
             camera.lookAt(scene.position);
             resize();
             window.onresize = resize;
@@ -46,13 +54,6 @@ block content
           function resize() {
           var aspect = window.innerWidth / window.innerHeight;
             renderer.setSize(window.innerWidth, window.innerHeight);
-            camera.aspect = aspect;
-            camera.updateProjectionMatrix();
-          }
-
-          function rotate() {
-          var aspect = window.innerWidth / window.innerHeight;
-            camera.position.y = document.getElementById( "lat" ).value;
             camera.aspect = aspect;
             camera.updateProjectionMatrix();
           }
@@ -162,7 +163,7 @@ block content
       .col-md-7
         .btn-group(data-toggle="buttons")
           label.btn.btn-outline-danger
-            input(type="checkbox", name="specifictools", autocomplete="off")
+            input(type="checkbox", autocomplete="off")
             | Tools
 
           label.btn.btn-outline-danger
@@ -193,7 +194,7 @@ block content
     .form-group.offset-sm-3.col-md-7.pl-2
       button.btn.btn-primary(type='submit')
         i.fas.fa-user-plus.fa-sm
-        | Submit
+        | Got it!
 
 
     style.

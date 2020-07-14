@@ -474,6 +474,15 @@ read
     -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
 }
 
+#gui {
+    position:absolute;
+    top:180;
+    left:180;
+}
+
+.form-control#invite, .form-control#nicname {
+    width: 200px !important;
+}
 
 /* Cookie Dialog */
 #gdpr-cookie-message {

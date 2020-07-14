@@ -1,0 +1,274 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 forWard Sign up
+  form(id='ward-signup-form', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='group', value='Ward Food Logistics')
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Name (or nic-name)
+      .col-md-7
+        input.form-control(type='text', name='name', id='name', placeholder='Name', autofocus, autocomplete='name', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='contactmethod') Most perferred way for this system to contact you:
+      .col-md-7
+        .btn-group(data-toggle="buttons")
+          label.btn.btn-outline-clear
+            input(type="radio", value="phone", border="0", id="contactmethod", name="contactmethod", autocomplete="off")
+            | Phone
+          label.btn.btn-outline-clear
+            input(type="radio", value="sms", id="contactmethod", name="contactmethod", autocomplete="off")
+            | SMS
+          label.btn.btn-outline-clear
+            input(type="radio", value="email", id="contactmethod", name="contactmethod", autocomplete="off")
+            | Email
+          label.btn.btn-outline-clear
+            input(type="radio", value="town bulletin board", id="contactmethod", name="contactmethod", autocomplete="off")
+            | Town Board
+          label.btn.btn-outline-clear
+            input(type="radio", value="yodeling", id="contactmethod", name="contactmethod", autocomplete="off")
+            | Yodeling
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='contactmethod') 2nd
+      .col-md-7
+        .btn-group(data-toggle="buttons")
+          label.btn.btn-outline-clear
+            input(type="radio", value="phone", border="0", id="contactmethod2", name="contactmethod2", autocomplete="off")
+            | Phone
+          label.btn.btn-outline-clear
+            input(type="radio", value="sms", id="contactmethod2", name="contactmethod2", autocomplete="off")
+            | SMS
+          label.btn.btn-outline-clear
+            input(type="radio", value="email", id="contactmethod2", name="contactmethod2", autocomplete="off")
+            | Email
+          label.btn.btn-outline-clear
+            input(type="radio", value="town bulletin board", id="contactmethod2", name="contactmethod2", autocomplete="off")
+            | Town Board
+          label.btn.btn-outline-clear
+            input(type="radio", value="yodeling", id="contactmethod2", name="contactmethod2", autocomplete="off")
+            | Yodeling
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='phone') Cell #
+      .col-md-7
+        input.form-control(type='phone', name='phone', id='phone', placeholder='Phone', autofocus, autocomplete='off', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
+      .col-md-7
+        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, autocomplete='email', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='yodel') Yodel pattern
+      .col-md-7
+        input.form-control(type='text', name='yodel', id='yodel', placeholder='Yodel pattern in dots and dashes', autofocus, autocomplete='yodel', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='password') Password
+      .col-md-7
+        input.form-control(type='password', name='password', id='password', placeholder='Password', autocomplete='new-password', minlength='8', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='confirmPassword') Confirm Password
+      .col-md-7
+        input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', autocomplete='new-password', minlength='8', required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed') 
+      .col-md-7
+        p 1. Will you have surplus/donations that need to be picked up?
+        .btn-group(data-toggle="buttons")
+
+          label.btn.btn
+            input(type="radio", autocomplete="off")
+            | Regularly scheduled
+          label.btn.btn
+            input(type="radio", autocomplete="off")
+            | As needed
+          label.btn.btn
+            input(type="radio", id="donations", name="donations", autocomplete="off")
+            | Both
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') &#902; Item(s) requested
+      .col-md-7
+        input.form-control(type='text', name='specificitem', id='specificitem', placeholder='Whatever you may need', autofocus, autocomplete='specificitem', required)
+    .form-group.row
+      label.col-md-3.col-form-label.h2.font-weight-bold.text-right(for='specificitem') &#911; Item(s) offered
+      .col-md-7
+        input.form-control(type='text', name='specificitem', id='specificitem', placeholder='Whatever you may need', autofocus, autocomplete='specificitem', required)
+
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') &Phi; Desired role(s):
+      .col-md-7
+        .btn-group(data-toggle="buttons")
+          label.btn.btn.btn-outline-primary
+            input(type="checkbox", name="pickupboulder", id="pickupboulder", autocomplete="off")
+            | Pickups in Boulder
+
+          label.btn.btn.btn-outline-primary
+            input(type="checkbox", name="delivery", id="delvery", autocomplete="off")
+            | Delivery
+
+          label.btn.btn-outline-primary
+            input(type="checkbox", name="materials_swap", id="materials_swap", autocomplete="off")
+            | Materials swap
+
+          label.btn.btn-outline-primary
+            input(type="checkbox", name="research", id="research", autocomplete="off")
+            | Opportunity Researcher
+
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem')
+      .col-md-7
+        span 2. Are you interested in picking-up/delivering surplus?
+        .btn-group(data-toggle="buttons")
+          label.btn
+            input(type="radio", name="pickupinterest",id="pickupinterest", value="yes", autocomplete="off")
+            | Yes
+          label.btn
+            input(type="radio", name="pickupinterest" id="pickupinterest", value="no", autocomplete="off")
+            | No
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') 
+      .col-md-7
+        span 3. Interested in helping with unloading/cleaning/organizing?
+        .btn-group(data-toggle="buttons")
+          label.btn
+            input(type="radio", name="helpinginterest",id="pickupinterest", value="yes", autocomplete="off")
+            | Yes
+          label.btn
+            input(type="radio", name="helpinginterest" id="pickupinterest", value="no", autocomplete="off")
+            | No
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') 
+      .col-md-7
+        span 4. Would like to be alerted when there is surplus: 
+        .btn-group(data-toggle="buttons")
+          label.btn
+            input(type="radio", name="surplusalert",id="surplusalert", value="yes", autocomplete="off")
+            | Yes
+          label.btn
+            input(type="radio", name="surplusalert" id="surplusalert", value="no", autocomplete="off")
+            | No
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') Have system notify you when avaiable:
+      .col-md-7
+        .btn-group(data-toggle="buttons")
+          label.btn.btn-outline-warning
+            input(type="checkbox", autocomplete="off")
+            | Building supplies
+
+          label.btn.btn-outline-warning
+            input(type="checkbox", autocomplete="off")
+            | Compost
+
+          label.btn.btn-outline-warning
+            input(type="checkbox", autocomplete="off")
+            | Compost pickup
+
+          label.btn.btn-outline-warning
+            input(type="checkbox", selected, autocomplete="off")
+            | Household Items
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') 
+      .col-md-7
+        .btn-group(data-toggle="buttons")
+          label.btn.btn-outline-danger
+            input(type="checkbox", autocomplete="off")
+            | Tools
+
+          label.btn.btn-outline-danger
+            input(type="checkbox", autocomplete="off")
+            | Clothing
+
+          label.btn.btn-outline-danger
+            input(type="checkbox", autocomplete="off")
+            | Plants
+
+          label.btn.btn-outline-danger
+            input(type="checkbox", selected, autocomplete="off")
+            | Books
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') 
+      .col-md-7
+        .btn-group(data-toggle="buttons")
+          label.btn.btn-outline-success
+            input(type="checkbox", autocomplete="off")
+            | Cat Food
+
+          label.btn.btn-outline-success
+            input(type="checkbox", autocomplete="off")
+            | Dog Food
+
+
+    .form-group-row#terms
+      h3
+      | Interface Terms
+      p
+      strong The meanings of defined terms and phrases in this document are at the end in the definitions section.
+      br
+      p
+      strong Provider
+      |  means Informatio Pty Ltd of NSW, Australia, contactable on example@example.com
+      br
+      p
+      strong Customer
+      |  means you or the entity that you are contracting for as authorised representative, contactable on the email registered with this service
+
+      h4#supply-of-services Supply of services
+      p Provider will provide the Services described in this document to Customer in accordance with the Agreement.
+      h4#payment-calculation Payment calculation
+      p The fees payable to Provider in exchange for the Services will be $30 per month (including GST).
+      h4#payment-methods Payment methods
+      ul
+        li Provider will invoice Customer for the Services rendered during the previous month.
+        li Customer authorises Provider to effect payment of invoices via direct debit or credit card every month.
+      h4#agreement-creation Agreement creation
+      p Customer agrees to the terms of the Agreement by manifesting acceptance of them using the “clickwrap procedure” at http://example.com.
+        h4#definitions Definitions
+        h4#agreement-agreements Agreement, Agreements
+        p means the agreement arising between the parties in accordance with this document and the other documents referred to by this document.
+        h4#service-services
+        | Service, Services
+        p means the services.
+#checkbox-div
+        p.small-text Scroll through terms and tick checkbox above to continue
+        p
+        span#checkSpan
+          input#payment(type="checkbox", disabled, name="terms")
+          span.redSmall I confirm I have read and agree to the terms
+          .button#submit SUBMIT
+          #pleaseTick
+
+  .form-group-row
+
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') User agreement: 
+      .col-md-7
+        span Please review our 
+        br
+        a(href="communityguidelines") Community Guidelines 
+        br
+        span and 
+        a(href="terms") Terms of Service
+        br
+        .btn-group(data-toggle="buttons")
+          label.btn
+            input(type="checkbox", autocomplete="off")
+            | I agree
+
+    .form-group.offset-sm-3.col-md-7.pl-2
+      button.btn.btn-primary(type='submit')
+        i.fas.fa-user-plus.fa-sm
+        | Register
+
+
+    style.
+
+       input[type=radio], input[type=checkbox] {
+         margin: 4px 0 0;
+         margin-top: 1px \9;
+         line-height: normal;
+       }

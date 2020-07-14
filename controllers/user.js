@@ -229,8 +229,6 @@ exports.getMessagesGroupInspiration = function (req, res, next) {
 };
 
 
-
-
 /**
  * GET /account/messagestags
  * Internal Messages
@@ -282,6 +280,31 @@ function getTrashlist(req, res) {
 exports.getMessagesTrash = function (req, res) {
       getTrashlist(req,res);
 };
+
+/**
+ * GET /account/door1
+ * Update DOM based ininvite code
+ */
+exports.getDoor1 = function (req, res) {
+    var itemid = req.params.itemid;
+    var status = req.params.status;
+
+    var data = {
+      status: status
+    };
+ /*  console.log("Itemid: " + itemid + " status: " + status );*/
+    Messages.findByIdAndUpdate(itemid, data, function(err, result) {
+    if (err){
+         res.send(err);
+    }
+    else{
+         res.status(200);
+ /*        console.log("RESULT: " + result);*/
+    };
+
+  });
+};
+
 
 
 
@@ -412,7 +435,6 @@ exports.postMessageCreate = (req, res, next) => {
 };
 
 
-
 /**
  * GET /wardsignup
  * Food Group Signup page.
@@ -427,23 +449,91 @@ exports.getWardsignup = (req, res) => {
 };
 
 /**
- * POST /wardsignup
+ * GET /wardsignup
+ * Food Group Signup page.
+ */
+exports.getWardsignup2 = (req, res) => {
+  if (req.user) {
+    return res.redirect('/account/elevatormanage?status=signup2');
+  } 
+  res.render('account/wardsignup2', {
+    title: 'forWard'
+  });
+};
+
+/**
+ * POST /wardwelcome
  * Create a new resource logistics account.
  */
+exports.getWardwelcome = (req, res) => {
+  if (req.user) {
+    return res.redirect('/account/messages');
+  } 
+  res.render('account/wardwelcome', {
+    title: 'Create Food Logistics Account'
+  });
+};
 
 /**
  * GET /avatared
  * Food Group Signup page.
  */
 exports.getAvatared = (req, res) => {
-let options = {};
-let avatars = new Avatars(sprites, options);
-let svg = avatars.create('custom-seed');
-  res.render('account/avatared', {
+  let options = {};
+  let avatars = new Avatars(sprites, options);
+  let svg = avatars.create('custom-seed');
+    res.render('account/avatared', {
     title: 'Create Avatars'
   });
 };
 
+
+/**
+ * POST /wardwelcome
+ * Create a new local account.
+ */
+exports.postWardwelcome = (req, res, next) => {
+  const validationErrors = [];
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+  }
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/wardsignup');
+  }
+  if (req.body.invite === "art") var thisgroup = "for Ward";
+  req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
+  const user = new User({
+    email: req.body.email,
+    password: req.body.password,
+    group: thisgroup,
+    paneldriver: req.body.paneldriver,
+    panelsurplus: req.body.panelsurplus,
+    panelrequests: req.body.panelrequests,
+    panelwarehouse: req.body.panelwarehouse,
+    panelresearch: req.body.panelresearch,
+    nicname: req.body.nicname,
+    invitecode: req.body.invite,
+    invited: req.body.invited,
+    inviter: req.body.inviter
+  });
+  User.findOne({ email: req.body.email }, (err, existingUser) => {
+    if (err) { return next(err); }
+    if (existingUser) {
+      req.flash('errors', { msg: 'Account with that nicname or email address already exists.' });
+      return res.redirect('/wardsignup');
+    }
+    user.save((err) => {
+      if (err) { return next(err); }
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect('/account/messages/');
+      });
+    });
+  });
+};
 
 
 
@@ -480,7 +570,7 @@ exports.postWardsignup = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/account/elevator/');
+        res.redirect('/account/elevatormanage/');
       });
     });
   });

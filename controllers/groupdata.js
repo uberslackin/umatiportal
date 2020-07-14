@@ -79,6 +79,16 @@ exports.getCreategroupdata = (req, res) => {
  * GET /createpost
  * Signup page.
  */
+exports.getCreatesubgroupdata = (req, res) => {
+  res.render('account/createsubgroup', {
+    title: 'Create new sub group'
+  });
+};
+
+/**
+ * GET /createpost
+ * Signup page.
+ */
 exports.getCreategroupnote = (req, res) => {
   res.render('account/creategroupnote', {
     title: 'Create new note to be seen internally by members of your groups.'
