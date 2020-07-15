@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const passport = require('passport');
 const _ = require('lodash');
 const validator = require('validator');
+const cloudinary = require('cloudinary');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
 // const Calendar = require('../models/Calendar');
@@ -392,6 +393,10 @@ exports.getMessageCompose = (req, res, next) => {
   if (!req.user) {
     return res.redirect('/');
   }
+
+
+
+
   var mysort = { createdAt: -1,  };
   User.find()
       .sort(mysort)
