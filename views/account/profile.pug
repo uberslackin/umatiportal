@@ -11,29 +11,28 @@ block content
     input(type='hidden', name='_csrf', value=_csrf)
     h3 #{user.group} Activity Profile
 
-
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem')
       .col-md-7
         .btn-group(data-toggle="buttons")
           label.btn.btn-outline-danger
-            input(type="checkbox", name="paneldriver", autocomplete="off", value="user.paneldriver")
+            input(type="checkbox", name="paneldriver", autocomplete="off", checked=user.paneldriver)
             | Driver
 
-          label.btn.btn-outline-danger
-            input(type="checkbox", name="panelsurplus", autocomplete="off", value="user.panelsurplus")
+          label.btn.btn-outline-warning
+            input(type="checkbox", name="panelsurplus", autocomplete="off", checked=user.panelsurplus)
             | Surplus
 
-          label.btn.btn-outline-danger
-            input(type="checkbox", name="panelrequests", autocomplete="off" value="user.panelrequests")
+          label.btn.btn-outline-success
+            input(type="checkbox", name="panelrequests", autocomplete="off" checked=user.panelrequests)
             | Requests
 
-          label.btn.btn-outline-danger
-            input(type="checkbox", name="panelwarehouse", autocomplete="off", value="user.panelwarehouse")
-            | Warehousing
+          label.btn.btn-outline-primary
+            input(type="checkbox", name="panelwarehouse", autocomplete="off", checked=user.panelwarehouse)
+            | Warehousing 
 
-          label.btn.btn-outline-danger
-            input(type="checkbox", name="panelresearch", selected, autocomplete="off", value="user.panelresearch")
+          label.btn.btn-outline-secondary
+            input(type="checkbox", name="panelresearch", selected, autocomplete="off", checked=user.panelresearch)
             | Research
 
     .form-group.row

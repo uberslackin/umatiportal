@@ -10,12 +10,15 @@ const User = require('../models/User');
 // const Calendar = require('../models/Calendar');
 const Member = require('../models/Member');
 const Messages = require('../models/Messages');
-
 const randomBytesAsync = promisify(crypto.randomBytes);
 
+//if (user.group == "Ward Food Logistics" || user.group == "For Ward" || user.group == "forWard" || user.group == "for ward" || user.group == "for Ward" || user.group == "ForWard") var thisgroup = "For Ward";
 /**
 * GET /login
 * Login page.
+*  July 15 2020
+*  TASK : this needs to be normal as per rest of app..
+*  ie. camelcase, and match logic across controller & route
 * 
 * ref:
 * app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
@@ -1179,6 +1182,11 @@ exports.postUpdateProfile = (req, res, next) => {
     if (err) { return next(err); }
     if (user.email !== req.body.email) user.emailVerified = false;
     user.email = req.body.email || '';
+    user.paneldriver = req.body.paneldriver || '';
+    user.panelsurplus = req.body.panelsurplus || '';
+    user.panelwarehouse = req.body.panelwarehouse || '';
+    user.panelrequests = req.body.panelrequests || '';
+    user.panelresearch = req.body.panelresearch || '';
     user.profile.name = req.body.name || '';
     user.profile.gender = req.body.gender || '';
     user.profile.story = req.body.story || '';
