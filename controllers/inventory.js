@@ -9,6 +9,7 @@ const validator = require('validator');
 const mailChecker = require('mailchecker');
 const Inventory = require('../models/Inventory');
 const User = require('../models/User');
+const Loc = require('../models/Loc');
 const randomBytesAsync = promisify(crypto.randomBytes);
 
 /**
@@ -44,11 +45,25 @@ exports.postInventory = (req, res, next) => {
  * GET /createinventory
  * new inventory page.
  */
-exports.getCreateinventory = (req, res) => {
-  res.render('account/createinventory', {
-    title: 'Create inventory'
-  });
+exports.getCreateinventory = (req, res, next) => {
+  if (!req.user) {
+    return res.redirect('/');
+  }
+
+
+  var mysort = { createdAt: -1,  };
+  Loc.find()
+      .sort(mysort)
+      .exec(function (err, loc_list) {
+            if (err) { return next(err); }
+            // Successful, so render.
+            res.render('account/loccompose', { title: 'Create Loc', loc_list: loc_list });
+      });
 };
+
+
+
+
 
 /**
  * POST /createpost

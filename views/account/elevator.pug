@@ -6,7 +6,7 @@ block content
   include ../partials/profilehead.pug
   
   span #{user.profile.group} panel
-  if (user.group != "for ward" || user.group ==  )
+  if (user.group != "for ward" || user.group ==+ "For Ward" || user.group === "Forward")
     a(href='/account/elevatorentrycreate') New food request
   else
     span podcast

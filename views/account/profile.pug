@@ -16,24 +16,44 @@ block content
       .col-md-7
         .btn-group(data-toggle="buttons")
           label.btn.btn-outline-danger
-            input(type="checkbox", name="paneldriver", autocomplete="off", checked=user.paneldriver)
-            | Driver
-
+            if (user.paneldriver === "on")
+              input(type="checkbox", name="paneldriver", autocomplete="off", checked=true)
+              | Driver
+            else
+              input(type="checkbox", name="paneldriver", autocomplete="off", checked=false)
+              | Driver
+         
           label.btn.btn-outline-warning
-            input(type="checkbox", name="panelsurplus", autocomplete="off", checked=user.panelsurplus)
-            | Surplus
+            if (user.panelsurplus === "on")
+              input(type="checkbox", name="panelsurplus", autocomplete="off", checked=true)
+              | Surplus
+            else
+              input(type="checkbox", name="panelsurplus", autocomplete="off", checked=false)
+              | Surplus
 
           label.btn.btn-outline-success
-            input(type="checkbox", name="panelrequests", autocomplete="off" checked=user.panelrequests)
-            | Requests
+            if (user.panelrequests === "on")
+              input(type="checkbox", name="panelrequests", autocomplete="off", checked=true)
+              | Requests
+            else
+              input(type="checkbox", name="panelrequests", autocomplete="off", checked=false)
+              | Requests
 
           label.btn.btn-outline-primary
-            input(type="checkbox", name="panelwarehouse", autocomplete="off", checked=user.panelwarehouse)
-            | Warehousing 
+            if (user.panelwarehouse === "on")
+              input(type="checkbox", name="panelwarehouse", autocomplete="off", checked=true)
+              | Warehouses
+            else
+              input(type="checkbox", name="panelwarehouse", autocomplete="off", checked=false)
+              | Warehouses
 
           label.btn.btn-outline-secondary
-            input(type="checkbox", name="panelresearch", selected, autocomplete="off", checked=user.panelresearch)
-            | Research
+            if (user.panelresearch === "on")
+              input(type="checkbox", name="panelresearch", autocomplete="off", checked=true)
+              | Research
+            else
+              input(type="checkbox", name="panelresearch", autocomplete="off", checked=false)
+              | Research
 
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Name

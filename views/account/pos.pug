@@ -21,14 +21,35 @@ block content
 
 
   - if (posdata.length)
+  .card-columns
     each items in posdata
        if items.username == userr.id 
-          strong #{items.postitle} #{moment(items.updatedAt).format('MMM Do h:mm:')}
-          strong #{items.location}  
-          div #{items.time}  
-          div tags: #{items.postags} #{items.poscat}
-          a(href='/account/pos/'+items._id) Edit
-          updated  &nbsp; &nbsp; &nbsp;  updated #{moment(items.updatedAt).format('MMM Do h:mm:ss a')}
-          hr
+           .card.bg-light
+             .card-body.text-left
+               p.card-text.strong #{items.postitle}
+               p.card-text.text-center #{items.location} #{items.time}  tags: #{items.postags} #{items.poscat}
+               a(href='/account/pos/'+items._id).text Edit
+               updated  &nbsp; &nbsp; &nbsp;  updated #{moment(items.updatedAt).format('MMM Do h:mm:ss a')}
     a(href='/account/posentrycreate') Add an entry -
         hr
+
+  .card-columns
+           .card.bg-primary
+             .card-body.text-center
+               p.card-text Some text inside the first card
+           .card.bg-warning
+             .card-body.text-center
+               p.card-text Some text inside the second card
+           .card.bg-success
+             .card-body.text-center
+               p.card-text Some text inside the third card
+           .card.bg-danger
+             .card-body.text-center
+               p.card-text Some text inside the fourth card
+           .card.bg-light
+             .card-body.text-center
+               p.card-text Some text inside the fifth card
+           .card.bg-info
+             .card-body.text-center
+               p.card-text Some text inside the sixth card
+

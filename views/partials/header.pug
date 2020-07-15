@@ -10,15 +10,16 @@
       ul.nav.navbar-nav
         li.nav-item(class=(title === 'Home') ? 'active' : undefined)
           a.nav-link(href='/') Home
-        li.nav-item(class=(title === 'Contact') ? 'active' : undefined)
-          a.nav-link(href='/contact') Contact
         if user
           li.nav-item(class=(title === 'Messages') ? 'active' : undefined)
             a.nav-link(href='/account/messages') Messages
-        if (user && user.profile.group == "Ward Food Logistics")  
+        if (user && user.group == "For Ward")  
             a.nav-link(href='/account/elevatormanage') Logistics
+            a.nav-link(href='/account/createinventory') List an item
       ul.nav.navbar-nav.ml-auto
         if !user
+          li.nav-item(class=(title === 'Contact') ? 'active' : undefined)
+            a.nav-link(href='/contact') Contact
           li.nav-item(class=(title === 'Login') ? 'active' : undefined)
             a.nav-link(href='/login') Login
           li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)

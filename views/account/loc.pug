@@ -1,0 +1,24 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+  include ../partials/profilehead.pug
+  
+  span Loc - 
+  a(href='/account/locsettings') Settings - 
+  a(href='/account/createloc') Add a location
+
+    hr
+
+    br
+
+  - var userr = { id: user._id }
+  - if (locs.length)
+    each locs in locs
+        if locs.username == userr.id 
+            strong #{locs.loctitle} - #{locs.locdate}  - #{locs.loccats}
+            br
+            #{locs.description}
+            a(href='/account/loc/'+locs._id).icon-edit Edit 
+            updated  &nbsp; &nbsp; &nbsp;  updated #{moment(locs.updatedAt).format('MMM Do h:mm:ss a')}
+            hr

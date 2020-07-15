@@ -38,6 +38,7 @@ const inventoryController = require('./controllers/inventory');
 const calController = require('./controllers/cal');
 const elevatorController = require('./controllers/elevator');
 const memberController = require('./controllers/member');
+const locController = require('./controllers/loc');
 const posController = require('./controllers/pos');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
@@ -201,8 +202,8 @@ app.get('/account/business', passportConfig.isAuthenticated, userController.getB
 app.post('/account/business', passportConfig.isAuthenticated, userController.postUpdateBusiness);
 app.get('/account/bizsettings', passportConfig.isAuthenticated, userController.getBizsettings);
 app.post('/account/bizsettings', passportConfig.isAuthenticated, userController.postUpdateBizsettings);
-
-
+app.get('/account/locsettings', passportConfig.isAuthenticated, userController.getLocsettings);
+app.post('/account/locsettings', passportConfig.isAuthenticated, userController.postUpdateLocsettings);
 app.get('/account/blogsettings', passportConfig.isAuthenticated, userController.getBlogsettings);
 app.post('/account/blogsettings', passportConfig.isAuthenticated, userController.postUpdateBlogsettings);
 app.get('/account/groupsettings', passportConfig.isAuthenticated, userController.getGroupsettings);
@@ -227,9 +228,15 @@ app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog)
 app.post('/account/blog', blogController.postUpdateBlog);
 app.post('/account/blogupdate', passportConfig.isAuthenticated, blogController.postUpdateBlog);
 app.get('/account/blog/:blogpost_id', passportConfig.isAuthenticated, blogController.getUpdateBlogpost);
-app.get('/account/createpost', passportConfig.isAuthenticated, blogController.getCreatepost);
-app.post('/account/createpost', passportConfig.isAuthenticated, blogController.postCreatepost);
+app.get('/account/createloc', passportConfig.isAuthenticated, locController.getCreateloc);
+app.post('/account/createloc', passportConfig.isAuthenticated, locController.postCreateloc);
 
+app.get('/account/loc', passportConfig.isAuthenticated, locController.getLoc);
+app.post('/account/loc', locController.postUpdateLoc);
+app.post('/account/locupdate', passportConfig.isAuthenticated, blogController.postUpdateBlog);
+app.get('/account/loc/:locpost_id', passportConfig.isAuthenticated, locController.getUpdateLocpost);
+app.get('/account/createloc', passportConfig.isAuthenticated, locController.getCreateloc);
+app.post('/account/createpost', passportConfig.isAuthenticated, blogController.postCreatepost);
 app.get('/account/inventory', passportConfig.isAuthenticated, inventoryController.getInventory);
 app.post('/account/inventory', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
 app.get('/account/createinventory', passportConfig.isAuthenticated, inventoryController.getCreateinventory);

@@ -831,6 +831,16 @@ exports.getCalsettings = (req, res) => {
 };
 
 /**
+ * GET /account/locsettings
+ * Loc items
+ */
+exports.getLocsettings = (req, res) => {
+  res.render('account/locsettings', {
+    title: 'Loc Settings'
+  });
+};
+
+/**
  * GET /account/elevsettings
  * Profile page.
  */
@@ -843,7 +853,7 @@ exports.getElevsettings = (req, res) => {
 
 /**
  * POST /account/calsettings
- * Update blog settings.
+ * Update cal settings.
  */
 exports.postUpdateCalsettings = (req, res, next) => {
   const validationErrors = [];
@@ -875,7 +885,39 @@ exports.postUpdateCalsettings = (req, res, next) => {
   });
 };
 
+/**
+ * POST /account/locsettings
+ * Update loc settings.
+ */
+exports.postUpdateLocsettings = (req, res, next) => {
+  const validationErrors = [];
 
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/locsettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.locsettings.user = req.body.user || '';
+    user.locsettings.caltitle = req.body.loctitle || '';
+    user.locsettings.description = req.body.description || '';
+    user.locsettings.loccats = req.body.loccats || '';
+    user.locsettings.loctags = req.body.loctags || '';
+    user.locsettings.visibility = req.body.visibility || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your loc settings update.' });
+          return res.redirect('/account/locsettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Loc setings have been updated.' });
+      res.redirect('/account/locsettings');
+    });
+  });
+};
 
 exports.postUpdateElevsettings = (req, res, next) => {
   const validationErrors = [];

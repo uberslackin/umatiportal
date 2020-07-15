@@ -6,7 +6,8 @@ block content
 
   include ../partials/profilehead.pug
   a(href='/account/inventory') INVENTORY - 
-  a(href='/account/inventorysettings') Settings
+  a(href='/account/inventorysettings') Settings - 
+  a(href='/account/createloc') Add a Location
 
   hr
   
@@ -32,7 +33,7 @@ block content
       .col-md-7
         input.form-control(type='text', name='price', id='price')
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location 
       .col-md-7
         input.form-control(type='text', name='location', id='location')
     .form-group.row

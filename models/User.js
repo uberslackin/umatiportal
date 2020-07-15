@@ -78,6 +78,14 @@ const userSchema = new mongoose.Schema({
     caltags: String,
     visibility: String
   },
+  locsettings: {
+    user: String,
+    loctitle: String,
+    description: String,
+    loccats: String,
+    loctags: String,
+    visibility: String
+  },
   elevsettings: {
     user: String,
     elevtitle: String,
