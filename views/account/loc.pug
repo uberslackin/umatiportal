@@ -14,11 +14,11 @@ block content
 
   - var userr = { id: user._id }
   - if (locs.length)
-    each locs in locs
-        if locs.username == userr.id 
-            strong #{locs.loctitle} - #{locs.locdate}  - #{locs.loccats}
+    each locas in locs
+        if locas.username == userr.id 
+            strong #{locas.loctitle} - #{locas.locdate}  - #{locas.loccats}
             br
-            #{locs.description}
-            a(href='/account/loc/'+locs._id).icon-edit Edit 
+            #{locas.description}
+            a(href='/account/loc/'+locas._id).icon-edit Edit 
             updated  &nbsp; &nbsp; &nbsp;  updated #{moment(locs.updatedAt).format('MMM Do h:mm:ss a')}
             hr

@@ -13,12 +13,17 @@ block content
 
   - var userr = { id: user._id }
   - if (data.length)
-    each posts in data
-        if posts.user == userr.id 
-            strong #{posts.inventorytitle} - #{moment(posts.updatedAt).format('MMM Do h:mm:ss a')}  - #{posts.inventorycat}
-            br
-            div #{posts.post}  - #{posts.inventorytags}
-            a(href='/account/inventory/'+posts._id) Edit
 
-            hr 
+  .card-columns
+    each posts in data
+       if posts.visibility != "none" 
+           .card-bg-light
+             .card-body.text-left
+               p.card-text.string #{posts.inventorytitle} 
+               p.card-text.tex-center - #{posts.location}
+               p.card-text.tex-center - #{posts.inventorytags}
+               p.card-text.tex-center - #{posts.post}
+               br
+               a(href='/account/inventory/'+posts._id) Edit
+    hr 
 

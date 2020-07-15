@@ -57,11 +57,9 @@ exports.getCreateinventory = (req, res, next) => {
       .exec(function (err, loc_list) {
             if (err) { return next(err); }
             // Successful, so render.
-            res.render('account/loccompose', { title: 'Create Loc', loc_list: loc_list });
+            res.render('account/createinventory', { title: 'Create Inventory', loc_list: loc_list });
       });
 };
-
-
 
 
 
@@ -82,8 +80,8 @@ exports.postCreateinventory = (req, res, next) => {
   const inventory = new Inventory({
     name: req.body.name,
     user: req.body.user,
+    group: req.body.group,
     username: req.body.username, 
-    inventorytitle: req.body.inventorytitle, 
     price: req.body.price, 
     post: req.body.post,
     location: req.body.location,
@@ -92,7 +90,7 @@ exports.postCreateinventory = (req, res, next) => {
     inventorydate: req.body.inventorydate
   });
 
-  Inventory.findOne({ posttitle: req.body.posttitle }, (err, existingInventory) => {
+  Inventory.findOne({ name: req.body.name }, (err, existingInventory) => {
     if (err) { return next(err); }
     if (existingInventory) {
       req.flash('errors', { msg: 'Inventory post with that title already exists.' });

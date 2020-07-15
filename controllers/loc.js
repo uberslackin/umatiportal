@@ -14,8 +14,8 @@ const randomBytesAsync = promisify(crypto.randomBytes);
 
 
 /**
- * GET /account/oc
- * Blog manager.
+ * GET /account/loc
+ * Locational data manager.
  */
 
 
@@ -69,7 +69,7 @@ exports.postUpload = (req, res, next) => {
 
 
 /**
- * GET /createpost
+ * GET /createloc
  * Signup page.
  */
 exports.getCreateloc = (req, res) => {
@@ -80,12 +80,12 @@ exports.getCreateloc = (req, res) => {
 
 /**
  * POST /createloc
- * Create a new local account.
+ * Create new location data
  */
 exports.postCreateloc = (req, res, next) => {
   const validationErrors = [];
-  if (!validator.isAscii(req.body.posttitle)) validationErrors.push({ msg: 'Please enter a title for your new post.' });
-  if (!validator.isAscii(req.body.post)) validationErrors.push({ msg: 'Please add some content to your post.' });
+  if (!validator.isAscii(req.body.loctitle)) validationErrors.push({ msg: 'Please enter a title for your new location.' });
+// if (!validator.isAscii(req.body.post)) validationErrors.push({ msg: 'Please add some content to your location.' });
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
@@ -93,19 +93,20 @@ exports.postCreateloc = (req, res, next) => {
   }
 
   const loc = new Loc({
-    loctitle: req.body.posttitle,
+    loctitle: req.body.loctitle,
     description: req.body.post, 
     group: req.body.group, 
     username: req.body.user, 
     location: req.body.location, 
     loccat: req.body.postcat,
     loctags: req.body.posttags,
-    refdate: req.body.postdate
+    lat: req.body.lat,
+    long: req.body.long
   });
 
-  Loc.findOne({ posttitle: req.body.posttitle }, (err, existingBlog) => {
+  Loc.findOne({ loctitle: req.body.loctitle }, (err, existingLoc) => {
     if (err) { return next(err); }
-    if (existingBlog) {
+    if (existingLoc) {
       req.flash('errors', { msg: 'Loc with that title already exists.' });
       return res.redirect('/account/loc');
     }

@@ -21,7 +21,7 @@ block content
             h4.modal-title UMATI BANK
                img(src="/lion.png",border="0")
                a.navbar-brand(href='/')
-               | &nbsp;UMATI BANK
+               | &nbsp;
             button.close(type="button", data-dismiss="modal") ×
           .modal-body.content
             .row
@@ -49,6 +49,7 @@ block content
   form(action="/account/createloc", method="POST")
     input(type='hidden', name='_csrf', value=_csrf)
     input(type='hidden', name='user', value=user.id)
+    input(type='hidden', name='group', value=user.group)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttitle') Post Title
       .col-md-7
