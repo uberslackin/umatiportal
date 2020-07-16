@@ -17,13 +17,13 @@ block content
   .card-columns
     each posts in data
        if posts.visibility != "none" 
-           .card-bg-light
+           .card.bg-light
              .card-body.text-left
-               p.card-text.string #{posts.inventorytitle} 
-               p.card-text.tex-center - #{posts.location}
-               p.card-text.tex-center - #{posts.inventorytags}
-               p.card-text.tex-center - #{posts.post}
+               p.card-text.strong #{posts.inventorytitle} 
+               p.card-text.text-center - #{posts.location}
+               p.card-text.text-center - #{posts.inventorytags}
+               p.card-text.text-center - #{posts.post}
                br
-               a(href='/account/inventory/'+posts._id) Edit
+               a.align-left(href='/account/inventory/'+posts._id) Edit
     hr 
 

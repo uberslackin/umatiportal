@@ -237,11 +237,11 @@ app.post('/account/locupdate', passportConfig.isAuthenticated, blogController.po
 app.get('/account/loc/:locpost_id', passportConfig.isAuthenticated, locController.getUpdateLocpost);
 app.get('/account/createloc', passportConfig.isAuthenticated, locController.getCreateloc);
 app.post('/account/createpost', passportConfig.isAuthenticated, blogController.postCreatepost);
+app.get('/account/inventory/:inventory_id', passportConfig.isAuthenticated, inventoryController.getUpdateInventory);
 app.get('/account/inventory', passportConfig.isAuthenticated, inventoryController.getInventory);
 app.post('/account/inventory', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
 app.get('/account/createinventory', passportConfig.isAuthenticated, inventoryController.getCreateinventory);
 app.post('/account/createinventory', passportConfig.isAuthenticated, inventoryController.postCreateinventory);
-app.get('/account/inventory/:inventory_id', passportConfig.isAuthenticated, inventoryController.getUpdateInventory);
 app.post('/account/inventoryedit', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
 app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
 app.get('/account/resourceelevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateResourceElevatorEntry);

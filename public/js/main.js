@@ -23,6 +23,9 @@ $('#depth').append( "h2 boot" );
   ]
 });
 */
+  var scale $('#scale').val();
+	$('#text-scale').val(scale); 
+
 
     $('#invite').on('click', function () {
         var Status = $(this).val();

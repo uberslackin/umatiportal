@@ -22,3 +22,18 @@ block content
             a(href='/account/loc/'+locas._id).icon-edit Edit 
             updated  &nbsp; &nbsp; &nbsp;  updated #{moment(locs.updatedAt).format('MMM Do h:mm:ss a')}
             hr
+
+
+
+  #map
+  script.
+	
+              var map = L.map('map').setView({lon: 0, lat: 0}, 2);
+	
+              L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
+              }).addTo(map);
+
+               L.control.scale().addTo(map);
+               L.marker({lon: 0, lat: 0}).bindPopup('The center of the world').addTo(map);

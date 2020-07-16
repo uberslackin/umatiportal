@@ -69,8 +69,8 @@ exports.getCreateinventory = (req, res, next) => {
  */
 exports.postCreateinventory = (req, res, next) => {
   const validationErrors = [];
-  if (!validator.isAscii(req.body.posttitle)) validationErrors.push({ msg: 'Please enter a title for your new inventory.' });
-  if (!validator.isAscii(req.body.post)) validationErrors.push({ msg: 'Please add some content to your inventory.' });
+  if (!validator.isAscii(req.body.name)) validationErrors.push({ msg: 'Please enter a title for your new inventory item.' });
+  if (!validator.isAscii(req.body.post)) validationErrors.push({ msg: 'Please add some descriptive content to your inventory item.' });
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);

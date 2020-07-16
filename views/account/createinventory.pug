@@ -51,22 +51,39 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttags') Tags
       .col-md-7
         input.form-control(type='text', name='posttags', id='posttags')
+
+    
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='datenote') Date comment:
-      .col-md-7
-        input.form-control(type='text', name='datenote', id='datenote')
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttags') Add Dates
+              a.toggle-trigger  >>>>>>>
+      .col-md-7.toggle-wrap(style='display:none;')
+              .form-group.row
+                label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate') Date
+              input.form-control(type='date', name='postdate', id='postdate')
+              .form-group.row
+                input.form-control(type='text', name='datenote', id='datenote')
+              .form-group.row
+                label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate2') Date
+              input.form-control(type='date', name='postdate2', id='postdate2')
+              .form-group.row
+                label.col-md-3.col-form-label.font-weight-bold.text-left(for='datenote') Date comment:
+                input.form-control(type='text', name='datenote2', id='datenote2')
+
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate') Date
-      .col-md-7
-        input.form-control(type='date', name='postdate', id='postdate')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='datenote') Date comment:
-      .col-md-7
-        input.form-control(type='text', name='datenote2', id='datenote2')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate2') Date
-      .col-md-7
-        input.form-control(type='date', name='postdate2', id='postdate2')
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='visibility') Visibility
+       .col-md-7
+         .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='visibility', value='visible', data-toggle='radio')
+         label.form-check-label Visible
+         .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='visibility', value='group', data-toggle='radio')
+         label.form-check-label My Group Only
+         .form-check.form-check-inline
+          input(type='radio', class='form-check-input', name='visibility', value='subgroup', data-toggle='radio')
+         label.form-check-label Sub Group Only
+         .form-check.form-check-inline
+          input(type='radio', class='form-check-input', name='visibility', value='invisible', data-toggle='radio')
+         label.form-check-label Invisible
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')
