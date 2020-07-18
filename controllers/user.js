@@ -461,9 +461,6 @@ exports.getWardsignup = (req, res) => {
  * Food Group Signup page.
  */
 exports.getWardsignup2 = (req, res) => {
-  if (req.user) {
-    return res.redirect('/account/elevatormanage?status=signup2');
-  } 
   res.render('account/wardsignup2', {
     title: 'forWard'
   });
@@ -737,7 +734,7 @@ exports.postUpdateSetup = (req, res, next) => {
 
 /**
  * GET /account/business
- * Profile page.
+ * Business configuration page.
  */
 exports.getBusiness = (req, res) => {
   res.render('account/business', {
@@ -822,7 +819,7 @@ exports.postUpdateActivity = (req, res, next) => {
 
 /**
  * GET /account/calsettings
- * Profile page.
+ * Calendar settings page.
  */
 exports.getCalsettings = (req, res) => {
   res.render('account/calsettings', {
@@ -1223,21 +1220,27 @@ exports.postUpdateProfile = (req, res, next) => {
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
     if (user.email !== req.body.email) user.emailVerified = false;
+    user.profile.name = req.body.name || '';
     user.email = req.body.email || '';
     user.paneldriver = req.body.paneldriver || '';
     user.panelsurplus = req.body.panelsurplus || '';
     user.panelwarehouse = req.body.panelwarehouse || '';
     user.panelrequests = req.body.panelrequests || '';
     user.panelresearch = req.body.panelresearch || '';
-    user.profile.name = req.body.name || '';
-    user.profile.gender = req.body.gender || '';
-    user.profile.story = req.body.story || '';
-    user.profile.location = req.body.location || '';
-    user.group = req.body.group || '';
-    user.profile.business = req.body.business || '';
-    user.profile.vocation = req.body.vocation || '';
-    user.profile.role = req.body.role || '';
-    user.profile.website = req.body.website || '';
+    user.donations_avail = req.body.donations_avail || '';
+    user.specificitem = req.body.specificitem || '';
+    user.interest_pickup_deliver = req.body.interest_pickup_deliver || '';
+    user.specificoffer = req.body.specificoffer || '';
+    user.need_buildingsupplies = req.body.need_buildingsupplies || '';
+    user.profile.need_compost = req.body.need_compost || '';
+    user.profile.need_compostpickcup = req.body.need_compostpickup || '';
+    user.need_houseolditems = req.body.need_householditems || '';
+    user.profile.need_tools = req.body.need_tools || '';
+    user.profile.need_clothing = req.body.need_clothing || '';
+    user.profile.need_plants= req.body.need_plants || '';
+    user.profile.need_books= req.body.need_books || '';
+    user.profile.need_catfood= req.body.need_catfood || '';
+    user.profile.need_dogfood= req.body.need_dogfood || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -1251,6 +1254,79 @@ exports.postUpdateProfile = (req, res, next) => {
     });
   });
 };
+
+
+/** 
+ *  userController.getUpdateProfileAjax
+ * GET /account/profileajax
+ * Update status of entry to 'trash' or whatever needed
+ */
+exports.getUpdateProfileAjax = function (req, res, next) {
+
+    var user = req.params.user;
+    var item = req.params.item;
+    var val = req.params.val;
+
+    if (item === "need_buildingsupplies") var data = { need_buildingsupplies: val };
+    if (item === "need_compost") var data = { need_compost: val };
+    if (item === "need_compostpickup") var data = { need_compostpickup: val };
+    if (item === "need_householditems") var data = { need_householditems: val };
+    if (item === "need_tools") var data = { need_tools: val };
+    if (item === "need_clothing") var data = { need_clothing: val };
+    if (item === "need_books") var data = { need_books: val };
+    if (item === "need_plants") var data = { need_plants: val };
+    if (item === "need_catfood") var data = { need_catfood: val };
+    if (item === "need_dogfood") var data = { need_dogfood: val };
+    if (item === "warehouse_vol") var data = { warehouse_vol: val };
+    if (item === "surplus") var data = { surplus: val };
+    if (item === "pickup_deliver") var data = { pickup_deliver: val };
+    console.log("Itemid: " + item + " val: " + val + "user:" + user );
+
+    User.findByIdAndUpdate(user, data, function(err, result) {
+    if (err){
+         res.send(err);
+    }
+    else{
+         res.status(200);
+    };
+
+  });
+};
+
+
+/**
+ * POST /account/actionprofile
+ * Update profile information.
+ */
+exports.postUpdateAjaxProfile = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.profile.surplus_provider = req.body.value || '';
+    user.profile.website = req.body.website || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'The email address you have entered is already associated with an account.' });
+          return res.redirect('/account#profile');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Profile information has been updated.' });
+      res.redirect('/account#profile');
+    });
+  });
+};
+
+
+
+
 
 /**
  * POST /account/password

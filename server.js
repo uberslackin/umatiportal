@@ -173,6 +173,7 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+app.get('/account/profileajax/:user/:item/:val', passportConfig.isAuthenticated, userController.getUpdateProfileAjax);
 app.get('/link/:username', userController.getLink);
 app.get('/account/activity', passportConfig.isAuthenticated, userController.getActivity);
 app.get('/account/activity-print', passportConfig.isAuthenticated, userController.getActivityprint);

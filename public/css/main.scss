@@ -101,7 +101,7 @@ h3+p {
 }
 
 .cta {
-  background-image: linear-gradient(rgba(123,14,34,0), rgba(0,0,0,0.8)),url(https://i.picsum.photos/id/1074/5472/3648.jpg);
+  background-image: linear-gradient(rgba(123,14,34,0), rgba(0,0,0,0.8)),url(/lion.jpg);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -259,6 +259,9 @@ textarea {
   left: initial;
   right: 0;
 }
+
+
+
 
 // button raised definition
 // this button uses gradient for the background

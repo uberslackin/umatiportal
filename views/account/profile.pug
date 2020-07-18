@@ -7,23 +7,27 @@ block content
 
   include ../partials/profilehead.pug
 
-  form(action='/account/profile', method='POST')
+  form(action='/account/actionprofile', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
-    h3 #{user.group} Activity Profile
+    h3 #{user.group} Activity Settings
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Name
+      .col-md-7
+        input.form-control(type='text', name='name', id='name', value=user.profile.name, autocomplete='name')
 
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem')
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') Your dashboard views 
       .col-md-7
         .btn-group(data-toggle="buttons")
-          label.btn.btn-outline-danger
+          label.btn.btn-outline-secondary
             if (user.paneldriver === "on")
               input(type="checkbox", name="paneldriver", autocomplete="off", checked=true)
               | Driver
             else
               input(type="checkbox", name="paneldriver", autocomplete="off", checked=false)
-              | Driver
+              | Driver Timeline
          
-          label.btn.btn-outline-warning
+          label.btn.btn-outline-secondary
             if (user.panelsurplus === "on")
               input(type="checkbox", name="panelsurplus", autocomplete="off", checked=true)
               | Surplus
@@ -31,7 +35,7 @@ block content
               input(type="checkbox", name="panelsurplus", autocomplete="off", checked=false)
               | Surplus
 
-          label.btn.btn-outline-success
+          label.btn.btn-outline-secondary
             if (user.panelrequests === "on")
               input(type="checkbox", name="panelrequests", autocomplete="off", checked=true)
               | Requests
@@ -39,26 +43,175 @@ block content
               input(type="checkbox", name="panelrequests", autocomplete="off", checked=false)
               | Requests
 
-          label.btn.btn-outline-primary
+          label.btn.btn-outline-secondary
             if (user.panelwarehouse === "on")
               input(type="checkbox", name="panelwarehouse", autocomplete="off", checked=true)
-              | Warehouses
+              | Warehousing
             else
               input(type="checkbox", name="panelwarehouse", autocomplete="off", checked=false)
-              | Warehouses
+              | Warehousing
 
           label.btn.btn-outline-secondary
             if (user.panelresearch === "on")
               input(type="checkbox", name="panelresearch", autocomplete="off", checked=true)
-              | Research
+              | Planning
             else
               input(type="checkbox", name="panelresearch", autocomplete="off", checked=false)
-              | Research
+              | Planning
 
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Name
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed') 1. Do you or will you have surplus/donations?
+      ul.nav.nav-pills
+        li.nav-item
+          if (user.surplus === "have_surplus")
+            a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
+          else
+            a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
+        li.nav-item
+          if (user.surplus === "schedule_pickup")
+            a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
+          else
+            a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
+        li.nav-item
+          if (user.surplus === "regular_pickups")
+            a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
+          else
+            a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
+        li.nav-item
+          if (user.surplus === "no")
+            a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
+          else
+            a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_offered') Specific item offered
       .col-md-7
-        input.form-control(type='text', name='name', id='name', value=user.profile.name, autocomplete='name')
+        input.form-control(type='text', name='item_offered', id='item_offered', placeholder='you can always update this', autofocus, autocomplete='item_offered')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='interest_pickup_deliver') 2. Are you interested in picking-up/delivering surplus?
+      ul.nav.nav-pills
+        li.nav-item
+          if (user.pickup_deliver === "yes")
+            a.nav-link.pickup_deliver.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") Yes
+          else
+            a.nav-link.pickup_deliver(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") Yes
+        li.nav-item
+          if (user.pickup_deliver === "schedule_something")
+            a.nav-link.pickup_deliver.active(data-toggle="tab", id="schedule_something", href="/account/profileajax/" + user._id + "/pickup_deliver/schedule_something/") Let's schedule something
+          else
+            a.nav-link.pickup_deliver(data-toggle="tab", id="schedule_something", href="/account/profileajax/" + user._id + "/pickup_deliver/schedule_something/") Let's schedule something
+        li.nav-item
+          if (user.pickup_deliver === "no")
+            a.nav-link.pickup_deliver.active(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/no/") not at this time
+          else
+            a.nav-link.pickup_deliver(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/no/") not at this time
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='unloading_cleaning') 3. Interested in helping with unloading/cleaning/organizing?
+      ul.nav.nav-pills
+        li.nav-item
+          if (user.warehouse_vol === "yes")
+            a.nav-link.surplus.active(data-toggle="tab", id="unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/yes/") yes
+          else
+            a.nav-link.surplus(data-toggle="tab", id="unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/yes/") yes
+        li.nav-item
+          if (user.warehouse_vol === "no")
+            a.nav-link.surplus.active(data-toggle="tab", id="no_unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/no/") no
+          else
+            a.nav-link.surplus(data-toggle="tab", id="no_unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/no/") no
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_requested') 4. What are your needs?
+      .col-md-7
+        input.form-control(type='text', name='item_requested', id='item_requested', placeholder='Whatever you may need', autofocus, autocomplete='item_requested')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='need') Have system notify you when available:
+      .col-md-7
+        .btn-group(data-toggle="buttons")
+          label.btn.btn-outline-success
+            if (user.need_buildingsupplies === "checked")
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_buildingsupplies/" checked)
+            else
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_buildingsupplies/")
+            | Building supplies
+
+          label.btn.btn-outline-success
+            if (user.need_compost === "checked")
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compost/" checked)
+            else
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compost/")
+            | Compost
+
+          label.btn.btn-outline-success
+            if (user.need_compostpickup === "checked")
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compostpickup/" checked)
+            else
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compostpickup/")
+            | Compost pickup
+
+          label.btn.btn-outline-success
+            if (user.need_householditems === "checked")
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_householditems/" checked)
+            else
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_householditems/")
+            | Household Items
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='need2')
+      .col-md-7
+        .btn-group(data-toggle="buttons")
+          label.btn.btn-outline-success
+            if (user.need_tools === "checked")
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_tools/" checked)
+            else
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_tools/")
+            | Tools
+
+          label.btn.btn-outline-success
+            if (user.need_clothing === "checked")
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_clothing/" checked)
+            else
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_clothing/")
+            | Clothing
+
+          label.btn.btn-outline-success
+            if (user.need_plants === "checked")
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_plants/" checked)
+            else
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_plants/")
+            | Plants
+
+          label.btn.btn-outline-success
+            if (user.need_books === "checked")
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_books/" checked)
+            else
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_books/")
+
+            | Books
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem')
+      .col-md-7
+        .btn-group(data-toggle="buttons")
+          label.btn.btn-outline-success
+            if (user.need_catfood === "checked")
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/" checked)
+            else
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/")
+            | Cat Food
+          label.btn.btn-outline-success
+            if (user.need_catfood === "checked")
+              input.notifyreq(type="checkbox", name="need_dogfood", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/" checked)
+            else
+              input.notifyreq(type="checkbox", name="need_dogfood", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/")
+            | Dog Food
+
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update Activity Profile
+
+
+  form(action='/account/profile', method='POST', id="profile")
+    hr
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left Avatar
       .col-sm-4
@@ -74,45 +227,35 @@ block content
         else
           .text-danger.font-italic
             | Unverified: &nbsp;
-            a(href='/account/verify') (won't) Send verification email (yet)
+            a(href='/account/verify') (no) Send verification email (yet)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='story') Your story
       .col-md-7
-        textarea.form-control( name="story", rows="6", cols="66", autocomplete="story" ) #{user.profile.story}
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left Gender
-      .col-sm-6
-        .form-check.form-check-inline
-          input(type='radio', class='form-check-input' checked=user.profile.gender == 'male', name='gender', value='male', data-toggle='radio')
-          label.form-check-label Male
-
-        .form-check.form-check-inline
-          input(type='radio', class='form-check-input' checked=user.profile.gender == 'female', name='gender', value='female', data-toggle='radio')
-          label.form-check-label Female
-
-        .form-check.form-check-inline
-          input(type='radio', class='form-check-input' checked=user.profile.gender == 'other', name='gender', value='other', data-toggle='radio')
-          label.form-check-label Other
+        textarea.form-control(type='text', name="story", rows="6", cols="66", autocomplete='user.profile.story') #{user.profile.story}
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
       .col-md-7
-        input.form-control(type='text', name='location', id='location', value=user.profile.location, autocomplete)
+        input.form-control(type='text', name='location', id='location', value=user.profile.location, autocomplete='user.profile.location')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='business') Business
       .col-md-7
-        input.form-control(type='text', name='business', id='business', value=user.profile.business, autocomplete)
+        input.form-control(type='text', name='business', id='business', value=user.profile.business, autocomplete='user.profile.business')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='group') Group
       .col-md-7
-        input.form-control(type='text', name='group', id='group', value=user.group, autocomplete)
+        input.form-control(type='text', name='group', id='group', value=user.group, autocomplete='user.group')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='role') Role
       .col-md-7
-        input.form-control(type='text', name='role', id='role', value=user.profile.role, autocomplete)        
+        input.form-control(type='text', name='role', id='role', value=user.profile.role, autocomplete='user.profile.role')        
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='website') Website
       .col-md-7
-        input.form-control(type='text', name='website', id='website', value=user.profile.website, autocomplete='url')
+        input.form-control(type='text', name='website', id='website', value=user.profile.website, autocomplete='user.profile.website')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='vocation') Vocation
+      .col-md-7
+        input.form-control(type='text', name='vocation', id='vocation', value=user.profile.vocation, autocomplete='user.profile.vocation')
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')
