@@ -3,18 +3,13 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
 
-    h3 Profile Information
+    h3 Settings
 
   include ../partials/profilehead.pug
 
   form(action='/account/actionprofile', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     h3 #{user.group} Activity Settings
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Name
-      .col-md-7
-        input.form-control(type='text', name='name', id='name', value=user.profile.name, autocomplete='name')
-
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') Your dashboard views 
       .col-md-7
@@ -83,10 +78,6 @@ block content
           else
             a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_offered') Specific item offered
-      .col-md-7
-        input.form-control(type='text', name='item_offered', id='item_offered', placeholder='you can always update this', autofocus, autocomplete='item_offered')
-    .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='interest_pickup_deliver') 2. Are you interested in picking-up/delivering surplus?
       ul.nav.nav-pills
         li.nav-item
@@ -118,11 +109,7 @@ block content
           else
             a.nav-link.surplus(data-toggle="tab", id="no_unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/no/") no
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_requested') 4. What are your needs?
-      .col-md-7
-        input.form-control(type='text', name='item_requested', id='item_requested', placeholder='Whatever you may need', autofocus, autocomplete='item_requested')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='need') Have system notify you when available:
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='need') 4. What are your needs?
       .col-md-7
         .btn-group(data-toggle="buttons")
           label.btn.btn-outline-success
@@ -203,15 +190,14 @@ block content
               input.notifyreq(type="checkbox", name="need_dogfood", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/")
             | Dog Food
 
-    .form-group
-      .offset-sm-3.col-md-7.pl-2
-        button.btn.btn.btn-primary(type='submit')
-          i.fas.fa-pencil-alt.fa-sm
-          | Update Activity Profile
-
-
   form(action='/account/profile', method='POST', id="profile")
     hr
+    h3 #{user.name} Profile
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Name
+      .col-md-7
+        input.form-control(type='text', name='name', id='name', value=user.profile.name, autocomplete='name')
+
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left Avatar
       .col-sm-4
@@ -228,6 +214,14 @@ block content
           .text-danger.font-italic
             | Unverified: &nbsp;
             a(href='/account/verify') (no) Send verification email (yet)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_requested') Any specific current needs?
+      .col-md-7
+        input.form-control(type='text', name='item_requested', id='item_requested', placeholder='Whatever you may need', autofocus, autocomplete='item_requested')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_offered') Specific item(s) offered
+      .col-md-7
+        input.form-control(type='text', name='item_offered', id='item_offered', placeholder='you can always update this', autofocus, autocomplete='item_offered')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='story') Your story
       .col-md-7

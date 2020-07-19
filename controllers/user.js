@@ -765,6 +765,10 @@ exports.postUpdateBusiness = (req, res, next) => {
     user.business.social1 = req.body.social1 || '';
     user.business.social2 = req.body.social2 || '';
     user.business.social3 = req.body.social3 || '';
+    user.business.social4 = req.body.social4 || '';
+    user.business.social5 = req.body.social5 || '';
+    user.business.social6 = req.body.social6 || '';
+    user.business.social7 = req.body.social7 || '';
     user.business.businesstags = req.body.businesstags || '';
     user.business.postdate = req.body.postdate || '';
     user.business.members = req.body.members || '';
