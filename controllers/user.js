@@ -1232,19 +1232,11 @@ exports.postUpdateProfile = (req, res, next) => {
     user.panelrequests = req.body.panelrequests || '';
     user.panelresearch = req.body.panelresearch || '';
     user.donations_avail = req.body.donations_avail || '';
-    user.specificitem = req.body.specificitem || '';
-    user.interest_pickup_deliver = req.body.interest_pickup_deliver || '';
-    user.specificoffer = req.body.specificoffer || '';
-    user.need_buildingsupplies = req.body.need_buildingsupplies || '';
-    user.profile.need_compost = req.body.need_compost || '';
-    user.profile.need_compostpickcup = req.body.need_compostpickup || '';
-    user.need_houseolditems = req.body.need_householditems || '';
-    user.profile.need_tools = req.body.need_tools || '';
-    user.profile.need_clothing = req.body.need_clothing || '';
-    user.profile.need_plants= req.body.need_plants || '';
-    user.profile.need_books= req.body.need_books || '';
-    user.profile.need_catfood= req.body.need_catfood || '';
-    user.profile.need_dogfood= req.body.need_dogfood || '';
+    user.specificitemoffered = req.body.item_offered || '';
+    user.specificitemrequested = req.body.item_requested || '';
+    user.profile.vocation = req.body.vocation || '';
+    user.trackwriteoffs = req.body.trackwriteoffs || '';
+    user.rewriteoffs = req.body.rewriteoffs || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {

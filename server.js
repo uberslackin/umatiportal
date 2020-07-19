@@ -244,6 +244,11 @@ app.post('/account/inventory', passportConfig.isAuthenticated, inventoryControll
 app.get('/account/createinventory', passportConfig.isAuthenticated, inventoryController.getCreateinventory);
 app.post('/account/createinventory', passportConfig.isAuthenticated, inventoryController.postCreateinventory);
 app.post('/account/inventoryedit', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
+app.get('/account/donation', passportConfig.isAuthenticated, inventoryController.getDonation);
+app.get('/account/createdonation', passportConfig.isAuthenticated, inventoryController.getCreatedonation);
+app.post('/account/createdonation', passportConfig.isAuthenticated, inventoryController.postCreatedonation);
+app.get('/account/donation/:donation_id', passportConfig.isAuthenticated, inventoryController.getUpdateDonation);
+app.post('/account/donationedit', passportConfig.isAuthenticated, inventoryController.postUpdateDonation);
 app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
 app.get('/account/resourceelevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateResourceElevatorEntry);
 app.get('/account/elevator', passportConfig.isAuthenticated, elevatorController.getElevator);

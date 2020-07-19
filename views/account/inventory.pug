@@ -2,11 +2,12 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-  include ../partials/profilehead.pug
   
   span INVENTORY - 
   a(href='/account/inventorysettings') Settings - 
-  a(href='/account/createinventory') Add an item
+  a(href='/account/createinventory') Add inventory item - 
+  a(href='/account/createloc') New location - 
+  a(href='/account/createdonation') List a donation
 
     hr
     br
@@ -27,3 +28,4 @@ block content
                a.align-left(href='/account/inventory/'+posts._id) Edit
     hr 
 
+  include ../partials/profilehead.pug

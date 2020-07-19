@@ -2,7 +2,6 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-  include ../partials/profilehead.pug
   
   span BLOG - 
   a(href='/account/blogsettings') Settings - 
@@ -22,3 +21,12 @@ block content
             a(href='/account/blog/'+posts._id).icon-edit Edit 
             updated  &nbsp; &nbsp; &nbsp;  updated #{moment(posts.updatedAt).format('MMM Do h:mm:ss a')}
             hr
+  br
+  br
+  br
+  br
+  br
+  br
+  br
+  hr
+  include ../partials/profilehead.pug

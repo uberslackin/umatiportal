@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+  include ../partials/profilehead.pug
+  
+  span #{user.group} DONATIONS QUEUE - 
+  a(href='/account/createloc') Add a location
+  span - 
+  a(href='/account/createdonation') List a donation
+
+    hr
+    br
+
+  - var userr = { id: user._id }
+  - if (data.length)
+
+  .card-columns
+    each posts in data
+       if posts.visibility != "none" 
+           .card.bg-light
+             .card-body.text-left
+               .card-text
+                 h2 #{posts.donationname} 
+               p.card-text.text-center - #{posts.location}
+               p.card-text.text-center - #{posts.donationtags}
+               p.card-text.text-center - #{posts.description}
+               br
+               a.align-left(href='/account/donation/'+posts._id) Edit
+    hr 
+

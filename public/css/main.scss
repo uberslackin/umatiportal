@@ -107,6 +107,11 @@ h3+p {
   flex-direction: column;
 }
 
+.move-left {
+  width: 15px;
+  box-shadow: none;
+}
+
 a.spam-button:link {
   border: 1px solid #ccc;
   border-radius: 3px;

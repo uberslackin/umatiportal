@@ -15,7 +15,7 @@
             a.nav-link(href='/account/messages') Messages
         if (user && user.group == "For Ward")  
             a.nav-link(href='/account/elevatormanage') Logistics
-            a.nav-link(href='/account/createinventory') List a donation
+            a.nav-link(href='/account/createdonation') List a donation
       ul.nav.navbar-nav.ml-auto
         if !user
           li.nav-item(class=(title === 'Contact') ? 'active' : undefined)

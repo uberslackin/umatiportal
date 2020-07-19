@@ -141,10 +141,10 @@ block content
               input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/")
             | Cat Food
           label.btn.btn-outline-success
-            if (user.need_catfood === "checked")
-              input.notifyreq(type="checkbox", name="need_dogfood", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/" checked)
+            if (user.need_dogfood === "checked")
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_dogfood/" checked)
             else
-              input.notifyreq(type="checkbox", name="need_dogfood", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/")
+              input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_dogfood/")
             | Dog Food
 
   form(action='/account/profile', method='POST', id="profile")
@@ -250,6 +250,20 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='vocation') Vocation
       .col-md-7
         input.form-control(type='text', name='vocation', id='vocation', value=user.profile.vocation, autocomplete='user.profile.vocation')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='trackwriteoffs') Track tax write offs
+      .col-md-7
+        if (user.profile.taxwriteoffs === "checked")
+          input.form-control.move-left(type='checkbox', name='trackwriteoffs', id='trackwriteoffs', value=user.profile.trackwriteoffs, autocomplete='user.profile.trackwriteoffs')
+        else
+          input.form-control.move-left(type='checkbox', name='trackwriteoffs', id='trackwriteoffs', value=user.profile.trackwriteoffs, autocomplete='user.profile.trackwriteoffs' checked)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='rewriteoffs') Include home ownership write offs
+      .col-md-7
+        if (user.profile.rewriteoffs === "checked")
+          input.form-control.move-left(type='checkbox', name='rewriteoffs', id='rewriteoffs', value=user.profile.rewriteoffs, autocomplete='user.profile.rewriteoffs' checked)
+        else
+          input.form-control.move-left(type='checkbox', name='rewriteoffs', id='rewriteoffs', value=user.profile.rewriteoffs, autocomplete='user.profile.rewriteoffs')
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')

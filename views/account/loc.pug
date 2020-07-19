@@ -2,7 +2,6 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-  include ../partials/profilehead.pug
   
   span Loc - 
   a(href='/account/locsettings') Settings - 
@@ -26,6 +25,14 @@ block content
 
 
   #map
+  hr
+  br
+  br
+  br
+  br
+  br
+  br
+  include ../partials/profilehead.pug
   script.
 	
               var map = L.map('map').setView({lon: 0, lat: 0}, 2);
@@ -37,3 +44,4 @@ block content
 
                L.control.scale().addTo(map);
                L.marker({lon: 0, lat: 0}).bindPopup('The center of the world').addTo(map);
+
