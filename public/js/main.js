@@ -15,6 +15,7 @@ $(document).ready(() => {
 
     $('.surplus').on('click', function () {
             var hreff = $(this).attr('href');
+            $(this).Addclass('active');
         $(this).load( hreff );
         return false;
     });
