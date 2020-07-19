@@ -15,20 +15,11 @@ $(document).ready(() => {
 
     $('.surplus').on('click', function () {
             var hreff = $(this).attr('href');
-            $(this).Addclass('active');
+            $(this).parent().siblings().children().removeClass('active');
+            $(this).addClass('active');
         $(this).load( hreff );
         return false;
     });
-
-
-
-   $("notifyre2q input:checkbox").change(function() {
-      var ischecked= $(this).is(':checked');
-      if(ischecked)
-      if(!ischecked)
-      alert('uncheckd ' + $(this).val());
-    }); 
-
 
    $('.notifyreq').change(function() {
         var $checkbox = $(this);
@@ -42,16 +33,10 @@ $(document).ready(() => {
         }
     });
 
-
-    $(".notifyre3q").on('click', function () {
-            if ($(this).is(":checked")) console.log('checkbox checked in jquery.');
-            else  console.log('checkbox unchecked in jquery.');
-        $(this).load( hreff );
-        return false;
-    });
-
     $('.pickup_deliver').on('click', function () {
             var hreff = $(this).attr('href');
+            $(this).parent().siblings().children().removeClass('active');
+            $(this).addClass('active');
         $(this).load( hreff );
         return false;
     });
