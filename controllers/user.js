@@ -1255,7 +1255,7 @@ exports.postUpdateProfile = (req, res, next) => {
 /** 
  *  userController.getUpdateProfileAjax
  * GET /account/profileajax
- * Update status of entry to 'trash' or whatever needed
+ * Update entry based on params in the url string
  */
 exports.getUpdateProfileAjax = function (req, res, next) {
 
@@ -1276,7 +1276,7 @@ exports.getUpdateProfileAjax = function (req, res, next) {
     if (item === "warehouse_vol") var data = { warehouse_vol: val };
     if (item === "surplus") var data = { surplus: val };
     if (item === "pickup_deliver") var data = { pickup_deliver: val };
-    console.log("Itemid: " + item + " val: " + val + "user:" + user );
+    console.log("hello there. Item id is: " + item + " val: " + val + "user: " + user );
 
     User.findByIdAndUpdate(user, data, function(err, result) {
     if (err){

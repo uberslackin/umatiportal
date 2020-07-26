@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
   donations_avail: String,
   specificitemreqested: String,
   specificitemreqested: String,
+  surplus: String,
   pickup_deliver: String,
   warehouse_vol: String,
   need_buildingsupplies: String,

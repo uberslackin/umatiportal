@@ -1,8 +1,8 @@
 extends ../layout
 
 block content
+  include ../partials/resourcenav.pug
   .pb-2.mt-2.mb-4.border-bottom
-  include ../partials/profilehead.pug
   
   span #{user.group} DONATIONS QUEUE - 
   a(href='/account/createloc') Add a location
@@ -46,4 +46,4 @@ block content
                  i.fa.fa-man
 
     hr 
-
+  include ../partials/profilehead.pug

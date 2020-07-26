@@ -1528,6 +1528,13 @@ submitting a pull request. This project uses
 few minor exceptions. If you are submitting a pull request that involves
 Pug templates, please make sure you are using *spaces*, not tabs.
 
+
+MANY THANKS 
+
+Great SVG input checkbox style
+Copyright (c) 2020 by Gowri Prasanth V M (https://codepen.io/gowriprasanthvm/pen/zzareW)
+
+
 License
 -------
 

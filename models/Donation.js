@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
-const Schema = mongoose.userSchema;
 
 const donationSchema = new mongoose.Schema({
     id: Number,

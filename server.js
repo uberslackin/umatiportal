@@ -40,6 +40,7 @@ const elevatorController = require('./controllers/elevator');
 const memberController = require('./controllers/member');
 const locController = require('./controllers/loc');
 const posController = require('./controllers/pos');
+const donationController = require('./controllers/donation');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
@@ -244,6 +245,11 @@ app.post('/account/inventory', passportConfig.isAuthenticated, inventoryControll
 app.get('/account/createinventory', passportConfig.isAuthenticated, inventoryController.getCreateinventory);
 app.post('/account/createinventory', passportConfig.isAuthenticated, inventoryController.postCreateinventory);
 app.post('/account/inventoryedit', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
+app.get('/account/driver', passportConfig.isAuthenticated, donationController.getDriver);
+app.get('/account/surplus_provider', passportConfig.isAuthenticated, donationController.getSurplusprovider);
+app.get('/account/requests', passportConfig.isAuthenticated, donationController.getRequests);
+app.get('/account/warehouse', passportConfig.isAuthenticated, donationController.getWarehouse);
+app.get('/account/ops', passportConfig.isAuthenticated, donationController.getOps);
 app.get('/account/donation', passportConfig.isAuthenticated, inventoryController.getDonation);
 app.get('/account/createdonation', passportConfig.isAuthenticated, inventoryController.getCreatedonation);
 app.post('/account/createdonation', passportConfig.isAuthenticated, inventoryController.postCreatedonation);

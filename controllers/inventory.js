@@ -8,7 +8,7 @@ const _ = require('lodash');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
 const Inventory = require('../models/Inventory');
-const Donation = require('../models/Donations');
+const Donation = require('../models/Donation');
 const User = require('../models/User');
 const Loc = require('../models/Loc');
 const randomBytesAsync = promisify(crypto.randomBytes);
@@ -202,13 +202,12 @@ exports.postCreatedonation = (req, res, next) => {
     value: req.body.value,
     description: req.body.description,
     location: req.body.location,
-    donationcat: req.body.inventorycat,
-    donationtags: req.body.inventorytags,
-    donationdate: req.body.inventorydate
-    donationdate: req.body.inventorydate
-    donationnote: req.body.inventorydate
-    donationdate2: req.body.inventorydate
-    donationnote2: req.body.inventorydate
+    donationcat: req.body.donationcat,
+    donationtags: req.body.donationtags,
+    donationdate: req.body.donationdate,
+    donationnote: req.body.donationnote,
+    donationdate2: req.body.donationdate2,
+    donationnote2: req.body.donationnote2
   });
 
   Donation.findOne({ name: req.body.donationname }, (err, existingDonation) => {
@@ -226,7 +225,7 @@ exports.postCreatedonation = (req, res, next) => {
 
 
 exports.getUpdateDonation = function (req, res, next) {
-  Donation.findById(req.params.inventory_id, function(err, donation){
+  Donation.findById(req.params.donation_id, function(err, donation){
     if(donation.user != req.user._id){
       req.flash('danger', 'Not Authorized');
       return res.redirect('/');

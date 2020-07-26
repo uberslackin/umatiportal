@@ -1,10 +1,10 @@
 extends ../layout
 
 block content
+  include ../partials/resourcenav.pug
   .pb-2.mt-2.mb-4.border-bottom
-  include ../partials/profilehead.pug
   
-  span #{user.group} DONATIONS QUEUE - 
+  span #{user.group} DRIVER DASHBOARD - 
   a(href='/account/createloc') Add a location
   span - 
   a(href='/account/createdonation') List a donation
@@ -47,3 +47,4 @@ block content
 
     hr 
 
+  include ../partials/profilehead.pug

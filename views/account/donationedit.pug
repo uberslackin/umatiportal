@@ -2,11 +2,11 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-    h3 Edit Inventory Item
+    h3 Edit Donated Item
 
     .form-group.row
-    a(href='/account/donation') donation - 
-    a(href='/account/donationsettings') Settings
+    a(href='/account/donation') DONATIONS -  
+    a(href='/account/createloc') Add a location
 
 
   form(action='/account/donationedit', method='POST')
@@ -15,13 +15,13 @@ block content
     input(type='hidden', name='username', value=user._id)
     input(type='hidden', name='donationitemid', value=donation._id)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='donationtitle') Item name
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='donationname') Item name
       .col-md-7
-        input.form-control(type='text', name='donationtitle', id='donationtitle' , value=donation.donationtitle, autocomplete=donation.donationtitle)
+        input.form-control(type='text', name='donationtitle', id='donationname' , value=donation.donationname, autocomplete=donation.donationname)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='price') Price
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='value') Value
       .col-md-7
-        input.form-control(type='text', name='price', id='price' , value=donation.price, autocomplete=donation.price)
+        input.form-control(type='text', name='value', id='value' , value=donation.value, autocomplete=donation.value)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='donationdate') Date
       .col-md-7

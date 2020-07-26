@@ -1,6 +1,7 @@
 /* eslint-env jquery, browser */
 $(document).ready(() => {
 
+
     $('#invite').on('click', function () {
         var Status = $(this).val();
         $.ajax({
