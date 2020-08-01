@@ -156,49 +156,6 @@ block content
       .col-md-7
         input.form-control(type='text', name='name', id='name', value=user.profile.name, autocomplete='name')
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem') Your dashboard views 
-      .col-md-7
-        .btn-group(data-toggle="buttons")
-          label.btn.btn-outline-secondary
-            if (user.paneldriver === "on")
-              input(type="checkbox", name="paneldriver", autocomplete="off", checked=true)
-              | Driver
-            else
-              input(type="checkbox", name="paneldriver", autocomplete="off", checked=false)
-              | Driver Timeline
-         
-          label.btn.btn-outline-secondary
-            if (user.panelsurplus === "on")
-              input(type="checkbox", name="panelsurplus", autocomplete="off", checked=true)
-              | Surplus
-            else
-              input(type="checkbox", name="panelsurplus", autocomplete="off", checked=false)
-              | Surplus
-
-          label.btn.btn-outline-secondary
-            if (user.panelrequests === "on")
-              input(type="checkbox", name="panelrequests", autocomplete="off", checked=true)
-              | Requests
-            else
-              input(type="checkbox", name="panelrequests", autocomplete="off", checked=false)
-              | Requests
-
-          label.btn.btn-outline-secondary
-            if (user.panelwarehouse === "on")
-              input(type="checkbox", name="panelwarehouse", autocomplete="off", checked=true)
-              | Warehousing
-            else
-              input(type="checkbox", name="panelwarehouse", autocomplete="off", checked=false)
-              | Warehousing
-
-          label.btn.btn-outline-secondary
-            if (user.panelresearch === "on")
-              input(type="checkbox", name="panelresearch", autocomplete="off", checked=true)
-              | Planning
-            else
-              input(type="checkbox", name="panelresearch", autocomplete="off", checked=false)
-              | Planning
-    .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left Avatar
       .col-sm-4
         img(src="https://avatars.dicebear.com/api/human/" + user.profile.name +".svg", class='profile', width='100', height='100')

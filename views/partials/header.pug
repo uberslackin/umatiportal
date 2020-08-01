@@ -14,26 +14,20 @@
           li.nav-item(class=(title === 'Messages') ? 'active' : undefined)
             a.nav-link(href='/account/messages') Messages
         if (user && user.group == "For Ward")  
-          li.dropdown.nav-item
-            a.dropdown-toggle.nav-link(href='#', data-toggle='dropdown')
-              span= user.group || user.profile.name || user.email || user.id
-              i.caret
-                .col-md-4
-                  ul.dropdown-menu
-                        li
-                          a(href='/account/elevatormanage') Logistics
-                        li
-                          a(href='/account/createdonation') List a donation
-                        li
-                          a(href='/account/driver') Driver Dashboard 
-                        li
-                          a(href='/account/surplus_provider') Surplus 
-                        li
-                          a(href='/account/requests') Request Queue 
-                        li
-                          a(href='/account/warehouse') Warehouse 
-                        li
-                          a(href='/account/ops') Planning
+          li.nav-item.dropdown 
+            #{user.group}
+            a.nav-link.dropdown-toggle#navbarDropdown(href="#", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false").
+            Dropdown
+            .dropdown-menu(aria-labelledby="navbarDropdown")
+                a.dropdown-item(href="/account/createdonation") List a Donation
+                .dropdown-divider
+                a.dropdown-item(href="/account/requests") Requests
+                a.dropdown-item(href="/account/driver") Drivers
+                a.dropdown-item(href="/account/inventory") Inventory
+                a.dropdown-item(href="#") 
+                .dropdown-divider
+                a.dropdown-item(href="#") Request
+                a.dropdown-item(href="#") Offer
       ul.nav.navbar-nav.ml-auto
         if !user
           li.nav-item(class=(title === 'Contact') ? 'active' : undefined)

@@ -1276,6 +1276,11 @@ exports.getUpdateProfileAjax = function (req, res, next) {
     if (item === "warehouse_vol") var data = { warehouse_vol: val };
     if (item === "surplus") var data = { surplus: val };
     if (item === "pickup_deliver") var data = { pickup_deliver: val };
+    if (item === "paneldriver") var data = { paneldriver: val };
+    if (item === "panelsurplus") var data = { panelsurplus: val };
+    if (item === "panelrequests") var data = { panelrequests: val };
+    if (item === "panelwarehouse") var data = { panelwarehouse: val };
+    if (item === "panelresearch") var data = { panelresearch: val };
     console.log("hello there. Item id is: " + item + " val: " + val + "user: " + user );
 
     User.findByIdAndUpdate(user, data, function(err, result) {
