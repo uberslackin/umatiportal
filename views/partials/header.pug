@@ -15,9 +15,7 @@
             a.nav-link(href='/account/messages') Messages
         if (user && user.group == "For Ward")  
           li.nav-item.dropdown 
-            #{user.group}
-            a.nav-link.dropdown-toggle#navbarDropdown(href="#", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false").
-            Dropdown
+            a.nav-link.dropdown-toggle#navbarDropdown(href="#", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") #{user.group}
             .dropdown-menu(aria-labelledby="navbarDropdown")
                 a.dropdown-item(href="/account/createdonation") List a Donation
                 .dropdown-divider
