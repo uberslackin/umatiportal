@@ -4,11 +4,11 @@ block content
   .pb-2.mt-2.mb-4.border-bottom
 
  
-  - var userr = { id: user.profile.group }
+  - var userr = { id: user.group }
   if userr.id  === ""
          span.caps UNSPECIFIED SELF HELP GROUP - 
   else
-         span.caps #{ user.profile.group } SELF HELP GROUP -
+         span.caps #{ user.group } SELF HELP GROUP -
   a(href='/account/groupsettings') Settings - 
   a(href='/account/creategroupnote') Add a note
 
