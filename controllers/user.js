@@ -980,6 +980,7 @@ exports.postUpdatePossettings = (req, res, next) => {
     user.possettings.postitle = req.body.postitle || '';
     user.possettings.posdesc = req.body.posdesc || '';
     user.possettings.shortdesc = req.body.shortdesc || '';
+    user.possettings.template = req.body.template || '';
     user.possettings.postags = req.body.postags || '';
     user.possettings.visibility = req.body.visibility || '';
     user.save((err) => {
