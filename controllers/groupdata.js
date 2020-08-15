@@ -103,8 +103,6 @@ exports.getCreategroupnote = (req, res) => {
  */
 exports.postCreategroupdata = (req, res, next) => {
   const validationErrors = [];
-  if (!validator.isAscii(req.body.name)) validationErrors.push({ msg: 'Please enter a title for your new POS entry.' });
-  if (!validator.isAscii(req.body.group)) validationErrors.push({ msg: 'Please add some content to your POS entry.' });
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
@@ -140,7 +138,7 @@ exports.postCreategroupdata = (req, res, next) => {
         }
         return next(err);
       }
-      req.flash('success', { msg: 'Calendar update saved.' });
+      req.flash('success', { msg: 'Group note created.' });
       res.redirect('/account/group');
     });
   });
