@@ -3,9 +3,8 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
 
-    h3 Create a new Blog Post
+    h3 Create a new Post
 
-  include ../partials/profilehead.pug
 
     hr
     a(href='/account/blog') Blog -
@@ -82,3 +81,5 @@ block content
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm
           | Create post
+
+  include ../partials/profilehead.pug

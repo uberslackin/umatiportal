@@ -3,12 +3,11 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
  
-  include ../partials/profilehead.pug
     hr
     a(href='/account/loc') Loc -  
     a(href='/account/createloc') Create a loc
 
-  h3 Loc Settings
+  h3 Location Settings
 
 
   form(action='/account/locsettings', method='POST')
@@ -61,3 +60,5 @@ block content
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm
           | Update Settings
+
+  include ../partials/profilehead.pug

@@ -1233,8 +1233,8 @@ exports.postUpdateProfile = (req, res, next) => {
     user.panelrequests = req.body.panelrequests || '';
     user.panelresearch = req.body.panelresearch || '';
     user.donations_avail = req.body.donations_avail || '';
-    user.specificitemoffered = req.body.item_offered || '';
-    user.specificitemrequested = req.body.item_requested || '';
+    user.item_offered = req.body.item_offered || '';
+    user.item_requested = req.body.item_requested || '';
     user.profile.vocation = req.body.vocation || '';
     user.trackwriteoffs = req.body.trackwriteoffs || '';
     user.rewriteoffs = req.body.rewriteoffs || '';

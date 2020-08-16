@@ -172,13 +172,13 @@ block content
             | Unverified: &nbsp;
             a(href='/account/verify') (no) Send verification email (yet)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_requested') Any specific current needs?
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_requested') Any specific current need(s)?
       .col-md-7
-        input.form-control(type='text', name='item_requested', id='item_requested', placeholder='Whatever you may need', autofocus, autocomplete='item_requested')
+        input.form-control(type='text', name='item_requested', id='item_requested', placeholder='Whatever you may need', value=user.item_requested, autofocus, autocomplete='user.item_requested')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_offered') Specific item(s) offered
       .col-md-7
-        input.form-control(type='text', name='item_offered', id='item_offered', placeholder='you can always update this', autofocus, autocomplete='item_offered')
+        input.form-control(type='text', name='item_offered', id='item_offered', placeholder='you can always update this', value=user.item_offered, autofocus, autocomplete='user.item_offered')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='story') Your story
       .col-md-7

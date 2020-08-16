@@ -2,14 +2,12 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-  include ../partials/profilehead.pug
     hr
-    a(href='/account/cal') Calendar -  
-    a(href='/account/calsettings') Setup
+    span CALENDAR - 
+    a(href='/account/calsettings') Settings -
+    a(href='/account/cal') Events
 
-  hr
-
-  h3 Edit Calendar Entry
+  h3 Edit Calendar Event
 
   form(action='/account/calentryupdate', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
@@ -53,3 +51,5 @@ block content
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm
           | Update Entry
+
+  include ../partials/profilehead.pug

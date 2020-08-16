@@ -3,12 +3,11 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
 
-    h3 Create a new loc item
+    h3 Add a new location
 
-  include ../partials/profilehead.pug
 
     hr
-    a(href='/account/loc') Loc -
+    a(href='/account/loc') Location -
     a(href='/account/locsettings') Settings - 
     a(href='#', type="button", data-toggle="modal", data-target="#myModal") Media Manager
   
@@ -26,9 +25,8 @@ block content
           .modal-body.content
             .row
             .col-md-5
-            span Note, this is set up to use 3rd party APIs. go to your 
-            a(href='/account/profile') account profile 
-            to add one.
+            span Note: Media uploads are blocked for app security 
+            a(href='/account/profile') Please link Dropbox, git, or g.drive
             h2  Add images
             form(action="/account/upload", method="POST", enctype="multipart/form-data")
             input(type='hidden', name='user', value=user.id)
@@ -63,11 +61,11 @@ block content
       .col-md-7
         textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' ) #{user.business.post}
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='lat') Lat
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='lat') Latitude
       .col-md-7
         input.form-control(type='text', name='lat', id='lat')
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='long') Long
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='long') Longitude
       .col-md-7
         input.form-control(type='text', name='long', id='long')
     .form-group.row
@@ -87,3 +85,5 @@ block content
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm
           | Create post
+
+  include ../partials/profilehead.pug

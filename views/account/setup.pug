@@ -4,7 +4,6 @@ block content
   .pb-2.mt-2.mb-4.border-bottom
 
 
-  include ../partials/profilehead.pug
   span SAVINGS - 
   a(href='/account/activity') History - 
   a(href='/account/activity-print') Data sheet - 
@@ -44,3 +43,6 @@ block content
         p.mb-1: a.text-danger(href='/account/unlink/quickbooks') Unlink your QuickBooks account
       else
         p.mb-1: a(href='/auth/quickbooks') Link your QuickBooks account
+
+
+  include ../partials/profilehead.pug
