@@ -1,7 +1,7 @@
 UMATI BANK self help group portal
 =======================
 
-H2 Hackathon starter core and its current build status:
+H2 UMATI BANK self help group portal
 
 [![Build Status](https://travis-ci.org/sahat/hackathon-starter.svg?branch=master)](https://travis-ci.org/sahat/hackathon-starter) [![Join the chat at https://gitter.im/sahat/hackathon-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sahat/hackathon-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
