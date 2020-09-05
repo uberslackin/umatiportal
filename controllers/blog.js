@@ -117,6 +117,22 @@ exports.postCreatepost = (req, res, next) => {
 };
 
 
+// display blog post
+exports.getDisplayBlogpost = (req, res, next) => {
+  Blog.findById(req.params.blogpost_id, function(err, blog) {
+    if (blog.username != req.user._id){
+      req.flash('danger', 'Not Authorized');
+      return res.redirect('/');
+    }
+
+    return res.render('account/blogdisplay', {
+      title: 'display blog entry',
+      blogdata: blog
+    });
+  });
+};
+ 
+
 
 
 // get a blog post
