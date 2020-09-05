@@ -154,6 +154,8 @@ app.post('/forgot', userController.postForgot);
 app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
+app.get('/account/supportedsignup', userController.getSupportedsignup);
+app.get('/account/prioritysupport', userController.getPrioritysupport);
 app.post('/signup', userController.postSignup);
 app.get('/wardwelcome', userController.getWardwelcome);
 app.post('/wardwelcome', userController.postWardwelcome);

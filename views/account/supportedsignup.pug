@@ -2,12 +2,6 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-
-
-    a(href='/account/supportedsignup') Signup with priority support 
-    span - 
-    a(href='/account/prioritysupport') Details
-
     h3 Free account signup
   form(id='signup-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)

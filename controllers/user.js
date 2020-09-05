@@ -94,6 +94,38 @@ exports.getSignup = (req, res) => {
   });
 };
 
+
+/**
+ * GET /account/supportedsignup
+ * Signup page.
+ */
+exports.getSupportedsignup = (req, res) => {
+  if (req.user) {
+    return res.redirect('/');
+  }
+  res.render('account/supportedsignup', {
+    title: 'Create Paid Account'
+  });
+};
+
+
+/**
+ * GET /account/prioritysupport
+ * Page that explains benefits of priority support
+ */
+exports.getPrioritysupport = (req, res) => {
+  if (req.user) {
+    return res.redirect('/');
+  }
+  res.render('account/prioritysupport', {
+    title: 'Benefits of priority support'
+  });
+};
+
+
+
+
+
 /**
  * POST /signup
  * Create a new local account.
