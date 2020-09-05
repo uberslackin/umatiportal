@@ -7,3 +7,15 @@ exports.index = (req, res) => {
     title: 'Home'
   });
 };
+
+
+
+/**
+ * GET /home-automated
+ * Database driven homepage.
+ */
+exports.homeautomated = (req, res) => {
+  res.render('homeautomated', {
+    title: 'Home Automated'
+  });
+};

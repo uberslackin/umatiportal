@@ -146,6 +146,7 @@ app.use('/account/avatars', express.static(path.join(__dirname, 'node_modules/no
  * Primary app routes.
  */
 app.get('/', homeController.index);
+app.get('/homeautomated', homeController.homeautomated);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
