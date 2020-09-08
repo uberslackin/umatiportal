@@ -19,4 +19,8 @@ block content
     p #{blogdata.postdate}
 
 
-    h1 ROCK
+    each posts in blogs
+        if posts.username == userr.id
+            a(href='/blog/'+posts._id).icon-edit 
+              strong #{posts.posttitle} #{posts.postdate} #{posts.postcat} #{posts.posttag}
+            br
