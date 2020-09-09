@@ -45,18 +45,18 @@ FEATURE DEVELOPMENT
   - security updates, dev instance, testing instance, feature branch instance(s) Note all of this is provided via netlify.com and vercel.com free account service level.  [info]
   
 
-##Continuous
-Prioritation of feature requests 
+## Continuous Prioritation of feature requests 
 
 
-web security, 
+## Areas that the Umaticore project emphasizes the educational value to our participants
+
+ -- web security, 
 
 
-software management 
+ -- software management 
 
 
-
-and web development  
+ -- web app development  
 
 
 
