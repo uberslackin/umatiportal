@@ -184,10 +184,10 @@ The easiest way to get started is to clone the repository:
 
 ```bash
 # Get the latest snapshot
-git clone https://github.com/biomassives/umati_hs.git whatever-your-group-or-projcet-name
+git clone https://github.com/biomassives/umati_hs.git whatever-your-project\'s-name-you-wish-to-use
 
 # Change directory
-cd whatever-your-group-or-project-name
+cd whatever-your-project\'s-name-you-wish-to-use
 
 # Install NPM dependencies
 npm install
@@ -195,6 +195,10 @@ npm install
 # Then simply start your app
 node app.js
 ```
+
+# Install mongod
+see https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#install-mongodb-community-edition
+note: mongo is a 'structured database' written in javascript, and by running it alongside nodejs both server and db are in javascript. This is a design pattern for the umaticore distibution.
 
 **Warning:** If you want to use some API that need https to work (for example Pinterest or facebook),
 you will need to download [ngrok](https://ngrok.com/).
