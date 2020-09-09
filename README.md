@@ -5,9 +5,8 @@ H2 UMATICORE groupware portal for self help groups
 
 [![Build Status](https://travis-ci.org/sahat/hackathon-starter.svg?branch=master)](https://travis-ci.org/sahat/hackathon-starter) [![Join the chat at https://gitter.im/sahat/hackathon-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sahat/hackathon-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Jump to [What's new?](https://github.com/sahat/hackathon-starter/blob/master/CHANGELOG.md)
-
-Umati Self Help Group Codebase is made from a boilerplate for **Node.js** web applications.
+Umati Self Help Group Codebase is made from Sahat's "Hackathon Starter" boilerplate code distribution.  Umaticore continues to merge new features and security updates from.  updated for **Node.js** web applications.  If you are about to clone or download this repo to work with for your own project, please --file and issue-- on Umaticore's public project project's issue page, which is located 
+[![here](https://github.com/SustainableCommunityDevelopmentHub/umaticore/issues)
 
 [![pipeline status](https://gitlab.com/umati1/umati/badges/master/pipeline.svg)](https://gitlab.com/umati1/umati/-/commits/master)
 
