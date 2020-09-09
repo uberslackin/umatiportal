@@ -20,11 +20,11 @@ SOFTWARE PROJECT FEATURES
 
   - simple one server deployment for cloud service mongodb and nodejs
 
-  - simple ui via bootstrap 4 and jquery 5
+  - simple ui via latest stable bootstrap, fontawesome and jquery 
 
   - markdown templeting system via pug
 
-  - git integrarion
+  - git integration, cicd for website build process netlify.com toolchain
 
 
 FEATURE DEVELOPMENT
