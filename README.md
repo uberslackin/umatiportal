@@ -26,7 +26,9 @@ SOFTWARE PROJECT FEATURES
 
   - git integration, cicd for website build process netlify.com toolchain
 
-
+  - testing via mongo collections, expanded upon inherited mocha test runner operating on app.js & model.js
+    - as referenced in this repo's package.json script execution collection
+          "test": "nyc mocha --timeout=10000 --exit", 
 FEATURE DEVELOPMENT
 
  - pluggable architecture for vendor supplied/ maintained features
