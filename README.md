@@ -1,22 +1,22 @@
 UMATI BANK self help group portal
 =======================
 
-H2 UMATICORE groupware portal for self help groups
+##  UMATICORE groupware portal for self help groups
 
-as a teaching tool
-
-
-appropriate for engineering education and small group interpersonal health and wellness support
+  as a teaching tool
 
 
-##Areas of work
-
-possible student workgroup session areas of focus
+  appropriate for engineering education and small group interpersonal health and wellness support
 
 
-Umaticore allows a unique learning perspective; Working on software that you use.
+## Areas of work
 
-SOFTWARE PROJECT FEATURES
+  possible student workgroup session areas of focus
+
+
+  Umaticore allows a unique learning perspective; Working on software that you use.
+
+## SOFTWARE PROJECT FEATURES
 
   - simple one server deployment for cloud service mongodb and nodejs
 
@@ -28,7 +28,7 @@ SOFTWARE PROJECT FEATURES
 
   - testing via mongo collections, expanded upon inherited mocha test runner operating on app.js & model.js
     - as referenced in this repo's package.json script execution collection
-          "test": "nyc mocha --timeout=10000 --exit", 
+    - "test": "nyc mocha --timeout=10000 --exit", 
 FEATURE DEVELOPMENT
 
  - pluggable architecture for vendor supplied/ maintained features
