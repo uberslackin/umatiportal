@@ -1,0 +1,75 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+
+  include ../partials/profilehead.pug
+  a(href='/account/donation') DONATIONS - 
+  a(href='/account/createloc') Add a Location
+
+  hr
+  
+  h3 #{user.group} DONATION FORM
+
+  form(action='/account/createdonation', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='user', value=user.id)
+    input(type='hidden', name='group', value=user.group)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='donationname') Name of Item
+      .col-md-7
+        input.form-control(type='text', name='donationname', id='donationname')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='description') Description
+      .col-md-7
+        textarea.form-control( name="description", rows="6", cols="66", autocomplete='description' ) 
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='value') Value
+      .col-md-7
+        input.form-control(type='text', name='value', id='value')
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='loctitle') Location:
+      .col-md-7
+
+                           select#sentto.select.form-control.input-lg(for='sentto', name='sentto')
+                             - var groupp = { id: user.group }
+                             - var grouppp = { id: user.profile.name }
+                             option(value='0') -- Select --
+                             each item,index in loc_list
+                               if (groupp.id === item.group  && grouppp.id !== item.name)
+                                 option(value=item.loctitle) #{item.loctitle}
+
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='donationcat') Donation Category
+      .col-md-7
+        input.form-control(type='text', name='donationcat', id='donationcat')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='donationtags') Tags
+      .col-md-7
+        input.form-control(type='text', name='donationtags', id='donationtags')
+    
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttags') Add Dates
+              a.toggle-trigger  >(expand)
+      .col-md-7.toggle-wrap(style='display:none;')
+              .form-group.row
+                label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate') Date
+              input.form-control(type='date', name='postdate', id='postdate')
+              .form-group.row
+                label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate') Comment
+                input.form-control(type='text', name='datenote', id='datenote')
+              .form-group.row
+                label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate2') Date
+              input.form-control(type='date', name='postdate2', id='postdate2')
+              .form-group.row
+                label.col-md-3.col-form-label.font-weight-bold.text-left(for='datenote') Comment:
+                input.form-control(type='text', name='datenote2', id='datenote2')
+
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Make Donation

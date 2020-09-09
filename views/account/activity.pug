@@ -3,13 +3,12 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
 
-  include ../partials/profilehead.pug
 
 
   - var userr = { id: user.profile.group }
 
   
-  span SAVINGS / MICRO-LOANS
+  span RECEITPS -  
   a(href='/account/setup') Settings - 
   if user.profile.group == "Taxes with mom"
     a(href='/account/activity-print') Tax Data -  
@@ -51,7 +50,16 @@ block content
                   .corner.left-bottom
  
     br
-    a(href='/account/payment').btn.buttontext.tn-outline-primary.circleadd.h2 Record a payment
-     -  
-
-    a(href='/account/requestpayment').btn.buttontext.tn-outline-primary.circleadd.h2 Request payment
+    a(href='/account/payment').btn.buttontext.btn-outline-danger.circleadd.h2 Record a payment
+    span -  
+    a(href='/account/requestpayment').btn.buttontext.btn-outline-warning.circleadd.h2 Request payment
+    span -  
+    a(href='/account/requestpayment').btn.buttontext.btn-outline-success.circleadd.h2 Request loan from #{user.group}
+  hr 
+  br
+  br
+  br
+  br
+  br
+  br
+  include ../partials/profilehead.pug

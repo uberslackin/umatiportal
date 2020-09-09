@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+    h3 Edit location item
+
+  include ../partials/profilehead.pug
+
+    .form-group.row
+    a(href='/account/locsettings') Loc Settings
+
+  form(action='/account/loc', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='username', value=user.id)
+    input(type='hidden', name='locpost_id', value=locdata._id)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='loctitle') Locaction Title
+      .col-md-7
+        input.form-control(type='text', name='loctitle', value=locdata.loctitle, id='loctitle')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='authorname') Author name
+      .col-md-7
+        input.form-control(type='text', name='authorname', value=locdata.authorname, id='authorname')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='description') Description
+      .col-md-7
+        input.form-control(type='text', name="post", value=locdata.description, id='description')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='loccat') Category
+      .col-md-7
+        input.form-control(type='text', name='loccats', id='loccats', value=locdata.loccats)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='loctags') Tags
+      .col-md-7
+        input.form-control(type='text', name='loctags', value=locdata.loctags, id='loctags')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='locdate') Date
+      .col-md-7
+        input.form-control(type='date', name='locdate', id='locdate', value=moment(locdata.locdate).format("YYYY-MM-DD"))
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | update post

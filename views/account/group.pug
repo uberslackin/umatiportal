@@ -3,13 +3,12 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
 
-  include ../partials/profilehead.pug
  
-  - var userr = { id: user.profile.group }
+  - var userr = { id: user.group }
   if userr.id  === ""
          span.caps UNSPECIFIED SELF HELP GROUP - 
   else
-         span.caps #{ user.profile.group } SELF HELP GROUP -
+         span.caps #{ user.group } SELF HELP GROUP -
   a(href='/account/groupsettings') Settings - 
   a(href='/account/creategroupnote') Add a note
 
@@ -29,3 +28,13 @@ block content
            div admin: #{items.admin} witness: #{items.witness}
            div #{items.comment}
            hr
+
+  br
+  br
+  br
+  br
+  br
+  br
+  hr
+
+  include ../partials/profilehead.pug

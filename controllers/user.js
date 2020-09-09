@@ -4,17 +4,21 @@ const nodemailer = require('nodemailer');
 const passport = require('passport');
 const _ = require('lodash');
 const validator = require('validator');
+const cloudinary = require('cloudinary');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
 // const Calendar = require('../models/Calendar');
 const Member = require('../models/Member');
 const Messages = require('../models/Messages');
-
 const randomBytesAsync = promisify(crypto.randomBytes);
 
+//if (user.group == "Ward Food Logistics" || user.group == "For Ward" || user.group == "forWard" || user.group == "for ward" || user.group == "for Ward" || user.group == "ForWard") var thisgroup = "For Ward";
 /**
 * GET /login
 * Login page.
+*  July 15 2020
+*  TASK : this needs to be normal as per rest of app..
+*  ie. camelcase, and match logic across controller & route
 * 
 * ref:
 * app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
@@ -89,6 +93,38 @@ exports.getSignup = (req, res) => {
     title: 'Create Account'
   });
 };
+
+
+/**
+ * GET /account/supportedsignup
+ * Signup page.
+ */
+exports.getSupportedsignup = (req, res) => {
+  if (req.user) {
+    return res.redirect('/');
+  }
+  res.render('account/supportedsignup', {
+    title: 'Create Paid Account'
+  });
+};
+
+
+/**
+ * GET /account/prioritysupport
+ * Page that explains benefits of priority support
+ */
+exports.getPrioritysupport = (req, res) => {
+  if (req.user) {
+    return res.redirect('/');
+  }
+  res.render('account/prioritysupport', {
+    title: 'Benefits of priority support'
+  });
+};
+
+
+
+
 
 /**
  * POST /signup
@@ -229,8 +265,6 @@ exports.getMessagesGroupInspiration = function (req, res, next) {
 };
 
 
-
-
 /**
  * GET /account/messagestags
  * Internal Messages
@@ -282,6 +316,31 @@ function getTrashlist(req, res) {
 exports.getMessagesTrash = function (req, res) {
       getTrashlist(req,res);
 };
+
+/**
+ * GET /account/door1
+ * Update DOM based ininvite code
+ */
+exports.getDoor1 = function (req, res) {
+    var itemid = req.params.itemid;
+    var status = req.params.status;
+
+    var data = {
+      status: status
+    };
+ /*  console.log("Itemid: " + itemid + " status: " + status );*/
+    Messages.findByIdAndUpdate(itemid, data, function(err, result) {
+    if (err){
+         res.send(err);
+    }
+    else{
+         res.status(200);
+ /*        console.log("RESULT: " + result);*/
+    };
+
+  });
+};
+
 
 
 
@@ -369,6 +428,10 @@ exports.getMessageCompose = (req, res, next) => {
   if (!req.user) {
     return res.redirect('/');
   }
+
+
+
+
   var mysort = { createdAt: -1,  };
   User.find()
       .sort(mysort)
@@ -412,7 +475,6 @@ exports.postMessageCreate = (req, res, next) => {
 };
 
 
-
 /**
  * GET /wardsignup
  * Food Group Signup page.
@@ -427,23 +489,88 @@ exports.getWardsignup = (req, res) => {
 };
 
 /**
- * POST /wardsignup
+ * GET /wardsignup
+ * Food Group Signup page.
+ */
+exports.getWardsignup2 = (req, res) => {
+  res.render('account/wardsignup2', {
+    title: 'forWard'
+  });
+};
+
+/**
+ * POST /wardwelcome
  * Create a new resource logistics account.
  */
+exports.getWardwelcome = (req, res) => {
+  if (req.user) {
+    return res.redirect('/account/messages');
+  } 
+  res.render('account/wardwelcome', {
+    title: 'Create Food Logistics Account'
+  });
+};
 
 /**
  * GET /avatared
  * Food Group Signup page.
  */
 exports.getAvatared = (req, res) => {
-let options = {};
-let avatars = new Avatars(sprites, options);
-let svg = avatars.create('custom-seed');
-  res.render('account/avatared', {
+  let options = {};
+  let avatars = new Avatars(sprites, options);
+  let svg = avatars.create('custom-seed');
+    res.render('account/avatared', {
     title: 'Create Avatars'
   });
 };
 
+
+/**
+ * POST /wardwelcome
+ * Create a new local account.
+ */
+exports.postWardwelcome = (req, res, next) => {
+  const validationErrors = [];
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+  }
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/wardsignup');
+  }
+  if (req.body.invite === "art") var thisgroup = "for Ward";
+  req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
+  const user = new User({
+    email: req.body.email,
+    password: req.body.password,
+    group: thisgroup,
+    paneldriver: req.body.paneldriver,
+    panelsurplus: req.body.panelsurplus,
+    panelrequests: req.body.panelrequests,
+    panelwarehouse: req.body.panelwarehouse,
+    panelresearch: req.body.panelresearch,
+    nicname: req.body.nicname,
+    invitecode: req.body.invite,
+    invited: req.body.invited,
+    inviter: req.body.inviter
+  });
+  User.findOne({ email: req.body.email }, (err, existingUser) => {
+    if (err) { return next(err); }
+    if (existingUser) {
+      req.flash('errors', { msg: 'Account with that nicname or email address already exists.' });
+      return res.redirect('/wardsignup');
+    }
+    user.save((err) => {
+      if (err) { return next(err); }
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect('/account/messages/');
+      });
+    });
+  });
+};
 
 
 
@@ -480,7 +607,7 @@ exports.postWardsignup = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/account/elevator/');
+        res.redirect('/account/elevatormanage/');
       });
     });
   });
@@ -639,7 +766,7 @@ exports.postUpdateSetup = (req, res, next) => {
 
 /**
  * GET /account/business
- * Profile page.
+ * Business configuration page.
  */
 exports.getBusiness = (req, res) => {
   res.render('account/business', {
@@ -670,6 +797,10 @@ exports.postUpdateBusiness = (req, res, next) => {
     user.business.social1 = req.body.social1 || '';
     user.business.social2 = req.body.social2 || '';
     user.business.social3 = req.body.social3 || '';
+    user.business.social4 = req.body.social4 || '';
+    user.business.social5 = req.body.social5 || '';
+    user.business.social6 = req.body.social6 || '';
+    user.business.social7 = req.body.social7 || '';
     user.business.businesstags = req.body.businesstags || '';
     user.business.postdate = req.body.postdate || '';
     user.business.members = req.body.members || '';
@@ -724,11 +855,21 @@ exports.postUpdateActivity = (req, res, next) => {
 
 /**
  * GET /account/calsettings
- * Profile page.
+ * Calendar settings page.
  */
 exports.getCalsettings = (req, res) => {
   res.render('account/calsettings', {
     title: 'Calendar Settings'
+  });
+};
+
+/**
+ * GET /account/locsettings
+ * Loc items
+ */
+exports.getLocsettings = (req, res) => {
+  res.render('account/locsettings', {
+    title: 'Loc Settings'
   });
 };
 
@@ -745,7 +886,7 @@ exports.getElevsettings = (req, res) => {
 
 /**
  * POST /account/calsettings
- * Update blog settings.
+ * Update cal settings.
  */
 exports.postUpdateCalsettings = (req, res, next) => {
   const validationErrors = [];
@@ -777,7 +918,39 @@ exports.postUpdateCalsettings = (req, res, next) => {
   });
 };
 
+/**
+ * POST /account/locsettings
+ * Update loc settings.
+ */
+exports.postUpdateLocsettings = (req, res, next) => {
+  const validationErrors = [];
 
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/locsettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.locsettings.user = req.body.user || '';
+    user.locsettings.caltitle = req.body.loctitle || '';
+    user.locsettings.description = req.body.description || '';
+    user.locsettings.loccats = req.body.loccats || '';
+    user.locsettings.loctags = req.body.loctags || '';
+    user.locsettings.visibility = req.body.visibility || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your loc settings update.' });
+          return res.redirect('/account/locsettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Loc setings have been updated.' });
+      res.redirect('/account/locsettings');
+    });
+  });
+};
 
 exports.postUpdateElevsettings = (req, res, next) => {
   const validationErrors = [];
@@ -839,6 +1012,7 @@ exports.postUpdatePossettings = (req, res, next) => {
     user.possettings.postitle = req.body.postitle || '';
     user.possettings.posdesc = req.body.posdesc || '';
     user.possettings.shortdesc = req.body.shortdesc || '';
+    user.possettings.template = req.body.template || '';
     user.possettings.postags = req.body.postags || '';
     user.possettings.visibility = req.body.visibility || '';
     user.save((err) => {
@@ -1083,16 +1257,19 @@ exports.postUpdateProfile = (req, res, next) => {
   User.findById(req.user.id, (err, user) => {
     if (err) { return next(err); }
     if (user.email !== req.body.email) user.emailVerified = false;
-    user.email = req.body.email || '';
     user.profile.name = req.body.name || '';
-    user.profile.gender = req.body.gender || '';
-    user.profile.story = req.body.story || '';
-    user.profile.location = req.body.location || '';
-    user.group = req.body.group || '';
-    user.profile.business = req.body.business || '';
+    user.email = req.body.email || '';
+    user.paneldriver = req.body.paneldriver || '';
+    user.panelsurplus = req.body.panelsurplus || '';
+    user.panelwarehouse = req.body.panelwarehouse || '';
+    user.panelrequests = req.body.panelrequests || '';
+    user.panelresearch = req.body.panelresearch || '';
+    user.donations_avail = req.body.donations_avail || '';
+    user.item_offered = req.body.item_offered || '';
+    user.item_requested = req.body.item_requested || '';
     user.profile.vocation = req.body.vocation || '';
-    user.profile.role = req.body.role || '';
-    user.profile.website = req.body.website || '';
+    user.trackwriteoffs = req.body.trackwriteoffs || '';
+    user.rewriteoffs = req.body.rewriteoffs || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -1106,6 +1283,84 @@ exports.postUpdateProfile = (req, res, next) => {
     });
   });
 };
+
+
+/** 
+ *  userController.getUpdateProfileAjax
+ * GET /account/profileajax
+ * Update entry based on params in the url string
+ */
+exports.getUpdateProfileAjax = function (req, res, next) {
+
+    var user = req.params.user;
+    var item = req.params.item;
+    var val = req.params.val;
+
+    if (item === "need_buildingsupplies") var data = { need_buildingsupplies: val };
+    if (item === "need_compost") var data = { need_compost: val };
+    if (item === "need_compostpickup") var data = { need_compostpickup: val };
+    if (item === "need_householditems") var data = { need_householditems: val };
+    if (item === "need_tools") var data = { need_tools: val };
+    if (item === "need_clothing") var data = { need_clothing: val };
+    if (item === "need_books") var data = { need_books: val };
+    if (item === "need_plants") var data = { need_plants: val };
+    if (item === "need_catfood") var data = { need_catfood: val };
+    if (item === "need_dogfood") var data = { need_dogfood: val };
+    if (item === "warehouse_vol") var data = { warehouse_vol: val };
+    if (item === "surplus") var data = { surplus: val };
+    if (item === "pickup_deliver") var data = { pickup_deliver: val };
+    if (item === "paneldriver") var data = { paneldriver: val };
+    if (item === "panelsurplus") var data = { panelsurplus: val };
+    if (item === "panelrequests") var data = { panelrequests: val };
+    if (item === "panelwarehouse") var data = { panelwarehouse: val };
+    if (item === "panelresearch") var data = { panelresearch: val };
+    console.log("hello there. Item id is: " + item + " val: " + val + "user: " + user );
+
+    User.findByIdAndUpdate(user, data, function(err, result) {
+    if (err){
+         res.send(err);
+    }
+    else{
+         res.status(200);
+    };
+
+  });
+};
+
+
+/**
+ * POST /account/actionprofile
+ * Update profile information.
+ */
+exports.postUpdateAjaxProfile = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.profile.surplus_provider = req.body.value || '';
+    user.profile.website = req.body.website || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'The email address you have entered is already associated with an account.' });
+          return res.redirect('/account#profile');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Profile information has been updated.' });
+      res.redirect('/account#profile');
+    });
+  });
+};
+
+
+
+
 
 /**
  * POST /account/password

@@ -17,9 +17,6 @@ const randomBytesAsync = promisify(crypto.randomBytes);
  * GET /account/blog
  * Blog manager.
  */
-
-
-
 exports.getBlogupdated = function (req, res, user) {
     
             // Successful, so rendecalsr.
@@ -28,7 +25,6 @@ exports.getBlogupdated = function (req, res, user) {
 
 
 exports.getBlog = function (req, res, user) {
-    
     Blog.find()
         .exec(function (err, blog_data) {          
             // Successful, so rendecalsr.
@@ -36,6 +32,13 @@ exports.getBlog = function (req, res, user) {
         })
 };
 
+exports.getEditor = function (req, res, user) {
+    Blog.find()
+        .exec(function (err, blog_data) {          
+            // Successful, so rendecalsr.
+            res.render('account/editor', { title: 'Markdown editor', blogs: blog_data });
+        })
+};
 
 
 /** 
@@ -116,6 +119,22 @@ exports.postCreatepost = (req, res, next) => {
   });
 };
 
+
+// display blog post
+exports.getDisplayBlogpost = (req, res, next) => {
+  Blog.findById(req.params.blogpost_id, function(err, blog) {
+    if (blog.username != req.user._id){
+      req.flash('danger', 'Not Authorized');
+      return res.redirect('/');
+    }
+
+    return res.render('account/blogdisplay', {
+      title: 'display blog entry',
+      blogdata: blog
+    });
+  });
+};
+ 
 
 
 

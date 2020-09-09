@@ -33,14 +33,14 @@ const calSchema = new mongoose.Schema({
     time : req.body.time,
     visibility: req.body.visibility
 
-blogSchema.pre('save', function save(next) {
+calSchema.pre('save', function save(next) {
   const cal = this;
-  if (!blog.isModified('posttitle')) { return next(); }
+  if (!cal.isModified('calentrytitle')) { return next(); }
   bcrypt.genSalt(10, (err, salt) => {
     if (err) { return next(err); }
-    bcrypt.hash(blog.posttitle, salt, (err, hash) => {
+    bcrypt.hash(cal.calentrytitle, salt, (err, hash) => {
       if (err) { return next(err); }
-      pos.posttitle = hash;
+      cal.calentrytitle = hash;
       next();
     });
   });

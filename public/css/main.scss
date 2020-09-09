@@ -58,6 +58,28 @@ h3+p {
   color: #fff;
 }
 
+
+.btn-squared-default {
+        width: 6px !important;
+        height: 60px !important;
+        font-size: 10px;
+}
+
+.btn-squared-default:hover {
+            border: 3px solid white;
+            font-weight: 800;
+}
+
+.btn-squared-default-plain {
+        width: 60px !important;
+        height: 60px !important;
+        font-size: 10px;
+}
+
+.btn-squared-default-plain:hover {
+            border: 5px solid white;
+}
+
 .feature {
   background-image: url(https://images.unsplash.com/photo-1496516348160-24b35a31856f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80);
   background-position: bottom left;
@@ -74,6 +96,10 @@ h3+p {
   // -webkit-transition-delay: 1s; /* for Safari & Chrome */
   transition: all .4s ease;
   -webkit-transition: all .4s ease;
+}
+
+.resourcegroup {
+  margin: 20px 20px 20px 20px;
 }
 
 .news {
@@ -101,10 +127,15 @@ h3+p {
 }
 
 .cta {
-  background-image: linear-gradient(rgba(123,14,34,0), rgba(0,0,0,0.8)),url(https://i.picsum.photos/id/1074/5472/3648.jpg);
+  background-image: linear-gradient(rgba(123,14,34,0), rgba(0,0,0,0.8)),url(/lion.jpg);
   color: #fff;
   display: flex;
   flex-direction: column;
+}
+
+.move-left {
+  width: 15px;
+  box-shadow: none;
 }
 
 a.spam-button:link {
@@ -259,6 +290,9 @@ textarea {
   left: initial;
   right: 0;
 }
+
+
+
 
 // button raised definition
 // this button uses gradient for the background
@@ -474,6 +508,15 @@ read
     -webkit-box-shadow: rgba(0,0,0, 0.1) 0px 0px 8px;
 }
 
+#gui {
+    position:absolute;
+    top:180;
+    left:180;
+}
+
+.form-control#invite, .form-control#nicname {
+    width: 200px !important;
+}
 
 /* Cookie Dialog */
 #gdpr-cookie-message {
@@ -671,5 +714,3 @@ button#gdpr-cookie-advanced {
   left: 50%;
   top: calc(50% - 3px);
 }
-
-

@@ -2,7 +2,7 @@
   .container
     img(src="/lion.png",border="0")
     a.navbar-brand(href='/')
-      | &nbsp;UMATI BANK
+      | &nbsp;UMATI PORTAL
     button.navbar-toggler(type='button', data-toggle='collapse', data-target='.navbar-collapse')
       span.sr-only Toggle navigation
       span.navbar-toggler-icon
@@ -10,15 +10,26 @@
       ul.nav.navbar-nav
         li.nav-item(class=(title === 'Home') ? 'active' : undefined)
           a.nav-link(href='/') Home
-        li.nav-item(class=(title === 'Contact') ? 'active' : undefined)
-          a.nav-link(href='/contact') Contact
         if user
           li.nav-item(class=(title === 'Messages') ? 'active' : undefined)
             a.nav-link(href='/account/messages') Messages
-        if (user && user.profile.group == "Ward Food Logistics")  
-            a.nav-link(href='/account/elevatormanage') Logistics
+        if (user && user.group == "For Ward")  
+          li.nav-item.dropdown 
+            a.nav-link.dropdown-toggle#navbarDropdown(href="#", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") #{user.group}
+            .dropdown-menu(aria-labelledby="navbarDropdown")
+                a.dropdown-item(href="/account/createdonation") List a Donation
+                .dropdown-divider
+                a.dropdown-item(href="/account/requests") Requests
+                a.dropdown-item(href="/account/driver") Drivers
+                a.dropdown-item(href="/account/inventory") Inventory
+                a.dropdown-item(href="#") 
+                .dropdown-divider
+                a.dropdown-item(href="#") Request
+                a.dropdown-item(href="#") Offer
       ul.nav.navbar-nav.ml-auto
         if !user
+          li.nav-item(class=(title === 'Contact') ? 'active' : undefined)
+            a.nav-link(href='/contact') Contact
           li.nav-item(class=(title === 'Login') ? 'active' : undefined)
             a.nav-link(href='/login') Login
           li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)
@@ -51,15 +62,12 @@
                     li
                       a(href='/account/pos') POS
                     li
-                    if (user.profile.group == "ForWard")  
-                      a(href='/account/elevator') Food Panel
-                    else 
-                      a(href='/account/elevator') Podcast
+                      a(href='/account/elevator') Sharing
                       
                 .col-md-4
                   ul.dropdown-menu
                     li
-                      a(href='/account/') Profile
+                      a(href='/account/') Settings
                     li
                       a(href='/account/group') Group
                     li
@@ -68,3 +76,4 @@
                       a(href='/account/blog') Blog
                     li
                       a(href='/logout') >>Logout
+

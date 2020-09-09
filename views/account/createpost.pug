@@ -3,9 +3,8 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
 
-    h3 Create a new Blog Post
+    h3 Create a new Post
 
-  include ../partials/profilehead.pug
 
     hr
     a(href='/account/blog') Blog -
@@ -56,7 +55,7 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='authorname') Author name
       .col-md-7
-        input.form-control(type='text', name='authorname', id='authorname')
+        input.form-control(type='text', name='authorname', value=user.profile.name, id='authorname')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
@@ -82,3 +81,5 @@ block content
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm
           | Create post
+
+  include ../partials/profilehead.pug

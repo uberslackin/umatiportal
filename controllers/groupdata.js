@@ -79,6 +79,16 @@ exports.getCreategroupdata = (req, res) => {
  * GET /createpost
  * Signup page.
  */
+exports.getCreatesubgroupdata = (req, res) => {
+  res.render('account/createsubgroup', {
+    title: 'Create new sub group'
+  });
+};
+
+/**
+ * GET /createpost
+ * Signup page.
+ */
 exports.getCreategroupnote = (req, res) => {
   res.render('account/creategroupnote', {
     title: 'Create new note to be seen internally by members of your groups.'
@@ -93,8 +103,6 @@ exports.getCreategroupnote = (req, res) => {
  */
 exports.postCreategroupdata = (req, res, next) => {
   const validationErrors = [];
-  if (!validator.isAscii(req.body.name)) validationErrors.push({ msg: 'Please enter a title for your new POS entry.' });
-  if (!validator.isAscii(req.body.group)) validationErrors.push({ msg: 'Please add some content to your POS entry.' });
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
@@ -130,7 +138,7 @@ exports.postCreategroupdata = (req, res, next) => {
         }
         return next(err);
       }
-      req.flash('success', { msg: 'Calendar update saved.' });
+      req.flash('success', { msg: 'Group note created.' });
       res.redirect('/account/group');
     });
   });

@@ -18,6 +18,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const expressStatusMonitor = require('express-status-monitor');
 const sass = require('node-sass-middleware');
+const cloudinary = require('cloudinary');
 //const multer = require('multer');
 //const upload = multer({ dest: path.join(__dirname, 'uploads') });
 
@@ -37,7 +38,9 @@ const inventoryController = require('./controllers/inventory');
 const calController = require('./controllers/cal');
 const elevatorController = require('./controllers/elevator');
 const memberController = require('./controllers/member');
+const locController = require('./controllers/loc');
 const posController = require('./controllers/pos');
+const donationController = require('./controllers/donation');
 const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
 
@@ -138,10 +141,12 @@ app.use('/account/avatars', express.static(path.join(__dirname, 'node_modules/no
 
 
 
+
 /**
  * Primary app routes.
  */
 app.get('/', homeController.index);
+app.get('/homeautomated', homeController.homeautomated);
 app.get('/login', userController.getLogin);
 app.post('/login', userController.postLogin);
 app.get('/logout', userController.logout);
@@ -150,9 +155,15 @@ app.post('/forgot', userController.postForgot);
 app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
+app.get('/account/supportedsignup', userController.getSupportedsignup);
+app.get('/account/prioritysupport', userController.getPrioritysupport);
 app.post('/signup', userController.postSignup);
+app.get('/wardwelcome', userController.getWardwelcome);
+app.post('/wardwelcome', userController.postWardwelcome);
 app.get('/wardsignup', userController.getWardsignup);
+app.get('/wardsignup2', userController.getWardsignup2);
 app.post('/wardsignup', userController.postWardsignup);
+app.get('/account/createsubgroup', groupdataController.getCreatesubgroupdata);
 app.get('/privacypolicy', userController.getPrivacy);
 app.get('/privacy', contactController.getPrivacy);
 app.get('/contact', contactController.getContact);
@@ -166,12 +177,14 @@ app.post('/account/delete', passportConfig.isAuthenticated, userController.postD
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
+app.get('/account/profileajax/:user/:item/:val', passportConfig.isAuthenticated, userController.getUpdateProfileAjax);
 app.get('/link/:username', userController.getLink);
 app.get('/account/activity', passportConfig.isAuthenticated, userController.getActivity);
 app.get('/account/activity-print', passportConfig.isAuthenticated, userController.getActivityprint);
 app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
 app.get('/account/setup', passportConfig.isAuthenticated, userController.getSetup);
 app.post('/account/setup', passportConfig.isAuthenticated, userController.postUpdateSetup);
+app.get('/account/door1', passportConfig.isAuthenticated, userController.getDoor1);
 app.get('/account/messages', passportConfig.isAuthenticated, userController.getMessages);
 app.get('/account/messagessent', passportConfig.isAuthenticated, userController.getMessagesSent);
 app.get('/account/messagesdrafts', passportConfig.isAuthenticated, userController.getMessagesDrafts);
@@ -194,8 +207,8 @@ app.get('/account/business', passportConfig.isAuthenticated, userController.getB
 app.post('/account/business', passportConfig.isAuthenticated, userController.postUpdateBusiness);
 app.get('/account/bizsettings', passportConfig.isAuthenticated, userController.getBizsettings);
 app.post('/account/bizsettings', passportConfig.isAuthenticated, userController.postUpdateBizsettings);
-
-
+app.get('/account/locsettings', passportConfig.isAuthenticated, userController.getLocsettings);
+app.post('/account/locsettings', passportConfig.isAuthenticated, userController.postUpdateLocsettings);
 app.get('/account/blogsettings', passportConfig.isAuthenticated, userController.getBlogsettings);
 app.post('/account/blogsettings', passportConfig.isAuthenticated, userController.postUpdateBlogsettings);
 app.get('/account/groupsettings', passportConfig.isAuthenticated, userController.getGroupsettings);
@@ -216,19 +229,38 @@ app.get('/account/creategroupnote', passportConfig.isAuthenticated, groupdataCon
 app.get('/account/creategroup', passportConfig.isAuthenticated, groupdataController.getCreategroupdata);
 app.post('/account/creategroup', passportConfig.isAuthenticated, groupdataController.postCreategroupdata);
 
+app.get('/account/editor', passportConfig.isAuthenticated, blogController.getEditor);
 app.get('/account/blog', passportConfig.isAuthenticated, blogController.getBlog);
 app.post('/account/blog', blogController.postUpdateBlog);
 app.post('/account/blogupdate', passportConfig.isAuthenticated, blogController.postUpdateBlog);
 app.get('/account/blog/:blogpost_id', passportConfig.isAuthenticated, blogController.getUpdateBlogpost);
+app.get('/blog/:blogpost_id', passportConfig.isAuthenticated, blogController.getDisplayBlogpost);
+app.get('/account/createloc', passportConfig.isAuthenticated, locController.getCreateloc);
+app.post('/account/createloc', passportConfig.isAuthenticated, locController.postCreateloc);
+
+app.get('/account/loc', passportConfig.isAuthenticated, locController.getLoc);
+app.post('/account/loc', locController.postUpdateLoc);
+app.post('/account/locupdate', passportConfig.isAuthenticated, blogController.postUpdateBlog);
+app.get('/account/loc/:locpost_id', passportConfig.isAuthenticated, locController.getUpdateLocpost);
+app.get('/account/createloc', passportConfig.isAuthenticated, locController.getCreateloc);
 app.get('/account/createpost', passportConfig.isAuthenticated, blogController.getCreatepost);
 app.post('/account/createpost', passportConfig.isAuthenticated, blogController.postCreatepost);
-
+app.get('/account/inventory/:inventory_id', passportConfig.isAuthenticated, inventoryController.getUpdateInventory);
 app.get('/account/inventory', passportConfig.isAuthenticated, inventoryController.getInventory);
 app.post('/account/inventory', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
 app.get('/account/createinventory', passportConfig.isAuthenticated, inventoryController.getCreateinventory);
 app.post('/account/createinventory', passportConfig.isAuthenticated, inventoryController.postCreateinventory);
-app.get('/account/inventory/:inventory_id', passportConfig.isAuthenticated, inventoryController.getUpdateInventory);
 app.post('/account/inventoryedit', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
+app.get('/account/driver', passportConfig.isAuthenticated, donationController.getDriver);
+app.get('/account/surplus_provider', passportConfig.isAuthenticated, donationController.getSurplusprovider);
+app.get('/account/requests', passportConfig.isAuthenticated, donationController.getRequests);
+app.get('/account/warehouse', passportConfig.isAuthenticated, donationController.getWarehouse);
+app.get('/account/ops', passportConfig.isAuthenticated, donationController.getOps);
+app.get('/account/donation', passportConfig.isAuthenticated, inventoryController.getDonation);
+app.get('/account/createdonation', passportConfig.isAuthenticated, inventoryController.getCreatedonation);
+app.post('/account/createdonation', passportConfig.isAuthenticated, inventoryController.postCreatedonation);
+app.get('/account/donation/:donation_id', passportConfig.isAuthenticated, inventoryController.getUpdateDonation);
+app.post('/account/donationedit', passportConfig.isAuthenticated, inventoryController.postUpdateDonation);
 app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
 app.get('/account/resourceelevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateResourceElevatorEntry);
 app.get('/account/elevator', passportConfig.isAuthenticated, elevatorController.getElevator);
@@ -386,7 +418,7 @@ if (process.env.NODE_ENV === 'development') {
  * Start Express server.
  */
 app.listen(app.get('port'), () => {
-  console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓'), app.get('port'), app.get('env'));
+  console.log('%s App is running at http://localhost:%d in %s mode', chalk.green('✓✓✓'), app.get('port'), app.get('env'));
   console.log('  Press CTRL-C to stop\n');
 });
 

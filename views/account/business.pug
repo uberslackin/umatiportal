@@ -2,7 +2,6 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-  include ../partials/profilehead.pug
   span.caps #{user.business.name} PROFILE - 
   a(href='/account/bizsettings') Settings
  
@@ -27,17 +26,33 @@ block content
       .col-md-7
         input.form-control(type='text', name='contactphone', id='contactphone', value=user.business.contactphone, autocomplete='contactphone')
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social1') Social Media Link
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social1') Social Media Link 1
       .col-md-7
         input.form-control(type='text', name='social1', id='social1', value=user.business.social1, autocomplete='social1')
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social2') Social Media Link
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social2') Social Media Link 2
       .col-md-7
         input.form-control(type='text', name='social2', id='social2', value=user.business.social2, autocomplete='social2')
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social3') Social Media Link
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social3') Social Media Link 3
       .col-md-7
         input.form-control(type='text', name='social3', id='social3', value=user.business.social3, autocomplete='social3')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social4') Social Media Link 4
+      .col-md-7
+        input.form-control(type='text', name='social4', id='social4', value=user.business.social4, autocomplete='social4')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social5') Social Media Link 5 
+      .col-md-7
+        input.form-control(type='text', name='social5', id='social5', value=user.business.social5, autocomplete='social5')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social6') Social Media Link 6 
+      .col-md-7
+        input.form-control(type='text', name='social6', id='social6', value=user.business.social6, autocomplete='social6')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='social7') Social Media Link 7
+      .col-md-7
+        input.form-control(type='text', name='social7', id='social7', value=user.business.social7, autocomplete='social7')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='businesstags') Tags
       .col-md-7
@@ -55,3 +70,13 @@ block content
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm
           | Update Business Info
+      
+      br
+      br
+      br
+      br
+      br
+      br
+      hr
+
+  include ../partials/profilehead.pug

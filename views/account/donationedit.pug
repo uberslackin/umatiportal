@@ -1,0 +1,74 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+    h3 Edit Donated Item
+
+    .form-group.row
+    a(href='/account/donation') DONATIONS -  
+    a(href='/account/createloc') Add a location
+
+
+  form(action='/account/donationedit', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='user', value=user._id)
+    input(type='hidden', name='username', value=user._id)
+    input(type='hidden', name='donationitemid', value=donation._id)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='donationname') Item name
+      .col-md-7
+        input.form-control(type='text', name='donationtitle', id='donationname' , value=donation.donationname, autocomplete=donation.donationname)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='value') Value
+      .col-md-7
+        input.form-control(type='text', name='value', id='value' , value=donation.value, autocomplete=donation.value)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='donationdate') Date
+      .col-md-7
+        input.form-control(type='date', name='donationdate', id='donationdate', value=moment(donation.donationdate).format('YYYY-MM-DD') autocomplete=donation.donationdate)        
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='description') Description
+      .col-md-7
+        textarea.form-control( name="post", id="post", rows="6", cols="66", autocomplete='donation.description' ) #{donation.description}
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location of Item
+      .col-md-7
+        input.form-control(type='text', name='location', id='location', value=donation.location, autocomplete=donation.location)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='donationcat') Category
+      .col-md-7
+        input.form-control(type='text', name='donationcat', id='donationcat', autocomplete=donation.donationcat, value=donation.donationcat)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postag') Tags
+      .col-md-7
+        input.form-control(type='text', name='donationtags', id='donationtags', autocomplete=donation.donationtags, value=donation.donationtags)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='donationtags') Visibility
+       .col-md-7
+      .form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=donation.visibility == 'visible', name='visibility', value='visible', data-toggle='radio')
+        label.form-check-label Visible
+      .form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=donation.visibility == 'group', name='visibility', value='group', data-toggle='radio')
+        label.form-check-label My Group Only
+      .div.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=donation.visibility == 'subgroup', name='visibility', value='subgroup', data-toggle='radio')
+        label.form-check-label Sub Group Only
+      .div.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=donation.visibility == 'invisible', name='visibility', value='invisible', data-toggle='radio')
+        label.form-check-label Invisible
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update Item
+
+
+  hr
+  br
+  br
+  br
+  br
+  br
+  br
+  include ../partials/profilehead.pug

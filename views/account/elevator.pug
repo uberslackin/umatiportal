@@ -3,21 +3,22 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-  include ../partials/profilehead.pug
   
-  span #{user.profile.group} group 
-  if (user.profile.group != "Ward Food Logistics")
+  span #{user.group} resource manager -  
+  if (user.group === "for ward" || user.group === "For Ward" || user.group === "Forward")
+    a(href='/account/elevatorentrycreate') Create a request - 
+    a(href='/account/elevatorentryoffer') Offer something
+  else
     span podcast
-  span -
+  span  -
   a(href='/account/elevsettings') Settings - 
   a(href='/account/elevatormanage') Week view - 
-  if (user.profile.group != "Ward Food Logistics")
-    a(href='/account/elevatorentrycreate') Add an entry
-  else
-    a(href='/account/elevatorentrycreate') New food request
-  p We appreciate you!
+  if (user.group != "Ward Food Logistics")
+    a(href='/account/elevatorentrycreate') Add a item
 
-  if (user.profile.group == "Ward Food Logistics")
+  p Umati appreciates your participation.
+
+  if (user.group == "for Ward")
     strong Boulder food stores' specials:
     br
     a(href='https://www.alfalfas.com/whats-on-sale/sales-flyer/') Alfalfas Circular
@@ -58,3 +59,13 @@ block content
               strong dropoff: 
               span #{items.elevtags} 
             hr
+
+  br
+  br
+  br
+  br
+  br
+  br
+  hr
+
+  include ../partials/profilehead.pug

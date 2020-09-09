@@ -8,16 +8,15 @@ const _ = require('lodash');
 const validator = require('validator');
 const mailChecker = require('mailchecker');
 const Inventory = require('../models/Inventory');
+const Donation = require('../models/Donation');
 const User = require('../models/User');
+const Loc = require('../models/Loc');
 const randomBytesAsync = promisify(crypto.randomBytes);
 
 /**
- * GET /account/blog
- * Blog manager.
+ * GET /account/inventory
+ * Inventory manager.
  */
-
-
-
 // Display list of Member activity.
 exports.getInventory = function (req, res, next) {
 
@@ -44,11 +43,20 @@ exports.postInventory = (req, res, next) => {
  * GET /createinventory
  * new inventory page.
  */
-exports.getCreateinventory = (req, res) => {
-  res.render('account/createinventory', {
-    title: 'Create inventory'
-  });
+exports.getCreateinventory = (req, res, next) => {
+  if (!req.user) {
+    return res.redirect('/');
+  }
+
+  var mysort = { createdAt: -1,  };
+  Loc.find()
+      .sort(mysort)
+      .exec(function (err, loc_list) {
+            if (err) { return next(err); }
+            res.render('account/createinventory', { title: 'Create Inventory', loc_list: loc_list });
+      });
 };
+
 
 /**
  * POST /createpost
@@ -56,8 +64,8 @@ exports.getCreateinventory = (req, res) => {
  */
 exports.postCreateinventory = (req, res, next) => {
   const validationErrors = [];
-  if (!validator.isAscii(req.body.posttitle)) validationErrors.push({ msg: 'Please enter a title for your new inventory.' });
-  if (!validator.isAscii(req.body.post)) validationErrors.push({ msg: 'Please add some content to your inventory.' });
+  if (!validator.isAscii(req.body.name)) validationErrors.push({ msg: 'Please enter a title for your new inventory item.' });
+  if (!validator.isAscii(req.body.post)) validationErrors.push({ msg: 'Please add some descriptive content to your inventory item.' });
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
@@ -67,8 +75,8 @@ exports.postCreateinventory = (req, res, next) => {
   const inventory = new Inventory({
     name: req.body.name,
     user: req.body.user,
+    group: req.body.group,
     username: req.body.username, 
-    inventorytitle: req.body.inventorytitle, 
     price: req.body.price, 
     post: req.body.post,
     location: req.body.location,
@@ -77,7 +85,7 @@ exports.postCreateinventory = (req, res, next) => {
     inventorydate: req.body.inventorydate
   });
 
-  Inventory.findOne({ posttitle: req.body.posttitle }, (err, existingInventory) => {
+  Inventory.findOne({ name: req.body.name }, (err, existingInventory) => {
     if (err) { return next(err); }
     if (existingInventory) {
       req.flash('errors', { msg: 'Inventory post with that title already exists.' });
@@ -91,15 +99,11 @@ exports.postCreateinventory = (req, res, next) => {
   };
 
 
-
-
 /**
  * POST /account/inventory
  */
 exports.postUpdateInventory = (req, res) => {
 
-// create employee and send back all employees after creation
-  // create mongose method to update a existing record into collection
   var invid = req.body.inventoryitemid;
   var data = {
     user : req.body.user,
@@ -114,7 +118,6 @@ exports.postUpdateInventory = (req, res) => {
     visibility: req.body.visibility
   }
  
-  // save the user
   Inventory.findByIdAndUpdate(invid, data, function(err, pos) {
   if (err) throw err;
  
@@ -125,6 +128,9 @@ exports.postUpdateInventory = (req, res) => {
 
 
 
+/**
+ * GET /account/inventory/#{item}
+ */
 exports.getUpdateInventory = function (req, res, next) {
   Inventory.findById(req.params.inventory_id, function(err, inventory){
     if(inventory.user != req.user._id){
@@ -135,5 +141,125 @@ exports.getUpdateInventory = function (req, res, next) {
       title:'Edit Inventory Item',
       inventory:inventory
     });
+  });
+};
+
+
+
+/**
+ * GET /account/donation
+ * Donation manager.
+ */
+// Display list of Member activity.
+exports.getDonation = function (req, res, next) {
+
+    Donation.find()
+        .sort([['postdate', 'ascending']])
+        .exec(function (err, donation_data) {
+            if (err) { return next(err); }
+            res.render('account/donation', { title: 'Donations', data: donation_data });
+        })
+};
+
+
+
+/**
+ * GET /createdonation
+ * handle new donation form
+ */
+exports.getCreatedonation = (req, res, next) => {
+  if (!req.user) {
+    return res.redirect('/');
+  }
+
+  var mysort = { createdAt: -1,  };
+  Loc.find()
+      .sort(mysort)
+      .exec(function (err, loc_list) {
+	    if (err) { return next(err); }
+	    res.render('account/createdonation', { title: 'Create Donation', loc_list: loc_list });
+      });
+};
+
+/**
+ * POST /createdonation
+ * Create a new donation
+ */
+exports.postCreatedonation = (req, res, next) => {
+  const validationErrors = [];
+  if (!validator.isAscii(req.body.donationname)) validationErrors.push({ msg: 'Please enter a title for your new donation item.' });
+  if (!validator.isAscii(req.body.description)) validationErrors.push({ msg: 'Please add some descriptive content to your donation item.' });
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/donation');
+  }
+
+  const donation = new Donation({
+    donationname: req.body.donationname,
+    user: req.body.user,
+    group: req.body.group,
+    value: req.body.value,
+    description: req.body.description,
+    location: req.body.location,
+    donationcat: req.body.donationcat,
+    donationtags: req.body.donationtags,
+    donationdate: req.body.donationdate,
+    donationnote: req.body.donationnote,
+    donationdate2: req.body.donationdate2,
+    donationnote2: req.body.donationnote2
+  });
+
+  Donation.findOne({ name: req.body.donationname }, (err, existingDonation) => {
+    if (err) { return next(err); }
+    if (existingDonation) {
+      req.flash('errors', { msg: 'Donation with that title already exists.' });
+      return res.redirect('/account/donation');
+    }
+    donation.save((err) => {
+      if (err) { return next(err); }
+        res.redirect('/account/donation');
+      });
+    });
+  };
+
+
+exports.getUpdateDonation = function (req, res, next) {
+  Donation.findById(req.params.donation_id, function(err, donation){
+    if(donation.user != req.user._id){
+      req.flash('danger', 'Not Authorized');
+      return res.redirect('/');
+    }
+    return res.render('account/donationedit', {
+      title:'Edit Donation Item',
+      donation:donation
+    });
+  });
+};
+
+/**
+ * POST /account/donation
+ */
+exports.postUpdateDonation = (req, res) => {
+
+  var donid = req.body.donationitemid;
+  var data = {
+    user : req.body.user,
+    username : req.body.username,
+    donationtitle : req.body.inventorytitle,
+    post : req.body.post,
+    price : req.body.price,
+    location : req.body.location,
+    donationcat : req.body.inventorycat,
+    donationtags : req.body.inventorytags,
+    donationdate : req.body.inventorydate,
+    visibility: req.body.visibility
+  }
+ 
+  Donation.findByIdAndUpdate(donid, data, function(err, pos) {
+  if (err) throw err;
+ 
+  req.flash('success', { msg: 'Nice job. Your Inventory entry has been updated.' });
+  res.redirect('/account/donation');
   });
 };

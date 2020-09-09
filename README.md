@@ -1,13 +1,71 @@
 UMATI BANK self help group portal
 =======================
 
-H2 Hackathon starter core and its current build status:
+H2 UMATICORE groupware portal for self help groups
+
+as a teaching tool
+
+
+appropriate for engineering education and small group interpersonal health and wellness support
+
+
+##Areas of work
+
+possible student workgroup session areas of focus
+
+
+Umaticore allows a unique learning perspective; Working on software that you use.
+
+SOFTWARE PROJECT FEATURES
+
+  - simple one server deployment for cloud service mongodb and nodejs
+
+  - simple ui via latest stable bootstrap, fontawesome and jquery 
+
+  - markdown templeting system via pug
+
+  - git integration, cicd for website build process netlify.com toolchain
+
+
+FEATURE DEVELOPMENT
+
+ - pluggable architecture for vendor supplied/ maintained features
+
+ - ajax-expressjs ajax form management in use for user profiles 
+
+ - profile use case based interface 'switcher' ie. matching system within the expressjs framework 
+
+  
+
+
+
+  - CI/CD  ( SCDHUB.ORG website has place via staic git to netlify hugo-amp website.
+  - security updates, dev instance, testing instance, feature branch instance(s) Note all of this is provided via netlify.com and vercel.com free account service level.  [info]
+  
+
+##Continuous
+Prioritation of feature requests 
+
+
+web security, 
+
+
+software management 
+
+
+
+and web development  
+
+
+
+
+
+
 
 [![Build Status](https://travis-ci.org/sahat/hackathon-starter.svg?branch=master)](https://travis-ci.org/sahat/hackathon-starter) [![Join the chat at https://gitter.im/sahat/hackathon-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sahat/hackathon-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Jump to [What's new?](https://github.com/sahat/hackathon-starter/blob/master/CHANGELOG.md)
-
-Umati Self Help Group Codebase is made from a boilerplate for **Node.js** web applications.
+Umati Self Help Group Codebase is made from Sahat's "Hackathon Starter" boilerplate code distribution.  Umaticore continues to merge new features and security updates from.  updated for **Node.js** web applications.  If you are about to clone or download this repo to work with for your own project, please --file and issue-- on Umaticore's public project project's issue page, which is located 
+[![here](https://github.com/SustainableCommunityDevelopmentHub/umaticore/issues)
 
 [![pipeline status](https://gitlab.com/umati1/umati/badges/master/pipeline.svg)](https://gitlab.com/umati1/umati/-/commits/master)
 
@@ -126,10 +184,10 @@ The easiest way to get started is to clone the repository:
 
 ```bash
 # Get the latest snapshot
-git clone https://github.com/biomassives/umati_hs.git whatever-your-group-or-projcet-name
+git clone https://github.com/biomassives/umati_hs.git whatever-your-project\'s-name-you-wish-to-use
 
 # Change directory
-cd whatever-your-group-or-project-name
+cd whatever-your-project\'s-name-you-wish-to-use
 
 # Install NPM dependencies
 npm install
@@ -137,6 +195,10 @@ npm install
 # Then simply start your app
 node app.js
 ```
+
+# Install mongod
+see https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/#install-mongodb-community-edition
+note: mongo is a 'structured database' written in javascript, and by running it alongside nodejs both server and db are in javascript. This is a design pattern for the umaticore distibution.
 
 **Warning:** If you want to use some API that need https to work (for example Pinterest or facebook),
 you will need to download [ngrok](https://ngrok.com/).
@@ -1527,6 +1589,13 @@ submitting a pull request. This project uses
 [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) with a
 few minor exceptions. If you are submitting a pull request that involves
 Pug templates, please make sure you are using *spaces*, not tabs.
+
+
+MANY THANKS 
+
+Great SVG input checkbox style
+Copyright (c) 2020 by Gowri Prasanth V M (https://codepen.io/gowriprasanthvm/pen/zzareW)
+
 
 License
 -------

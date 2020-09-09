@@ -1,0 +1,89 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+    h3 Add a new location
+
+
+    hr
+    a(href='/account/loc') Location -
+    a(href='/account/locsettings') Settings - 
+    a(href='#', type="button", data-toggle="modal", data-target="#myModal") Media Manager
+  
+    .modal#myModal
+      .modal-dialog
+        .modal-content.content
+          .modal-header
+            .row
+            .col-md-7
+            h4.modal-title UMATI BANK
+               img(src="/lion.png",border="0")
+               a.navbar-brand(href='/')
+               | &nbsp;
+            button.close(type="button", data-dismiss="modal") ×
+          .modal-body.content
+            .row
+            .col-md-5
+            span Note: Media uploads are blocked for app security 
+            a(href='/account/profile') Please link Dropbox, git, or g.drive
+            h2  Add images
+            form(action="/account/upload", method="POST", enctype="multipart/form-data")
+            input(type='hidden', name='user', value=user.id)
+            p Name of item:
+            input.thedata(type="text", name="item")
+            br
+            br
+            | 
+            Photo
+              input.thefile(type="file", name="uploaded_file")  
+              button(type="submit") Add item
+
+        
+          .modal-footer
+            button.btn.btn-danger(type="button", data-dismiss="modal") Close
+
+
+  form(action="/account/createloc", method="POST")
+    input(type='hidden', name='_csrf', value=_csrf)
+    input(type='hidden', name='user', value=user.id)
+    input(type='hidden', name='group', value=user.group)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttitle') Post Title
+      .col-md-7
+        input.form-control(type='text', name='loctitle', id='loctitle')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='authorname') Author name
+      .col-md-7
+        input.form-control(type='text', name='authorname', id='authorname')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Description
+      .col-md-7
+        textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' ) #{user.business.post}
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='lat') Latitude
+      .col-md-7
+        input.form-control(type='text', name='lat', id='lat')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='long') Longitude
+      .col-md-7
+        input.form-control(type='text', name='long', id='long')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postcat') Category
+      .col-md-7
+        input.form-control(type='text', name='postcat', id='postcat')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttags') Tags
+      .col-md-7
+        input.form-control(type='text', name='posttags', id='posttags')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate') Date
+      .col-md-7
+        input.form-control(type='date', name='postdate', id='postdate')
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Create post
+
+  include ../partials/profilehead.pug

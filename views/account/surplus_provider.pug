@@ -1,0 +1,50 @@
+extends ../layout
+
+block content
+  include ../partials/resourcenav.pug
+  .pb-2.mt-2.mb-4.border-bottom
+  
+  span #{user.group} SURPLUS - 
+  a(href='/account/createloc') Add a location
+  span - 
+  a(href='/account/createdonation') List a donation
+
+    hr
+    br
+
+  - var userr = { id: user._id }
+  - if (data.length)
+
+  .card-columns
+    each posts in data
+       if posts.visibility != "none" 
+           .card.bg-light
+             .card-body.text-left
+               .card-text
+                 h2 #{posts.donationname} 
+               p.card-text.text-center - #{posts.location}
+               p.card-text.text-center - #{posts.donationtags}
+               p.card-text.text-center - #{posts.description}
+               br
+               label.btn.btn-outline-success
+                 if (user.need_books === "checked")
+                   input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/request_item/" checked)
+                 else
+                   input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/request_item/")
+                 | Request item
+               label.btn.btn-outline-success
+                 if (user.need_books === "checked")
+                   input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/offer_pickup/" checked)
+                 else
+                   input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/offer_pickup/")
+                 | Offer pickup
+
+
+               br
+               a.align-left(href='/account/donation/'+posts._id) Edit
+                 button.btn
+                 i.fa.fa-man
+
+    hr 
+
+  include ../partials/profilehead.pug

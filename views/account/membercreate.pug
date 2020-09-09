@@ -2,17 +2,16 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-  include ../partials/profilehead.pug
   
   span TRANSACTIONS - 
   a(href='/account/activity') History - 
-  a(href='/account/activity-print') Data sheet - 
+  a(href='/account/activity-print') Data sheet (beta) - 
   a(href='/account/setup') Settings
 
 
     hr
 
-  h3 New transaction record
+  h3 Record a payment
 
   form(action='/account/payment', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
@@ -57,3 +56,6 @@ block content
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm
           | Create post
+
+
+  include ../partials/profilehead.pug

@@ -2,21 +2,81 @@ extends ../layout
 
 block content
   .pb-2.mt-2.mb-4.border-bottom
-    h3 Sign up
+
+
+    a(href='/account/supportedsignup') Priority support option
+    span - 
+    a(href='/account/prioritysupport') Details
+
+    h3 Umati account signup
   form(id='signup-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
       .col-md-7
-        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, autocomplete='email', required)
+        input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='password') Password
       .col-md-7
-        input.form-control(type='password', name='password', id='password', placeholder='Password', autocomplete='new-password', minlength='8', required)
+        input.form-control(type='password', name='password', id='password', placeholder='Password', minlength='8', required)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='confirmPassword') Confirm Password
       .col-md-7
-        input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', autocomplete='new-password', minlength='8', required)
+        input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', minlength='8', required)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='group') Group name
+      .col-md-7
+        input.form-control(type='text', name='group', id='group', placeholder='Group name', autofocus)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='usecase') Use case
+      .col-md-7
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='usecase', value='health', data-toggle='radio')
+           label.form-check-label Health
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='usecase', value='SCD', data-toggle='radio')
+           label.form-check-label Design Clinic 
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='affilation', value='resinv', data-toggle='radio')
+           label.form-check-label Resource inventory
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='usecase', value='foodsec', data-toggle='radio')
+           label.form-check-label Food security
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='usecase', value='musicarts', data-toggle='radio')
+           label.form-check-label Creative
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='usecase', value='unknown', data-toggle='radio')
+           label.form-check-label Other
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='usecaseother') 
+      .col-md-7
+        input.form-control(type='text', name='usecaseother', id='usecaseother', placeholder='Please specify', autofocus, required)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='status') Phase of project
+      .col-md-7
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='status', id='status', value='concept')
+           label.form-check-label Concept
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='status', id='status', value='planning')
+           label.form-check-label Planning / research
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='status', id='status', value='outreach')
+           label.form-check-label Outreach & promotion
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='status', id='status', value='fundraising')
+           label.form-check-label Fundraising
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='status', id='status', value='testing')
+           label.form-check-label Testing
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='grouplead') Group point of contact
+      .col-md-7
+        input.form-control(type='text', name='grouplead', id='grouplead', placeholder='email', autofocus)
+
     .form-group.offset-sm-3.col-md-7.pl-2
       button.btn.btn-success(type='submit')
         i.fas.fa-user-plus.fa-sm
