@@ -3,6 +3,65 @@ UMATI BANK self help group portal
 
 H2 UMATICORE groupware portal for self help groups
 
+as a teaching tool
+
+
+appropriate for engineering education and small group interpersonal health and wellness support
+
+
+##Areas of work
+
+possible student workgroup session areas of focus
+
+
+Umaticore allows a unique learning perspective; Working on software that you use.
+
+SOFTWARE PROJECT FEATURES
+
+  - simple one server deployment for cloud service mongodb and nodejs
+
+  - simple ui via bootstrap 4 and jquery 5
+
+  - markdown templeting system via pug
+
+  - git integrarion
+
+
+FEATURE DEVELOPMENT
+
+ - pluggable architecture for vendor supplied/ maintained features
+
+ - ajax-expressjs ajax form management in use for user profiles 
+
+ - profile use case based interface 'switcher' ie. matching system within the expressjs framework 
+
+  
+
+
+
+  - CI/CD  ( SCDHUB.ORG website has place via staic git to netlify hugo-amp website.
+  - security updates, dev instance, testing instance, feature branch instance(s) Note all of this is provided via netlify.com and vercel.com free account service level.  [info]
+  
+
+##Continuous
+Prioritation of feature requests 
+
+
+web security, 
+
+
+software management 
+
+
+
+and web development  
+
+
+
+
+
+
+
 [![Build Status](https://travis-ci.org/sahat/hackathon-starter.svg?branch=master)](https://travis-ci.org/sahat/hackathon-starter) [![Join the chat at https://gitter.im/sahat/hackathon-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sahat/hackathon-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Umati Self Help Group Codebase is made from Sahat's "Hackathon Starter" boilerplate code distribution.  Umaticore continues to merge new features and security updates from.  updated for **Node.js** web applications.  If you are about to clone or download this repo to work with for your own project, please --file and issue-- on Umaticore's public project project's issue page, which is located 
