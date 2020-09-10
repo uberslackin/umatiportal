@@ -179,10 +179,10 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_offered') Specific item(s) offered
       .col-md-7
         input.form-control(type='text', name='item_offered', id='item_offered', placeholder='you can always update this', value=user.item_offered, autofocus, autocomplete='user.item_offered')
-    .form-group.row.inactive
-      label.col-md-3.col-form-label.font-weight-bold.text-left.inactive(for='story') Your story
-      .col-md-7.inactive
-        textarea.form-control.inactive(type='text', name="story", rows="6", cols="66", autocomplete='user.profile.story') #{user.profile.story}
+    .form-group.row.hidden
+      label.col-md-3.col-form-label.font-weight-bold.text-left.hidden(for='story') Your story
+      .col-md-7.hidden
+        textarea.form-control.hidden(type='text', name="story", rows="6", cols="66", autocomplete='user.profile.story') #{user.profile.story}
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
       .col-md-7
