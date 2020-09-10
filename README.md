@@ -20,6 +20,32 @@ This software is designed for two core use cases 1- as a teaching tool and 2- as
 appropriate for engineering education and small group interpersonal health and wellness support
 
 
+  ed: I see a few distinct breakaway teaching pathways in the Umaticore distr.  As per your suggestion, I have been updating the documentation. I am using the  readme page on this public repo.
+
+  https://github.com/SustainableCommunityDevelopmentHub/umati_hs
+
+  please note that the current development thread is in a private repository which i would be happy to share access to you and/or students involved in tech infra support for ECHO as well as UNM scholastic projects.
+
+  the sections that can be lead independently are
+
+## Tiered role based management of solutions database
+  - feature branch I am leading
+
+## Authentication
+ - student lead
+ - expressJs with passport authentication. API connector exm
+
+## APIs used
+ - student lead
+
+## Pluggable architecture
+ - express / express-mongo 'apps within apps'.
+
+## Account Dashboard actions / services
+ - specific to a
+ - i am have an active branch, student pluggable arch features availlea
+ - designing and configuring specific fea
+
 
 
 ##  UMATICORE groupware portal for self help groups
