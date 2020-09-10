@@ -115,6 +115,10 @@ Current EC2 instance is 'thin' stack with one micro server running both web serv
 
 PM2 process manager is used both in local development and the Umaticore the live EC2 instance.
 
+  -- UI Build 
+    -- scss is compiled into css
+    -- jquery, twitter bootstrap, and font awesome specific latest packages are used via cdn
+
 ## Deployment Hardening.
 
   --  important design patterns effecting tolpology of the deployment
