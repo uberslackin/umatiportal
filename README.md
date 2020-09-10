@@ -109,6 +109,10 @@ FEATURE DEVELOPMENT
 
 ## Server deployment stack
 
+Current EC2 instance is 'thin' stack with one micro server running both web server and database.
+
+  -- note that it is reccomended for deployments with any reasonable public facing traffic to better isolate services to separate machines and/or remote services ( ie, mail- sendgrid, mailgun, aws ses, mailchimp; db- mongo atlas (3 relication set db cluster is min req.), firebase, cassandra service via docker/kube, etc.;content delivery network- cloudfront, akamai, azure, cdn77; libs via cdn- cdnjs, ibootstrapcdn
+
 PM2 process manager is used both in local development and the Umaticore the live EC2 instance.
 
 ## Deployment Hardening.
