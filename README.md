@@ -19,6 +19,12 @@ UMATI BANK self help group portal
 This software is designed for two core use cases 1- as a teaching tool and 2- as a useful organizing tool for small social enterprise, creative, community development problem solving, ecological restoration, and other informal sustainable community development community groups that interface locally and with a greater community of vested interest partners and adversaries.
 appropriate for engineering education and small group interpersonal health and wellness support
 
+## TESTING 
+  
+  -- Functional and Unit tests via node js test runner mocha, nyc, (and likely adding jasemine) are the heart of our current effort to define a standard set of future-proof features that support the direction of the project as suitable for the existing user base, while planning for the scale-ability of larger organizational users, requirin i86 language compliance, simpler workflows, and..
+
+  --  ( back to testing ) BDD- behavour driven development.
+
 
   ed: I see a few distinct breakaway teaching pathways in the Umaticore distr.  As per your suggestion, I have been updating the documentation. I am using the  readme page on this public repo.
 
