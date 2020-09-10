@@ -68,7 +68,10 @@ appropriate for engineering education and small group interpersonal health and w
   - simple one server deployment for cloud service mongodb and nodejs
 
   - simple ui via latest stable bootstrap, fontawesome and jquery 
-
+    -- ref: https://www.w3schools.com/bootstrap/bootstrap_ref_css_buttons.asp
+    -- ref: https://fontawesome.com/cheatsheet
+    -- jquery: https://api.jquery.com/Jquery.ajax/
+      -- https://api.jquery.com/
   - markdown templeting system via pug
 
   - git integration, cicd for website build process netlify.com toolchain
@@ -107,6 +110,34 @@ FEATURE DEVELOPMENT
 
 
 
+<<<<<<< HEAD
+=======
+## Server deployment stack
+
+Current EC2 instance is 'thin' stack with one micro server running both web server and database.
+
+  -- note that it is reccomended for deployments with any reasonable public facing traffic to better isolate services to separate machines and/or remote services ( ie, mail- sendgrid, mailgun, aws ses, mailchimp; db- mongo atlas (3 relication set db cluster is min req.), firebase, cassandra service via docker/kube, etc.;content delivery network- cloudfront, akamai, azure, cdn77; libs via cdn- cdnjs, ibootstrapcdn
+
+PM2 process manager is used both in local development and the Umaticore the live EC2 instance.
+
+  -- UI Build 
+    -- scss is compiled into css
+    -- jquery, twitter bootstrap, and font awesome specific latest packages are used via cdn
+
+## Deployment Hardening.
+
+  --  important design patterns effecting tolpology of the deployment
+
+  -- -- DRY approach to all code, content, and database stucture.
+
+  -- -- document code well by starting at the granular level and using concise, descriptive names for functions, controllers, arrays, etc.
+
+
+
+
+
+
+>>>>>>> f556be64fce62574f56eb8121084149cb043b99a
 [![Build Status](https://travis-ci.org/sahat/hackathon-starter.svg?branch=master)](https://travis-ci.org/sahat/hackathon-starter) [![Join the chat at https://gitter.im/sahat/hackathon-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sahat/hackathon-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Umati Self Help Group Codebase is made from Sahat's "Hackathon Starter" boilerplate code distribution.  Umaticore continues to merge new features and security updates from.  updated for **Node.js** web applications.  If you are about to clone or download this repo to work with for your own project, please --file and issue-- on Umaticore's public project project's issue page, which is located 
