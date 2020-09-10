@@ -1,3 +1,14 @@
+PM2 is a popular process  manager for nginx's many modern server management tasks
+
+  - Keymetrics maintains PM2 and it has MIT libresoft share alike license
+  - https://pm2.keymetrics.io 
+
+
+## npm install pm2 -g
+  -- installation is simple with the node package manager
+
+my most common thing to do with it is to periodically change the start script and restart the server like below
+
 ubuntu@ip-***-**-**-***:~/umati$ pm2 restart
 
   error: missing required argument `id|name|namespace|all|json|stdin'
