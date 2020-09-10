@@ -1,32 +1,90 @@
 UMATI BANK self help group portal
 =======================
 
-H2 UMATICORE groupware portal for self help groups
 
-as a teaching tool
+## UMATICORE groupware portal for self help groups
 
 
+  - Last updated: Wed Sep  9 19:46:06 EDT 2020
+  - This document can be found online at
+  - https://github.com/SustainableCommunityDevelopmentHub/umati_hs
+
+## Latest development thread is at
+  -  https://github.com/uberslackin/umatiCore 
+
+
+## Please request access or notify of issue or pull request by emailing 
+  - ecocommunity@protonmail.com
+
+This software is designed for two core use cases 1- as a teaching tool and 2- as a useful organizing tool for small social enterprise, creative, community development problem solving, ecological restoration, and other informal sustainable community development community groups that interface locally and with a greater community of vested interest partners and adversaries.
 appropriate for engineering education and small group interpersonal health and wellness support
 
+## TESTING 
+  
+  -- Functional and Unit tests via node js test runner mocha, nyc, (and likely adding jasemine) are the heart of our current effort to define a standard set of future-proof features that support the direction of the project as suitable for the existing user base, while planning for the scale-ability of larger organizational users, requirin i86 language compliance, simpler workflows, and..
 
-##Areas of work
-
-possible student workgroup session areas of focus
+  --  ( back to testing ) BDD- behavour driven development.
 
 
-Umaticore allows a unique learning perspective; Working on software that you use.
+  ed: I see a few distinct breakaway teaching pathways in the Umaticore distr.  As per your suggestion, I have been updating the documentation. I am using the  readme page on this public repo.
 
-SOFTWARE PROJECT FEATURES
+  https://github.com/SustainableCommunityDevelopmentHub/umati_hs
+
+  please note that the current development thread is in a private repository which i would be happy to share access to you and/or students involved in tech infra support for ECHO as well as UNM scholastic projects.
+
+  the sections that can be lead independently are
+
+## Tiered role based management of solutions database
+  - feature branch I am leading
+
+## Authentication
+ - student lead
+ - expressJs with passport authentication. API connector exm
+
+## APIs used
+ - student lead
+
+## Pluggable architecture
+ - express / express-mongo 'apps within apps'.
+
+## Account Dashboard actions / services
+ - specific to a
+ - i am have an active branch, student pluggable arch features availlea
+ - designing and configuring specific fea
+
+
+
+##  UMATICORE groupware portal for self help groups
+
+  as a teaching tool
+
+
+  appropriate for engineering education and small group interpersonal health and wellness support
+
+
+## Areas of work
+
+  possible student workgroup session areas of focus
+
+
+  Umaticore allows a unique learning perspective; Working on software that you use.
+
+## SOFTWARE PROJECT FEATURES
 
   - simple one server deployment for cloud service mongodb and nodejs
 
   - simple ui via latest stable bootstrap, fontawesome and jquery 
-
+    -- ref: https://www.w3schools.com/bootstrap/bootstrap_ref_css_buttons.asp
+    -- ref: https://fontawesome.com/cheatsheet
+    -- jquery: https://api.jquery.com/Jquery.ajax/
+      -- https://api.jquery.com/
   - markdown templeting system via pug
 
   - git integration, cicd for website build process netlify.com toolchain
 
-
+  - testing via mongo collections, expanded upon inherited mocha test runner operating on app.js & model.js
+    - as referenced in this repo's package.json script execution collection
+    - "test": "nyc mocha --timeout=10000 --exit", 
 FEATURE DEVELOPMENT
 
  - pluggable architecture for vendor supplied/ maintained features
@@ -43,25 +101,49 @@ FEATURE DEVELOPMENT
   - security updates, dev instance, testing instance, feature branch instance(s) Note all of this is provided via netlify.com and vercel.com free account service level.  [info]
   
 
-##Continuous
-Prioritation of feature requests 
+## Continuous Prioritation of feature requests 
 
 
-web security, 
+## Areas that the Umaticore project emphasizes the educational value to our participants
+
+ -- web security, 
 
 
-software management 
+ -- software management 
 
 
-
-and web development  
-
-
-
+ -- web app development  
 
 
 
+<<<<<<< HEAD
+=======
+## Server deployment stack
 
+Current EC2 instance is 'thin' stack with one micro server running both web server and database.
+
+  -- note that it is reccomended for deployments with any reasonable public facing traffic to better isolate services to separate machines and/or remote services ( ie, mail- sendgrid, mailgun, aws ses, mailchimp; db- mongo atlas (3 relication set db cluster is min req.), firebase, cassandra service via docker/kube, etc.;content delivery network- cloudfront, akamai, azure, cdn77; libs via cdn- cdnjs, ibootstrapcdn
+
+PM2 process manager is used both in local development and the Umaticore the live EC2 instance.
+
+  -- UI Build 
+    -- scss is compiled into css
+    -- jquery, twitter bootstrap, and font awesome specific latest packages are used via cdn
+
+## Deployment Hardening.
+
+  --  important design patterns effecting tolpology of the deployment
+
+  -- -- DRY approach to all code, content, and database stucture.
+
+  -- -- document code well by starting at the granular level and using concise, descriptive names for functions, controllers, arrays, etc.
+
+
+
+
+
+
+>>>>>>> f556be64fce62574f56eb8121084149cb043b99a
 [![Build Status](https://travis-ci.org/sahat/hackathon-starter.svg?branch=master)](https://travis-ci.org/sahat/hackathon-starter) [![Join the chat at https://gitter.im/sahat/hackathon-starter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/sahat/hackathon-starter?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Umati Self Help Group Codebase is made from Sahat's "Hackathon Starter" boilerplate code distribution.  Umaticore continues to merge new features and security updates from.  updated for **Node.js** web applications.  If you are about to clone or download this repo to work with for your own project, please --file and issue-- on Umaticore's public project project's issue page, which is located 
@@ -84,7 +166,7 @@ I also tried to make it as **generic** and **reusable** as possible to cover mos
 without being too specific. In the worst case, you can use this as a learning guide for your projects,
 if for example you are only interested in **Sign in with Google** authentication and nothing else.
 
-### Testimonials
+### Testimonials (about sahat/hackathon-starter)
 
 > [**“Nice! That README alone is already gold!”**](https://www.producthunt.com/tech/hackathon-starter#comment-224732)<br>
 > — Adrian Le Bas

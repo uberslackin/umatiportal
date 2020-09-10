@@ -53,25 +53,37 @@ block content
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='usecaseother') 
       .col-md-7
-        input.form-control(type='text', name='usecaseother', id='usecaseother', placeholder='Please specify', autofocus, required)
+        input.form-control(type='text', name='usecaseother', id='usecaseother', placeholder='Please elaborate', autofocus, required)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='status') Phase of project
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='projectphase') Phase of project
       .col-md-7
         .form-check.form-check-inline
-           input(type='radio', class='form-check-input', name='status', id='status', value='concept')
+           input(type='radio', class='form-check-input', name='status', id='projectphase', value='concept')
            label.form-check-label Concept
         .form-check.form-check-inline
-           input(type='radio', class='form-check-input', name='status', id='status', value='planning')
+           input(type='radio', class='form-check-input', name='status', id='projectphase', value='planning')
            label.form-check-label Planning / research
         .form-check.form-check-inline
-           input(type='radio', class='form-check-input', name='status', id='status', value='outreach')
+           input(type='radio', class='form-check-input', name='status', id='projectphase', value='outreach')
            label.form-check-label Outreach & promotion
         .form-check.form-check-inline
-           input(type='radio', class='form-check-input', name='status', id='status', value='fundraising')
+           input(type='radio', class='form-check-input', name='status', id='projectphase', value='fundraising')
            label.form-check-label Fundraising
         .form-check.form-check-inline
-           input(type='radio', class='form-check-input', name='status', id='status', value='testing')
+           input(type='radio', class='form-check-input', name='status', id='projectphase', value='testing')
            label.form-check-label Testing
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed') Relevant project phase(s)
+      ul.nav.nav-pills
+        li.nav-item
+            a.nav-link.surplus(data-toggle="tab") not at this time
+
+
+
+
+
+
+
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='grouplead') Group point of contact
       .col-md-7
