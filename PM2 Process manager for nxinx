@@ -1,0 +1,16 @@
+ubuntu@ip-***-**-**-***:~/umati$ pm2 restart
+
+  error: missing required argument `id|name|namespace|all|json|stdin'
+
+ubuntu@ip-***-**-**-***:~/umati$ pm2 restart 0
+Use --update-env to update environment variables
+[PM2] Applying action restartProcessId on app [0](ids: [ '0' ])
+[PM2] [umatiproto1](0) ✓
+┌─────┬────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id  │ name           │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├─────┼────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 1   │ app            │ default     │ 1.0.0   │ fork    │ N/A      │ 0      │ 169  │ stopped   │ 0%       │ 0b       │ ubuntu   │ disabled │
+│ 2   │ etiny1         │ default     │ 1.0.0   │ fork    │ N/A      │ 0      │ 92   │ stopped   │ 0%       │ 0b       │ ubuntu   │ disabled │
+│ 0   │ umatiproto1    │ default     │ 1.0.0   │ fork    │ 9128     │ 0s     │ 2    │ online    │ 0%       │ 20.4mb   │ ubuntu   │ disabled │
+└─────┴────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+ubuntu@ip-***-**-**-***:~/umati*$ 
