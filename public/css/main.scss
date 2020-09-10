@@ -80,6 +80,10 @@ h3+p {
             border: 5px solid white;
 }
 
+.inactive {
+ 	display:none;
+}
+
 .feature {
   background-image: url(https://images.unsplash.com/photo-1496516348160-24b35a31856f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80);
   background-position: bottom left;

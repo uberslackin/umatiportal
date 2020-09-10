@@ -107,6 +107,19 @@ FEATURE DEVELOPMENT
 
 
 
+## Server deployment stack
+
+PM2 process manager is used both in local development and the Umaticore the live EC2 instance.
+
+## Deployment Hardening.
+
+  --  important design patterns effecting tolpology of the deployment
+
+  -- -- DRY approach to all code, content, and database stucture.
+
+  -- -- document code well by starting at the granular level and using concise, descriptive names for functions, controllers, arrays, etc.
+
+
 
 
 
