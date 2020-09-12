@@ -83,6 +83,10 @@ appropriate for engineering education and small group interpersonal health and w
   - git integration, cicd for website build process netlify.com toolchain
 
   - testing via mongo collections, expanded upon inherited mocha test runner operating on app.js & model.js
+
+    -- ![](https://www.dropbox.com/s/dfyoaav7q40imnj/Screenshot%20from%202020-09-12%2014-05-28.png?dl=0?raw=true)
+
+
     - as referenced in this repo's package.json script execution collection
     - "test": "nyc mocha --timeout=10000 --exit", 
 FEATURE DEVELOPMENT
@@ -115,12 +119,9 @@ FEATURE DEVELOPMENT
  -- web app development  
 
 
-
-<<<<<<< HEAD
-=======
 ## Server deployment stack
 
-Current EC2 instance is 'thin' stack with one micro server running both web server and database.
+Current EC2 instance is a 'thin' stack with one micro server running both web server and database.
 
   -- note that it is reccomended for deployments with any reasonable public facing traffic to better isolate services to separate machines and/or remote services ( ie, mail- sendgrid, mailgun, aws ses, mailchimp; db- mongo atlas (3 relication set db cluster is min req.), firebase, cassandra service via docker/kube, etc.;content delivery network- cloudfront, akamai, azure, cdn77; libs via cdn- cdnjs, ibootstrapcdn
 
