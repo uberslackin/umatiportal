@@ -196,6 +196,10 @@ block content
       .col-md-7
         input.form-control(type='text', name='group', id='group', value=user.group, autocomplete='user.group')
     .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='grouplead') Group Lead
+      .col-md-7
+        input.form-control(type='text', name='grouplead', id='grouplead', value=user.grouplead, autocomplete='user.grouplead')
+    .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='role') Role
       .col-md-7
         input.form-control(type='text', name='role', id='role', value=user.profile.role, autocomplete='user.profile.role')        
@@ -209,18 +213,6 @@ block content
         input.form-control(type='text', name='vocation', id='vocation', value=user.profile.vocation, autocomplete='user.profile.vocation')
     .form-group.row.hidden
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='trackwriteoffs') Track tax write offs
-      .col-md-7
-        if (user.profile.taxwriteoffs === "checked")
-          input.form-control.move-left(type='checkbox', name='trackwriteoffs', id='trackwriteoffs', value=user.profile.trackwriteoffs, autocomplete='user.profile.trackwriteoffs')
-        else
-          input.form-control.move-left(type='checkbox', name='trackwriteoffs', id='trackwriteoffs', value=user.profile.trackwriteoffs, autocomplete='user.profile.trackwriteoffs' checked)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='rewriteoffs') Include home ownership write offs
-      .col-md-7
-        if (user.profile.rewriteoffs === "checked")
-          input.form-control.move-left(type='checkbox', name='rewriteoffs', id='rewriteoffs', value=user.profile.rewriteoffs, autocomplete='user.profile.rewriteoffs' checked)
-        else
-          input.form-control.move-left(type='checkbox', name='rewriteoffs', id='rewriteoffs', value=user.profile.rewriteoffs, autocomplete='user.profile.rewriteoffs')
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')

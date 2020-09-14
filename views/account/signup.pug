@@ -12,6 +12,10 @@ block content
   form(id='signup-form', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='nicname') Nicname
+      .col-md-7
+        input.form-control(type='text', name='nicname', id='nicname', placeholder='your preferred handle', autofocus, required)
+    .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
       .col-md-7
         input.form-control(type='email', name='email', id='email', placeholder='Email', autofocus, required)
@@ -25,9 +29,14 @@ block content
         input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', minlength='8', required)
 
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='group') Group name
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='group') Group
       .col-md-7
         input.form-control(type='text', name='group', id='group', placeholder='Group name', autofocus)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='grouplead') Contact person
+      .col-md-7
+        input.form-control(type='text', name='grouplead', id='grouplead', placeholder='name or email', autofocus)
 
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='usecase') Use case
@@ -55,39 +64,29 @@ block content
       .col-md-7
         input.form-control(type='text', name='usecaseother', id='usecaseother', placeholder='what is a good word or phrase to describe your group?', autofocus, required)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='projectphase') Phase of project
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='status') Phase of project
       .col-md-7
         .form-check.form-check-inline
-           input(type='radio', class='form-check-input', name='status', id='projectphase', value='concept')
+           input(type='radio', class='form-check-input', name='status', id='status', value='concept')
            label.form-check-label Concept
         .form-check.form-check-inline
-           input(type='radio', class='form-check-input', name='status', id='projectphase', value='planning')
+           input(type='radio', class='form-check-input', name='status', id='status', value='planning')
            label.form-check-label Planning / research
         .form-check.form-check-inline
-           input(type='radio', class='form-check-input', name='status', id='projectphase', value='outreach')
+           input(type='radio', class='form-check-input', name='status', id='status', value='outreach')
            label.form-check-label Outreach & promotion
         .form-check.form-check-inline
-           input(type='radio', class='form-check-input', name='status', id='projectphase', value='fundraising')
+           input(type='radio', class='form-check-input', name='status', id='status', value='fundraising')
            label.form-check-label Fundraising
         .form-check.form-check-inline
-           input(type='radio', class='form-check-input', name='status', id='projectphase', value='testing')
+           input(type='radio', class='form-check-input', name='status', id='status', value='testing')
            label.form-check-label Testing
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed') Relevant project phase(s)
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='status_det1') Relevant project phase(s)
       ul.nav.nav-pills
         li.nav-item
             a.nav-link.surplus(data-toggle="tab") not at this time
 
-
-
-
-
-
-
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='grouplead') Group point of contact
-      .col-md-7
-        input.form-control(type='text', name='grouplead', id='grouplead', placeholder='email', autofocus)
 
     .form-group.offset-sm-3.col-md-7.pl-2
       button.btn.btn-success(type='submit')

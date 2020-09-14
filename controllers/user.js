@@ -143,7 +143,17 @@ exports.postSignup = (req, res, next) => {
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
   const user = new User({
+    personal: req.body.person,
+    business: req.body.business,
+    tags: req.body.tags,
+    academicinst: req.body.academicinst,
+    nicname: req.body.nicname,
+    name: req.body.name,
     email: req.body.email,
+    group: req.body.group,
+    grouplead: req.body.grouplead,
+    usecase: req.body.usecase,
+    status: req.body.status,
     password: req.body.password
   });
 
@@ -1268,8 +1278,11 @@ exports.postUpdateProfile = (req, res, next) => {
     user.item_offered = req.body.item_offered || '';
     user.item_requested = req.body.item_requested || '';
     user.profile.vocation = req.body.vocation || '';
-    user.trackwriteoffs = req.body.trackwriteoffs || '';
-    user.rewriteoffs = req.body.rewriteoffs || '';
+    user.profile.story = req.body.story || '';
+    user.profile.location = req.body.location || '';
+    user.profile.business = req.body.business || '';
+    user.profile.role = req.body.role || '';
+    user.profile.website = req.body.website || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
