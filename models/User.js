@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
+  personal: String,
   story: String,
   location: String,
   business: String,
@@ -13,6 +14,8 @@ const userSchema = new mongoose.Schema({
   webite: String,
   role: String,
   usecase: String,
+  usecaseother: String,
+  usecaseother2: String,
   status: String,
   contactmethod: String,
   nicname: String,

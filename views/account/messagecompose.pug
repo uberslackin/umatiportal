@@ -129,13 +129,13 @@ block content
                         .col-md-7
 
                            select#sentto.select.form-control.input-lg(for='sentto', name='sentto')
-                             - var groupp = { id: user.profile.group }
+                             - var groupp = { id: user.group }
                              - var grouppp = { id: user.profile.name }
                              option(value='0') -- Select --
                              option(value='group') All #{groupp.id} members
                              each item,index in user_list
                                if (groupp.id === item.profile.group  && grouppp.id !== item.profile.name)
-                                 option(value=item.profile.name) #{item.profile.name}
+                                 option(value=item.profile.name) -#{item.profile.name}-
                      .form-group.row
                         label.col-md-3.col-form-label.font-weight-bold.text-right(for='subject') Subject:
                         .col-md-7

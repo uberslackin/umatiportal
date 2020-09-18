@@ -143,18 +143,21 @@ exports.postSignup = (req, res, next) => {
   req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false });
 
   const user = new User({
-    personal: req.body.person,
+    email: req.body.email,
+    password: req.body.password,
+    personal: req.body.personal,
+    group: req.body.group,
+    academicinst: req.body.academicinst,
     business: req.body.business,
     tags: req.body.tags,
-    academicinst: req.body.academicinst,
     nicname: req.body.nicname,
     name: req.body.name,
-    email: req.body.email,
-    group: req.body.group,
-    grouplead: req.body.grouplead,
     usecase: req.body.usecase,
+    usecaseother: req.body.usecaseother,
+    usecaseother2: req.body.usecaseother2,
     status: req.body.status,
-    password: req.body.password
+    statusdetl: req.body.statusdetl,
+    grouplead: req.body.grouplead,
   });
 
   User.findOne({ email: req.body.email }, (err, existingUser) => {
@@ -1246,7 +1249,7 @@ exports.postUpdateGroupsettings = (req, res, next) => {
  */
 exports.getAccount = (req, res) => {
   res.render('account/profile', {
-    title: 'Account Management'
+    title: 'Settings'
   });
 };
 

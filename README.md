@@ -77,7 +77,7 @@ appropriate for engineering education and small group interpersonal health and w
     -- ref: https://www.w3schools.com/bootstrap/bootstrap_ref_css_buttons.asp
     -- ref: https://fontawesome.com/cheatsheet
     -- jquery: https://api.jquery.com/Jquery.ajax/
-      -- https://api.jquery.com/
+      0 o https://stackoverflow.com/questions/31033168/securing-ajax-calls-with-a-nodejs-express-application
   - markdown templeting system via pug
 
   - git integration, cicd for website build process netlify.com toolchain

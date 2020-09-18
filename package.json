@@ -1,15 +1,16 @@
 {
-  "name": "umatibank-self-help-group-finance-app",
-  "version": "1.0.0",
-  "description": "Umati Bank  Self Help Group App",
+  "name": "umati-portal-groupware-app",
+  "version": "1.2.3",
+  "description": "Umati Portal Groupware App",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "https://github.com/sustainablecommunitydevelopmenthub/umaticore.git"
   },
   "license": "MIT",
   "author": "Greg Willson",
   "contributors": [
     "Greg Willson (https://github.com/biomassives",
+    "Sahat Yalkabov (https://github.com/sahat)",
     "Yashar Fakhari (https://github.com/YasharF)"
   ],
   "scripts": {

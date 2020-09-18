@@ -245,7 +245,7 @@ app.get('/account/loc/:locpost_id', passportConfig.isAuthenticated, locControlle
 app.get('/account/createloc', passportConfig.isAuthenticated, locController.getCreateloc);
 app.get('/account/createpost', passportConfig.isAuthenticated, blogController.getCreatepost);
 app.post('/account/createpost', passportConfig.isAuthenticated, blogController.postCreatepost);
-app.get('/account/inventory/:inventory_id', passportConfig.isAuthenticated, inventoryController.getUpdateInventory);
+app.get('/account/inventory/:inventoryid', passportConfig.isAuthenticated, inventoryController.getUpdateInventory);
 app.get('/account/inventory', passportConfig.isAuthenticated, inventoryController.getInventory);
 app.post('/account/inventory', passportConfig.isAuthenticated, inventoryController.postUpdateInventory);
 app.get('/account/createinventory', passportConfig.isAuthenticated, inventoryController.getCreateinventory);

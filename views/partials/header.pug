@@ -15,6 +15,8 @@
             a.nav-link(href='/account/messages') Messages
         if (user && user.group == "For Ward")  
           li.nav-item.dropdown 
+            a.nav-link.dropdown-toggle#navbarDropdown(href="#", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") Food security
+          li.nav-item.dropdown 
             a.nav-link.dropdown-toggle#navbarDropdown(href="#", role="button", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false") #{user.group}
             .dropdown-menu(aria-labelledby="navbarDropdown")
                 a.dropdown-item(href="/account/createdonation") List a Donation
@@ -35,7 +37,16 @@
           li.nav-item(class=(title === 'Create Account') ? 'active' : undefined)
             a.nav-link(href='/signup') Create Account
         else
-          li.dropdown(class=(title === 'Account Management') ? 'active' : undefined).nav-item
+
+          if (title === 'Settings')
+            li.button.btn.btn-outline-secondary(type="button", data-toggle="modal", data-target="#foodsecModal") resource inventory
+            li.button.btn.btn-outline-success(type="button", data-toggle="modal", data-target="#scdModal") scd clinic
+            li.button.btn.btn-outline-warning(type="button", data-toggle="modal", data-target="#resinvModal") foodshed
+            li.button.btn.btn-outline-danger(type="button", data-toggle="modal", data-target="#creativeModal") creative
+            li.button.btn(type="button", data-toggle="modal", data-target="#basicExampleModal") other
+
+
+          li.dropdown(class=(title === 'Settings') ? 'active' : undefined).nav-item
             a.dropdown-toggle.nav-link(href='#', data-toggle='dropdown')
               if user.profile.picture
                 img(src=user.profile.picture)

@@ -10,48 +10,8 @@ block content
   form(action='/account/actionprofile', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     h3 #{user.group} Dashboard
+    h4 #{user.usecase} customizations:
 
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed') 1. Do you or will you have surplus/donations?
-      ul.nav.nav-pills
-        li.nav-item
-          if (user.surplus === "have_surplus")
-            a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
-          else
-            a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
-        li.nav-item
-          if (user.surplus === "schedule_pickup")
-            a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
-          else
-            a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
-        li.nav-item
-          if (user.surplus === "regular_pickups")
-            a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
-          else
-            a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
-        li.nav-item
-          if (user.surplus === "no")
-            a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
-          else
-            a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='interest_pickup_deliver') 2. Are you interested in picking-up/delivering surplus?
-      ul.nav.nav-pills
-        li.nav-item
-          if (user.pickup_deliver === "yes")
-            a.nav-link.pickup_deliver.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") Yes
-          else
-            a.nav-link.pickup_deliver(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") Yes
-        li.nav-item
-          if (user.pickup_deliver === "schedule_something")
-            a.nav-link.pickup_deliver.active(data-toggle="tab", id="schedule_something", href="/account/profileajax/" + user._id + "/pickup_deliver/schedule_something/") Let's schedule something
-          else
-            a.nav-link.pickup_deliver(data-toggle="tab", id="schedule_something", href="/account/profileajax/" + user._id + "/pickup_deliver/schedule_something/") Let's schedule something
-        li.nav-item
-          if (user.pickup_deliver === "no")
-            a.nav-link.pickup_deliver.active(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/no/") not at this time
-          else
-            a.nav-link.pickup_deliver(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/no/") not at this time
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='unloading_cleaning') 3. Interested in helping with unloading/cleaning/organizing?
       ul.nav.nav-pills
@@ -146,6 +106,10 @@ block content
             else
               input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_dogfood/")
             | Dog Food
+
+
+
+
 
   form(action='/account/profile', method='POST', id="profile")
     input(type='hidden', name='_csrf', value=_csrf)
@@ -297,3 +261,350 @@ block content
         p.mb-1: a.text-danger(href='/account/unlink/quickbooks') Unlink your QuickBooks account
       else
         p.mb-1: a(href='/auth/quickbooks') Link your QuickBooks account
+
+  .modal-footer
+
+    button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+    button.btn.btn-primary(type="button") ok
+
+
+
+
+
+
+
+  .modal.fade#resinvModal(tabindex="-1", role="dialog", aria-labelledby="resinvModalLabel", aria-hidden="true")
+    .modal-dialog(role="document")
+      .modal-content
+        .modal-header(style="background-color:ltgrey")
+          img(src="/lion.png",border="0")
+          h5.modal-title#resinvModalLabel &nbsp; Umati Resource Inventory
+          button.close(type="button", data-dismiss="modal", aria-label="Close")
+           span(aria-hidden="true") ×
+        .modal-body
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed') Food security group
+              ul.nav.nav-pills
+                li.nav-item
+                  if (user.surplus === "have_surplus")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
+                li.nav-item
+                  if (user.surplus === "schedule_pickup")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
+                li.nav-item
+                  if (user.surplus === "regular_pickups")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
+                li.nav-item
+                  if (user.surplus === "no")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
+
+        .modal-footer
+          button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+
+
+
+
+
+
+  .modal.fade#scdModal(tabindex="-1", role="dialog", aria-labelledby="scdModalLabel", aria-hidden="true")
+    .modal-dialog(role="document")
+      .modal-content
+        .modal-header(style="background-color:ltgrey")
+          img(src="/lion.png",border="0")
+          h5.modal-title#scdModalLabel &nbsp; SCD Clinics
+          p.modal-title#scdModalLabel &nbsp; hands on technical training
+          button.close(type="button", data-dismiss="modal", aria-label="Close")
+           span(aria-hidden="true") ×
+        .modal-body
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed')
+              ul.nav.nav-pills
+                li.nav-item
+                  if (user.surplus === "have_surplus")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
+                li.nav-item
+                  if (user.surplus === "schedule_pickup")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
+                li.nav-item
+                  if (user.surplus === "regular_pickups")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
+                li.nav-item
+                  if (user.surplus === "no")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
+
+        .modal-footer
+          button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+
+
+
+
+
+  .modal.fade#creativeModal(tabindex="-1", role="dialog", aria-labelledby="creativeModalLabel", aria-hidden="true")
+    .modal-dialog(role="document")
+      .modal-content
+        .modal-header(style="background-color:ltgrey")
+          img(src="/lion.png",border="0")
+          h5.modal-title#creativeModalLabel &nbsp; Umati Creative
+          button.close(type="button", data-dismiss="modal", aria-label="Close")
+           span(aria-hidden="true") ×
+        .modal-body
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed')
+              ul.nav.nav-pills
+                li.nav-item
+                  if (user.surplus === "have_surplus")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
+                li.nav-item
+                  if (user.surplus === "schedule_pickup")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
+                li.nav-item
+                  if (user.surplus === "regular_pickups")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
+                li.nav-item
+                  if (user.surplus === "no")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
+
+
+        .modal-footer
+          button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+
+
+
+  .modal.fade#basicExampleModal(tabindex="-1", role="dialog", aria-labelledby="exampleModalLabel", aria-hidden="true")
+    .modal-dialog(role="document")
+      .modal-content
+        .modal-header(style="background-color:ltgrey")
+          img(src="/lion.png",border="0")
+          h5.modal-title#exampleModalLabel &nbsp; Other Umati use cases
+          button.close(type="button", data-dismiss="modal", aria-label="Close")
+           span(aria-hidden="true") ×
+        .modal-body
+
+          if !user
+            a.nav-link(href='/login') Login
+            a.nav-link(href='/signup') Create Account
+            p Please log in and check your group section.
+          else
+
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed')
+              ul.nav.nav-pills
+                li.nav-item
+                  if (user.surplus === "have_surplus")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
+                li.nav-item
+                  if (user.surplus === "schedule_pickup")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
+                li.nav-item
+                  if (user.surplus === "regular_pickups")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
+                li.nav-item
+                  if (user.surplus === "no")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not available
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not available
+
+
+
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='interest_pickup_deliver')
+              ul.nav.nav-pills
+                li.nav-item
+                  if (user.pickup_deliver === "yes")
+                    a.nav-link.pickup_deliver.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") I can help deliver
+                  else
+                    a.nav-link.pickup_deliver(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") I can help deliver
+                li.nav-item
+                  if (user.pickup_deliver === "schedule_something")
+                    a.nav-link.pickup_deliver.active(data-toggle="tab", id="schedule_something", href="/account/profileajax/" + user._id + "/pickup_deliver/schedule_something/") Let's schedule something
+                  else
+                    a.nav-link.pickup_deliver(data-toggle="tab", id="schedule_something", href="/account/profileajax/" + user._id + "/pickup_deliver/schedule_something/") Let's schedule something
+                li.nav-item
+                  if (user.pickup_deliver === "no")
+                    a.nav-link.pickup_deliver.active(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/no/") not at this time
+                  else
+                    a.nav-link.pickup_deliver(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/no/") not at this time
+
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='unloading_cleaning')
+              ul.nav.nav-pills
+                li.nav-item
+                  if (user.warehouse_vol === "yes")
+                    a.nav-link.surplus.active(data-toggle="tab", id="unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/yes/") Available for loading & unloading
+                  else
+                    a.nav-link.surplus(data-toggle="tab", id="unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/yes/") Available for loading & unloading
+                li.nav-item
+                  if (user.warehouse_vol === "no")
+                    a.nav-link.surplus.active(data-toggle="tab", id="no_unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/no/") not available
+                  else
+                    a.nav-link.surplus(data-toggle="tab", id="no_unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/no/")  not available
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='need')
+                .col-md-7
+                  .btn-group(data-toggle="buttons")
+                    label.btn.btn-outline-success
+                      if (user.need_buildingsupplies === "checked")
+                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_buildingsupplies/" checked)
+                      else
+                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_buildingsupplies/")
+                        | Building supplies
+
+              label.btn.btn-outline-success
+                if (user.need_compost === "checked")
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compost/" checked)
+                else
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compost/")
+                  | Compost
+
+              label.btn.btn-outline-success
+                if (user.need_compostpickup === "checked")
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compostpickup/" checked)
+                else
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compostpickup/")
+                | Compost pickup
+
+              label.btn.btn-outline-success
+                if (user.need_householditems === "checked")
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_householditems/" checked)
+                else
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_householditems/")
+                  | Household Items
+
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='need2')
+                .col-md-7
+                  .btn-group(data-toggle="buttons")
+                    label.btn.btn-outline-success
+                      if (user.need_tools === "checked")
+                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_tools/" checked)
+                      else
+                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_tools/")
+                        | Tools
+
+              label.btn.btn-outline-success
+                if (user.need_clothing === "checked")
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_clothing/" checked)
+                else
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_clothing/")
+                  | Clothing
+
+              label.btn.btn-outline-success
+                if (user.need_plants === "checked")
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_plants/" checked)
+                else
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_plants/")
+                  | Plants
+
+              label.btn.btn-outline-success
+                if (user.need_books === "checked")
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_books/" checked)
+                else
+                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_books/")
+                  | Books
+
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem')
+                .col-md-7
+                  .btn-group(data-toggle="buttons")
+                    label.btn.btn-outline-success
+                      if (user.need_catfood === "checked")
+                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/" checked)
+                      else
+                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/")
+                        | Cat Food
+                    label.btn.btn-outline-success
+                      if (user.need_dogfood === "checked")
+                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_dogfood/" checked)
+                      else
+                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_dogfood/")
+                        | Dog Food
+
+        .modal-footer
+          button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+
+
+
+
+  .modal.fade#foodsecModal(tabindex="-1", role="dialog", aria-labelledby="foodsecModalLabel", aria-hidden="true")
+    .modal-dialog(role="document")
+      .modal-content
+        .modal-header(style="background-color:ltgrey")
+          h5.modal-title#foodsecModalLabel &nbsp; Umati Food Security
+          img(src="/lion.png",border="0")
+          button.close(type="button", data-dismiss="modal", aria-label="Close")
+           span(aria-hidden="true") ×
+        .modal-body
+
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed')
+              ul.nav.nav-pills
+                li.nav-item
+                  if (user.surplus === "have_surplus")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") I have surplus
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") I have surplus
+                li.nav-item
+                  if (user.surplus === "schedule_pickup")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") schedule a time to pick it up
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") schedule a time to pick it up
+                li.nav-item
+                  if (user.surplus === "no")
+                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not available
+                  else
+                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not available
+
+
+
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='interest_pickup_deliver')
+              ul.nav.nav-pills
+                li.nav-item
+                  if (user.pickup_deliver === "yes")
+                    a.nav-link.pickup_deliver.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") I can help deliver
+                  else
+                    a.nav-link.pickup_deliver(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") I can help deliver
+                li.nav-item
+                  if (user.pickup_deliver === "schedule_something")
+                    a.nav-link.pickup_deliver.active(data-toggle="tab", id="schedule_something", href="/account/profileajax/" + user._id + "/pickup_deliver/schedule_something/") Let's schedule something
+                  else
+                    a.nav-link.pickup_deliver(data-toggle="tab", id="schedule_something", href="/account/profileajax/" + user._id + "/pickup_deliver/schedule_something/") Let's schedule something
+                li.nav-item
+                  if (user.pickup_deliver === "no")
+                    a.nav-link.pickup_deliver.active(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/no/") not at this time
+                  else
+                    a.nav-link.pickup_deliver(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/no/") not at this time
+
+
+        .modal-footer
+          button.btn.btn-secondary(type="button", data-dismiss="modal") Close

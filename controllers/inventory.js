@@ -132,7 +132,7 @@ exports.postUpdateInventory = (req, res) => {
  * GET /account/inventory/#{item}
  */
 exports.getUpdateInventory = function (req, res, next) {
-  Inventory.findById(req.params.inventory_id, function(err, inventory){
+  Inventory.findById(req.params.inventoryid, function(err, inventory){
     if(inventory.user != req.user._id){
       req.flash('danger', 'Not Authorized');
       return res.redirect('/');
