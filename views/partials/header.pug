@@ -8,8 +8,6 @@
       span.navbar-toggler-icon
     .collapse.navbar-collapse
       ul.nav.navbar-nav
-        li.nav-item(class=(title === 'Home') ? 'active' : undefined)
-          a.nav-link(href='/') Home
         if user
           li.nav-item(class=(title === 'Messages') ? 'active' : undefined)
             a.nav-link(href='/account/messages') Messages
@@ -39,11 +37,11 @@
         else
 
           if (title === 'Settings')
-            li.button.btn.btn-outline-secondary(type="button", data-toggle="modal", data-target="#foodsecModal") resource inventory
+            li.button.btn.btn-outline-secondary(type="button", data-toggle="modal", data-target="#resinvModal") resource inventory
             li.button.btn.btn-outline-success(type="button", data-toggle="modal", data-target="#scdModal") scd clinic
-            li.button.btn.btn-outline-warning(type="button", data-toggle="modal", data-target="#resinvModal") foodshed
+            li.button.btn.btn-outline-warning(type="button", data-toggle="modal", data-target="#foodsecModal") foodshed
             li.button.btn.btn-outline-danger(type="button", data-toggle="modal", data-target="#creativeModal") creative
-            li.button.btn(type="button", data-toggle="modal", data-target="#basicExampleModal") other
+            li.button.btn(type="button", data-toggle="modal", data-target="#basicExampleModal") other 
 
 
           li.dropdown(class=(title === 'Settings') ? 'active' : undefined).nav-item
@@ -56,35 +54,38 @@
               i.caret
             .dropdown-menu.multi-column
               .row
-                .col-md-4
+                .col-md-3
                   ul.dropdown-menu
                     li    
                       a(href="/logout")
                           img(src="/umati_creativefire_3birds.png", border="0", height="110", alt="Log out")
 
-                .col-md-4
+                .col-md-3
                   ul.dropdown-menu                  
                     li
                       a(href='/account/payment') Receipts
                     li
-                      a(href='/account/business') Business
-                    li
                       a(href='/account/inventory') Inventory
                     li
                       a(href='/account/pos') POS
+
+                .col-md-3
+                  ul.dropdown-menu                  
+                    li
+                      a(href='/account/cal') Calendar
                     li
                       a(href='/account/elevator') Sharing
+                    li
+                      a(href='/account/group') Group
                       
-                .col-md-4
+                .col-md-3
                   ul.dropdown-menu
                     li
                       a(href='/account/') Settings
                     li
-                      a(href='/account/group') Group
-                    li
-                      a(href='/account/cal') Calendar
+                      a(href='/account/business') Business
                     li
                       a(href='/account/blog') Blog
                     li
-                      a(href='/logout') >>Logout
+                      a(href='/logout') >> Logout
 

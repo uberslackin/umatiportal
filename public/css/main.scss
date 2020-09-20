@@ -23,7 +23,6 @@ body {
   font-size: 14px;
 }
 
-
 h3 {
   margin: 0;
 }
@@ -32,87 +31,68 @@ h3+p {
   margin-top: 0;
 }
 
+ /* The switch - the box around the slider */
 .switch {
-    background: #f2f2f2;
-    border-radius: 6px;
-    overflow: hidden;
-    position: relative;
-
-    .slider {
-        height: 40px;
-        width: 50%;
-        background: #00D191;
-        position: absolute;
-        top:-5px;
-        left: 0;      
-        transition: all 0.3s cubic-bezier(0, 1.13, 0.58, 1);
-    }
-
-    .btn {
-        padding: .3rem .75rem;
-        transition-duration: 0.2s;
-        transition-property: all;
-
-        &.active {           
-            color: #fff;
-        }
-    }
-
-    .btn.focus,
-    .btn:focus {
-        outline: 0;
-        box-shadow: none;
-    }
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
 }
 
-.left-switch.active ~ .slider {
-    left: 0;
-}
-.right-switch.active ~ .slider {
-    transform: translateX(100%);
-    background:grey;
-}
-
-.switch {
-    background: #f2f2f2;
-    border-radius: 6px;
-    overflow: hidden;
-    position: relative;
-
-    .slider {
-        height: 40px;
-        width: 50%;
-        background: #00D191;
-        position: absolute;
-        top:-5px;
-        left: 0;      
-        transition: all 0.3s cubic-bezier(0, 1.13, 0.58, 1);
-    }
-
-    .btn {
-        padding: .3rem .75rem;
-        transition-duration: 0.2s;
-        transition-property: all;
-
-        &.active {           
-            color: #fff;
-        }
-    }
-
-    .btn.focus,
-    .btn:focus {
-        outline: 0;
-        box-shadow: none;
-    }
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
-.left-switch.active ~ .slider {
-    left: 0;
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
-.right-switch.active ~ .slider {
-    transform: translateX(100%);
-    background:grey;
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 
 
 .wrap {
   margin:20%;
@@ -210,7 +190,7 @@ h3+p {
 }
 
 .amazing {
-  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.9)), url(https://images.unsplash.com/photo-1579170053380-58064b2dee67?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=400&q=60); 
+  background-image: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.9)), url(/photo-1579170053380-58064b2dee67.webp); 
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -804,3 +784,4 @@ button#gdpr-cookie-advanced {
   left: 50%;
   top: calc(50% - 3px);
 }
+

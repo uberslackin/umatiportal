@@ -1,19 +1,17 @@
 extends layout
 
 block content
-  h1 Feature test release 
-  p Sept 8 2020.  Testing new group signup methods, blog editor system, updating of git repositories from your umati account.  Welcome community groups: ForWard, informal EWB groups; self help groups: Art at heart, Mamawatoto Eco School, COACH's cashew project, Tinyfood, & Etiny creatives.
-  p contact ecocommunity@protonmail.com for support, feature requests, report a bug, mrege requests, use case customizations.
+  h1 Use case release : v. 0.9.10
+  p Sept 18 2020.  We are now live testing Umati's new use case settings manager for projects. The signup page  has been updated as well as the settings page toallow umati users to quickly get info and provide updates.  The blog editor system is being configured to manage web content for static web sites.
 
-    a(href='https://portal.etiny.xyz/wardsignup') forWard
-  span Umaticore bugs and feature requests are tracked 
-    a(href='https://github.com/uberslackin/umatiCore') here.
-  span Umati source code and roadmap is 
-    a(href='https://github.com/SustainableCommunityDevelopmentHub/umati_hs') here.
+  p Use cases that can now be managed: resource inventory, food security, creative, SCD hands on learning clinics and 'other'. Please 
+    a(href='/contact') let us know your thoughts.
+
+  p or directly email Greg at ecocommunity@protonmail.com 
+
+  a(href='https://github.com/uberslackin/umatiCore') Bug reports 
+  a(href='https://github.com/SustainableCommunityDevelopmentHub/umati_hs') Source code
  
-  h2 Supporting in-person groups pursuing sustainable social enterprises
-  hr
-
   .home-hero
     .feature
       h3 Software to assist
@@ -30,31 +28,32 @@ block content
     .cta
       p Get started today! Our server is secure, and we protect your data. 
       if (!user) 
-        a.button.btn.btn-success.spam-button(href='/signup') Start a private group Now!
+        a.button.btn.btn-success.spam-button(href='/signup') Get started
       else
         a.button.btn.btn-success.spam-button(href='/account/groupsettings') Start a new group
   .row
     .col-md-6 
       hr  
+
+  h1 Rallying for sustainable social enterprise.
+  p.i because it is poised to help so many.
+
   .row
+    .col-md-6 
+      h2 Context in community projects
+      p.b in community projects
+      span Every project has its own unique context.  Success depends upon carefully considering such things well in advance.  Umati's group and project emphasis draws from the African movement of 'self help groups' where members check in on a weekly basis, support one another by contributing small weekly sums to the group which form the basis for shor
     .col-md-6
-      h2 Appropriate Technolgy
-      p Umati Bank is a resource for self help groups. We provide a reminder service and database to help support the success of small groups that meet regularly and help one another with small business via small loans, promotion, and business management tools.
-      p
-        a.btn.btn-raised(href='#', role='button') Participating groups »
-    .col-md-6
-      h2 Social benefit projects
+      h2 Self help groups & social ventures
       p At the heart of Umati is our desire to see local businesses thrive. Members of self help groups are encouraged to meet on a regular weekly or biweekly basis, to help members to keep their business and financial goals on track.  Umati service is being designed to provide a review portal for self help group members wishing to access small zero interest loans offered from their own groups as well as the international community. 
-      p
-        a.btn.btn-raised(href='#', role='button') Sponsoring a project »
     .col-md-6
-      h2 Self help groups
-      p The Umati self help group system supports accounting for group savings and contributions.  We do not hold money for groups, rather, we allow group leaders to report the weekly contributions, notify their members of their savings progress, and provide methods of tracking individual member savings, loan disbursements, and loan repayments. As a member of an Umati self help group, you are able to maintain your own blog here, request support for your small business from the internet community visiting umatibank.com loan request portal, and learn more about opportunites that help grow your business. 
-    .col-md-6
-      h2 Group Resource management
-      p With the goal of better online collaboration within self help groups, umatibank has been developing a podcast feature in its software release. The idea is that web resources that we love can be scheduled by group members. 
+      h2 Appropriate technolgy
+      p The Umati self help group system supports accounting for group savings and contributions.  We do not hold money for groups, rather, we allow group leaders to report the weekly contributions, notify their members of their savings progress, and provide methods of tracking individual member savings, loan disbursements, and loan repayments. 
       p
         button.btn.btn-primary(type="button", data-toggle="modal", data-target="#basicExampleModal") Get started
+    .col-md-6
+      h2 Water systems
+      p One goal of Umati's online collaboration is to benefit self help groups.  As a member of an Umati self help group, you are able to maintain your own blog here, request support for your small business from the internet community visiting umatibank.com loan request portal, and learn more about opportunites that help grow your business. 
 
       .row
         .col-md-12

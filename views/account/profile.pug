@@ -13,22 +13,9 @@ block content
     h4 #{user.usecase} customizations:
 
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='unloading_cleaning') 3. Interested in helping with unloading/cleaning/organizing?
-      ul.nav.nav-pills
-        li.nav-item
-          if (user.warehouse_vol === "yes")
-            a.nav-link.surplus.active(data-toggle="tab", id="unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/yes/") yes
-          else
-            a.nav-link.surplus(data-toggle="tab", id="unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/yes/") yes
-        li.nav-item
-          if (user.warehouse_vol === "no")
-            a.nav-link.surplus.active(data-toggle="tab", id="no_unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/no/") no
-          else
-            a.nav-link.surplus(data-toggle="tab", id="no_unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/no/") no
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='need') 4. What are your needs?
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='need') What are your needs?
       .col-md-7
-        .btn-group(data-toggle="buttons")
+
           label.btn.btn-outline-success
             if (user.need_buildingsupplies === "checked")
               input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_buildingsupplies/" checked)
@@ -136,17 +123,9 @@ block content
             | Unverified: &nbsp;
             a(href='/account/verify') (no) Send verification email (yet)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_requested') Any specific current need(s)?
-      .col-md-7
-        input.form-control(type='text', name='item_requested', id='item_requested', placeholder='Whatever you may need', value=user.item_requested, autofocus, autocomplete='user.item_requested')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_offered') Specific item(s) offered
-      .col-md-7
-        input.form-control(type='text', name='item_offered', id='item_offered', placeholder='you can always update this', value=user.item_offered, autofocus, autocomplete='user.item_offered')
-    .form-group.row.hidden
       label.col-md-3.col-form-label.font-weight-bold.text-left.hidden(for='story') Your story
       .col-md-7.hidden
-        textarea.form-control.hidden(type='text', name="story", rows="6", cols="66", autocomplete='user.profile.story') #{user.profile.story}
+        textarea.form-control.hidden(type='text', name="story", rows="3", cols="46", autocomplete='user.profile.story') #{user.profile.story}
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
       .col-md-7
@@ -175,8 +154,6 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='vocation') Vocation
       .col-md-7
         input.form-control(type='text', name='vocation', id='vocation', value=user.profile.vocation, autocomplete='user.profile.vocation')
-    .form-group.row.hidden
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='trackwriteoffs') Track tax write offs
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')
@@ -278,37 +255,72 @@ block content
       .modal-content
         .modal-header(style="background-color:ltgrey")
           img(src="/lion.png",border="0")
-          h5.modal-title#resinvModalLabel &nbsp; Umati Resource Inventory
+          h5.modal-title#resinvModalLabel &nbsp; Resource Inventory
           button.close(type="button", data-dismiss="modal", aria-label="Close")
            span(aria-hidden="true") ×
         .modal-body
             .form-group.row
-              label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed') Food security group
-              ul.nav.nav-pills
-                li.nav-item
-                  if (user.surplus === "have_surplus")
-                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
-                  else
-                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") yes
-                li.nav-item
-                  if (user.surplus === "schedule_pickup")
-                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
-                  else
-                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") ok to schedule a pickup
-                li.nav-item
-                  if (user.surplus === "regular_pickups")
-                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
-                  else
-                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/regular_pickups/") regular pickups
-                li.nav-item
-                  if (user.surplus === "no")
-                    a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
-                  else
-                    a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
+              .col
+                label.switch Describe the resources you would like to manage
+                  textarea.form-control.hidden(type='text', name="story", rows="4", cols="auto", autocomplete='user.profile.story') #{user.profile.story}
+              .col-xsm
+                button.btn.btn-primary(type="submit") save
+              .col-xsm
+                span &nbsp; &nbsp;
+            .form-group.row
+              .col
+                ul.nav.nav-pills
+                  li.nav-item
+                    if (user.surplus === "have_surplus")
+                      a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") I expect surplus
+                    else
+                      a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/have_surplus/") I expect surplus
+                  li.nav-item
+                    if (user.surplus === "schedule_pickup")
+                      a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") schedule surplus pickup
+                    else
+                      a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/schedule_pickup/") schedule surplus pickup
+                  li.nav-item
+                    if (user.surplus === "no")
+                      a.nav-link.surplus.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
+                    else
+                      a.nav-link.surplus(data-toggle="tab", href="/account/profileajax/" + user._id + "/surplus/no/") not at this time
+
+            .form-group.row
+              .col
+                label.switch building supplies 
+                  input(type="checkbox")
+                span &nbsp &nbsp; &nbsp;
+                label.switch need compost 
+                  input(type="checkbox")
+                span &nbsp &nbsp; &nbsp;
+                label.switch compost pickup 
+                  input(type="checkbox")
+                span &nbsp &nbsp; &nbsp;
+                label.switch household items 
+                  input(type="checkbox")
+                span &nbsp &nbsp; &nbsp;
+                label.switch tools 
+                  input(type="checkbox")
+                span &nbsp &nbsp; &nbsp;
+                label.switch clothing 
+                  input(type="checkbox")
+                span &nbsp &nbsp; &nbsp;
+                label.switch plants 
+                  input(type="checkbox")
+                span &nbsp &nbsp; &nbsp;
+                label.switch dog food 
+                  input(type="checkbox")
+                span &nbsp &nbsp; &nbsp;
+                label.switch cat food 
+                  input(type="checkbox")
+                span &nbsp &nbsp; &nbsp;
+                label.switch books 
+                  input(type="checkbox")
+                span &nbsp &nbsp; &nbsp;
 
         .modal-footer
           button.btn.btn-secondary(type="button", data-dismiss="modal") Close
-
 
 
 
@@ -320,7 +332,7 @@ block content
         .modal-header(style="background-color:ltgrey")
           img(src="/lion.png",border="0")
           h5.modal-title#scdModalLabel &nbsp; SCD Clinics
-          p.modal-title#scdModalLabel &nbsp; hands on technical training
+          p.modal-title#scdModalLabel
           button.close(type="button", data-dismiss="modal", aria-label="Close")
            span(aria-hidden="true") ×
         .modal-body
@@ -360,7 +372,7 @@ block content
       .modal-content
         .modal-header(style="background-color:ltgrey")
           img(src="/lion.png",border="0")
-          h5.modal-title#creativeModalLabel &nbsp; Umati Creative
+          h5.modal-title#creativeModalLabel &nbsp; Creative Projects
           button.close(type="button", data-dismiss="modal", aria-label="Close")
            span(aria-hidden="true") ×
         .modal-body
@@ -399,7 +411,7 @@ block content
       .modal-content
         .modal-header(style="background-color:ltgrey")
           img(src="/lion.png",border="0")
-          h5.modal-title#exampleModalLabel &nbsp; Other Umati use cases
+          h5.modal-title#exampleModalLabel &nbsp; Other use cases
           button.close(type="button", data-dismiss="modal", aria-label="Close")
            span(aria-hidden="true") ×
         .modal-body
@@ -410,8 +422,13 @@ block content
             p Please log in and check your group section.
           else
 
+
             .form-group.row
-              label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed')
+              .col-md-7.hidden
+                textarea.form-control.hidden(type='text', name="story", rows="4", cols="auto", autocomplete='user.profile.story') #{user.profile.story}
+
+            .form-group.row
+              col.label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed')
               ul.nav.nav-pills
                 li.nav-item
                   if (user.surplus === "have_surplus")
@@ -441,9 +458,9 @@ block content
               ul.nav.nav-pills
                 li.nav-item
                   if (user.pickup_deliver === "yes")
-                    a.nav-link.pickup_deliver.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") I can help deliver
+                    a.nav-link.pickup_deliver.active(data-toggle="tab", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") I can do deliveries
                   else
-                    a.nav-link.pickup_deliver(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") I can help deliver
+                    a.nav-link.pickup_deliver(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/yes/") I can do deliveries
                 li.nav-item
                   if (user.pickup_deliver === "schedule_something")
                     a.nav-link.pickup_deliver.active(data-toggle="tab", id="schedule_something", href="/account/profileajax/" + user._id + "/pickup_deliver/schedule_something/") Let's schedule something
@@ -468,86 +485,7 @@ block content
                     a.nav-link.surplus.active(data-toggle="tab", id="no_unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/no/") not available
                   else
                     a.nav-link.surplus(data-toggle="tab", id="no_unload_clean_organize", href="/account/profileajax/" + user._id + "/warehouse_vol/no/")  not available
-            .form-group.row
-              label.col-md-3.col-form-label.font-weight-bold.text-right(for='need')
-                .col-md-7
-                  .btn-group(data-toggle="buttons")
-                    label.btn.btn-outline-success
-                      if (user.need_buildingsupplies === "checked")
-                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_buildingsupplies/" checked)
-                      else
-                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_buildingsupplies/")
-                        | Building supplies
 
-              label.btn.btn-outline-success
-                if (user.need_compost === "checked")
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compost/" checked)
-                else
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compost/")
-                  | Compost
-
-              label.btn.btn-outline-success
-                if (user.need_compostpickup === "checked")
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compostpickup/" checked)
-                else
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_compostpickup/")
-                | Compost pickup
-
-              label.btn.btn-outline-success
-                if (user.need_householditems === "checked")
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_householditems/" checked)
-                else
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_householditems/")
-                  | Household Items
-
-            .form-group.row
-              label.col-md-3.col-form-label.font-weight-bold.text-right(for='need2')
-                .col-md-7
-                  .btn-group(data-toggle="buttons")
-                    label.btn.btn-outline-success
-                      if (user.need_tools === "checked")
-                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_tools/" checked)
-                      else
-                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_tools/")
-                        | Tools
-
-              label.btn.btn-outline-success
-                if (user.need_clothing === "checked")
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_clothing/" checked)
-                else
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_clothing/")
-                  | Clothing
-
-              label.btn.btn-outline-success
-                if (user.need_plants === "checked")
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_plants/" checked)
-                else
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_plants/")
-                  | Plants
-
-              label.btn.btn-outline-success
-                if (user.need_books === "checked")
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_books/" checked)
-                else
-                  input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_books/")
-                  | Books
-
-            .form-group.row
-              label.col-md-3.col-form-label.font-weight-bold.text-right(for='specificitem')
-                .col-md-7
-                  .btn-group(data-toggle="buttons")
-                    label.btn.btn-outline-success
-                      if (user.need_catfood === "checked")
-                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/" checked)
-                      else
-                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_catfood/")
-                        | Cat Food
-                    label.btn.btn-outline-success
-                      if (user.need_dogfood === "checked")
-                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_dogfood/" checked)
-                      else
-                        input.notifyreq(type="checkbox", autocomplete="off", href="/account/profileajax/" + user._id + "/need_dogfood/")
-                        | Dog Food
 
         .modal-footer
           button.btn.btn-secondary(type="button", data-dismiss="modal") Close
@@ -559,7 +497,7 @@ block content
     .modal-dialog(role="document")
       .modal-content
         .modal-header(style="background-color:ltgrey")
-          h5.modal-title#foodsecModalLabel &nbsp; Umati Food Security
+          h5.modal-title#foodsecModalLabel &nbsp; Food Security
           img(src="/lion.png",border="0")
           button.close(type="button", data-dismiss="modal", aria-label="Close")
            span(aria-hidden="true") ×
@@ -567,6 +505,17 @@ block content
 
             .form-group.row
               label.col-md-3.col-form-label.font-weight-bold.text-right(for='pickupneed')
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_requested') Request(s):
+              .col-md-7
+                input.form-control(type='text', name='item_requested', id='item_requested', placeholder='Whatever you may need', value=user.item_requested, autofocus, autocomplete='user.item_requested')
+
+            .form-group.row
+              label.col-md-3.col-form-label.font-weight-bold.text-right(for='item_requested') Offered:
+              .col-md-7
+                input.form-control(type='text', name='item_offered', id='item_offered', placeholder='Whatever you have to share', value=user.item_offered, autofocus, autocomplete='user.item_offered')
+
+
               ul.nav.nav-pills
                 li.nav-item
                   if (user.surplus === "have_surplus")
@@ -604,7 +553,6 @@ block content
                     a.nav-link.pickup_deliver.active(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/no/") not at this time
                   else
                     a.nav-link.pickup_deliver(data-toggle="tab", id="yes_pickup_deliver", href="/account/profileajax/" + user._id + "/pickup_deliver/no/") not at this time
-
 
         .modal-footer
           button.btn.btn-secondary(type="button", data-dismiss="modal") Close
