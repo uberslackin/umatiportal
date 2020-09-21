@@ -43,18 +43,9 @@ block content
         input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'invisible', name='visibility', id='visibility', value='invisible', data-toggle='radio')
         label.form-check-label Invisible
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='template') Template
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='template') Git url:
       .col-md-7
-        select#template.select.form-control.input-lg(for='template', name='template')
-          option(value='0') -- Select --
-          option(value='8' selected=(user.blogsettings.visibility == 'Light') ) Light
-          option(value='9' selected=(user.blogsettings.visibility == 'Dark') ) Dark
-          option(value='10' selected=(user.blogsettings.visibility == 'Business') ) Business
-          option(value='11' selected=(user.blogsettings.visibility == 'Business2') ) Business2
-          option(value='12' selected=(user.blogsettings.visibility == 'Art1') ) Art1
-          option(value='13' selected=(user.blogsettings.visibility == 'Art2') ) Art2
-          option(value='14' selected=(user.blogsettings.visibility == 'Music1') ) Music1
-          option(value='15' selected=(user.blogsettings.visibility == 'Music2') ) Music2
+        input.form-control(type='text', name='template', id='template', value=user.blogsettings.template, autocomplete='user.blogsettings.template')
     .form-group 
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')
