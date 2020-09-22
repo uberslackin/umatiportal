@@ -14,12 +14,12 @@ block content
 
   form(action='/account/createinventory', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
-    input(type='hidden', name='user', value=user.id)
+    input(type='hidden', name='user', value=user._id)
     input(type='hidden', name='group', value=user.group)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Name
       .col-md-7
-        input.form-control(type='text', name='name', id='name')
+        input.form-control(type='text', name='name', id='name', autocomplete='name')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Description
       .col-md-7

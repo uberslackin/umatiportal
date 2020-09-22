@@ -17,28 +17,27 @@ block content
           .modal-header
             .row
             .col-md-7
-            h4.modal-title UMATI BANK
+            h4.modal-title
                img(src="/lion.png",border="0")
                a.navbar-brand(href='/')
-               | &nbsp;UMATI BANK
+               | &nbsp;UMATI PORTAL
             button.close(type="button", data-dismiss="modal") ×
           .modal-body.content
             .row
             .col-md-5
-            span Note, this is set up to use 3rd party APIs. go to your 
-            a(href='/account/profile') account profile 
-            to add one.
+
             h2  Add images
             form(action="/account/upload", method="POST", enctype="multipart/form-data")
             input(type='hidden', name='user', value=user.id)
-            p Name of item:
-            input.thedata(type="text", name="item")
+            p Name of item
+              input(type="text", id="image1name", name="image1name")
             br
             br
             | 
             Photo
-              input.thefile(type="file", name="uploaded_file")  
-              button(type="submit") Add item
+              input(type="text", id="image1url", name="image1url")
+  
+              button(type="submit") Add image
 
         
           .modal-footer

@@ -17,8 +17,8 @@ const randomBytesAsync = promisify(crypto.randomBytes);
 * GET /login
 * Login page.
 *  July 15 2020
-*  TASK : this needs to be normal as per rest of app..
-*  ie. camelcase, and match logic across controller & route
+*  TASK : this needs to be normalized as per rest of app..
+*  ie. camelcase, and match syntax across controller & route
 * 
 * ref:
 * app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
@@ -26,7 +26,6 @@ const randomBytesAsync = promisify(crypto.randomBytes);
 * app.get('/account/activity', passportConfig.isAuthenticated, userController.getActivity);
 * app.get('/account/activity-print', passportConfig.isAuthenticated, userController.getActivityprint);
 * app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
-
 
  */
 exports.getLogin = (req, res) => {
@@ -91,6 +90,32 @@ exports.getSignup = (req, res) => {
   }
   res.render('account/signup', {
     title: 'Create Account'
+  });
+};
+
+/**
+ * GET /groupsignup
+ * Signup page.
+ */
+exports.getGroupSignup = (req, res) => {
+  if (req.user) {
+    return res.redirect('/account/groupsettings');
+  }
+  res.render('account/signupgroup', {
+    title: 'Create group form'
+  });
+};
+
+/**
+ * GET /projectsignup
+ * Signup page.
+ */
+exports.getProjectSignup = (req, res) => {
+  if (req.user) {
+    return res.redirect('/account/projectsettings');
+  }
+  res.render('account/signupproject', {
+    title: 'Create project form'
   });
 };
 
@@ -175,6 +200,46 @@ exports.postSignup = (req, res, next) => {
         res.redirect('/');
       });
     });
+  });
+};
+
+/**
+ * GET /groupsignup
+ * Signup page.
+ */
+exports.getGroupSignup = (req, res) => {
+  if (req.user) {
+    return res.redirect('/account/groupsettings');
+  }
+  res.render('account/signupgroup', {
+    title: 'Create group form'
+  });
+};
+
+/**
+ * POST /account/backup
+ *  csv data download url
+ *
+ *   Response from backup page generated link
+   
+ *   Form data payload with a loop searching through the db for this user.
+ *   organize the data in a succinct csv file
+ *   allow file to be downloaded directly when this controller is used.
+ * 
+**/
+
+
+/**
+ * GET /account/backup
+ *  csv data download url
+ */
+exports.getBackup = (req, res) => {
+  if (req.user) {
+    return res.redirect('/backup');
+    title: 'Public data backup policy info page'
+  }
+  res.render('account/backup', {
+    title: 'Private account data backup request form page'
   });
 };
 
@@ -1206,9 +1271,15 @@ exports.getGroupsettings = (req, res) => {
   });
 };
 
+/**
+ * getGroupsettings form
+ *
+*/
+
+
 
 /**
- * POST /account/group 
+ * POST /account/groupsettings 
  * Update blog settings.
  */
 exports.postUpdateGroupsettings = (req, res, next) => {
@@ -1242,6 +1313,47 @@ exports.postUpdateGroupsettings = (req, res, next) => {
   });
 };
 
+exports.getProjectsettings = (req, res) => {
+  res.render('account/projectsettings', {
+    title: 'Project Settings'
+  });
+};
+
+
+/**
+ * POST /account/projectsettings 
+ * Update project settings.
+ */
+exports.postUpdateProjectsettings = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/projectsettings');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.projectsettings.groupname = req.body.groupname || '';
+    user.projectsettings.adminperson = req.body.adminperson || '';
+    user.projectsettings.location = req.body.location || '';
+    user.projectsettings.description = req.body.description || '';
+    user.projectsettings.shortdesc = req.body.shortdesc || '';
+    user.projectsettings.memberlist = req.body.memberlist || '';
+    user.projectsettings.visibility = req.body.visibility || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your project settings update.' });
+          return res.redirect('/account/projectsettings');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Project details have been updated.' });
+      res.redirect('/account/projectsettings');
+    });
+  });
+};
 
 /**
  * GET /account

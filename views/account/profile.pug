@@ -160,6 +160,23 @@ block content
           i.fas.fa-pencil-alt.fa-sm
           | Update Profile
 
+  hr
+
+  .row.pb-2.mt-2.mb-4.border-bottom
+    label.col-md-3.col-form-label.font-weight-bold.text-left(for='group') Account
+    .col-3
+      h3 Backup
+
+      p Your complete data can be 
+        span be downloaded 
+          a(href='/account/backup') here
+
+    .col-3
+      h3 Delete User
+      a(href='/account/confirmdelete') Click here 
+      to the confirm dialogue to delete your account. As per Umati 
+      a(href='/privacy') privacy policy.
+
   .pb-2.mt-2.mb-4.border-bottom
     h3 Change Password
 

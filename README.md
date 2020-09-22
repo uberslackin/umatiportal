@@ -11,6 +11,9 @@ UMATI BANK self help group portal
 
 ## Latest development thread is at
   -  https://github.com/uberslackin/umatiCore 
+  -  more extensive documntationat is being maintained at
+     - https://drive.google.com/drive/folders/1uiOsozRkuzp1NiUBBC_d0IjexXxJbGpq?usp=sharing
+
 
 
 ## Please request access or notify of issue or pull request by emailing 

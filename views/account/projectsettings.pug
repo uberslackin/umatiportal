@@ -1,0 +1,57 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+ 
+  
+  a(href='/account/group') SELF HELP GROUP - 
+  a(href='/account/creategroupnote') Add a note
+
+
+  hr
+
+  h3.caps #{ user.profile.name }'s #{ user.profile.group } settings
+
+  form(action='/account/groupsettings', method='POST')
+    input(type='hidden', name='_csrf', value=_csrf)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='groupname') Your nic name in the group
+      .col-md-7
+        input.form-control(type='text', name='groupname', id='groupname', value=user.groupsettings.groupname, autocomplete='groupname')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='adminperson') Your first backup person
+      .col-md-7
+        input.form-control(type='text', name='adminperson', id='adminperson', value=user.groupsettings.adminperson, autocomplete)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Your preferred pickup location
+      .col-md-7
+        input.form-control(type='text', name='location', id='location', value=user.groupsettings.location, autocomplete)
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='shortdesc') Statement
+      .col-md-7
+        input.form-control(type='text', name='shortdesc', id='shortdesc', value=user.groupsettings.shortdesc, autocomplete='shortdesc')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='description') Ideas for the group
+      .col-md-7
+        textarea.form-control( name="description", rows="6", cols="66", autocomplete='description' ) #{user.groupsettings.description}        
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='visibility') Visibility
+      .col-md-1.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.groupsettings.visibility == 'visible', name='visibility', value='visible', data-toggle='radio')
+        label.form-check-label Visible
+      .col-md-2.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.groupsettings.visibility == 'group', name='visibility', value='group', data-toggle='radio')
+        label.form-check-label My Group Only
+      .col-md-2.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.groupsettings.visibility == 'subgroup', name='visibility', value='subgroup', data-toggle='radio')
+        label.form-check-label Sub Group Only
+      .col-md-1.form-check.form-check-inline
+        input(type='radio', class='form-check-input' checked=user.groupsettings.visibility == 'invisible', name='visibility', value='invisible', data-toggle='radio')
+        label.form-check-label Invisible
+    .form-group
+      .offset-sm-3.col-md-7.pl-2
+        button.btn.btn.btn-primary(type='submit')
+          i.fas.fa-pencil-alt.fa-sm
+          | Update Settings
+
+  include ../partials/profilehead.pug

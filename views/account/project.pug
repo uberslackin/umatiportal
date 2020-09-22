@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+
+ 
+  - var userr = { id: user.group }
+  if userr.id  === ""
+         span.caps unspecified project - 
+  else
+         span.caps #{ user.group } Project -
+  a(href='/account/projectsettings') Settings - 
+  a(href='/account/createprojectnote') Add notes
+
+    hr
+
+    br
+
+  h3 Project notes
+ 
+  hr
+
+
+  - if (projectdata.length)
+    each items in projectdata
+         if items.project === userr.id 
+           strong #{items.name} #{items.group} #{items.date}
+           div admin: #{items.admin} witness: #{items.witness}
+           div #{items.comment}
+           hr
+
+  br
+  br
+  br
+  br
+  br
+  br
+  hr
+
+  include ../partials/profilehead.pug
