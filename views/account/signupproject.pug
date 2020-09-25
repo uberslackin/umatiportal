@@ -9,13 +9,18 @@ block content
     a(href='/account/prioritysupport') Details
 
     h3 Umati project form
-  form(id='signup-form', method='POST', action='#', onsubmit='if(document.getElementById(\'agree\').checked) { return true; } else { alert(\'Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy\'); return false; }')
+  form(id='signup-form', method='POST', action='/signup', onsubmit='if(document.getElementById(\'agree\').checked) { return true; } else { alert(\'Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy\'); return false; }')
 
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Name
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='project') Name of project
       .col-md-7
-        input.form-control(type='text', name='name', id='name', placeholder='First and last or handle', autofocus, required)
+        input.form-control(type='text', name='project', id='group', autofocus)
+
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-right(for='name') Your name
+      .col-md-7
+        input.form-control(type='text', name='name', id='name', autofocus, required)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='email') Email
       .col-md-7
@@ -30,11 +35,6 @@ block content
         input.form-control(type='password', name='confirmPassword', id='confirmPassword', placeholder='Confirm Password', minlength='8', required)
 
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='group') Group
-      .col-md-7
-        input.form-control(type='text', name='group', id='group', placeholder='Group name', autofocus)
-
-    .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-right(for='usecase') Use case
       .col-md-7
         .form-check.form-check-inline
@@ -42,7 +42,7 @@ block content
            label.form-check-label Health
         .form-check.form-check-inline
            input(type='radio', class='form-check-input', name='usecase', value='scd clinic', data-toggle='radio')
-           label.form-check-label SCD Clinic 
+           label.form-check-label Training Clinic 
         .form-check.form-check-inline
            input(type='radio', class='form-check-input', name='affilation', value='resinv', data-toggle='radio')
            label.form-check-label Resource inventory
@@ -71,43 +71,29 @@ block content
            label.form-check-label Concept
         .form-check.form-check-inline
            input(type='radio', class='form-check-input', name='status', id='status', value='planning')
-           label.form-check-label Planning / research
+           label.form-check-label Planning
         .form-check.form-check-inline
            input(type='radio', class='form-check-input', name='status', id='status', value='outreach')
-           label.form-check-label Outreach & promotion
+           label.form-check-label Outreach
         .form-check.form-check-inline
            input(type='radio', class='form-check-input', name='status', id='status', value='fundraising')
            label.form-check-label Fundraising
         .form-check.form-check-inline
            input(type='radio', class='form-check-input', name='status', id='status', value='testing')
            label.form-check-label Testing
+        .form-check.form-check-inline
+           input(type='radio', class='form-check-input', name='status', id='status', value='retrospective')
+           label.form-check-label Retrospective
 
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='grouplead') Contact person
+      .col-md-3 
       .col-md-7
-        input.form-control(type='text', name='grouplead', id='grouplead', placeholder='name or email', autofocus)
+        input#agree(type='checkbox', name='checkbox', value='check')
+        |  I have read and agree to the
+        br
+        a(href='/terms') Terms and Conditions
+        |  and 
+        a(href='/privacy') Privacy Policy
 
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='status_det1') Promote my project to the Umati community
-      ul.nav.nav-pills
-        li.nav-item
-            a.nav-link.notifyall(data-toggle="tab") yes
-            a.nav-link.notifygroup(data-toggle="tab") just my group
-            a.nav-link.notifyusecase(data-toggle="tab") just to users with same use case
-            a.nav-link.notifytag(data-toggle="tab") everyone in same project phase
-
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-right(for='promotionassistance') Support my promotion strategy with periodic advice
-      ul.nav.nav-pills.success
-        li.nav-item
-            a.nav-link.notifygroup(data-toggle="tab") sounds good.
-
-
-    input#agree(type='checkbox', name='checkbox', value='check')
-    |  I have read and agree to the 
-    |  a(href='/terms') Terms and Conditions 
-    |  and 
-    |  a(href='/privacy') Privacy Policy
 
 
 

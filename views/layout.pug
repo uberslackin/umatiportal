@@ -8,6 +8,7 @@ html
     meta(name='csrf-token', content=_csrf)
     title Umatibank Self help group network - #{title} page
     link(rel='shortcut icon', href='/favicon.png')
+    link(rel='stylesheet', href='/css/tabsinput.css')
     link(rel='stylesheet', href='/css/main.css')
     if (title === 'Settings') 
         link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/pretty-checkbox@3.0/dist/pretty-checkbox.min.css')
@@ -87,4 +88,6 @@ html
         script(src='https://cdnjs.cloudflare.com/ajax/libs/chroma-js/2.1.0/chroma.min.js')
     if (title === 'Pong') 
          script(src='/js/pong.js')
+
     script(src='/js/main.js')
+    script(src='/js/tagsinput.js')

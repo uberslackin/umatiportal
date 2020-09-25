@@ -31,7 +31,17 @@ h3+p {
   margin-top: 0;
 }
 
- /* The switch - the box around the slider */
+
+.gllpMap { 
+  width: 600px; 
+  height: 250px;
+}
+
+.modallink {
+  text-decoration:underline;
+  color: blue;
+}
+
 .switch {
   position: relative;
   display: inline-block;

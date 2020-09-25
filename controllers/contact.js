@@ -1,106 +1,163 @@
-const validator = require('validator');
+const mongoose = require('mongoose');
+const { wrap: async } = require('co');
+const { promisify } = require('util');
+const crypto = require('crypto');
 const nodemailer = require('nodemailer');
+const passport = require('passport');
+const _ = require('lodash');
+const validator = require('validator');
+const mailChecker = require('mailchecker');
+const Contact = require('../models/Contact');
+const User = require('../models/User');
+
+
+const randomBytesAsync = promisify(crypto.randomBytes);
 
 /**
- * GET /contact
- * Contact form page.
- */
-exports.getContact = (req, res) => {
-  const unknownUser = !(req.user);
+ * GET /account/calendar
+ * Contacts manager.
+ *
+ * Display contacts page.
+*/
 
-  res.render('contact', {
-    title: 'Contact',
-    unknownUser,
+
+// Display list of Contact activity.
+exports.getContact = function (req, res, next) {
+
+    Contact.find()
+        .sort([['date', 'ascending']])
+        .exec(function (err, contact_data) {
+            if (err) { return next(err); }
+            // Successful, so rendecalsr.
+            res.render('account/contacts', { title: 'Contacts page', memdata: conctact_data });
+        })
+};
+
+
+ /*
+ * POST /contact
+ * Sign in using email and password.
+ */
+exports.postContact = (req, res, next) => {
+  const validationErrors = [];
+  if (validator.isEmpty(req.body.name)) validationErrors.push({ msg: 'Item name cannot be blank.' });
+};
+
+/**
+ * GET /createpost
+ * Signup page.
+ */
+exports.getCreatecontact = (req, res) => {
+  res.render('account/createcontact', {
+    title: 'Create entry'
   });
 };
 
 /**
- * GET /privacy
- * Privacy page.
+ * GET /createpost
+ * Signup page.
  */
 exports.getPrivacy = (req, res) => {
-  const unknownUser = !(req.user);
-
   res.render('privacy', {
-    title: 'Privacy Policy',
-    unknownUser,
+    title: 'Privacy Statement'
   });
 };
 
+
 /**
- * POST /contact
- * Send a contact form via Nodemailer.
+ * POST /account/createcontact
+ * Create a new local account.
  */
-exports.postContact = (req, res) => {
+exports.postCreateContactEntry = (req, res) => {
   const validationErrors = [];
-  let fromName;
-  let fromEmail;
-  if (!req.user) {
-    if (validator.isEmpty(req.body.name)) validationErrors.push({ msg: 'Please enter your name' });
-    if (!validator.isEmail(req.body.email)) validationErrors.push({ msg: 'Please enter a valid email address.' });
-  }
-  if (validator.isEmpty(req.body.message)) validationErrors.push({ msg: 'Please enter your message.' });
+  if (!validator.isAscii(req.body.name)) validationErrors.push({ msg: 'Please enter a title for your new entry.' });
+  if (!validator.isAscii(req.body.post)) validationErrors.push({ msg: 'Please add some content to your entry.' });
 
   if (validationErrors.length) {
     req.flash('errors', validationErrors);
-    return res.redirect('/contact');
+    return res.redirect('/account/calentrycreate');
   }
 
-  if (!req.user) {
-    fromName = req.body.name;
-    fromEmail = req.body.email;
-  } else {
-    fromName = req.user.profile.name || '';
-    fromEmail = req.user.email;
-  }
-
-  let transporter = nodemailer.createTransport({
-    service: 'SendGrid',
-    auth: {
-      user: process.env.SENDGRID_USER,
-      pass: process.env.SENDGRID_PASSWORD
-    }
+  const cal = new Cal({
+    name: req.body.name,
+    user: req.body.user,
+    visibility: req.body.visibility,
+    comment: req.body.comment,
+    address1: req.body.addres1,
+    address2: req.body.addres2,
+    country: req.body.country,
+    postalcode: req.body.postalcode,
+    vetted: req.body.vetted,
+    phoneh: req.body.phoneh,
+    phoneb: req.body.phoneb,
+    source: req.body.source,
+    group: req.body.group,
+    project: req.body.project,
+    iphash: req.body.iphash, 
+    transhash: req.body.transhash
   });
-  const mailOptions = {
-    to: 'your@email.com',
-    from: `${fromName} <${fromEmail}>`,
-    subject: 'Contact Form | Umati Bank',
-    text: req.body.message
-  };
 
-  return transporter.sendMail(mailOptions)
-    .then(() => {
-      req.flash('success', { msg: 'Email has been sent successfully!' });
-      res.redirect('/contact');
-    })
-    .catch((err) => {
-      if (err.message === 'self signed certificate in certificate chain') {
-        console.log('WARNING: Self signed certificate in certificate chain. Retrying with the self signed certificate. Use a valid certificate if in production.');
-        transporter = nodemailer.createTransport({
-          service: 'SendGrid',
-          auth: {
-            user: process.env.SENDGRID_USER,
-            pass: process.env.SENDGRID_PASSWORD
-          },
-          tls: {
-            rejectUnauthorized: false
-          }
-        });
-        return transporter.sendMail(mailOptions);
-      }
-      console.log('ERROR: Could not send contact email after security downgrade.\n', err);
-      req.flash('errors', { msg: 'Error sending the message. Please try again shortly.' });
-      return false;
-    })
-    .then((result) => {
-      if (result) {
-        req.flash('success', { msg: 'Email has been sent successfully!' });
-        return res.redirect('/contact');
-      }
-    })
-    .catch((err) => {
-      console.log('ERROR: Could not send contact email.\n', err);
-      req.flash('errors', { msg: 'Error sending the message. Please try again shortly.' });
-      return res.redirect('/contact');
+  Cal.findOne({ calentrytitle: req.body.calentrytitle }, (err, existingCal) => {
+    if (err) { return next(err); }
+    if (existingCal) {
+      req.flash('errors', { msg: 'Calendar entry with that title already exists.' });
+      return res.redirect('/account/calentrycreate');
+    }
+    cal.save((err) => {
+      if (err) { return next(err); }
+      req.logIn(res.user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect('/account/cal');
+      });
     });
+  });
 };
+
+
+
+/**
+ * POST /account/calendar
+ * Update cal information.
+ */
+exports.postUpdateContactEntry = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/contactcreate');
+  }
+
+  Contact.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    contact.name = req.body.name || '';
+    contact.user = req.body.user || '';
+    contact.visibility = req.body.visibility || '';
+    contact.comment = req.body.comment || '';
+    contact.address1 = req.body.address1 || '';
+    contact.address2 = req.body.address2 || '';
+    contact.country = req.body.posgtdate || '';
+    contact.postalcode = req.body.postalcode || '';
+    contact.vetted = req.body.vetted || '';
+    contact.phoneh = req.body.phoneh || '';
+    contact.phoneb = req.body.phoneb || '';
+    contact.source = req.body.source || '';
+    contact.group = req.body.group || '';
+    contact.project = req.body.project || '';
+    contact.iphash = req.body.iphash || '';
+    contact.transhash = req.body.transhash || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your calendar update.' });
+          return res.redirect('/account/calendar');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Calendar entry has been registered.' });
+      res.redirect('/account/calendar');
+    });
+  });
+};
+

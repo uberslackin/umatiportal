@@ -37,13 +37,13 @@ const groupdataController = require('./controllers/groupdata');
 const projectController = require('./controllers/project');
 const inventoryController = require('./controllers/inventory');
 const calController = require('./controllers/cal');
-const elevatorController = require('./controllers/elevator');
+const mediaController = require('./controllers/media');
 const memberController = require('./controllers/member');
 const locController = require('./controllers/loc');
 const posController = require('./controllers/pos');
 const donationController = require('./controllers/donation');
-const apiController = require('./controllers/api');
 const contactController = require('./controllers/contact');
+const apiController = require('./controllers/api');
 
 /**
  * API keys and Passport configuration.
@@ -138,8 +138,9 @@ app.use('/webfonts', express.static(path.join(__dirname, 'node_modules/@fortawes
 app.use('/account/avatars', express.static(path.join(__dirname, 'node_modules/node_modules/avatars-utils/dist'), { maxAge: 31557600000 }));
 
 
-// Import routes
-
+/**
+ * Import routes
+ */
 
 
 
@@ -156,10 +157,11 @@ app.post('/forgot', userController.postForgot);
 app.get('/reset/:token', userController.getReset);
 app.post('/reset/:token', userController.postReset);
 app.get('/signup', userController.getSignup);
+app.get('/signupmult', userController.getMultSignup);
 app.get('/account/backup', userController.getBackup);
 app.get('/account/confirmdelete', userController.getConfirmDelete);
-app.get('/groupsignup', userController.getGroupSignup);
-app.get('/projectsignup', userController.getProjectSignup);
+app.get('/signupgroup', userController.getGroupSignup);
+app.get('/signupproject', userController.getProjectSignup);
 app.get('/account/supportedsignup', userController.getSupportedsignup);
 app.get('/account/prioritysupport', userController.getPrioritysupport);
 app.post('/signup', userController.postSignup);
@@ -181,6 +183,11 @@ app.post('/account/password', passportConfig.isAuthenticated, userController.pos
 app.post('/account/delete', passportConfig.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConfig.isAuthenticated, userController.getOauthUnlink);
 
+app.get('/:name', userController.getPublicUserPage);
+app.get('/business/:name', userController.getPublicBusinessPage);
+app.get('/group/:name', userController.getPublicGroupPage);
+app.get('/project/:name', userController.getPublicProjectPage);
+
 app.post('/account/profile', passportConfig.isAuthenticated, userController.postUpdateProfile);
 app.get('/account/profileajax/:user/:item/:val', passportConfig.isAuthenticated, userController.getUpdateProfileAjax);
 app.get('/link/:username', userController.getLink);
@@ -189,7 +196,6 @@ app.get('/account/activity-print', passportConfig.isAuthenticated, userControlle
 app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
 app.get('/account/setup', passportConfig.isAuthenticated, userController.getSetup);
 app.post('/account/setup', passportConfig.isAuthenticated, userController.postUpdateSetup);
-app.get('/account/door1', passportConfig.isAuthenticated, userController.getDoor1);
 app.get('/account/messages', passportConfig.isAuthenticated, userController.getMessages);
 app.get('/account/messagessent', passportConfig.isAuthenticated, userController.getMessagesSent);
 app.get('/account/messagesdrafts', passportConfig.isAuthenticated, userController.getMessagesDrafts);
@@ -215,6 +221,8 @@ app.post('/account/bizsettings', passportConfig.isAuthenticated, userController.
 app.get('/account/locsettings', passportConfig.isAuthenticated, userController.getLocsettings);
 app.post('/account/locsettings', passportConfig.isAuthenticated, userController.postUpdateLocsettings);
 app.get('/account/blogsettings', passportConfig.isAuthenticated, userController.getBlogsettings);
+app.post('/account/bloghomepage', passportConfig.isAuthenticated, userController.postBloghomepage);
+app.get('/account/bloghomepage', passportConfig.isAuthenticated, userController.getBloghomepage);
 app.post('/account/blogsettings', passportConfig.isAuthenticated, userController.postUpdateBlogsettings);
 app.get('/account/projectsettings', passportConfig.isAuthenticated, userController.getProjectsettings);
 app.post('/account/projectsettings', passportConfig.isAuthenticated, userController.postUpdateProjectsettings);
@@ -224,10 +232,22 @@ app.get('/account/inventorysettings', passportConfig.isAuthenticated, userContro
 app.post('/account/inventorysettings', passportConfig.isAuthenticated, userController.postUpdateInventorysettings);
 app.get('/account/calsettings', passportConfig.isAuthenticated, userController.getCalsettings);
 app.post('/account/calsettings', passportConfig.isAuthenticated, userController.postUpdateCalsettings);
-app.get('/account/elevsettings', passportConfig.isAuthenticated, userController.getElevsettings);
-app.post('/account/elevsettings', passportConfig.isAuthenticated, userController.postUpdateElevsettings);
 app.get('/account/possettings', passportConfig.isAuthenticated, userController.getPossettings);
 app.post('/account/possettings', passportConfig.isAuthenticated, userController.postUpdatePossettings);
+
+app.get('/projects', userController.getProjects);
+app.get('/account/projectdata', passportConfig.isAuthenticated, projectController.getProjectdata);
+app.get('/account/project', passportConfig.isAuthenticated, projectController.getProjectdata);
+app.post('/account/project', passportConfig.isAuthenticated, projectController.postProjectdata);
+
+app.get('/account/createproject', passportConfig.isAuthenticated, projectController.getCreateprojectdata);
+app.post('/account/createproject', passportConfig.isAuthenticated, projectController.postCreateprojectdata);
+
+app.get('/account/createprojectnote', passportConfig.isAuthenticated, projectController.getCreateprojectnote);
+app.post('/account/createprojectnote', passportConfig.isAuthenticated, projectController.postCreateprojectnote);
+
+app.get('/account/createsubproject', passportConfig.isAuthenticated, projectController.getCreateprojectdata);
+app.post('/account/createproject', passportConfig.isAuthenticated, projectController.postCreateprojectdata);
 
 app.get('/account/groupdatasheet1', passportConfig.isAuthenticated, groupdataController.getGroupdatasheet1);
 app.get('/account/group', passportConfig.isAuthenticated, groupdataController.getGroupdata);
@@ -246,6 +266,7 @@ app.get('/account/createloc', passportConfig.isAuthenticated, locController.getC
 app.post('/account/createloc', passportConfig.isAuthenticated, locController.postCreateloc);
 
 app.get('/account/loc', passportConfig.isAuthenticated, locController.getLoc);
+app.get('/account/location', passportConfig.isAuthenticated, locController.getLocation);
 app.post('/account/loc', locController.postUpdateLoc);
 app.post('/account/locupdate', passportConfig.isAuthenticated, blogController.postUpdateBlog);
 app.get('/account/loc/:locpost_id', passportConfig.isAuthenticated, locController.getUpdateLocpost);
@@ -268,26 +289,9 @@ app.get('/account/createdonation', passportConfig.isAuthenticated, inventoryCont
 app.post('/account/createdonation', passportConfig.isAuthenticated, inventoryController.postCreatedonation);
 app.get('/account/donation/:donation_id', passportConfig.isAuthenticated, inventoryController.getUpdateDonation);
 app.post('/account/donationedit', passportConfig.isAuthenticated, inventoryController.postUpdateDonation);
-app.get('/account/elevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateElevatorEntry);
-app.get('/account/resourceelevator/:elevitem_id', passportConfig.isAuthenticated, elevatorController.getUpdateResourceElevatorEntry);
-app.get('/account/elevator', passportConfig.isAuthenticated, elevatorController.getElevator);
-app.get('/account/api/elevator', passportConfig.isAuthenticated, elevatorController.getElevatorapi);
-app.get('/account/elevatormanage', passportConfig.isAuthenticated, elevatorController.getElevatormanage);
-app.post('/account/elevator', passportConfig.isAuthenticated, elevatorController.postCreateElevatorEntry);
-app.get('/account/elevator3', passportConfig.isAuthenticated, elevatorController.getElevator3);
-app.get('/account/elevator4', passportConfig.isAuthenticated, elevatorController.getElevator4);
-app.get('/account/elevator5', passportConfig.isAuthenticated, elevatorController.getElevator5);
-app.get('/account/elevator/cat/:elevcat', passportConfig.isAuthenticated, elevatorController.getElevatorCat);
-app.get('/account/elevator/remove/:itemid', passportConfig.isAuthenticated, elevatorController.getElevatorRemove);
-app.get('/account/elevatorentryupdate/:itemid/:seqid/:dayid/', passportConfig.isAuthenticated, elevatorController.getElevatorentryupdate);
-app.post('/account/elevatorentryupdate', passportConfig.isAuthenticated, elevatorController.postUpdateElevatorEntry);
-app.get('/account/elevatorentrycreate', passportConfig.isAuthenticated, elevatorController.getElevatorEntry);
-app.post('/account/elevatorentrycreate', passportConfig.isAuthenticated, elevatorController.postCreateElevatorEntry);
 app.get('/account/api/cal', passportConfig.isAuthenticated, calController.getCaljson);
 app.get('/account/cal', passportConfig.isAuthenticated, calController.getCal);
 
-app.get('/account/cal4', passportConfig.isAuthenticated, calController.getCal4);
-app.get('/account/cal3', passportConfig.isAuthenticated, calController.getCal3);
 app.post('/account/cal', passportConfig.isAuthenticated, calController.postCreateCalEntry);
 app.get('/account/cal/:calitem_id', passportConfig.isAuthenticated, calController.getUpdateCalEntry);
 app.post('/account/calentryupdate', passportConfig.isAuthenticated, calController.postUpdateCalEntry);
@@ -312,7 +316,6 @@ app.post('/account/upload', passportConfig.isAuthenticated, blogController.postU
 
 app.get('/games/pong', userController.getPong);
 app.get('/games/si', userController.getSi);
-app.get('/projects', userController.getProjects);
 app.get('/account/jexcel', userController.getJexcel);
 app.get('/account/avatared', userController.getAvatared);
 /**

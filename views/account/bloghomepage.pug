@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+  .pb-2.mt-2.mb-4.border-bottom
+ 
+    hr
+    a(href='/account/blog') Blog -  
+    a(href='/account/createpost') Create a post
+
+  h3 Blog Homepage
+
+  form(action='/account/bloghomepage', method='POST')
+   input(type='hidden', name='_csrf', value=_csrf)
+   .form-group.row
+     label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Title
+     .col-md-7
+       input.form-control(type='text', name='title', id='title', value=user.bloghomepage.title, autocomplete='title')
+   .form-group.row
+     label.col-md-3.col-form-label.font-weight-bold.text-left(for='element') Element
+     .col-md-7
+       input.form-control(type='text', name='author', id='author', value=user.bloghomepage.author, autocomplete)
+   .form-group.row
+     label.col-md-3.col-form-label.font-weight-bold.text-left(for='pubdate') Publication date
+     .col-md-7
+       input.form-control(type='text', name='pubdate', id='pubdate', value=user.bloghomepage.pubdate, autocomplete)
+
+   .form-group.row
+     label.col-md-3.col-form-label.font-weight-bold.text-left(for='content1') Content
+     .col-md-7
+       textarea.form-control.hidden(type='text', name="content1", rows="3", cols="46", autocomplete='user.bloghomepage.content1') #{user.bloghomepage.content1}
+
+   .form-group.row
+     label.col-md-3.col-form-label.font-weight-bold.text-left(for='weblink1') reference url:
+     .col-md-7
+       input.form-control(type='text', name='weblink1', id='weblink1', value=user.bloghomepage.weblink1, autocomplete='user.bloghomepage.weblink1')
+   .form-group 
+     .offset-sm-3.col-md-7.pl-2
+       button.btn.btn.btn-primary(type='submit')
+       i.fas.fa-pencil-alt.fa-sm Update Settings
+
+  include ../partials/profilehead.pug

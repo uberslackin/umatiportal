@@ -9,35 +9,39 @@ block content
     hr
     a(href='/account/blog') Blog -
     a(href='/account/blogsettings') Settings - 
-    a(href='#', type="button", data-toggle="modal", data-target="#myModal") Media Manager
+    a(href='#', type="button", data-toggle="modal", data-target="#myModal") Add media
   
     .modal#myModal
       .modal-dialog
         .modal-content.content
           .modal-header
             .row
-            .col-md-7
-            h4.modal-title
-               img(src="/lion.png",border="0")
-               a.navbar-brand(href='/')
-               | &nbsp;UMATI PORTAL
+              .col-md-3
+                img(src="/umatimoto.gif",border="0")
+              .col-md-3
+                h2 Add media
+            .row
+            .col-md-7.align-right
             button.close(type="button", data-dismiss="modal") ×
           .modal-body.content
             .row
             .col-md-5
 
-            h2  Add images
-            form(action="/account/upload", method="POST", enctype="multipart/form-data")
-            input(type='hidden', name='user', value=user.id)
-            p Name of item
-              input(type="text", id="image1name", name="image1name")
-            br
-            br
-            | 
-            Photo
-              input(type="text", id="image1url", name="image1url")
-  
-              button(type="submit") Add image
+              form(action="/account/mediamanager", method="POST")
+                input(type='hidden', name='user', value=user.id)
+
+            .row
+            .col-md-5
+
+              div Name / Title
+                input(type='text', name='imagename')
+            
+            .row
+            .col-md-5
+
+              div Web Url
+                input(type="text", id="imageurl")
+                button(type="submit", id="ajaxmedia") Add resource
 
         
           .modal-footer
@@ -71,10 +75,6 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttags') Tags
       .col-md-7
         input.form-control(type='text', name='posttags', id='posttags')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate') Date
-      .col-md-7
-        input.form-control(type='date', name='postdate', id='postdate')
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')

@@ -7,27 +7,10 @@ const validator = require('validator');
 const cloudinary = require('cloudinary');
 const mailChecker = require('mailchecker');
 const User = require('../models/User');
-// const Calendar = require('../models/Calendar');
 const Member = require('../models/Member');
 const Messages = require('../models/Messages');
 const randomBytesAsync = promisify(crypto.randomBytes);
 
-//if (user.group == "Ward Food Logistics" || user.group == "For Ward" || user.group == "forWard" || user.group == "for ward" || user.group == "for Ward" || user.group == "ForWard") var thisgroup = "For Ward";
-/**
-* GET /login
-* Login page.
-*  July 15 2020
-*  TASK : this needs to be normalized as per rest of app..
-*  ie. camelcase, and match syntax across controller & route
-* 
-* ref:
-* app.get('/account/payment', passportConfig.isAuthenticated, userController.getMember);
-* app.post('/account/payment', passportConfig.isAuthenticated, userController.postMember);
-* app.get('/account/activity', passportConfig.isAuthenticated, userController.getActivity);
-* app.get('/account/activity-print', passportConfig.isAuthenticated, userController.getActivityprint);
-* app.post('/account/activity', passportConfig.isAuthenticated, userController.postUpdateActivity);
-
- */
 exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect('/');
@@ -81,6 +64,43 @@ exports.logout = (req, res) => {
 
 
 /**
+ * getPublicGroupPage
+ */
+exports.getPublicGroupPage = (req,res,next) => {
+  res.render('account/template_group', {
+    title: 'Group page'
+  });
+}
+
+
+/**
+ * getPublicProjectPage
+ */
+exports.getPublicProjectPage = (req,res,next) => {
+  res.render('account/template_project', {
+    title: 'Project page'
+  });
+}
+
+/**
+ * getPublicBusinessPage
+ */
+exports.getPublicBusinessPage = (req,res,next) => {
+  res.render('account/template_business', {
+    title: 'Business page'
+  });
+}
+
+/**
+ * getPublicUserPage
+ */
+exports.getPublicUserPage = (req,res,next) => {
+  res.render('account/template_user', {
+    title: 'Public user page'
+  });
+}
+
+/**
  * GET /signup
  * Signup page.
  */
@@ -94,12 +114,27 @@ exports.getSignup = (req, res) => {
 };
 
 /**
+ * GET /signup
+ * Signup page.
+ */
+
+exports.getMultSignup = (req, res) => {
+  if (req.user) {
+    return res.redirect('/');
+  }
+  res.render('account/signupmult', {
+    title: 'Create Account'
+  });
+};
+
+
+/**
  * GET /groupsignup
  * Signup page.
  */
 exports.getGroupSignup = (req, res) => {
   if (req.user) {
-    return res.redirect('/account/groupsettings');
+    return res.redirect('/');
   }
   res.render('account/signupgroup', {
     title: 'Create group form'
@@ -112,7 +147,7 @@ exports.getGroupSignup = (req, res) => {
  */
 exports.getProjectSignup = (req, res) => {
   if (req.user) {
-    return res.redirect('/account/projectsettings');
+    return res.redirect('/');
   }
   res.render('account/signupproject', {
     title: 'Create project form'
@@ -197,7 +232,7 @@ exports.postSignup = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        res.redirect('/');
+        res.redirect('/account/welcome');
       });
     });
   });
@@ -395,31 +430,6 @@ exports.getMessagesTrash = function (req, res) {
       getTrashlist(req,res);
 };
 
-/**
- * GET /account/door1
- * Update DOM based ininvite code
- */
-exports.getDoor1 = function (req, res) {
-    var itemid = req.params.itemid;
-    var status = req.params.status;
-
-    var data = {
-      status: status
-    };
- /*  console.log("Itemid: " + itemid + " status: " + status );*/
-    Messages.findByIdAndUpdate(itemid, data, function(err, result) {
-    if (err){
-         res.send(err);
-    }
-    else{
-         res.status(200);
- /*        console.log("RESULT: " + result);*/
-    };
-
-  });
-};
-
-
 
 
 /**
@@ -451,7 +461,6 @@ exports.getMessagesTrashMoveAjax = function (req, res) {
 exports.getLink = function (req, res, next) {
   usernameparam = req.params.username;
   res.render('link')
-
   };
 
 
@@ -1060,9 +1069,18 @@ exports.postUpdateElevsettings = (req, res, next) => {
   });
 };
 
+/**
+ * GET /account/possettings
+ * Profile page.
+ */
+exports.getConfirmDelete = (req, res) => {
+  res.render('account/deleteconfirm', {
+    title: 'Confirm Delete'
+  });
+};
 
 /**
- * GET /account/calsettings
+ * GET /account/possettings
  * Profile page.
  */
 exports.getPossettings = (req, res) => {
@@ -1070,6 +1088,61 @@ exports.getPossettings = (req, res) => {
     title: 'POS Settings'
   });
 };
+
+/**
+ * GET /account/bloghomepage
+ * Blog homepage content manager
+ */
+exports.getBloghomepage = (req, res) => {
+  res.render('account/bloghomepage', {
+    title: 'Blog homepage manager'
+  });
+};
+
+
+
+/**
+ * POST /account/bloghomepage
+ * Update blog homepage content
+ */
+exports.postBloghomepage = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/bloghomepage');
+  }
+
+  User.findById(req.user.id, (err, user) => {
+    if (err) { return next(err); }
+    user.bloghomepage.user = req.body.user || '';
+    user.bloghomepage.blogid = req.body.blogid || '';
+    user.bloghomepage.element = req.body.element || '';
+    user.bloghomepage.title = req.body.title || '';
+    user.bloghomepage.author = req.body.author || '';
+    user.bloghomepage.pubdate = req.body.pubdate || '';
+    user.bloghomepage.weblink1 = req.body.weblink1 || '';
+    user.bloghomepage.webline2 = req.body.weblink2 || '';
+    user.bloghomepage.webline3 = req.body.weblink3 || '';
+    user.bloghomepage.content1 = req.body.content1 || '';
+    user.bloghomepage.content2 = req.body.content2 || '';
+    user.bloghomepage.status = req.body.status || '';
+    user.save((err) => {
+      if (err) {
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your point of sale settings update.' });
+          return res.redirect('/account/bloghomepage');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'POS setings has been updated.' });
+      res.redirect('/account/bloghomepage');
+    });
+  });
+};
+
+
+
 
 
 /**
@@ -1392,12 +1465,14 @@ exports.postUpdateProfile = (req, res, next) => {
     user.donations_avail = req.body.donations_avail || '';
     user.item_offered = req.body.item_offered || '';
     user.item_requested = req.body.item_requested || '';
-    user.profile.vocation = req.body.vocation || '';
+    user.project = req.project || '';
+    user.group = req.group || '';
     user.profile.story = req.body.story || '';
     user.profile.location = req.body.location || '';
     user.profile.business = req.body.business || '';
     user.profile.role = req.body.role || '';
     user.profile.website = req.body.website || '';
+    user.profile.vocation = req.body.vocation || '';
     user.save((err) => {
       if (err) {
         if (err.code === 11000) {
@@ -1485,9 +1560,6 @@ exports.postUpdateAjaxProfile = (req, res, next) => {
     });
   });
 };
-
-
-
 
 
 /**

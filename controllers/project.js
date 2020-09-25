@@ -32,27 +32,45 @@ exports.getProject = function (req, res, next) {
         })
 };
 
+
+// Display list of Member activity.
+exports.getProjects = function (req, res, next) {
+
+    Project.find()
+        .sort([['name', 'ascending']])
+        .exec(function (err, project_data) {
+            if (err) { return next(err); }
+            res.render('account/projects', { title: 'Projects', projectdata: project_data });
+        })
+};
+
+
+
+
+
 // Display list of Project info
-exports.getProjectdatasheet1 = function (req, res, next) {
+exports.getProjectdata = function (req, res, next) {
 
     Projectdata.find()
         .sort([['name', 'ascending']])
         .exec(function (err, project_data) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
-            res.render('account/projectdatasheet1', { title: 'Dataview1', projectdata: project_data });
+            res.render('account/projectdata', { title: 'Project data', projectdata: project_data });
         })
 };
 
 
- /*
- * POST /cal
- * Sign in using email and password.
- */
+/*
+* POST /cal
+* Sign in using email and password.
+*/
 exports.postProjectdata = (req, res, next) => {
   const validationErrors = [];
   if (validator.isEmpty(req.body.name)) validationErrors.push({ msg: 'Project name cannot be blank.' });
 };
+
+
 
 /**
  * GET /createpost
@@ -65,7 +83,17 @@ exports.getPosEntry = (req, res) => {
 };
 
 /**
- * GET /createpost
+ * GET /createprojectnote
+ * Signup page.
+ */
+exports.getCreateprojectnote = (req, res) => {
+  res.render('account/createprojectnote', {
+    title: 'Create a note for the project'
+  });
+};
+
+/**
+ * GET /createproject
  * Signup page.
  */
 exports.getCreateprojectdata = (req, res) => {
@@ -95,9 +123,57 @@ exports.getCreateprojectnote = (req, res) => {
 };
 
 
+/**
+ * POST  postCreateprojectnote
+ * Create a new local account.
+ */
+exports.postCreateprojectnote = (req, res, next) => {
+  const validationErrors = [];
+
+  if (validationErrors.length) {
+    req.flash('errors', validationErrors);
+    return res.redirect('/account/createprojectnote');
+  }
+
+  const projectdata = new Projectdata({
+    name: req.body.name,
+    admin: req.body.admin,
+    project: req.body.project,
+    secret: req.body.secret,
+    post: req.body.post, 
+    location: req.body.location, 
+    sourcenum: req.body.sourcenum,
+    sourcename: req.body.sourcename,
+    sourcetype: req.body.sourcetype,
+    date: req.body.posdate,
+    witness: req.body.witness,
+    comment: req.body.comment
+  });
+
+  Projectdata.findOne({ name: req.body.name }, (err, existingPos) => {
+    if (err) { return next(err); }
+    if (existingPos) {
+      req.flash('errors', { msg: 'Project entry with that title already exists.' });
+      return res.redirect('/account/createproject');
+    }
+    projectdata.save((err) => {
+      if (err) { 
+        if (err.code === 11000) {
+          req.flash('errors', { msg: 'There was an error in your update.' });
+          return res.redirect('/account/createprojectnote');
+        }
+        return next(err);
+      }
+      req.flash('success', { msg: 'Project note created.' });
+      res.redirect('/account/project');
+    });
+  });
+};
+
+
 
 /**
- * POST /necal  postCreateprojectdata
+ * POST  postCreateprojectdata
  * Create a new local account.
  */
 exports.postCreateprojectdata = (req, res, next) => {
@@ -145,8 +221,8 @@ exports.postCreateprojectdata = (req, res, next) => {
 
 
 /**
- * POST /account/  
- * Update cal information.
+ * POST /account/project  
+ * Update project information.
  */
 exports.postUpdateProjectdata = (req, res, next) => {
   const validationErrors = [];

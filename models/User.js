@@ -80,6 +80,29 @@ const userSchema = new mongoose.Schema({
     memberlist: String,
     visibility: String
   },
+  projectsettings: {
+    groupname: String,
+    adminperson: String,
+    location: String,
+    description: String,
+    shortdesc: String,
+    memberlist: String,
+    visibility: String
+  },
+  bloghomepage: {
+    user: String,
+    blogid: String,
+    element: String,
+    title: String,
+    authoro: String,
+    pubdate: String,
+    weblink1: String,
+    weblink2: String,
+    weblink3: String,
+    content1: String,
+    content2: String,
+    status: String
+  },
   blogsettings: {
     user: String,
     blogtitle: String,

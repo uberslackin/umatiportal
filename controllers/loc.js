@@ -36,6 +36,15 @@ exports.getLoc = function (req, res, user) {
         })
 };
 
+exports.getLocation = function (req, res, user) {
+    
+    Loc.find()
+        .exec(function (err, loc_data) {          
+            // Successful, so ..
+            res.render('account/location', { title: 'Location map', locs: loc_data });
+        })
+};
+
 
 
 /** 

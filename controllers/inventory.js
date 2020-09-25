@@ -21,7 +21,7 @@ const randomBytesAsync = promisify(crypto.randomBytes);
 exports.getInventory = function (req, res, next) {
 
     Inventory.find()
-        .sort([['postdate', 'ascending']])
+        .sort([['_id', 'ascending']])
         .exec(function (err, inv_data) {
             if (err) { return next(err); }
             // Successful, so rendecalsr.
@@ -74,6 +74,7 @@ exports.postCreateinventory = (req, res, next) => {
 
   const inventory = new Inventory({
     name: req.body.name,
+    inventorytitle: req.body.inventorytitle,
     user: req.body.user,
     group: req.body.group,
     username: req.body.username, 
@@ -85,10 +86,10 @@ exports.postCreateinventory = (req, res, next) => {
     inventorydate: req.body.inventorydate
   });
 
-  Inventory.findOne({ name: req.body.name }, (err, existingInventory) => {
+  Inventory.findOne({ name: req.body.inventorytitle }, (err, existingInventory) => {
     if (err) { return next(err); }
     if (existingInventory) {
-      req.flash('errors', { msg: 'Inventory post with that title already exists.' });
+      req.flash('errors', { msg: 'Inventory item with that title already exists.' });
       return res.redirect('/account/inventory');
     }
     inventory.save((err) => {

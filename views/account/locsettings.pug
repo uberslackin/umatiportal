@@ -5,7 +5,7 @@ block content
  
     hr
     a(href='/account/loc') Loc -  
-    a(href='/account/createloc') Create a loc
+    a(href='/account/createloc') add a location
 
   h3 Location Settings
 
@@ -13,48 +13,23 @@ block content
   form(action='/account/locsettings', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='name') Location Title
-      .col-md-7
-        input.form-control(type='text', name='loctitle', id='blogtitle', value=user.blogsettings.blogtitle, autocomplete='blogtitle')
-    .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='description') Description
       .col-md-7
-        input.form-control(type='text', name='description', id='description', value=user.locsettings.description, autocomplete)
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='loccats') Category
-      .col-md-7
-        input.form-control(type='text', name='loccats', id='loccats', value=user.locsettings.loccats, autocomplete='loccats')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='loctags') Tags
-      .col-md-7
-        input.form-control(type='text', name='loctags', id='loctags', value=user.locsettings.loctags, autocomplete='loctags')
+        textarea.form-control.hidden(type='text', name="description", rows="5", cols="46", autocomplete='user.locsettings.descripton') #{user.locsettings.description}
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='visibility') Visibility
       .col-md-1.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'visible', name='visibility', id='visibility', value='visible', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.locsettings.visibility == 'visible', name='visibility', id='visibility', value='visible', data-toggle='radio')
         label.form-check-label Visible
       .col-md-2.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'group', name='visibility', id='visibility', value='group', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.locsettings.visibility == 'group', name='visibility', id='visibility', value='group', data-toggle='radio')
         label.form-check-label My Group Only
       .col-md-2.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'subgroup', name='visibility', id='visibility', value='subgroup', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.locsettings.visibility == 'subgroup', name='visibility', id='visibility', value='subgroup', data-toggle='radio')
         label.form-check-label Sub Group Only
       .col-md-1.form-check.form-check-inline
-        input(type='radio', class='form-check-input' checked=user.blogsettings.visibility == 'invisible', name='visibility', id='visibility', value='invisible', data-toggle='radio')
+        input(type='radio', class='form-check-input' checked=user.locsettings.visibility == 'invisible', name='visibility', id='visibility', value='invisible', data-toggle='radio')
         label.form-check-label Invisible
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='template') Template
-      .col-md-7
-        select#template.select.form-control.input-lg(for='template', name='template')
-          option(value='0') -- Select --
-          option(value='8' selected=(user.blogsettings.visibility == '8') ) Light
-          option(value='9' selected=(user.blogsettings.visibility == '9') ) Dark
-          option(value='10' selected=(user.blogsettings.visibility == '10') ) Business
-          option(value='11' selected=(user.blogsettings.visibility == '11') ) Business2
-          option(value='12' selected=(user.blogsettings.visibility == '12') ) Art1
-          option(value='13' selected=(user.blogsettings.visibility == '13') ) Art2
-          option(value='14' selected=(user.blogsettings.visibility == '14') ) Music1
-          option(value='15' selected=(user.blogsettings.visibility == '15') ) Music2
     .form-group 
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')

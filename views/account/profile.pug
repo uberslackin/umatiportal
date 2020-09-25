@@ -111,6 +111,14 @@ block content
       .col-sm-4
         img(src="https://avatars.dicebear.com/api/human/" + user.profile.name +".svg", class='profile', width='100', height='100')
     .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='project') Your project
+      .col-md-7
+        input.form-control(type='text', name='project', id='project', value=user.project, autocomplete='user.project')
+    .form-group.row
+      label.col-md-3.col-form-label.font-weight-bold.text-left(for='group') Your proup
+      .col-md-7
+        input.form-control(type='text', name='group', id='group', value=user.group, autocomplete='user.group')
+    .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='email') Email
       .col-md-7
         input.form-control(type='email', name='email', id='email', value=user.email, autocomplete='email', required)
@@ -134,14 +142,6 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='business') Business
       .col-md-7
         input.form-control(type='text', name='business', id='business', value=user.profile.business, autocomplete='user.profile.business')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='group') Group
-      .col-md-7
-        input.form-control(type='text', name='group', id='group', value=user.group, autocomplete='user.group')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='grouplead') Group Lead
-      .col-md-7
-        input.form-control(type='text', name='grouplead', id='grouplead', value=user.grouplead, autocomplete='user.grouplead')
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='role') Role
       .col-md-7

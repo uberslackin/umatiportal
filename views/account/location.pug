@@ -1,0 +1,106 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='theme-color' content='#4DA5F4')
+
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width,initial-scale=1")
+title Map - Get map's status
+style(type="text/css").
+
+  html,body{margin:0px;height:100%;width:100%}
+    .container{width:100%;height:100%}
+    #status{position:fixed;left:0px;top:0px;width:100%;height:140px;overflow:hidden}
+    #status div{background-color:rgba(13, 13, 13, 0.5);width:100%;height:100%;padding:10px 10px 10px 10px;font:13px bold sans-serif;color:#fff}
+	
+link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.css")
+script(type="text/javascript", src="https://cdn.jsdelivr.net/npm/maptalks/dist/maptalks.min.js")
+#map.container
+#status
+script.
+  var map = new maptalks.Map('map', {
+    center: [-0.113049,51.498568],
+    zoom: 14,
+      centerCross: true,
+      baseLayer: new maptalks.TileLayer('base', {
+      urlTemplate: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
+        subdomains: ['a','b','c','d'],
+          attribution: '&copy; <a href="http://osm.org">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>'
+      })
+  });
+  map.on('zoomend moving moveend', getStatus);
+  getStatus();
+
+  function getStatus() {
+    var extent = map.getExtent(),
+    ex = [
+      '{',
+      'xmin:' + extent.xmin.toFixed(5),
+      ', ymin:' + extent.ymin.toFixed(5),
+      ', xmax:' + extent.xmax.toFixed(5),
+      ', ymax:' + extent.xmax.toFixed(5),
+      '}'
+         ].join('');
+      var center = map.getCenter();
+      var mapStatus = [
+      'Center : [' + [center.x.toFixed(5), center.y.toFixed(5)].join() + ']',
+      'Extent : ' + ex,
+      'Size : ' + map.getSize().toArray().join(),
+      'Zoom : '   + map.getZoom(),
+      'MinZoom : ' + map.getMinZoom(),
+      'MaxZoom : ' + map.getMaxZoom(),
+      'Projection : ' + map.getProjection().code
+        ];
+
+      console.log('thiis is ' + center.x.toFixed(5) );	
+      console.log('thaat is ' + center.y.toFixed(5) );	
+      document.getElementById('status').innerHTML = '<div>' + mapStatus.join('<br>') + '</div>';
+  }
+
+
+
+h3 Add a new location
+
+
+hr
+a(href='/account/loc') Location -
+a(href='/account/locsettings') Settings - 
+  
+
+form(action="/account/createloc", method="POST")
+  input(type='hidden', name='_csrf', value=_csrf)
+  input(type='hidden', name='user', value=user.id)
+  input(type='hidden', name='group', value=user.group)
+  .form-group.row
+    label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttitle') Name of location
+    .col-md-7
+      input.form-control(type='text', name='loctitle', id='loctitle')
+  .form-group.row
+    label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Description
+    .col-md-7
+      textarea.form-control( name="post", rows="6", cols="66", autocomplete='post' ) #{user.business.post}
+  .form-group.row
+    label.col-md-3.col-form-label.font-weight-bold.text-left(for='lat') Lat, long
+    .col-md-3
+      input.form-control(type='text', name='lat', id='lat')
+    .col-md-3
+      input.form-control(type='text', name='long', id='long')
+  .form-group.row
+    label.col-md-3.col-form-label.font-weight-bold.text-left(for='postcat') Category
+    .col-md-7
+      input.form-control(type='text', name='postcat', id='postcat')
+  .form-group.row
+    label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttags') Tags
+    .col-md-7
+      input.form-control(type='text', name='posttags', id='posttags')
+  .form-group
+    .offset-sm-3.col-md-7.pl-2
+      button.btn.btn.btn-primary(type='submit')
+        i.fas.fa-pencil-alt.fa-sm
+        | Save location
+
+include ../partials/profilehead.pug
+

@@ -2,6 +2,17 @@
 $(document).ready(() => {
 
 
+    $('#media').on('click', function () {
+        $.ajax({
+            url: '/account/mediaupdate',
+            data: {
+                mediatitle: $("input[name=mediatitle]").val(),
+                mediaurl: $("input[name=mediaurl]").val()
+            },
+            dataType : 'json'
+        });
+    });
+
     $('#invite').on('click', function () {
         var Status = $(this).val();
         $.ajax({

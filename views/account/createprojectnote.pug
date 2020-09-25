@@ -8,7 +8,26 @@ block content
 
   hr
 
-  h3.caps #{user.project} PROJECT NOTES
+  h3.caps NEW #{user.project} PROJECT NOTE
+
+  form(action='/account/createproject', method='POST')
+
+  //-  const projectdataSchema = new mongoose.Schema({
+    * user: String,
+    * role: String,
+    * project: String,
+    * date: Date,
+    * participants: String,
+    * contactperson: String,
+    * group: String,
+    * sourcename: String,
+    * sourcetype: String,
+    * refulr1: String,
+    * refurl2: String,
+    * refurl3: String,
+    * secret: String,
+    * comment: String
+    **/
 
   form(action='/account/createproject', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
