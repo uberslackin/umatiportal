@@ -123,9 +123,25 @@ exports.getMultSignup = (req, res) => {
     return res.redirect('/');
   }
   res.render('account/signupmult', {
-    title: 'Create Account'
+    title: 'gimme 3 steps'
   });
 };
+
+
+/**
+ * GET /signupzhc
+ * Signup page.
+ */
+
+exports.getZhcSignup = (req, res) => {
+  if (req.user) {
+    return res.redirect('/');
+  }
+  res.render('account/signupzhc', {
+    title: 'new Zip Home Chef account'
+  });
+};
+
 
 
 /**

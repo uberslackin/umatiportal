@@ -5,14 +5,17 @@ block content
 
     h3 Blog Post Edit
 
-  include ../partials/profilehead.pug
+    a(href='/account/bloghomepage') homepage - 
+    a(href='/account/blogsettings') settings -
+    a(href='/account/createpost') create a new post
+
 
     .form-group.row
     a(href='/account/blogsettings') Blog Settings
 
   form(action='/account/blog', method='POST')
     input(type='hidden', name='_csrf', value=_csrf)
-    input(type='hidden', name='username', value=user.id)
+    input(type='hidden', name='user', value=user.id)
     input(type='hidden', name='blogpost_id', value=blogdata._id)
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttitle') Post Title
@@ -22,32 +25,37 @@ block content
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='authorname') Author name
       .col-md-7
         input.form-control(type='text', name='authorname', value=blogdata.authorname, id='authorname')
+
     .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='user') User nicname
-      .col-md-7
-        input.form-control(type='text', name='user', value=blogdata.user, id='user')
+      label.col-md-3.col-form-label.font-weight-bold.text-left.hidden(for='story') Blog Post
+      .col-md-7.hidden
+        textarea.form-control.hidden(type='text', name="story", rows="3", cols="46", autocomplete='blodata.post') #{blogdata.post}
+
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='post') Post Content
       .col-md-7
         input.form-control(type='text', name="post", value=blogdata.post, id='post')
-    .form-group.row
-      label.col-md-3.col-form-label.font-weight-bold.text-left(for='location') Location
-      .col-md-7
-        input.form-control(type='text', name='location', value=blogdata.location, id='location')
+
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='postcat') Category
       .col-md-7
         input.form-control(type='text', name='postcat', id='postcat', value=blogdata.postcat)
+
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='posttags') Tags
       .col-md-7
         input.form-control(type='text', name='posttags', value=blogdata.posttags, id='posttags')
+
     .form-group.row
       label.col-md-3.col-form-label.font-weight-bold.text-left(for='postdate') Date
       .col-md-7
         input.form-control(type='date', name='postdate', id='postdate', value=moment(blogdata.postdate).format("YYYY-MM-DD"))
+
     .form-group
       .offset-sm-3.col-md-7.pl-2
         button.btn.btn.btn-primary(type='submit')
           i.fas.fa-pencil-alt.fa-sm
           | update post
+
+
+  include ../partials/profilehead.pug

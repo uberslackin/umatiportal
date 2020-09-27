@@ -3,11 +3,13 @@ extends ../layout
 block content
   .pb-2.mt-2.mb-4.border-bottom
   
-  h2 BLOG MANAGER 
   if user._id == "5f6cf09b9a806936329128ed"
-      span ADMIN EDITOR for 
-      br
-      a(href='/account/bloghomepage') homepage - 
+    h2 MANAGE UMATI PORTAL CONTENT
+  else if user._id == "5f6cf09b9a806936329128fe"
+    h2 ZipHomeChef 
+  else 
+    h2 BLOG MANAGER
+  a(href='/account/bloghomepage') homepage - 
   a(href='/account/blogsettings') settings - 
   a(href='/account/createpost') create a new post
 
@@ -18,7 +20,7 @@ block content
   - var userr = { id: user._id }
   - if (blogs.length)
     each posts in blogs
-        if posts.username == userr.id 
+        if posts.user == userr.id 
             strong #{posts.posttitle} - #{posts.postdate}  - #{posts.postcat}
             br
             #{posts.post}
