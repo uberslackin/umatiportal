@@ -38,9 +38,9 @@
 
           if (title === 'Settings')
             li.button.btn.btn-outline-secondary(type="button", data-toggle="modal", data-target="#resinvModal") resource inventory
-            li.button.btn.btn-outline-success(type="button", data-toggle="modal", data-target="#scdModal") scd clinic
+            li.button.btn.btn-outline-success(type="button", data-toggle="modal", data-target="#scdModal") water clinic
             li.button.btn.btn-outline-warning(type="button", data-toggle="modal", data-target="#foodsecModal") foodshed
-            li.button.btn.btn-outline-danger(type="button", data-toggle="modal", data-target="#creativeModal") creative
+            li.button.btn.btn-outline-danger(type="button", data-toggle="modal", data-target="#creativeModal") blog
             li.button.btn(type="button", data-toggle="modal", data-target="#basicExampleModal") other 
 
 
@@ -63,29 +63,20 @@
                 .col-md-3
                   ul.dropdown-menu                  
                     li
-                      a(href='/account/payment') Receipts
+                      a(href='/account/project') process
                     li
-                      a(href='/account/inventory') Inventory
+                      a(href='/account/component') parts
                     li
-                      a(href='/account/pos') POS
-
-                .col-md-3
-                  ul.dropdown-menu                  
-                    li
-                      a(href='/account/cal') Calendar
-                    li
-                      a(href='/account/group') Groups
-                    li
-                      a(href='/account/projectdata') Projects
+                      a(href='/account/media') media
                       
                 .col-md-3
                   ul.dropdown-menu
                     li
-                      a(href='/account/') Settings
+                      a(href='/account/') config
                     li
-                      a(href='/account/business') Business
+                      a(href='/account/inventory') inventory
                     li
-                      a(href='/account/blog') Blog
+                      a(href='/account/blog') blog
                     li
                       a(href='/logout') >> Logout
 
